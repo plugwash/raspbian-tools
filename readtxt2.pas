@@ -22,31 +22,34 @@ uses
 const
   bufsize=4096;
   eoltype_none=0;
+  eoltype_any=0;
   eoltype_cr=1;
   eoltype_lf=2;
   eoltype_crlf=3;
 
 type
   treadtxt=class(tobject)
-  public
-    sourcestream:tstream;
-    destroysourcestream:boolean;
-    constructor create(asourcestream: tstream; adestroysourcestream:boolean);
-    constructor createf(filename : string);
-
-    function readline:ansistring;
-    function eof:boolean;
-    destructor destroy; override;
   private
     buf:array[0..bufsize-1] of byte;
     numread:integer;
     bufpointer:integer;
     currenteol,preveol:integer;
     fileeof,reachedeof:boolean;
-    eoltype:integer;
+    fdetectedeol:integer;
     procedure checkandread;
-  end;
+  public
+    sourcestream:tstream;
+    destroysourcestream:boolean;
+    allowedeol:integer;
+    constructor create(asourcestream: tstream; adestroysourcestream:boolean);
+    constructor createf(filename : string);
 
+    function readline:ansistring;
+    function eof:boolean;
+    destructor destroy; override;
+    property detectedeol : integer read fdetectedeol;
+  end;
+  
 implementation
 
 constructor treadtxt.create(asourcestream: tstream; adestroysourcestream:boolean);
@@ -78,21 +81,51 @@ end;
 function treadtxt.readline;
 var
   a,b,c,d:integer;
+  prevchar : integer;
+  trimchar : boolean;
 begin
-
+  prevchar := 0;
   result := '';
   repeat
     checkandread;
     b := numread-1;
-
+    trimchar := false;
     {core search loop begin}
     d := -1;
     for a := bufpointer to b do begin
       c := buf[a];
-      if (c = 10) or (c = 13) then begin
-         d := a;
-         break;
+      //check if the character can possiblly be a line ending before getting
+      //into the more complex checks that depend on eol type
+      if (c = 10) or (c = 13) then case allowedeol of
+        eoltype_any: begin
+          d := a;
+          break;
+        end;
+        eoltype_cr: begin
+          if (c = 13) then begin
+            d := a;
+            break;
+          end;
+        end;
+        eoltype_lf: begin
+          if (c = 10) then begin
+            d := a;
+            break;
+          end;
+        end;
+        eoltype_crlf: begin
+          if (c = 10) and (prevchar= 13) then begin
+            d := a;
+            trimchar := true;
+            break;
+          end;
+          prevchar := c;
+        end;
+        else begin
+          raise exception.create('undefined eol type set');
+        end;
       end;
+      prevchar := c;
     end;
     {core search loop end}
     
@@ -114,18 +147,24 @@ begin
       currenteol := buf[d];
 
       {end of line before end of buffer}
-      if (currenteol = 10) and (preveol = 13) then begin
+      if (currenteol = 10) and (preveol = 13) and (bufpointer = d) then begin
         {it's the second EOL char of a DOS line ending, don't cause a line}
         bufpointer := d+1;
-        eoltype := eoltype_crlf;
+        fdetectedeol := eoltype_crlf;
       end else begin
-        if eoltype = eoltype_none then begin
-          if (currenteol = 10) then eoltype := eoltype_lf else eoltype := eoltype_cr;
+        if fdetectedeol = eoltype_none then begin
+          if (currenteol = 10) then fdetectedeol := eoltype_lf else fdetectedeol := eoltype_cr;
         end;  
         b := d-bufpointer;
-        setlength(result,c+b);
-        move(buf[bufpointer],result[c+1],b);
-        bufpointer := d+1;
+        if trimchar then begin
+          setlength(result,c+b-1);
+          move(buf[bufpointer],result[c+1],b-1);
+          bufpointer := d+1;
+        end else begin
+          setlength(result,c+b);
+          move(buf[bufpointer],result[c+1],b);
+          bufpointer := d+1;
+        end;
 
         {EOF check}
         if fileeof then begin
