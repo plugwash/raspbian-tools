@@ -61,7 +61,7 @@ end;
 
 constructor treadtxt.createf(filename: string);
 begin
-  create(tfilestream.create(filename,fmOpenRead),true);
+  create(tfilestream.create(filename,fmOpenRead or fmShareDenyWrite),true);
 end;
 
 
