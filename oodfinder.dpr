@@ -1,0 +1,214 @@
+program oodfinder;
+uses
+  readtxt2,sysutils, contnrs, dpkgdb, classes, util;
+const
+  sourcesfile = '/home/repo/repo/raspbian/dists/wheezy-staging/main/source/Sources';
+  packagesfile = '/home/repo/repo/raspbian/dists/wheezy-staging/main/binary-armhf/Packages';
+
+//return -1 if versiona is less than versionb
+//reutrn 0 if versiona is equal to versionb
+//reutrn 1 if versiona is greater than versionb
+function compareversion(versiona,versionb: string) : longint;
+var
+  rversiona:versionrevision;
+  rversionb:versionrevision;
+  error : dpkg_error;
+begin
+  //writeln(versiona,' ',versionb);
+  uniquestring(versiona);
+  uniquestring(versionb);
+  if parseversion(@rversiona,pchar(versiona),@error) <> 0 then begin
+    writeln('error parsing version '+versiona);
+    halt;
+  end;
+  //writeln('rversiona.version ',rversiona.version);
+  //writeln('rversiona.revision ',rversiona.revision);
+  if parseversion(@rversionb,pchar(versionb),@error) <> 0 then begin
+    writeln('error parsing version '+versionb);
+    halt;
+  end;
+  //writeln('rversionb.version ',rversionb.version);
+  //writeln('rversionb.revision ',rversionb.revision);
+  
+  result := versioncompare(@rversiona,@rversionb);
+end;
+
+var
+  t : treadtxt;
+  line : string;
+  currentpackage, currentversion, currentsourcepackage, currentsourceversion , currentdepends :string;
+  sources : tfpstringhashtable;
+  rdeps : tfpobjecthashtable;
+
+
+procedure reset;
+begin
+  currentpackage := '';
+  currentversion := '';
+  currentsourcepackage := '';
+  currentsourceversion := '';
+end;
+
+procedure processsource;
+var
+  existingversion : string;
+begin
+  if currentversion = '' then begin
+    writeln('package without version!');
+    halt;
+  end;
+  existingversion := sources[currentpackage];
+  if existingversion = '' then begin
+    sources[currentpackage] := currentversion;
+  end else begin
+    writeln('multiple instances of the same source package cannot be handled yet');
+    halt;
+  end;
+end;
+
+procedure processdependency(const sourcepackage:string; const dependency : string);
+var
+  rdeplist : tfphashlist;
+begin
+  rdeplist := tfphashlist(rdeps[dependency]);
+  if rdeplist = nil then begin
+    rdeplist := tfphashlist.create;
+    rdeps[dependency] := rdeplist;
+  end;
+  if rdeplist.findindexof(sourcepackage) < 0 then rdeplist.add(sourcepackage,0);
+end;
+
+var
+  nsfcount     : integer = 0;
+  oodcount     : integer = 0;
+  futurecount  : integer = 0;
+  currentcount : integer = 0;
+procedure processpackage(pass: byte);
+var
+  sourceversionfromsources : string;
+  versioncomparison : integer;
+  inbrackets : boolean;
+  dependency : string;
+  c : char;
+  i : integer;
+  rdeplist : tfphashlist;
+begin
+  if currentversion = '' then begin
+    writeln('package without version!');
+    halt;
+  end;
+  if currentsourcepackage = '' then currentsourcepackage := currentpackage;
+  if currentsourceversion = '' then currentsourceversion := currentversion;
+  
+  if pass = 1 then begin
+    dependency := '';
+    inbrackets := false;
+    for i := 1 to length(currentdepends) do begin
+      c := currentdepends[i];
+      if c = '(' then inbrackets := true;
+      if c = '(' then inbrackets := false;
+      if (not inbrackets) and (c in ['a'..'z','0'..'9','+','-','.']) then begin
+        dependency := dependency + c;
+      end else begin
+        if dependency <> '' then processdependency(currentsourcepackage,dependency);
+        dependency := '';
+      end;
+    end;
+    if dependency <> '' then processdependency(currentsourcepackage,dependency);
+  end else begin
+    sourceversionfromsources := sources[currentsourcepackage];
+    if sourceversionfromsources = '' then begin
+      writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' nsf');
+      nsfcount := nsfcount +1;
+    end else begin
+      versioncomparison := compareversion(currentsourceversion,sourceversionfromsources);
+      if versioncomparison < 0 then begin
+        writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' ood');
+        oodcount := oodcount +1;
+        rdeplist := tfphashlist(rdeps[currentpackage]);
+        if rdeplist <> nil then for i := 0 to rdeplist.count -1 do begin
+          writeln('  binnmu '+rdeplist.nameofindex(i)+'_'+sources[rdeplist.nameofindex(i)]+' 1 ''rebuild to eliminate dependency on '+currentpackage+'''');
+        end;
+      end else if versioncomparison > 0 then begin
+        writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' future');
+        futurecount := futurecount +1;
+      end else if versioncomparison = 0 then begin
+        //writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' current');
+        currentcount := currentcount +1;
+      end;
+    end;
+  end;
+  
+end;
+
+var
+  sourcelinecontent : string;
+  p : integer;
+  pass : byte;
+begin
+  //writeln(compareversion('1','2'));
+  //writeln(compareversion('1-1','1-2'));
+  //writeln(compareversion('2','1'));
+  //writeln(compareversion('1','1'));
+  //halt;
+  sources := tfpstringhashtable.create;
+  t := treadtxt.createf(sourcesfile);
+  reset;
+  repeat
+    line := t.readline;
+    if copy(line,1,8) = 'Package:' then begin
+      currentpackage := trim(copy(line,9,255));
+    end;
+    if copy(line,1,8) = 'Version:' then begin
+      currentversion := trim(copy(line,9,255));
+    end;
+    if line = '' then begin
+      //end of block
+      if currentpackage <> '' then processsource;
+      reset;
+    end;
+  until t.eof;
+  if currentpackage <> '' then processsource;
+  
+  t.free;
+
+  rdeps := tfpobjecthashtable.create();
+  for pass := 1 to 2 do begin
+    t := treadtxt.createf(packagesfile);
+    reset;
+    repeat
+      line := t.readline;
+      if stringstartis(line,'Package:') then begin
+        currentpackage := trim(copy(line,9,maxlongint));
+      end;
+      if stringstartis(line,'Version:') then begin
+        currentversion := trim(copy(line,9,maxlongint));
+      end;
+      if stringstartis(line,'Source:') then begin
+        sourcelinecontent := trim(copy(line,8,maxlongint));
+        p := pos('(',sourcelinecontent);
+        if p = 0 then begin
+          currentsourcepackage := sourcelinecontent;
+        end else begin
+          currentsourcepackage := trim(copy(sourcelinecontent,1,p-1));
+          currentsourceversion := copy(sourcelinecontent,p+1,255);
+          p := pos(')',currentsourceversion);
+          currentsourceversion := trim(copy(currentsourceversion,1,p-1));
+        end;
+      end;
+      if stringstartis(line,'Depends:') then begin
+        currentdepends := trim(copy(line,9,maxlongint));
+      end;
+      if line = '' then begin
+        //end of block
+        if currentpackage <> '' then processpackage(pass);
+        reset;
+      end;
+    until t.eof;
+    if currentpackage <> '' then processpackage(pass);
+    t.free;
+  end;
+  
+  writeln('nsf:',nsfcount,' ood:',oodcount,' future:',futurecount,' current:',currentcount);
+
+end.

@@ -1,0 +1,5018 @@
+Package: abs-guide
+Version: 6.5-1
+Installed-Size: 4024
+Maintainer: Sandro Tosi <morph@debian.org>
+Architecture: all
+Recommends: lynx | www-browser
+Size: 1458196
+SHA256: 4d7ac436e6b4e13362d760e4605e2599c84c14a36ad91917f6ab8f503e781445
+SHA1: 53e64640179418b563eace6009e042c784199e1f
+MD5sum: 9383087e8ce0e19536918cda972f6179
+Description: The Advanced Bash-Scripting Guide
+Homepage: http://www.tldp.org/LDP/abs/html/
+Description-md5: c70e528b8b624e5738bdbd1b89e8b349
+Tag: devel::doc, devel::examples, made-of::html, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/a/abs-guide/abs-guide_6.5-1_all.deb
+
+Package: abuse-sfx
+Version: 1:0.8-1
+Installed-Size: 2972
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: abuse (>= 1:0.8-1)
+Size: 1784998
+SHA256: fbd888efe040ce0b7a02d2982c3ecce4eb960908e6917cec3705563702c4d02d
+SHA1: 14f0a4cd7ee45316b2db49fb571a74c4075adce3
+MD5sum: 0a759ce18a2bfeccab4b95d25c31af90
+Description: music and sound effects for Abuse
+Description-md5: 459dfcf687af3a776f1719792bfe352b
+Tag: game::arcade, use::gameplaying
+Section: non-free/games
+Priority: optional
+Filename: pool/non-free/a/abuse-sfx/abuse-sfx_0.8-1_all.deb
+
+Package: album
+Version: 4.06-2
+Installed-Size: 324
+Maintainer: Joao Eriberto Mota Filho <eriberto@eriberto.pro.br>
+Architecture: all
+Depends: perl, imagemagick
+Recommends: album-data
+Suggests: apache2
+Size: 97736
+SHA256: e2a125eefb5873d315ae921cf04a48d87e7e77d7c19c451d22be5ddf9ca2efff
+SHA1: 3a04bbbe5b3ab6fd3849b195e81758240b027780
+MD5sum: 0efe75360d9a17591d9ca229950c0683
+Description: HTML photo album generator with theme support
+Homepage: http://marginalhacks.com/Hacks/album
+Description-md5: 9b6218fda3d13b37d56464a057a44ea5
+Tag: implemented-in::perl, interface::commandline, role::program,
+ scope::application, use::browsing, use::organizing, web::application,
+ works-with-format::html, works-with::image, works-with::image:raster,
+ works-with::text
+Section: non-free/web
+Priority: extra
+Filename: pool/non-free/a/album/album_4.06-2_all.deb
+
+Package: album-data
+Version: 4.05-2
+Installed-Size: 11768
+Maintainer: Joao Eriberto Mota Filho <eriberto@eriberto.pro.br>
+Architecture: all
+Depends: album
+Size: 5862856
+SHA256: b6b7354d6cf1e62b1dec6bcfdf16364c2b7a0b658110d24eadda697773fb90fb
+SHA1: 9185bd804e573e654f3f93162159c3ec2648cb23
+MD5sum: b65294042483a6a3bd41aa4df578bb51
+Description: themes, plugins and translations for album
+Homepage: http://marginalhacks.com/Hacks/album
+Description-md5: 1830a4f03882d1824bcb39c032bdbd30
+Tag: role::app-data
+Section: non-free/web
+Priority: extra
+Filename: pool/non-free/a/album-data/album-data_4.05-2_all.deb
+
+Package: alien-arena-data
+Version: 7.53-1
+Installed-Size: 911786
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: all
+Recommends: ttf-freefont
+Enhances: alien-arena (>= 7.53), alien-arena-server (>= 7.53)
+Size: 437098556
+SHA256: 308a1ace2ef202502b75f875164e0008085785061ad73d13d1b6041de92b37c9
+SHA1: ef26fa6aaf34e6ede278d748031d7809566b0c85
+MD5sum: e82980d2737754252ee2cc15c90dbb91
+Description: Game data files for Alien Arena
+Homepage: http://red.planetarena.org
+Description-md5: e036c4aba9e5fee7ef1e4d2b9286f22a
+Tag: game::fps, role::app-data, use::gameplaying
+Section: non-free/games
+Priority: extra
+Filename: pool/non-free/a/alien-arena-data/alien-arena-data_7.53-1_all.deb
+
+Package: amoeba-data
+Version: 1.1-6
+Installed-Size: 3552
+Maintainer: "Steinar H. Gunderson" <sesse@debian.org>
+Architecture: all
+Recommends: amoeba
+Size: 3198746
+SHA256: fee2df1e1bad65caa6f4c249798006f00436d3d371fbd31815c9091b33c9a729
+SHA1: fcfc8e37136a21701e7322ef78552e0f539b197f
+MD5sum: 8cec3de2012768f5477459e6df6ae4f5
+Description: Fast-paced, polished OpenGL demonstration by Excess (data)
+Description-md5: 034c9cfac5217a9a6eb4db71c1f05423
+Tag: game::demos, role::app-data, use::gameplaying
+Section: non-free/x11
+Priority: optional
+Filename: pool/non-free/a/amoeba-data/amoeba-data_1.1-6_all.deb
+
+Package: assaultcube-data
+Version: 1.1.0.4+repack1-2
+Installed-Size: 52478
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: all
+Size: 45852186
+SHA256: 8da9181b34debd99ec3d167b314c73ef65793bd7ce8c2c846dcc4901eeb1c83b
+SHA1: df3f3f455908452f536d960eb7cdff1b23241fbf
+MD5sum: 0f8f11621e3e8719e5a1a846e5f48485
+Description: data files and documentation for AssaultCube
+Homepage: http://assault.cubers.net/
+Description-md5: 44b8beee01b54b17188cc8f5f91c8ea7
+Tag: role::app-data
+Section: non-free/games
+Priority: optional
+Filename: pool/non-free/a/assaultcube-data/assaultcube-data_1.1.0.4+repack1-2_all.deb
+
+Package: asterisk-prompt-es
+Version: 1.4-1
+Installed-Size: 2528
+Maintainer: Debian VoIP Team <pkg-voip-maintainers@lists.alioth.debian.org>
+Architecture: all
+Depends: asterisk (>= 1:1.4)
+Enhances: asterisk
+Size: 1392186
+SHA256: 851dc466e874101eee21f866ed26c6f586f161daf9dbdb8b4b1979b3d234c715
+SHA1: 418bf5bc228fa5cca539d34a914a39050af10688
+MD5sum: 5b18724fa42bfb5b080e94cb35cfdd2a
+Description: Spanish prompts for the Asterisk PBX
+Homepage: http://www.voipnovatos.es/voces/
+Description-md5: cdf1f4624c212b6309d27c7a10821345
+Tag: culture::spanish, protocol::voip, role::app-data, works-with::audio
+Section: non-free/comm
+Priority: extra
+Filename: pool/non-free/a/asterisk-prompt-es/asterisk-prompt-es_1.4-1_all.deb
+
+Package: atmel-firmware
+Version: 1.3-4
+Installed-Size: 860
+Maintainer: Simon Kelley <simon@thekelleys.org.uk>
+Architecture: all
+Suggests: wireless-tools
+Conflicts: atmelwlandriver-tools
+Size: 467450
+SHA256: 1263db7dd3b55dbd02c5f239d8362e4193ee36e3580db02bd938dac59c1a4ed3
+SHA1: 36641678f3247a771305a38696f2989780c94573
+MD5sum: b174efacdc1162e4721478e1ed2f6de3
+Description: Firmware for Atmel at76c50x wireless networking chips.
+Description-md5: 9ebc545ff4fb8aff2093d26a803a820a
+Tag: admin::hardware, hardware::TODO, role::data, use::driver,
+ use::transmission
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/a/atmel-firmware/atmel-firmware_1.3-4_all.deb
+
+Package: autodocktools
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 59469
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), mgltools-pmv, mgltools-molkit, mgltools-volume, mgltools-support, python-imaging-tk, mgltools-viewerframework
+Recommends: mgltools-pyautodock, mgltools-utpackages, mgltools-webservices
+Suggests: autodock, autodock-vina, ballview, mgltools-cadd
+Size: 17834540
+SHA256: 9d54036da524a82f100c71b3797776e06cafad4bf89a3a4ea26f88eccdecca05
+SHA1: 5606c691351ca024ff8bb0ca626ad71ab8cd2d48
+MD5sum: 6e33e8a91d2022e199272e406163644f
+Description: GUI to help set up, launch and analyze AutoDock dockings
+Homepage: http://autodock.scripps.edu/
+Description-md5: 0132d27cee14da344e1e6e04ee1d6815
+Tag: field::biology, field::biology:structural, field::chemistry,
+ interface::x11, role::program, science::modelling, scope::suite,
+ uitoolkit::tk, use::analysing, use::configuring, use::converting,
+ use::simulating, use::viewing, works-with-format::TODO,
+ works-with::3dmodel, x11::application
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/a/autodocktools/autodocktools_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: automake1.9-doc
+Source: automake1.9-nonfree
+Version: 1.9.6-1
+Installed-Size: 296
+Maintainer: Eric Dorland <eric@debian.org>
+Architecture: all
+Replaces: automake1.9
+Conflicts: automake1.9 (<= 1.9.6-5)
+Size: 221124
+SHA256: f356029ce802dbfa4b5220ac22f9bef82fb99435a2fd678e6a5cf56a3640cfb4
+SHA1: 324a034a797cbc0e6421e7f8e74f376ada1589dc
+MD5sum: 1b921a9bfad03c7d555bbf02db1f3713
+Description: A tool for generating GNU Standards-compliant Makefiles
+Description-md5: 16f7c6a70ae85327f4522569aa2e0cc9
+Tag: devel::buildtools, devel::doc, made-of::info, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/a/automake1.9-nonfree/automake1.9-doc_1.9.6-1_all.deb
+
+Package: bison-doc
+Version: 1:2.5-1
+Installed-Size: 1938
+Maintainer: Chuan-kai Lin <cklin@debian.org>
+Architecture: all
+Replaces: bison (<< 2.2.dfsg-1)
+Depends: dpkg (>= 1.15.4) | install-info
+Suggests: doc-base
+Size: 1079434
+SHA256: 35eb2b6a1765b414c69e69a93059befa638e096bba23c824754b862c73dd2cb3
+SHA1: 2853e9ee36e108c4feb08c32e5bc66604ad8f042
+MD5sum: 82eb6ac2b405fbe5b044596d9e642810
+Description: Documentation for the Bison parser generator
+Homepage: http://www.gnu.org/software/bison/
+Description-md5: 13fe90eab8084a7e8639929bf1218e17
+Tag: devel::doc, made-of::info, made-of::pdf, role::documentation, suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/b/bison-doc/bison-doc_2.5-1_all.deb
+
+Package: bluez-firmware
+Version: 1.2-3
+Installed-Size: 158
+Maintainer: Debian Bluetooth Maintainers <pkg-bluetooth-maintainers@lists.alioth.debian.org>
+Architecture: all
+Size: 72672
+SHA256: cda2368d429ee40c39c7a60e193c2661dfa07034499c73323156328f05a4c2a0
+SHA1: bcdf810826eca4b7b449486db34e7c9f90c7749b
+MD5sum: 03284e5253981f0a309d6cf32734e3e2
+Description: Firmware for Bluetooth devices
+Description-md5: 5ff7003d38bca57594b0a2f4299ab93a
+Tag: hardware::TODO, role::data
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/b/bluez-firmware/bluez-firmware_1.2-3_all.deb
+
+Package: broadcom-sta-common
+Source: broadcom-sta
+Version: 5.100.82.112-7
+Installed-Size: 52
+Maintainer: Cyril Lacoux <clacoux@easter-eggs.com>
+Architecture: all
+Recommends: broadcom-sta-source, module-assistant
+Size: 12138
+SHA256: 145bf218167610f9f5e5cd438b2339c1a844018ef369f749af323c273f3cddc6
+SHA1: 70cd99ae951bf100e09de70910b6efc564788787
+MD5sum: 293d886a1a5c0cc4169633892aa4fcd6
+Description: Common files for the Broadcom STA Wireless driver
+Homepage: http://www.broadcom.com/support/802.11/linux_sta.php
+Description-md5: a6e77923406ca1eaeab0e016d9ed8ed2
+Section: non-free/admin
+Priority: optional
+Filename: pool/non-free/b/broadcom-sta/broadcom-sta-common_5.100.82.112-7_all.deb
+
+Package: broadcom-sta-dkms
+Source: broadcom-sta
+Version: 5.100.82.112-7
+Installed-Size: 6040
+Maintainer: Cyril Lacoux <clacoux@easter-eggs.com>
+Architecture: all
+Replaces: broadcom-sta-common, broadcom-sta-modules (<< 5.100.82.112-6~), broadcom-sta-source
+Provides: broadcom-sta-modules
+Depends: dkms (>= 2.1.0.0)
+Recommends: wireless-tools
+Breaks: broadcom-sta-common, broadcom-sta-modules (<< 5.100.82.112-6~), broadcom-sta-source
+Size: 2208360
+SHA256: 8e4c8ef1c2378669294164c9d4c1ee87ebd95287cb8a1b8217704df0760e46ce
+SHA1: 2f31463ea2417b0e808aaa74083ed3823414c87e
+MD5sum: f269691e70858b30f9050759e62772f5
+Description: dkms source for the Broadcom STA Wireless driver
+Homepage: http://www.broadcom.com/support/802.11/linux_sta.php
+Description-md5: b7a74704bdb09b2bce2e95c182cae8a4
+Section: non-free/admin
+Priority: optional
+Filename: pool/non-free/b/broadcom-sta/broadcom-sta-dkms_5.100.82.112-7_all.deb
+
+Package: broadcom-sta-source
+Source: broadcom-sta
+Version: 5.100.82.112-7
+Installed-Size: 1929
+Maintainer: Cyril Lacoux <clacoux@easter-eggs.com>
+Architecture: all
+Depends: debhelper (>= 8), bzip2, make
+Recommends: module-assistant
+Size: 1938854
+SHA256: 28ee5bfea47b0321ec1da5df5eea873db4f1b8a51aa6605d4def638d9264d5a3
+SHA1: 0af500021e4b667c4e21c025563e84819e1abdab
+MD5sum: 6393c2176e3a4691350ade1dadee8976
+Description: Source for the Broadcom STA Wireless driver
+Homepage: http://www.broadcom.com/support/802.11/linux_sta.php
+Description-md5: c3d04f10764e2c981d018b1283a4af51
+Tag: admin::hardware, hardware::TODO, implemented-in::c, role::source
+Section: non-free/admin
+Priority: optional
+Filename: pool/non-free/b/broadcom-sta/broadcom-sta-source_5.100.82.112-7_all.deb
+
+Package: cclib-data
+Version: 1.0.1-3
+Installed-Size: 32359
+Maintainer: Debichem Team <debichem-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), python-cclib (>= 1.0.1-1)
+Size: 5349918
+SHA256: 2e0b4c6b9f00f0dbb82f391fde8b7ca07780c8c5f936650f71d38c3a199287a7
+SHA1: cf7b8664624b3fdc030035c1ffabc71937c5fbde
+MD5sum: bbc2f6f70a1f09c8916cc17192b6c2e1
+Description: Parsers and algorithms for computational chemistry (data files)
+Homepage: http://cclib.sourceforge.net
+Description-md5: b3fc6a06f6988440348dbafee80b3cee
+Tag: role::app-data
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/c/cclib-data/cclib-data_1.0.1-3_all.deb
+
+Package: celestia-common-nonfree
+Source: celestia-nonfree
+Version: 1.6.1-1
+Installed-Size: 10244
+Maintainer: Guus Sliepen <guus@debian.org>
+Architecture: all
+Recommends: celestia-common
+Conflicts: celestia-common (<< 1.5.1)
+Size: 9754782
+SHA256: dd329abc35f3dfef9ea8f849354aa31a584bafd47d605ddc6201bc6ab18835c2
+SHA1: 5bcfcffed4c09d702ae9dc9d6ac0b098a2e29b3a
+MD5sum: b1996a1f36a85cd37fbbb009b5bde245
+Description: Non-free datafiles for Celestia, a real-time visual space simulation
+Homepage: http://www.shatters.net/celestia/
+Description-md5: 81a1b05f0c28026e5415782fca13a155
+Tag: field::astronomy, role::app-data, use::gameplaying, use::learning,
+ use::viewing
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/c/celestia-nonfree/celestia-common-nonfree_1.6.1-1_all.deb
+
+Package: context-doc-nonfree
+Version: 2012.06.27-1
+Installed-Size: 125580
+Maintainer: Debian TeX maintainers <debian-tex-maint@lists.debian.org>
+Architecture: all
+Depends: dpkg (>= 1.14.18), tex-common (>= 3)
+Suggests: context, context-nonfree
+Size: 98296066
+SHA256: 8fa3f4c5bfa83e13480f70db4ae4a9c74003b6e2115765730773140c5b0549d4
+SHA1: b4d3ed4094cc76a06cc3609f473776980d111c9a
+MD5sum: 83ec1d79f0002d90a0068738b1c81363
+Description: ConTeXt documentation that is not DFSG free
+Description-md5: 432ddc1a98a461eff7937ebd9dac8fe9
+Tag: made-of::pdf, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/c/context-doc-nonfree/context-doc-nonfree_2012.06.27-1_all.deb
+
+Package: context-nonfree
+Version: 2007.03.22-1
+Installed-Size: 1036
+Maintainer: Debian TeX maintainers <debian-tex-maint@lists.debian.org>
+Architecture: all
+Depends: tex-common (>> 0.35), context
+Size: 683926
+SHA256: d988600525f1f6a42ca4c6d86c110686b2767837621039d41e496e1a0586195a
+SHA1: 4d89b67ea83249595fa6eed23ad028f887491470
+MD5sum: efa8e265b9572defa7051317ab191194
+Description: Non-free items from the ConTeXt distribution
+Description-md5: 310bf479c0b4cec06f1a7d79420bb2f5
+Tag: made-of::font, role::app-data
+Section: non-free/tex
+Priority: optional
+Filename: pool/non-free/c/context-nonfree/context-nonfree_2007.03.22-1_all.deb
+
+Package: coq-doc
+Version: 8.3pl4-1
+Installed-Size: 77
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Architecture: all
+Depends: coq-doc-html (>= 8.3pl4-1), coq-doc-pdf (>= 8.3pl4-1)
+Size: 44868
+SHA256: 5801338ffb00b5e96502246e11aa38b4126458c6185b12c7659f10a174aa06cd
+SHA1: 7de4d35f2f84ab4b7a81c5dc5a89b814992ddafa
+MD5sum: 41b4cb6eda684c72659cfb788f1f8ae9
+Description: documentation for Coq
+Homepage: http://coq.inria.fr/
+Description-md5: 8162cc95ca212365bc0155b6cfef283a
+Tag: devel::doc, made-of::html, role::documentation, role::metapackage
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/c/coq-doc/coq-doc_8.3pl4-1_all.deb
+
+Package: coq-doc-html
+Source: coq-doc
+Version: 8.3pl4-1
+Installed-Size: 2459
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Architecture: all
+Replaces: coq-doc (<= 8.0pl1.0-1)
+Size: 556424
+SHA256: 2239066cfecd3f4f2483f39af613f07806cc68a5531312655d5dfaa7eadce799
+SHA1: 7c5e4e0fc7b3bb03d2f07591eece247b3da1ecea
+MD5sum: 8913fd0a1a550188c8c716ab791a98ac
+Description: documentation for Coq in html format
+Homepage: http://coq.inria.fr/
+Description-md5: 2a1cea3031ba67430a5917f291c6087a
+Tag: devel::doc, made-of::html, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/c/coq-doc/coq-doc-html_8.3pl4-1_all.deb
+
+Package: coq-doc-pdf
+Source: coq-doc
+Version: 8.3pl4-1
+Installed-Size: 2391
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Architecture: all
+Replaces: coq-doc (<= 8.0pl1.0-1)
+Size: 2414996
+SHA256: 0ff8ca0bc2b255db573a050c3f6c3b44b513d12b7cf90abd6e8e1a29f659e0ea
+SHA1: fb46d289b274df3c28f840fd52033abc573b20a5
+MD5sum: 35f11d06346d1e92748400d37fa128dd
+Description: documentation for Coq in pdf format
+Homepage: http://coq.inria.fr/
+Description-md5: 6406c20f936aa913c3dfc9f90c15fc8a
+Tag: devel::doc, made-of::pdf, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/c/coq-doc/coq-doc-pdf_8.3pl4-1_all.deb
+
+Package: cpp-4.4-doc
+Source: gcc-4.4-doc-non-dfsg
+Version: 4.4.4.nf1-1
+Installed-Size: 496
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Architecture: all
+Depends: gcc-doc-base (>= 4.1.1.nf3-1), dpkg (>= 1.15.4) | install-info
+Suggests: doc-base
+Size: 203390
+SHA256: 4ccfe0170ab8483c8a609d358846699c92d1f04d4059e2bfaa4578fde6653c8d
+SHA1: e4511c98059921fd2c4489836c7acdc42d319d3a
+MD5sum: ec8c080443b8d2b5d0f1b85462939cac
+Description: documentation for the GNU C preprocessor (cpp)
+Description-md5: fafeb6f7a4af0b2d9f555c6e4f34535a
+Tag: devel::doc, devel::lang:c, made-of::info, role::documentation,
+ suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/gcc-4.4-doc-non-dfsg/cpp-4.4-doc_4.4.4.nf1-1_all.deb
+
+Package: crash-whitepaper
+Version: 1.0-1.1
+Installed-Size: 716
+Maintainer: Troy Heber <troyh@debian.org>
+Architecture: all
+Suggests: crash
+Size: 104524
+SHA256: a4cc591cbb43b95528ba7e5cfbf251f96469dcbeb14ee6f19cb5473ffa10361d
+SHA1: 329a5fe8976e70f796eb15bca770a21cca686b20
+MD5sum: d35918590a01a4b2321a93339d8afdf2
+Description: Whitepaper for crash kernel debugging utility
+Description-md5: a467e9e5b8c1ad73f6b256b33023cc2c
+Tag: made-of::html, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/c/crash-whitepaper/crash-whitepaper_1.0-1.1_all.deb
+
+Package: cuneiform-common
+Source: cuneiform
+Version: 1.1.0+dfsg-4
+Installed-Size: 50691
+Maintainer: Jakub Wilk <jwilk@debian.org>
+Architecture: all
+Pre-Depends: dpkg (>= 1.15.6)
+Size: 21840066
+SHA256: 6cc5046e7484475eb67a43655dac6f37619e4337f1382fc5f31c87669df58375
+SHA1: b54db5555daae2ff6d43a428f87217fbc7379f7e
+MD5sum: 01cedeb1b7d95d5400658b7a41868565
+Description: multi-language OCR system (common)
+Multi-Arch: foreign
+Homepage: http://launchpad.net/cuneiform-linux/
+Description-md5: 26ff2ce2ac800318b04976471b4bf01d
+Tag: role::app-data
+Section: non-free/graphics
+Priority: optional
+Filename: pool/non-free/c/cuneiform/cuneiform-common_1.1.0+dfsg-4_all.deb
+
+Package: dahdi-firmware-nonfree
+Source: dahdi-firmware
+Version: 2.6.1-1
+Installed-Size: 2141
+Maintainer: Debian VoIP Team <pkg-voip-maintainers@lists.alioth.debian.org>
+Architecture: all
+Replaces: zaptel-firmware
+Conflicts: zaptel-firmware
+Breaks: dahdi (<< 1:2.2.1)
+Size: 819348
+SHA256: 883d77f81a762145e9faef6529994860ee43fb039ef776256a2bcb599b1115c2
+SHA1: d05ef3c3a141e7526d1b5d474e9c779e900b9cce
+MD5sum: 1c5d2145be8eb94484ac02373910f319
+Description: DAHDI non-free firmware
+Homepage: http://www.asterisk.org/
+Description-md5: 4c47467763a897993ac7b8c259d6e7c4
+Section: non-free/comm
+Priority: extra
+Filename: pool/non-free/d/dahdi-firmware/dahdi-firmware-nonfree_2.6.1-1_all.deb
+
+Package: doc-linux-nonfree-html
+Source: doc-linux-nonfree
+Version: 2008.08-1
+Installed-Size: 9728
+Maintainer: Debian LDP Maintainers <pkg-doc-linux-devel@lists.alioth.debian.org>
+Architecture: all
+Replaces: doc-linux, doc-linux-html (<< 2008.05-1), doc-linux-text (<< 98.06-1)
+Recommends: doc-linux-html
+Suggests: doc-base, menu, www-browser
+Enhances: doc-linux-html
+Conflicts: doc, doc-base (<< 0.8.4), doc-linux
+Size: 1744994
+SHA256: 313b1456b0513715af4c2ed111c2e86c3187e0a4f81d425f0fddbc3a3ebaec30
+SHA1: 532ce0bd33b06d2dd2435a1581e6d97e75dd507b
+MD5sum: 0616dc2c4920c0da6655b1567b8affd4
+Description: Linux HOWTOs in HTML format (non-free)
+Homepage: http://www.tldp.org/
+Description-md5: 85ca9d640f6bbfd96c0d896e2073f488
+Tag: made-of::html, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/d/doc-linux-nonfree/doc-linux-nonfree-html_2008.08-1_all.deb
+
+Package: doc-linux-nonfree-text
+Source: doc-linux-nonfree
+Version: 2008.08-1
+Installed-Size: 1700
+Maintainer: Debian LDP Maintainers <pkg-doc-linux-devel@lists.alioth.debian.org>
+Architecture: all
+Replaces: doc-linux, doc-linux-html (<< 98.06-1), doc-linux-text (<< 2008.05-1)
+Recommends: doc-linux-text
+Suggests: doc-linux-html
+Enhances: doc-linux-text
+Conflicts: doc, doc-linux
+Size: 1444218
+SHA256: b32b354dff1a3ed93382310415058d4c1946812a884275fdd7690a1ce587fdad
+SHA1: 84e903c1bde78dafd438c651bbb395452adf1a08
+MD5sum: e54f1fb600547572ded083dc21087866
+Description: Linux HOWTOs in ASCII format (non-free)
+Homepage: http://www.tldp.org/
+Description-md5: 553aeb6a0337babb0d79723842c0e374
+Tag: role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/d/doc-linux-nonfree/doc-linux-nonfree-text_2008.08-1_all.deb
+
+Package: doc-rfc
+Version: 20120225-2
+Installed-Size: 14
+Maintainer: Iustin Pop <iustin@debian.org>
+Architecture: all
+Depends: doc-rfc-std, doc-rfc-std-proposed, doc-rfc-fyi-bcp, doc-rfc-misc, doc-rfc-old-std, doc-rfc-others, doc-rfc-informational
+Size: 8538
+SHA256: bb03c1043367cda9a7440ff2e6899a8c73cf281fa42b3bfc3b16192b534b710a
+SHA1: 67599a044db0485c835653888fad9e36f7bd4e78
+MD5sum: 81c33265ca81fe091fc589c087c78003
+Description: RFC documents metapackage
+Homepage: http://www.rfc-editor.org/
+Description-md5: bd3390a3853c7176201db994016c790a
+Tag: devel::doc, role::documentation, role::metapackage
+Section: non-free/metapackages
+Priority: optional
+Filename: pool/non-free/d/doc-rfc/doc-rfc_20120225-2_all.deb
+
+Package: doc-rfc-experimental
+Source: doc-rfc
+Version: 20120225-2
+Installed-Size: 5064
+Maintainer: Iustin Pop <iustin@debian.org>
+Architecture: all
+Replaces: doc-rfc (<< 20120225-2), doc-rfc-fyi-bcp (<< 20120225-2), doc-rfc-informational (<< 20120225-2), doc-rfc-misc (<< 20120225-2), doc-rfc-old-std (<< 20120225-2), doc-rfc-others (<< 20120225-2), doc-rfc-std (<< 20120225-2), doc-rfc-std-proposed (<< 20120225-2)
+Breaks: doc-rfc (<< 20120225-2), doc-rfc-fyi-bcp (<< 20120225-2), doc-rfc-informational (<< 20120225-2), doc-rfc-misc (<< 20120225-2), doc-rfc-old-std (<< 20120225-2), doc-rfc-others (<< 20120225-2), doc-rfc-std (<< 20120225-2), doc-rfc-std-proposed (<< 20120225-2)
+Size: 5188302
+SHA256: 4ef9cbd1d3404aab589306ee435013117a6faedf16171a571ee2564403024027
+SHA1: 5975a57288e98958114204a38b00bc881546b3b5
+MD5sum: 48213612bfc417211328853a2b520400
+Description: Experimental RFCs
+Homepage: http://www.rfc-editor.org/
+Description-md5: 9d01cf6dc8570101acf85dd410a0c590
+Tag: devel::doc, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/d/doc-rfc/doc-rfc-experimental_20120225-2_all.deb
+
+Package: doc-rfc-fyi-bcp
+Source: doc-rfc
+Version: 20120225-2
+Installed-Size: 3519
+Maintainer: Iustin Pop <iustin@debian.org>
+Architecture: all
+Replaces: doc-rfc (<< 20120225-2), doc-rfc-experimental (<< 20120225-2), doc-rfc-informational (<< 20120225-2), doc-rfc-misc (<< 20120225-2), doc-rfc-old-std (<< 20120225-2), doc-rfc-others (<< 20120225-2), doc-rfc-std (<< 20120225-2), doc-rfc-std-proposed (<< 20120225-2)
+Breaks: doc-rfc (<< 20120225-2), doc-rfc-experimental (<< 20120225-2), doc-rfc-informational (<< 20120225-2), doc-rfc-misc (<< 20120225-2), doc-rfc-old-std (<< 20120225-2), doc-rfc-others (<< 20120225-2), doc-rfc-std (<< 20120225-2), doc-rfc-std-proposed (<< 20120225-2)
+Size: 3601152
+SHA256: feeaf2ada5719ba53fc4022690041ca34dc88d781524cde505e8922db08103a3
+SHA1: ac62a67a25010c2375325da8e2398bc13221779b
+MD5sum: bff2675d3cfebaf9f36f0794be7260a9
+Description: FYI and BCP RFCs
+Homepage: http://www.rfc-editor.org/
+Description-md5: 512d9cd84452ac3b50c84839ce5ecf26
+Tag: devel::doc, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/d/doc-rfc/doc-rfc-fyi-bcp_20120225-2_all.deb
+
+Package: doc-rfc-informational
+Source: doc-rfc
+Version: 20120225-2
+Installed-Size: 29311
+Maintainer: Iustin Pop <iustin@debian.org>
+Architecture: all
+Replaces: doc-rfc (<< 20120225-2), doc-rfc-experimental (<< 20120225-2), doc-rfc-fyi-bcp (<< 20120225-2), doc-rfc-misc (<< 20120225-2), doc-rfc-old-std (<< 20120225-2), doc-rfc-others (<< 20120225-2), doc-rfc-std (<< 20120225-2), doc-rfc-std-proposed (<< 20120225-2)
+Breaks: doc-rfc (<< 20120225-2), doc-rfc-experimental (<< 20120225-2), doc-rfc-fyi-bcp (<< 20120225-2), doc-rfc-misc (<< 20120225-2), doc-rfc-old-std (<< 20120225-2), doc-rfc-others (<< 20120225-2), doc-rfc-std (<< 20120225-2), doc-rfc-std-proposed (<< 20120225-2)
+Size: 29982212
+SHA256: 2e6da214416595a7b9599654c21b7cffce75d168afc659c5cd5ef674d1f7d582
+SHA1: 1e7b70e74544a2c6d3889a7825741ec8591a1a06
+MD5sum: 90e6ab00c4b1f242fa39c66b696fe4f9
+Description: Informational RFCs
+Homepage: http://www.rfc-editor.org/
+Description-md5: 6ea21717f856f9f32ac88b98b561c337
+Tag: devel::doc, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/d/doc-rfc/doc-rfc-informational_20120225-2_all.deb
+
+Package: doc-rfc-misc
+Source: doc-rfc
+Version: 20120225-2
+Installed-Size: 6312
+Maintainer: Iustin Pop <iustin@debian.org>
+Architecture: all
+Replaces: doc-rfc (<< 20120225-2), doc-rfc-experimental (<< 20120225-2), doc-rfc-fyi-bcp (<< 20120225-2), doc-rfc-informational (<< 20120225-2), doc-rfc-old-std (<< 20120225-2), doc-rfc-others (<< 20120225-2), doc-rfc-std (<< 20120225-2), doc-rfc-std-proposed (<< 20120225-2)
+Breaks: doc-rfc (<< 20120225-2), doc-rfc-experimental (<< 20120225-2), doc-rfc-fyi-bcp (<< 20120225-2), doc-rfc-informational (<< 20120225-2), doc-rfc-old-std (<< 20120225-2), doc-rfc-others (<< 20120225-2), doc-rfc-std (<< 20120225-2), doc-rfc-std-proposed (<< 20120225-2)
+Size: 6466972
+SHA256: da07d039de9f40d20e16d0fe5b6c324194ab3a26c5e207d1da8a8cc321c7d474
+SHA1: e94afaa0e603e9b1eafe129b2193f3a6352f9d99
+MD5sum: a2e842ae1ad0404b02f972baa031c148
+Description: Historic and draft RFCs
+Homepage: http://www.rfc-editor.org/
+Description-md5: 997c45357013e72959c4654059d99326
+Tag: devel::doc, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/d/doc-rfc/doc-rfc-misc_20120225-2_all.deb
+
+Package: doc-rfc-old-std
+Source: doc-rfc
+Version: 20120225-2
+Installed-Size: 12603
+Maintainer: Iustin Pop <iustin@debian.org>
+Architecture: all
+Replaces: doc-rfc (<< 20120225-2), doc-rfc-experimental (<< 20120225-2), doc-rfc-fyi-bcp (<< 20120225-2), doc-rfc-informational (<< 20120225-2), doc-rfc-misc (<< 20120225-2), doc-rfc-others (<< 20120225-2), doc-rfc-std (<< 20120225-2), doc-rfc-std-proposed (<< 20120225-2)
+Breaks: doc-rfc (<< 20120225-2), doc-rfc-experimental (<< 20120225-2), doc-rfc-fyi-bcp (<< 20120225-2), doc-rfc-informational (<< 20120225-2), doc-rfc-misc (<< 20120225-2), doc-rfc-others (<< 20120225-2), doc-rfc-std (<< 20120225-2), doc-rfc-std-proposed (<< 20120225-2)
+Size: 12904870
+SHA256: c7198600e95d1c0acc207edf4962caffc0d3507d36d48897184615432a4cf2b4
+SHA1: dd79f867f6b4737ba932cbff91c5896ec9f82148
+MD5sum: 6344d725f81778b615367fde008901c1
+Description: Old Standard RFCs
+Homepage: http://www.rfc-editor.org/
+Description-md5: e0e245fe19e303502c88b4ab0c59141d
+Tag: devel::doc, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/d/doc-rfc/doc-rfc-old-std_20120225-2_all.deb
+
+Package: doc-rfc-others
+Source: doc-rfc
+Version: 20120225-2
+Installed-Size: 51197
+Maintainer: Iustin Pop <iustin@debian.org>
+Architecture: all
+Replaces: doc-rfc (<< 20120225-2), doc-rfc-experimental (<< 20120225-2), doc-rfc-fyi-bcp (<< 20120225-2), doc-rfc-informational (<< 20120225-2), doc-rfc-misc (<< 20120225-2), doc-rfc-old-std (<< 20120225-2), doc-rfc-std (<< 20120225-2), doc-rfc-std-proposed (<< 20120225-2)
+Breaks: doc-rfc (<< 20120225-2), doc-rfc-experimental (<< 20120225-2), doc-rfc-fyi-bcp (<< 20120225-2), doc-rfc-informational (<< 20120225-2), doc-rfc-misc (<< 20120225-2), doc-rfc-old-std (<< 20120225-2), doc-rfc-std (<< 20120225-2), doc-rfc-std-proposed (<< 20120225-2)
+Size: 52018280
+SHA256: f8d19635e6b1673ae4297e2fbdef9c99dc15d2de3bff812bafba8329058cb54e
+SHA1: dbf8bc9fcbffb458bd2b7522e8c967104345afe6
+MD5sum: 145f73b282c47d5d4cb3e0a369d6b9f4
+Description: Old experimental and unclassified RFCs
+Homepage: http://www.rfc-editor.org/
+Description-md5: 7e933a75af8a2daa21f426b4dd37a6e1
+Tag: devel::doc, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/d/doc-rfc/doc-rfc-others_20120225-2_all.deb
+
+Package: doc-rfc-std
+Source: doc-rfc
+Version: 20120225-2
+Installed-Size: 5623
+Maintainer: Iustin Pop <iustin@debian.org>
+Architecture: all
+Replaces: doc-rfc (<< 20120225-2), doc-rfc-experimental (<< 20120225-2), doc-rfc-fyi-bcp (<< 20120225-2), doc-rfc-informational (<< 20120225-2), doc-rfc-misc (<< 20120225-2), doc-rfc-old-std (<< 20120225-2), doc-rfc-others (<< 20120225-2), doc-rfc-std-proposed (<< 20120225-2)
+Breaks: doc-rfc (<< 20120225-2), doc-rfc-experimental (<< 20120225-2), doc-rfc-fyi-bcp (<< 20120225-2), doc-rfc-informational (<< 20120225-2), doc-rfc-misc (<< 20120225-2), doc-rfc-old-std (<< 20120225-2), doc-rfc-others (<< 20120225-2), doc-rfc-std-proposed (<< 20120225-2)
+Size: 5733922
+SHA256: e14db4504327867c9ea0b56d78e28250c84b19449c247a9edbc3a2970a89ef7d
+SHA1: a9048ad4ceedd60a64884350284084eab60b3b4e
+MD5sum: 2ff4212d807408d8bdd6eb1151e02b6b
+Description: Standard RFCs
+Homepage: http://www.rfc-editor.org/
+Description-md5: 34ae989487403159b07b0ba2e6a4e2ca
+Tag: devel::doc, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/d/doc-rfc/doc-rfc-std_20120225-2_all.deb
+
+Package: doc-rfc-std-proposed
+Source: doc-rfc
+Version: 20120225-2
+Installed-Size: 30365
+Maintainer: Iustin Pop <iustin@debian.org>
+Architecture: all
+Replaces: doc-rfc (<< 20120225-2), doc-rfc-experimental (<< 20120225-2), doc-rfc-fyi-bcp (<< 20120225-2), doc-rfc-informational (<< 20120225-2), doc-rfc-misc (<< 20120225-2), doc-rfc-old-std (<< 20120225-2), doc-rfc-others (<< 20120225-2), doc-rfc-std (<< 20120225-2)
+Breaks: doc-rfc (<< 20120225-2), doc-rfc-experimental (<< 20120225-2), doc-rfc-fyi-bcp (<< 20120225-2), doc-rfc-informational (<< 20120225-2), doc-rfc-misc (<< 20120225-2), doc-rfc-old-std (<< 20120225-2), doc-rfc-others (<< 20120225-2), doc-rfc-std (<< 20120225-2)
+Size: 31118398
+SHA256: ede2e6defa3f99cdfb860690cfa1babb1901dbfa245e916f017b67441852af14
+SHA1: 6e02131e12e59b07c8920d2bdc12147339581d24
+MD5sum: cb078dbd786a9913ff09ca95865a1235
+Description: Proposed Standard RFCs
+Homepage: http://www.rfc-editor.org/
+Description-md5: 5565c0002a196f665c8b29521d8e5f5e
+Tag: devel::doc, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/d/doc-rfc/doc-rfc-std-proposed_20120225-2_all.deb
+
+Package: doom-wad-shareware
+Version: 1.9.fixed-2
+Installed-Size: 4148
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: all
+Provides: doom-wad
+Recommends: doom-engine
+Size: 1755854
+SHA256: 9933056323fb938f7c5311e2d51ec5c94117e4298bb1e898f7098eefbded8658
+SHA1: e74400ebde3df267fe94a44d871ee5eb01574906
+MD5sum: 8addae87f22cfd63f392dc4eb4c2a319
+Description: Shareware game files for the 3D game Doom
+Description-md5: 305f347cd8b0dcd69bb7c8dc54f4ed8b
+Tag: game::arcade, role::app-data, use::gameplaying
+Section: non-free/games
+Priority: optional
+Filename: pool/non-free/d/doom-wad-shareware/doom-wad-shareware_1.9.fixed-2_all.deb
+
+Package: eagle-data
+Source: eagle
+Version: 5.12.0-3
+Installed-Size: 72715
+Maintainer: Scott Howard <showard@debian.org>
+Architecture: all
+Size: 30934880
+SHA256: b13a322566e640d0a3ea5702917cb24760f071744932054a8f8ebaa357a1e554
+SHA1: 1db48fadb8ffe21a7dea8567214dca38f73e8f9e
+MD5sum: 7e1f47d5fbf714220b10ca790b4b7d93
+Description: Data files for Eagle
+Multi-Arch: foreign
+Homepage: http://www.cadsoft.de
+Description-md5: 874730834d5a0947b1aff094f0b6e027
+Tag: field::electronics, role::app-data, role::documentation
+Section: non-free/electronics
+Priority: extra
+Filename: pool/non-free/e/eagle/eagle-data_5.12.0-3_all.deb
+
+Package: ebook-dev-alp
+Version: 200407-1
+Installed-Size: 3943
+Maintainer: Francesco Paolo Lovergine <frankie@debian.org>
+Architecture: all
+Recommends: xpdf-reader | pdf-viewer
+Size: 3592678
+SHA256: 7689bef3fcdaf3dd2fc4f29cd377e46ce015d823d29183a5f3276a61a2b06d04
+SHA1: 274c1ebac521d9796e61885801c65c1c95e0928a
+MD5sum: c5c6f4e75eec067ede140900c78070ed
+Description: [EBOOK-DEV] Advanced Linux Programming
+Description-md5: 66528f58aed47826b9d2954e3852d251
+Tag: devel::doc, devel::lang:c, made-of::pdf, role::data, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/e/ebook-dev-alp/ebook-dev-alp_200407-1_all.deb
+
+Package: elmer-doc
+Version: 2011.09.06-1
+Installed-Size: 85385
+Maintainer: Adam C. Powell, IV <hazelsct@debian.org>
+Architecture: all
+Suggests: elmer, elmergui-samples
+Size: 84524006
+SHA256: 25b122096166a55cdb05d97e78afbe03a58cd9d2dbf6bbd5f298ac89b296acdf
+SHA1: 0dbbb4ce801fb0f6f0588bdaba893148d85dfadd
+MD5sum: a07081775a4cc61019f713f76f52ab1c
+Description: Elmer multiphysics FEA package documentation
+Homepage: http://www.csc.fi/elmer/
+Description-md5: c366ede5a3aa81772c367ab5ab9b0d37
+Tag: made-of::pdf, role::documentation
+Section: non-free/doc
+Priority: extra
+Filename: pool/non-free/e/elmer-doc/elmer-doc_2011.09.06-1_all.deb
+
+Package: emacs23-common-non-dfsg
+Source: emacs23-non-dfsg
+Version: 23.4+1-1
+Installed-Size: 4226
+Maintainer: Rob Browning <rlb@defaultvalue.org>
+Architecture: all
+Replaces: emacs22-common (<< 22.2)
+Depends: dpkg (>= 1.15.4) | install-info
+Conflicts: emacs22-common (<< 22.2)
+Size: 4164000
+SHA256: ba65084b3e961a371e86325867145a570de6a0b5d48aac5789693c9d3a7f3790
+SHA1: 2e2e6c388ac64c9e1c9b056aa5dc5edf1f7ccf0d
+MD5sum: 3f823d4cf919a34881072342e3706197
+Description: GNU Emacs shared, architecture independent, non-DFSG items
+Description-md5: 90f02678a2f64c3944119e0e8745cae4
+Tag: suite::emacs
+Section: non-free/editors
+Priority: optional
+Filename: pool/non-free/e/emacs23-non-dfsg/emacs23-common-non-dfsg_23.4+1-1_all.deb
+
+Package: emacs24-common-non-dfsg
+Source: emacs24-non-dfsg
+Version: 24.1+1-1
+Installed-Size: 4418
+Maintainer: Rob Browning <rlb@defaultvalue.org>
+Architecture: all
+Replaces: emacs22-common (<< 22.2)
+Depends: dpkg (>= 1.15.4) | install-info
+Conflicts: emacs22-common (<< 22.2)
+Size: 4363244
+SHA256: b4394d2201f044ac8106c2de35e73a81527deba2be8808fda4d0c9acd3e3d07b
+SHA1: 8592fd8b6192c5270a9bbbbf85b11f0938bda13c
+MD5sum: 9b3576faed0d0109790edce618ac2050
+Description: GNU Emacs common non-DFSG items, including the core documentation
+Description-md5: 4ec84c62d4d6533d9f6a093fa1157b61
+Section: non-free/editors
+Priority: optional
+Filename: pool/non-free/e/emacs24-non-dfsg/emacs24-common-non-dfsg_24.1+1-1_all.deb
+
+Package: etoys
+Version: 4.0.2340-1
+Installed-Size: 30612
+Maintainer: José L. Redrejo Rodríguez <jredrejo@debian.org>
+Architecture: all
+Depends: squeak-vm
+Recommends: etoys-doc
+Size: 15405264
+SHA256: b2dfec4b7feff7b85838893e83dde32792a5d35dbfa597c9ac07f992c776de86
+SHA1: aeb4abc8a149b8a91adc09be9f21b170338dc843
+MD5sum: ae433aa4dbcf2177fea00fed8e3c5d18
+Description: A media-rich model, simulation construction kit and authoring tool
+Description-md5: 80d4e58f7564aabe98871c231b4c4733
+Section: non-free/games
+Priority: extra
+Filename: pool/non-free/e/etoys/etoys_4.0.2340-1_all.deb
+
+Package: etoys-doc
+Source: etoys
+Version: 4.0.2340-1
+Installed-Size: 10944
+Maintainer: José L. Redrejo Rodríguez <jredrejo@debian.org>
+Architecture: all
+Size: 10733618
+SHA256: d82ce101d6f16c8c417f0b60f73a04f6a9643105b3f273426597dbc5d8085c69
+SHA1: 5060f91065d64d71b71b66fae6ebd243075ea64e
+MD5sum: b97b6d1c28cf90c059a42d41e5e43d14
+Description: Documentation for etoys
+Description-md5: 328208c8885cdd9bcf620311bfad1f2c
+Tag: role::documentation, role::examples
+Section: non-free/doc
+Priority: extra
+Filename: pool/non-free/e/etoys/etoys-doc_4.0.2340-1_all.deb
+
+Package: festlex-oald
+Version: 1.4.0-3.1
+Installed-Size: 13637
+Maintainer: Matthias Urlichs <smurf@debian.org>
+Architecture: all
+Depends: festival (>= 1.4.3-9)
+Conflicts: festvox-rablpc16k (<< 1.3.1), festvox-rablpc8k (<< 1.3.1)
+Size: 2084256
+SHA256: 7897b191042ade2ed972b9466e3f256e4694704eb3c3249a4772ad8d969765ad
+SHA1: 1845be675e700f066098577aa6c3aed26ed8f5f4
+MD5sum: 58d26f49261feb60473226b4a596d7fc
+Description: Festival lexicon from Oxford Advanced Learners' Dictionary
+Description-md5: ce5877e81c377e82a4e6185ed2605182
+Tag: accessibility::speech, culture::british, role::app-data
+Section: non-free/sound
+Priority: extra
+Filename: pool/non-free/f/festlex-oald/festlex-oald_1.4.0-3.1_all.deb
+
+Package: festvox-ellpc11k
+Version: 1.4.0-3
+Installed-Size: 2128
+Maintainer: Matthias Urlichs <smurf@smurf.noris.de>
+Architecture: all
+Replaces: festvox-ellpc16k
+Depends: festival (>= 1.4.3-9)
+Conflicts: festvox-ellpc16k
+Size: 1472380
+SHA256: a9af776363ab573430e2afbe9adf4e9aa6966628114dfa880844778a865c99bf
+SHA1: 5733ae0603a9304e5c5e1ba60dd20d98ee2ee203
+MD5sum: e430732ba30a45d2248744a573a9bf5d
+Description: Castilian Spanish male speaker for Festival
+Description-md5: ca4569cbd3e340771ccb8c3e576de398
+Tag: accessibility::speech, role::app-data
+Section: non-free/sound
+Priority: extra
+Filename: pool/non-free/f/festvox-ellpc11k/festvox-ellpc11k_1.4.0-3_all.deb
+
+Package: firmware-atheros
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 716
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Suggests: initramfs-tools, linux-image
+Size: 426062
+SHA256: 27cbd2099ce28c742f42833b09a61bdc7fb5b2ebcf5b35a52e750160ea1001b6
+SHA1: 7224d40c66e6e849b8ab35b40c3c432e7ca81855
+MD5sum: 2e72b60bcdb3d24987079aac52ee6b05
+Description: Binary firmware for Atheros wireless cards
+Multi-Arch: foreign
+Homepage: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+Description-md5: 7922e9514ab00deb67a4dfa2f5952fd9
+Tag: admin::hardware, hardware::TODO, role::data
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-atheros_0.36_all.deb
+
+Package: firmware-bnx2
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 659
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Suggests: initramfs-tools, linux-image
+Size: 319786
+SHA256: 32730fdeb0fb15a36e0ca046bde69e1a6fece8561af57afc7d9f1cf978fd25ab
+SHA1: 892d3a66140831121085a89f41d4055929410ee3
+MD5sum: d45865ff6274ebc4a2e611d68bb642e3
+Description: Binary firmware for Broadcom NetXtremeII
+Multi-Arch: foreign
+Homepage: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+Description-md5: aeb841b71f02639abf4bcbedbf054097
+Tag: admin::hardware, admin::kernel, hardware::TODO, hardware::video,
+ role::data
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-bnx2_0.36_all.deb
+
+Package: firmware-bnx2x
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 1016
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Suggests: initramfs-tools, linux-image
+Size: 906290
+SHA256: 22f23f4abb4aa2dac22718f12cf3bbd3fd2d63870b13e81c8401e6f841a719e8
+SHA1: b6b0eae78a105e0875e7ac34264ce478044eb087
+MD5sum: 9d6f9150951e8b5419367ec2efc41ff3
+Description: Binary firmware for Broadcom NetXtreme II 10Gb
+Multi-Arch: foreign
+Homepage: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+Description-md5: 4aa0d64a12461408970780309e4a219e
+Tag: admin::hardware, admin::kernel, hardware::TODO, role::data, use::driver
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-bnx2x_0.36_all.deb
+
+Package: firmware-brcm80211
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 157
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Suggests: initramfs-tools, linux-image
+Size: 55302
+SHA256: 17055c4199cc7e2aaa7d1d76dd5e718d24dbebb84020bb2d95ffab03bcfc7e8a
+SHA1: 0600700258b495b6b2bf76075f4649dd6f00354d
+MD5sum: 1083689bec5f3253d1296940d906b2af
+Description: Binary firmware for Broadcom 802.11 wireless cards
+Multi-Arch: foreign
+Homepage: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+Description-md5: d0d63ad31aedb3638b9821a043cc86cd
+Tag: admin::hardware, hardware::TODO, role::data
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-brcm80211_0.36_all.deb
+
+Package: firmware-crystalhd
+Version: 0.0~git20120110.fdd2f19-1
+Installed-Size: 6322
+Maintainer: Andres Mejia <amejia@debian.org>
+Architecture: all
+Suggests: initramfs-tools, linux-image
+Size: 2271324
+SHA256: b0f7ca0a78ffc3c74ba1ff4872e63be6b8f67c2c3fcefbd2acf2c42ae3900bc0
+SHA1: a5e8c7e0e5186fe90b2ecc862e538a10ae65b3d6
+MD5sum: 95eea84414c0d75e1c297a82cf3a405c
+Description: Crystal HD Video Decoder (firmware)
+Homepage: http://www.broadcom.com/support/crystal_hd/
+Description-md5: f2b34a9b8da985f08d05c0512b0c8488
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-crystalhd/firmware-crystalhd_0.0~git20120110.fdd2f19-1_all.deb
+
+Package: firmware-intelwimax
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 4069
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Suggests: initramfs-tools, linux-image
+Size: 2353772
+SHA256: cc1b894990d3074e93b3f79b2b617614aab554b5e832d34993b5a16f64bdb84a
+SHA1: 71f4463688f6b11143aa5b6f2da18a459d26555e
+MD5sum: 8692a4e746a46ce36cbf8878e3a89291
+Description: Binary firmware for Intel WiMAX Connection
+Multi-Arch: foreign
+Homepage: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+Description-md5: ae47af61e94c0fae535ff632c2ad9e9f
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-intelwimax_0.36_all.deb
+
+Package: firmware-ipw2x00
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 1216
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Pre-Depends: debconf | debconf-2.0
+Suggests: initramfs-tools, linux-image
+Size: 523160
+SHA256: 2ef0810e2e037f7d536b24cc35527c456ff13b7aa5fd2df607b7035227553c9d
+SHA1: 9c4f802a3b278f89f4c415c44b9f6b19036cc23e
+MD5sum: 2807c4cf5091a394d22dcd263fd0f1f5
+Description: Binary firmware for Intel Pro Wireless 2100, 2200 and 2915
+Multi-Arch: foreign
+Homepage: http://ipw2100.sourceforge.net/firmware.php, http://ipw2200.sourceforge.net/firmware.php
+Description-md5: 1d972493d993bfcbdfef9f9a8c8900a6
+Tag: admin::hardware, hardware::TODO, role::data
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-ipw2x00_0.36_all.deb
+
+Package: firmware-ivtv
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 872
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Pre-Depends: debconf | debconf-2.0
+Suggests: initramfs-tools, linux-image
+Size: 137794
+SHA256: 7bf30e142679d53ad376002f29026bbe28de51e1cb71bcc3ec5c5f5f119a7118
+SHA1: 22aacec67693f9a03ca93186aa38ad6d75f092fd
+MD5sum: 8a23c3519c2d5e70bb2d01b2291f4fc3
+Description: Binary firmware for iTVC15-family MPEG codecs (ivtv and pvrusb2 drivers)
+Multi-Arch: foreign
+Homepage: http://dl.ivtvdriver.org/ivtv/firmware/
+Description-md5: 65a4abe1afcc444ea341fef75faf7d78
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-ivtv_0.36_all.deb
+
+Package: firmware-iwlwifi
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 7226
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Suggests: initramfs-tools, linux-image
+Size: 3578354
+SHA256: 46ce0915583674ec10bfde3840b66ff450237edf604804ff51b9872fe767c1bb
+SHA1: df249c37e38a3e12b25396ebb8de8a7d37967e29
+MD5sum: aeeebce7fc887271b3fefb62ac9ad6c5
+Description: Binary firmware for Intel Wireless 3945, 4965 and 5000-series cards
+Multi-Arch: foreign
+Homepage: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+Description-md5: f72b0b93cc3f30c58a5b119fbf7a546d
+Tag: admin::hardware, implemented-in::c, role::app-data, role::data,
+ role::program, use::driver
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-iwlwifi_0.36_all.deb
+
+Package: firmware-libertas
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 2135
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Replaces: libertas-firmware
+Provides: libertas-firmware
+Suggests: initramfs-tools, linux-image
+Conflicts: libertas-firmware (<< 9.70.7.p0.0-2)
+Size: 1512470
+SHA256: c5d370d244f1c3a42f0a0280ed0cab067dbf36fa2926d387c9d10cf4ccd1b000
+SHA1: b81a85b707ecc497bffce9352ea3d763dcb44b07
+MD5sum: 1c5053c926bbf13b0afc9608aa5bc1b4
+Description: Binary firmware for Marvell Libertas 8xxx wireless cards
+Multi-Arch: foreign
+Homepage: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+Description-md5: 47fce24b33db3435f9c4751ce7daadee
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-libertas_0.36_all.deb
+
+Package: firmware-linux
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 39
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Depends: firmware-linux-free, firmware-linux-nonfree (= 0.36)
+Size: 7472
+SHA256: e19bedc2cacf2cd7a1fc38e25820effe9e58fdc56608e9f7c320c85b80cba6ea
+SHA1: 1698f9867eb7d6523073601184df9448bb2eafb9
+MD5sum: 3892132c43fb5056149930fa96df128f
+Description: Binary firmware for various drivers in the Linux kernel (meta-package)
+Description-md5: 1caf1ec34218fe4a57531b285e14bf1c
+Tag: admin::hardware, admin::kernel, role::dummy, use::driver
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-linux_0.36_all.deb
+
+Package: firmware-linux-nonfree
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 1298
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Replaces: firmware-linux (<< 0.19)
+Suggests: initramfs-tools, linux-image
+Conflicts: firmware-linux (<< 0.19)
+Size: 606884
+SHA256: 668d262dfcf18ffef2fe2a0b853b81bf5855f49fd2133203cbda097b1507c953
+SHA1: c2814583ed8bac71ba0d7abe7d3323bd3ae89b6f
+MD5sum: 16a79cd38900c871c1b73cd02c3f1b49
+Description: Binary firmware for various drivers in the Linux kernel
+Multi-Arch: foreign
+Homepage: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+Description-md5: 1b9a056cefc956f7b2ec077cec57fa9e
+Tag: admin::hardware, hardware::video, role::data, use::driver
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-linux-nonfree_0.36_all.deb
+
+Package: firmware-myricom
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 1866
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Suggests: initramfs-tools, linux-image
+Size: 549594
+SHA256: 038bd618c00e852206a8a1443ba47ea644c04052bd8f10af9392c716ebf16b3c
+SHA1: 2241915f706de4542f34a847d649ee7b5af9bdb8
+MD5sum: d4a9f7a7057f666c7e6282dd481492b4
+Description: Binary firmware for Myri-10G Ethernet adapters
+Multi-Arch: foreign
+Homepage: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+Description-md5: e8e4711530c09bd6b182b570c73124c7
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-myricom_0.36_all.deb
+
+Package: firmware-netxen
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 1831
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Suggests: initramfs-tools, linux-image
+Size: 1414340
+SHA256: 29e3c1707dab6439f391318a223e5d4b6508d493c8d8bad799aef4f35b4704e7
+SHA1: 9bd00ecf1ec7cab2b809cac960dc4ddd312633df
+MD5sum: 443d111dd8f599ccd72374c871626356
+Description: Binary firmware for QLogic Intelligent Ethernet (3000 and 3100 Series)
+Multi-Arch: foreign
+Homepage: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+Description-md5: 250ae378ac20125efbe9514583659d9f
+Tag: admin::hardware, hardware::TODO, role::data
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-netxen_0.36_all.deb
+
+Package: firmware-qlogic
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 1063
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Suggests: initramfs-tools, linux-image
+Size: 525176
+SHA256: cc43c6016f2b7661d39e1d678ac0e8ca70081be8a0c76c2ec4d2e71493afa7d8
+SHA1: 6c752750bc8ed8b575f0d00c5c89b61f374d55de
+MD5sum: 34d3215efd2759fb9d26ef9545c5777a
+Description: Binary firmware for QLogic IBA7220, QLA1xxx, ISP2xxx and SP2x2
+Multi-Arch: foreign
+Homepage: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+Description-md5: 1787364ea59ccfa92c7f9ab60430451e
+Tag: admin::hardware, hardware::TODO, role::data
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-qlogic_0.36_all.deb
+
+Package: firmware-ralink
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 94
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Suggests: initramfs-tools, linux-image
+Size: 20946
+SHA256: 4db8dc6b98821c59f008c8bf7464317443b031cebf6d7e56c06f0824e69e3922
+SHA1: 330163545a37dc4b04b4836856947ad5fcaa7a2f
+MD5sum: b278bd3d32d2423fc4a37baf1d200e5b
+Description: Binary firmware for Ralink wireless cards
+Multi-Arch: foreign
+Homepage: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+Description-md5: 7ecbdb892a56c54ec0ea2595bceee331
+Tag: admin::hardware, hardware::TODO, role::data
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-ralink_0.36_all.deb
+
+Package: firmware-realtek
+Source: firmware-nonfree
+Version: 0.36
+Installed-Size: 459
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Architecture: all
+Suggests: initramfs-tools, linux-image
+Size: 202064
+SHA256: c39e65e5a589325ceb365d11b9ea10b0244134b7e5b3b05fd91fe6ad66b2f093
+SHA1: c65f8cfdd3642a24aafc5f59b220af9b16f5ebb8
+MD5sum: 870037a06dade2bb794f6304aaeab00b
+Description: Binary firmware for Realtek wired and wireless network adapters
+Multi-Arch: foreign
+Homepage: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+Description-md5: 1c08f0943612b79b6ce370f832d758a5
+Tag: admin::hardware, hardware::TODO, role::data
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/f/firmware-nonfree/firmware-realtek_0.36_all.deb
+
+Package: foiltex
+Version: 2.1.4b-3
+Installed-Size: 1340
+Maintainer: Atsuhito KOHDA <kohda@debian.org>
+Architecture: all
+Depends: dpkg (>= 1.14.18), tex-common (>= 3), texlive-latex-base
+Size: 931056
+SHA256: 20cc2e559a8800405b0402f04b0425b577c4607f1fa6e32c4a7629d013ec6ed7
+SHA1: 73b736911b8ced7c75f79137658b43a076985728
+MD5sum: 675ce3a36a702cb5f6db8c18fe0633cd
+Description: collection of LaTeX files for making foils and slides
+Description-md5: aa10e012c22239f8d944e3b72ac84cde
+Tag: role::program, scope::application, works-with-format::tex,
+ works-with::text
+Section: non-free/tex
+Priority: optional
+Filename: pool/non-free/f/foiltex/foiltex_2.1.4b-3_all.deb
+
+Package: fonts-ipafont-nonfree-jisx0208
+Version: 00103-19
+Installed-Size: 15400
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Architecture: all
+Replaces: ttf-ipafont-jisx0208 (<< 00103-17)
+Provides: fonts-japanese-gothic, fonts-japanese-mincho
+Pre-Depends: dpkg (>= 1.15.6~)
+Suggests: fonts-ipafont
+Breaks: ttf-ipafont-jisx0208 (<< 00103-17)
+Size: 2937066
+SHA256: 732c28f17c38e65fd5ccc7ad511671e040ec1b59cd1480079d8ca4a0937176cc
+SHA1: ba1e4baf5923c0088246c9f3ee895010d9a45bae
+MD5sum: 349d509689db1267f58768d4493f8c47
+Description: Japanese TrueType font, IPAfont (JISX0208)
+Homepage: http://www.ipa.go.jp/
+Description-md5: ba5156a4eedcaa21954313a673af76b4
+Tag: culture::japanese, iso15924::jpan, made-of::font, role::data, x11::font
+Section: non-free/fonts
+Priority: extra
+Filename: pool/non-free/f/fonts-ipafont-nonfree-jisx0208/fonts-ipafont-nonfree-jisx0208_00103-19_all.deb
+
+Package: fonts-ipafont-nonfree-uigothic
+Source: fonts-ipafont-nonfree
+Version: 00203-21
+Installed-Size: 4846
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Architecture: all
+Replaces: ttf-ipafont-uigothic (<< 00203-17)
+Pre-Depends: dpkg (>= 1.15.6~)
+Breaks: ttf-ipafont-uigothic (<< 00203-17)
+Size: 2273740
+SHA256: a37fb9bb0cb29937439510d6fe1e8e83c5f2d8c777c9166502b228ecf0182fef
+SHA1: b7970f2af0e9601177cf946776f44b2dd7662cad
+MD5sum: f8716d0e163f261989d823a928904b02
+Description: Japanese TrueType font, IPAfont UI Gothic
+Homepage: http://www.ipa.go.jp/
+Description-md5: 03a7dc6459239544a4f1e417fcd2d645
+Tag: culture::japanese, made-of::font, role::data, x11::font
+Section: non-free/fonts
+Priority: extra
+Filename: pool/non-free/f/fonts-ipafont-nonfree/fonts-ipafont-nonfree-uigothic_00203-21_all.deb
+
+Package: fonts-larabie-deco
+Source: fonts-larabie
+Version: 1:20011216-4
+Installed-Size: 6698
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Architecture: all
+Replaces: ttf-larabie-deco (<< 1:20011216-4)
+Provides: ttf-larabie-deco
+Conflicts: ttf-larabie-deco (<< 1:20011216-4)
+Size: 3079346
+SHA256: e50e087ef73dd5fbd8425069a2c63f090991aa24fe14ebb43d640edf88a57686
+SHA1: 8cfa3ae1ab4082913255f154934af0b914e75979
+MD5sum: f7a73c52de0ab104b4fadb56f91c476b
+Description: Decorative fonts from www.larabiefonts.com
+Description-md5: 5419ca91fb7a465cbf0de90cc24ca6bf
+Tag: made-of::font, role::data, x11::font
+Section: non-free/fonts
+Priority: optional
+Filename: pool/non-free/f/fonts-larabie/fonts-larabie-deco_20011216-4_all.deb
+
+Package: fonts-larabie-straight
+Source: fonts-larabie
+Version: 1:20011216-4
+Installed-Size: 7278
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Architecture: all
+Replaces: ttf-larabie-straight (<< 1:20011216-4)
+Provides: ttf-larabie-straight
+Conflicts: ttf-larabie-straight (<< 1:20011216-4)
+Size: 3573908
+SHA256: 31c91bddc7f543bdc2af642a55416b89555cffb9b25cecb24d43cd3c3bb86b92
+SHA1: fdcc69cb798f2d11837ca34b41ce895aa8a6a9f5
+MD5sum: f181271e44a2536f3021b24524310148
+Description: Straight fonts from www.larabiefonts.com
+Description-md5: f7a4cbda1fb7ef64c41442ea361d3337
+Tag: made-of::font, role::app-data, x11::font
+Section: non-free/fonts
+Priority: optional
+Filename: pool/non-free/f/fonts-larabie/fonts-larabie-straight_20011216-4_all.deb
+
+Package: fonts-larabie-uncommon
+Source: fonts-larabie
+Version: 1:20011216-4
+Installed-Size: 6037
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Architecture: all
+Replaces: ttf-larabie-uncommon (<< 1:20011216-4)
+Provides: ttf-larabie-uncommon
+Conflicts: ttf-larabie-uncommon (<< 1:20011216-4)
+Size: 2798416
+SHA256: c429e89ffa9743dd8b22c18e618570b40b7b8e38a4a3ccc706e32ec294e313e9
+SHA1: 2cb20a1f2a23149a45a7a883366468fdd7e7809b
+MD5sum: d0516041dda15bf340e67a11d5b36362
+Description: Special decorative fonts from www.larabiefonts.com
+Description-md5: ab31dce5a406ff21517b985242f4fd34
+Tag: made-of::font, role::data, x11::font
+Section: non-free/fonts
+Priority: optional
+Filename: pool/non-free/f/fonts-larabie/fonts-larabie-uncommon_20011216-4_all.deb
+
+Package: fonts-mikachan
+Version: 9.1-8
+Installed-Size: 17028
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Architecture: all
+Replaces: ttf-mikachan (<< 9.1-4)
+Pre-Depends: dpkg (>= 1.15.6~)
+Breaks: ttf-mikachan (<< 9.1-4)
+Size: 4258590
+SHA256: 87686578b56e162a5e9e90338d18930e76bbfba014513a2abe6da3b555b74ad8
+SHA1: 63b0279d2a5963eb353a84eff977d9744139d470
+MD5sum: a09d5497a8518fffb8e303dc19be548d
+Description: handwritten Japanese Truetype font
+Homepage: http://mikachan-font.com/
+Description-md5: 3a711cb0e7924fd1f238102f46ad5a87
+Tag: culture::japanese, iso15924::jpan, made-of::font, role::data, x11::font
+Section: non-free/fonts
+Priority: optional
+Filename: pool/non-free/f/fonts-mikachan/fonts-mikachan_9.1-8_all.deb
+
+Package: fonts-moe-standard-kai
+Source: moe-standard-fonts
+Version: 20120530-1
+Installed-Size: 12705
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Architecture: all
+Size: 8274016
+SHA256: e5609e5236c655b816b18e948531ca3bb2f963e35b1b84b3366158698e07b821
+SHA1: 324d006e82230575eb6b51b3f7bd252ddacac774
+MD5sum: 01977d33ebd06f80f0303dec7d0d60ec
+Description: Chinese TrueType font, standard Kaiti (non-free)
+Description-md5: 088d6267378a16a8f81ea0b96147b246
+Section: non-free/fonts
+Priority: extra
+Filename: pool/non-free/m/moe-standard-fonts/fonts-moe-standard-kai_20120530-1_all.deb
+
+Package: fonts-moe-standard-song
+Source: moe-standard-fonts
+Version: 20120530-1
+Installed-Size: 20781
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Architecture: all
+Size: 12281826
+SHA256: 97e1890854af1b42d78007f41bc3f65e202b93bf826583050835c42c2b25e482
+SHA1: 7704ac130d76a1fccb5ad01a75bc66f032ecce6b
+MD5sum: d88295077cec8d4c9c57cef9d9f4d2cc
+Description: Chinese TrueType font, standard Song (non-free)
+Description-md5: 14d2f6f8b7f15ea351b3521ad4b5f8fd
+Section: non-free/fonts
+Priority: extra
+Filename: pool/non-free/m/moe-standard-fonts/fonts-moe-standard-song_20120530-1_all.deb
+
+Package: frogatto-data
+Version: 1.2+dfsg-1
+Installed-Size: 194360
+Maintainer: Dmitry E. Oboukhov <unera@debian.org>
+Architecture: all
+Depends: ttf-freefont, ttf-dejavu-core
+Suggests: frogatto (>= 1.2+dfsg-1)
+Size: 163692438
+SHA256: f5312a240ec1274da1f072d47b474a100ebd25289b3101de7230f2a5e1cc3d2d
+SHA1: f2b3c1f9842d6d46871aef9a5ced4442ec078308
+MD5sum: 3fab8c9b9b1496b73ade6b2c786c4903
+Description: 2D platformer game starring a quixotic frog
+Homepage: http://www.frogatto.com/
+Description-md5: b2cb4af4d50d386414c848e79033a030
+Tag: role::app-data
+Section: non-free/games
+Priority: extra
+Filename: pool/non-free/f/frogatto-data/frogatto-data_1.2+dfsg-1_all.deb
+
+Package: fsl
+Version: 4.1.9-6
+Installed-Size: 28
+Maintainer: NeuroDebian Team <team@neuro.debian.net>
+Architecture: all
+Depends: fsl-4.1 (>= 4.1.6-4~)
+Size: 18628
+SHA256: 374cbee2d2fcffb5eb54d0143e84e2a9c6021e7636d21110bb4fa462a84d6056
+SHA1: d1176e8c3d4e32b4ecb1dbb5e4cdc9aef42ef7f5
+MD5sum: 0e43128505ee1e3df8def2dca2a00d6d
+Description: Metapackage for the latest version of FSL
+Homepage: http://www.fmrib.ox.ac.uk/fsl/
+Description-md5: e23ece6aff847d9d6b74cc01519d1953
+Tag: field::medicine:imaging, implemented-in::c, implemented-in::c++,
+ interface::commandline, interface::x11, role::program, uitoolkit::tk,
+ use::analysing, works-with-format::TODO, x11::application
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/f/fsl/fsl_4.1.9-6_all.deb
+
+Package: fsl-doc-4.1
+Source: fsl
+Version: 4.1.9-6
+Installed-Size: 17495
+Maintainer: NeuroDebian Team <team@neuro.debian.net>
+Architecture: all
+Provides: fsl-doc
+Recommends: fslview-doc
+Size: 11202146
+SHA256: 3d5001eb085c172c9a66b9ea42746c6638ee3a043c6fe5bd36121331dc50b542
+SHA1: 57027df9e9982163a654a4d7c375dfdb2728529f
+MD5sum: be105669079ac4e260db05d85cb53a46
+Description: documentation for FSL
+Homepage: http://www.fmrib.ox.ac.uk/fsl/
+Description-md5: f77fe42e5ac60f59932f00390109229d
+Tag: devel::doc, field::medicine:imaging, made-of::html, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/f/fsl/fsl-doc-4.1_4.1.9-6_all.deb
+
+Package: gawk-doc
+Version: 4.0.1+ds-1
+Installed-Size: 5647
+Maintainer: Arthur Loiret <aloiret@debian.org>
+Architecture: all
+Depends: dpkg (>= 1.15.4) | install-info
+Size: 3044346
+SHA256: 8c8e7efe15cd1e649ec6f4a1a567140f843bd90fe7a30758f91ee3d2a5032757
+SHA1: c33db1e7eeec6306fd3546f040c1022b14d5b02d
+MD5sum: 186be8a840bfa757dd8adc0cdc53937d
+Description: Documentation for GNU awk
+Homepage: http://www.gnu.org/software/gawk/
+Description-md5: a0ccd75275de725a7e5b09acd72e2ce2
+Tag: devel::doc, made-of::info, role::documentation, suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/gawk-doc/gawk-doc_4.0.1+ds-1_all.deb
+
+Package: gcc-4.4-doc
+Source: gcc-4.4-doc-non-dfsg
+Version: 4.4.4.nf1-1
+Installed-Size: 7030
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Architecture: all
+Replaces: gcc (<= 2.7.2.3-4.3), gcc-docs (<< 2.95.2)
+Depends: gcc-doc-base (>= 4.1.1.nf3-1), dpkg (>= 1.15.4) | install-info
+Suggests: doc-base
+Conflicts: gcc-docs (<< 2.95.2)
+Size: 2323372
+SHA256: f248d4c66657982368a5b834806f222e01cd0e466bac7522cdaf1b8860d9612b
+SHA1: 22b26eecea840a27c7b035d735e7f133103f872e
+MD5sum: 17fd741e5646ea2c44e47760ae93229d
+Description: documentation for the GNU compilers (gcc, gobjc, g++)
+Description-md5: 1a90ec54479ec0f8264bf0d81835f573
+Tag: devel::doc, devel::lang:c, devel::lang:c++, devel::lang:objc,
+ made-of::html, made-of::info, role::documentation, suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/gcc-4.4-doc-non-dfsg/gcc-4.4-doc_4.4.4.nf1-1_all.deb
+
+Package: gcc-doc-base
+Source: gcc-4.4-doc-non-dfsg
+Version: 4.4.4.nf1-1
+Installed-Size: 40
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Architecture: all
+Replaces: gcc-4.1 (<< 4.1.1-11), gcc-docs (<< 2.95.2)
+Conflicts: gcc-4.1 (<< 4.1.1-11), gcc-docs (<< 2.95.2)
+Size: 30060
+SHA256: 902ced709be98b48ab056dacfc21e9928069ef8624a6f87be7f46d7010467a2a
+SHA1: fcb3e3d3dee518eab284ccb1c55393a6aaf1d019
+MD5sum: 680357a6dc8ee5d4ac52e5219080c59c
+Description: several GNU manual pages
+Description-md5: a3908a0b6cd1c3869235d28e3ac2ca01
+Tag: made-of::man, role::documentation, suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/gcc-4.4-doc-non-dfsg/gcc-doc-base_4.4.4.nf1-1_all.deb
+
+Package: gcj-4.4-doc
+Source: gcc-4.4-doc-non-dfsg
+Version: 4.4.4.nf1-1
+Installed-Size: 284
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Architecture: all
+Provides: gij-4.4-doc
+Depends: gcc-doc-base (>= 4.1.1.nf3-1), dpkg (>= 1.15.4) | install-info
+Suggests: doc-base
+Size: 130806
+SHA256: f050b6206e26a3f7a5e8145f19374bc7459601586397556d9e328af4697d020f
+SHA1: eb0c3796dcee14f56dd73068d6b40ed1b6bf3c23
+MD5sum: ff13b92c811a7f448bf5a14c57b8f355
+Description: documentation for the GNU Java tools (gcj, gij)
+Description-md5: 3f3d066c03cf7e8fb603c5d3f749b94c
+Tag: devel::doc, devel::lang:java, made-of::html, made-of::info,
+ made-of::man, role::documentation, suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/gcc-4.4-doc-non-dfsg/gcj-4.4-doc_4.4.4.nf1-1_all.deb
+
+Package: gdb-doc
+Version: 7.4.1-2
+Installed-Size: 8704
+Maintainer: Hector Oron <zumbi@debian.org>
+Architecture: all
+Replaces: gdb (<< 6.4.50.20060511-1), insight (<< 6.1+cvs.2004.04.07-1)
+Depends: dpkg (>= 1.15.4) | install-info
+Size: 5047596
+SHA256: 37f2f9816304c912a4626cd0f78087b411e2a0e1c5207d77f651ff8885b4e99c
+SHA1: a265c9f4a82249266a9ffe5303b98693213750ac
+MD5sum: c456970bd974355e0e95cbca27cf5e5d
+Description: The GNU Debugger Documentation
+Description-md5: 43091bf04b45c942f19804a19e09d5f3
+Tag: devel::doc, made-of::info, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/gdb-doc/gdb-doc_7.4.1-2_all.deb
+
+Package: gfortran-4.4-doc
+Source: gcc-4.4-doc-non-dfsg
+Version: 4.4.4.nf1-1
+Installed-Size: 1013
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Architecture: all
+Depends: gcc-doc-base (>= 4.1.1.nf3-1), dpkg (>= 1.15.4) | install-info
+Suggests: doc-base
+Size: 297398
+SHA256: 5d98aa042896c88c533cdb4f34f4b25954f68a1b93a47dfbe3991a17df5a99f8
+SHA1: d4f93703b913f7176c0056287c9f968f690fae51
+MD5sum: 12c29a2638bcbb151c4c7aad365af0b4
+Description: documentation for the GNU Fortran Compiler (gfortran)
+Description-md5: 07658cb2f9c94505902bab84022fc497
+Tag: devel::doc, devel::lang:fortran, made-of::info, made-of::man,
+ role::documentation, suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/gcc-4.4-doc-non-dfsg/gfortran-4.4-doc_4.4.4.nf1-1_all.deb
+
+Package: glibc-doc-reference
+Version: 2.13-1
+Installed-Size: 11816
+Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
+Architecture: all
+Depends: dpkg (>= 1.15.4) | install-info
+Conflicts: glibc-doc (<< 2.4)
+Size: 5224756
+SHA256: 03b47dbf78e6face711996486f96dd56e90ae0f3505705fe5a82a0d683dbeddd
+SHA1: dcdc698eb201048807fadca62687e7cfdab43b5e
+MD5sum: f23f11b6c9598cb26c909838c539faa2
+Description: GNU C Library: Documentation
+Description-md5: e6c7ec3ab323b394692e513eddd3c5de
+Tag: devel::doc, devel::lang:c, made-of::html, made-of::info, made-of::pdf,
+ role::documentation, suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/glibc-doc-reference/glibc-doc-reference_2.13-1_all.deb
+
+Package: gliese
+Version: 3.0.95-2
+Installed-Size: 804
+Maintainer: Francisco Manuel Garcia Claramonte <francisco@debian.org>
+Architecture: all
+Suggests: stardata-common, gliese-viewer
+Size: 230668
+SHA256: 6bf6e2069dccc4d1a860392b2b0472a3f4da3896320e0465a74fd8520da5b0d8
+SHA1: 6a78f914e9cc20507572779f79d500afc09c14c8
+MD5sum: a8d31cc35d8c6a2aabe56dca4260e3dc
+Description: stellar data set from the Third Catalogue of Nearby Stars
+Homepage: http://starplot.org/datafiles.html
+Description-md5: 5bcb1833d0c8b16542b0e6dafc0a2f9b
+Tag: field::astronomy, game::toys, role::app-data, use::gameplaying
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/g/gliese/gliese_3.0.95-2_all.deb
+
+Package: gmp-doc
+Version: 5.0.5-1
+Installed-Size: 932
+Maintainer: Steve M. Robbins <smr@debian.org>
+Architecture: all
+Depends: dpkg (>= 1.15.4) | install-info
+Size: 922652
+SHA256: 68eace625fc7540f2fcf2b23bf456f8a7327faa15deb7cf53c3ed853d8aee4bc
+SHA1: 3f452b07ad59eb0da0790eb726f59e884dc31c21
+MD5sum: f331dfa59c80d008d8b4f187bbb252c4
+Description: GMP (Multiprecision arithmetic library) documentation
+Homepage: http://gmplib.org/
+Description-md5: 7642ce2d935b6638e617b2ebee084e8a
+Tag: devel::doc, made-of::info, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/gmp-doc/gmp-doc_5.0.5-1_all.deb
+
+Package: gnat-4.4-doc
+Source: gcc-4.4-doc-non-dfsg
+Version: 4.4.4.nf1-1
+Installed-Size: 3387
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Architecture: all
+Depends: gcc-doc-base (>= 4.1.1.nf3-1), dpkg (>= 1.15.4) | install-info
+Suggests: doc-base
+Size: 1099694
+SHA256: 7d0bcee49f76cdcbcae1cd7bf9c6e6ba9945b4dbcdcc96aa8a9ee802d6b19083
+SHA1: 376d05cc681740573b710bb8779adf4ee9a9fadc
+MD5sum: 27c17bba6e1fed55c7baa289ab1ffabb
+Description: documentation for the GNU Ada 95 Compiler (gnat)
+Description-md5: 7e7cb40f22c8598e347d9ff57e4e549b
+Tag: devel::compiler, devel::doc, devel::lang:ada, made-of::html,
+ made-of::info, role::documentation, suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/gcc-4.4-doc-non-dfsg/gnat-4.4-doc_4.4.4.nf1-1_all.deb
+
+Package: gsfonts-other
+Version: 6.0-4
+Installed-Size: 1471
+Maintainer: Torsten Landschoff <torsten@debian.org>
+Architecture: all
+Size: 793860
+SHA256: 33be699eff270a61795557741128003b500dba84f87090cddb176f0f0cbda259
+SHA1: dbadcb9066fcc4bf5c533b98c4e5f7fdb47c25ef
+MD5sum: 9cf2bab889a1c8f6190a74dba5882ae5
+Description: Additional fonts for the ghostscript interpreter
+Description-md5: 0f1ed5e95626a4f2a7a5b131300d7c9b
+Tag: made-of::font, role::app-data, use::printing,
+ works-with-format::postscript, works-with::text
+Section: non-free/fonts
+Priority: optional
+Filename: pool/non-free/g/gsfonts-other/gsfonts-other_6.0-4_all.deb
+
+Package: gsl-doc-info
+Source: gsl-doc
+Version: 1.15-1
+Installed-Size: 356
+Maintainer: Dirk Eddelbuettel <edd@debian.org>
+Architecture: all
+Replaces: libgsl0-dev (<= 1.11-2)
+Depends: dpkg (>= 1.15.4) | install-info
+Suggests: libgsl0ldbl, info | info-browser
+Size: 329980
+SHA256: eab0c854fc032a97f80a01dd81d15cd7eb0827e5c225af11618f0c59fbf984e9
+SHA1: eef755af0bf1f8df0b1da81175b59031274817c4
+MD5sum: 5ba890c04c586cf312c25a27daa5963e
+Description: GNU Scientific Library (GSL) Reference Manual in info
+Homepage: http://www.gnu.org/software/gsl
+Description-md5: 3d51809619c4981a2493ba062223593f
+Tag: devel::doc, devel::lang:c, field::mathematics, made-of::info,
+ role::documentation, suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/gsl-doc/gsl-doc-info_1.15-1_all.deb
+
+Package: gsl-doc-pdf
+Source: gsl-doc
+Version: 1.15-1
+Installed-Size: 2332
+Maintainer: Dirk Eddelbuettel <edd@debian.org>
+Architecture: all
+Suggests: libgsl0ldbl, gv | pdf-viewer
+Size: 2367880
+SHA256: 69a4d2fdb8573a0f9e14355e79b1793ba11fb5a250d80712719a711a6f7cd395
+SHA1: f4d3af4625b61bf603892c8c00abd1ff444d7854
+MD5sum: 15207807aeaaa90009271df3520f048d
+Description: GNU Scientific Library (GSL) Reference Manual in pdf
+Homepage: http://www.gnu.org/software/gsl
+Description-md5: 982714ff4fe72ea7c3174796adac0baf
+Tag: devel::doc, devel::lang:c, field::mathematics, made-of::pdf,
+ role::documentation, suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/gsl-doc/gsl-doc-pdf_1.15-1_all.deb
+
+Package: gsl-ref-html
+Version: 1.15-1
+Installed-Size: 4640
+Maintainer: Dirk Eddelbuettel <edd@debian.org>
+Architecture: all
+Suggests: libgsl0ldbl, www-browser | lynx
+Size: 487854
+SHA256: 835ec96e0b755b19a0dc3ef14f271a85a7b1ce331018f1f14100276b744e1168
+SHA1: d65d2595ff286e04b08e47cf91e5ab074d520528
+MD5sum: 3819fdb0a49559dd22b3eb733c62a856
+Description: GNU Scientific Library (GSL) Reference Manual in html
+Description-md5: b7cb557113954f943279502b6043e474
+Tag: devel::doc, devel::lang:c, field::mathematics, made-of::html,
+ role::documentation, suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/gsl-ref-html/gsl-ref-html_1.15-1_all.deb
+
+Package: gsl-ref-psdoc
+Version: 1.15-1
+Installed-Size: 1424
+Maintainer: Dirk Eddelbuettel <edd@debian.org>
+Architecture: all
+Replaces: gsl-ref-pdf
+Suggests: libgsl0ldbl, gv | ps-viewer
+Conflicts: gsl-ref-pdf
+Size: 1422868
+SHA256: c6b9e35379dc386ef32f34bf803ac916fb9a0ed7732a1040d059583704933f59
+SHA1: 4a50b8caefcbf667ecadecfd214bc4def4df58b3
+MD5sum: ffe2a4e0c6ef6e00c0ebf2d3c6741885
+Description: GNU Scientific Library (GSL) Reference Manual in postscript
+Description-md5: ce73a967be93eb4cb6f100609608bc22
+Tag: devel::doc, devel::lang:c, field::mathematics, made-of::postscript,
+ role::documentation, suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/gsl-ref-psdoc/gsl-ref-psdoc_1.15-1_all.deb
+
+Package: guile-1.8-doc-non-dfsg
+Source: guile-1.8-non-dfsg
+Version: 1.8.8+1-1.1
+Installed-Size: 506
+Maintainer: Rob Browning <rlb@defaultvalue.org>
+Architecture: all
+Depends: dpkg (>= 1.15.4) | install-info
+Size: 491130
+SHA256: c8eb3b87397c11be059e2163afa42c2bd01f2caa5dd636f40c6f797a88562a7c
+SHA1: 4a106dd49ba9eff8d1686296121d5746a63c7d5c
+MD5sum: 976e76061eb3e48ac70f6443dcb6c548
+Description: Reference documentation for Guile 1.8 (non-DFSG items)
+Homepage: http://www.gnu.org/software/guile/
+Description-md5: 9aff3a18567eb2fcbfc1cc458a0b4599
+Tag: devel::doc, devel::lang:scheme, made-of::info, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/g/guile-1.8-non-dfsg/guile-1.8-doc-non-dfsg_1.8.8+1-1.1_all.deb
+
+Package: hevea-doc
+Version: 1.10-3
+Installed-Size: 752
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Architecture: all
+Recommends: hevea, www-browser
+Size: 164240
+SHA256: b61f4af0c53db2b3f23fcdfcd50fadec5c91334196e1379e1bd9c2e1edb64acb
+SHA1: ce849a012adbdfcf8fab63c9fb231006e8682114
+MD5sum: 1269f77595d88130714db4759b6b2f31
+Description: HeVeA documentation
+Homepage: http://hevea.inria.fr
+Description-md5: b83859940e782488515bf98b94c58c01
+Tag: made-of::html, made-of::tex, role::documentation, use::converting
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/h/hevea-doc/hevea-doc_1.10-3_all.deb
+
+Package: hijra-applet
+Source: hijra
+Version: 0.2.1-1
+Installed-Size: 144
+Maintainer: Debian Islamic Maintainers <debian-islamic-maintainers@lists.alioth.debian.org>
+Architecture: all
+Depends: python-hijra, python, python-gtk2, python-notify
+Recommends: python-dbus
+Size: 14106
+SHA256: f7f9981d20d40212a0e4663b57e6d65ad201bce2b249eb5ed2b0a3a24c27f129
+SHA1: 1f6fabc8b959fe74eaf62e29abbfdc64bcaf0f9f
+MD5sum: e15227b6ca19740164d8a76fc10620e6
+Description: Hijri Islamic Calendar tray applet and GNOME shell extension
+Homepage: http://hijra.ojuba.org
+Description-md5: 117e8e2fccfbdc8e33eca89d14410cef
+Tag: implemented-in::python, interface::x11, role::program, scope::utility,
+ uitoolkit::gtk, use::timekeeping
+Section: non-free/misc
+Priority: extra
+Filename: pool/non-free/h/hijra/hijra-applet_0.2.1-1_all.deb
+
+Package: human-icon-theme
+Version: 0.28.debian-3.3
+Installed-Size: 1979
+Maintainer: Alan Baghumian <alan@technotux.org>
+Architecture: all
+Depends: tangerine-icon-theme, gnome-icon-theme
+Size: 745682
+SHA256: 063fa3e6d0039acd0c09b88b7fea351c311443e7d38f3f1a0ab2f16b6c79b0ad
+SHA1: 788422d551ad61cac657efaab12c0724dc1d9a74
+MD5sum: b1d0d4d2087be4c26cb5b846121b6b15
+Description: Human Icon theme
+Description-md5: 06251ffada5394e6ff0c8103869ece9c
+Tag: role::app-data, suite::gnome, x11::theme
+Section: non-free/x11
+Priority: optional
+Filename: pool/non-free/h/human-icon-theme/human-icon-theme_0.28.debian-3.3_all.deb
+
+Package: hwb
+Version: 1:040412-3
+Installed-Size: 4376
+Maintainer: Robert James Clay <jame@rocasa.org>
+Architecture: all
+Size: 595144
+SHA256: 669e1a50fdf45e845d5efc59ec796479b197f232cd929beb48287fdb87395d2e
+SHA1: ffbb6417c75c0e502b7c8d4fb8df638fb8f0608d
+MD5sum: 0f79e1eb4b52778fba926b6291ba2d87
+Description: The Hardware Book
+Homepage: http://www.hardwarebook.net/
+Description-md5: b32022fe7c9fc32c725a441c82e8f5b1
+Tag: interface::web, made-of::html, role::data, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/h/hwb/hwb_040412-3_all.deb
+
+Package: icc-profiles
+Version: 2.0.1-1
+Installed-Size: 37258
+Maintainer: Oleksandr Moskalenko <malex@debian.org>
+Architecture: all
+Recommends: icc-profiles-free
+Size: 29686970
+SHA256: 435e2af9fe55b899d8cdd9479c49e3dfca28762461627e26beeeebc81e814c74
+SHA1: 9b85cf13edbfe2661de54dda86c5b92802a81578
+MD5sum: e379c95b236b22bd7535574d36651a3c
+Description: ICC color profiles for use with color profile aware software
+Description-md5: a813c4019da545f80d6c517a0ad94817
+Tag: role::app-data, works-with::image, works-with::image:raster
+Section: non-free/graphics
+Priority: optional
+Filename: pool/non-free/i/icc-profiles/icc-profiles_2.0.1-1_all.deb
+
+Package: igv
+Version: 2.0.30-1
+Installed-Size: 8400
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: openjdk-6-jre | java-runtime, libbatik-java (>> 1.7), libcommons-logging-java, libcommons-math-java, libcommons-net-java, libconcurrent-java, libhttpclient-java (>> 4.1), libhttpcore-java (>> 4.1), libjcommon-java, libjfreechart-java, libjhdf5-java, libjlibeps-java, libjama-java, libjargs-java, libjaxp1.3-java, liblog4j1.2-java, libsam-java, libswing-layout-java, libxml-commons-external-java
+Size: 7566774
+SHA256: 5a0f4713575d541611e1baf96776f174a5b44b06c4d0319cb84b8a902423d9d4
+SHA1: 01c76ed82bc53a5835b8c7f73d45e7696e06f7a9
+MD5sum: 395b3abab02c14dc0fa9070756e16d8f
+Description: Integrative Genomics Viewer
+Homepage: http://www.broadinstitute.org/igv/
+Description-md5: 290d3e877d3728fe3221b5ef9d1fa1b7
+Tag: field::biology, implemented-in::java, interface::x11, network::client,
+ protocol::http, role::program, scope::utility, use::viewing,
+ works-with::biological-sequence
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/i/igv/igv_2.0.30-1_all.deb
+
+Package: inform-docs
+Source: inform
+Version: 6.31.1+dfsg-1
+Installed-Size: 6032
+Maintainer: Jan Christoph Nordholz <hesso@pool.math.tu-berlin.de>
+Architecture: all
+Size: 4349620
+SHA256: 58c05f3927d6782185c620c8d6753c9815ff7beb427bcc2e4fdd20790a3eda0e
+SHA1: d8d27b94f2e8d5198576d4e14b3a040570c08933
+MD5sum: 56d43a1a8a700b4afb8916886e96ec0d
+Description: documentation for the Inform interactive fiction language (v6)
+Description-md5: 578386cf20c0cfac72d8b646ef56e2a5
+Tag: game::rpg, role::documentation, use::gameplaying
+Section: non-free/doc
+Priority: extra
+Filename: pool/non-free/i/inform/inform-docs_6.31.1+dfsg-1_all.deb
+
+Package: jhove
+Version: 1.6+dfsg-1
+Installed-Size: 12487
+Maintainer: Jeff Breidenbach <jab@debian.org>
+Architecture: all
+Depends: default-jre | java2-runtime
+Size: 2561216
+SHA256: e93732303967789f049349f12538daa2b73f8ee0004223537a497efdda6a3916
+SHA1: 56b3fa95ff73c226ac72007bdc1108533b3b786e
+MD5sum: 800223b87b6415ad19815e3c7cd942da
+Description: JSTOR/Harvard Object Validation Environment
+Homepage: http://hul.harvard.edu/jhove/
+Description-md5: efc4e2b654349825dd35b596c3f9fdb9
+Section: non-free/utils
+Priority: optional
+Filename: pool/non-free/j/jhove/jhove_1.6+dfsg-1_all.deb
+
+Package: libcolt-java
+Source: colt
+Version: 1.2.0~nojar-2
+Installed-Size: 635
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: libconcurrent-java
+Size: 543894
+SHA256: 0c866f3f8ac83633bfd5d09352144cb353b7ec9b1630a7850368922039615f55
+SHA1: 13d83a085a2c51a9bbc54625f9da6caa03f8b2b8
+MD5sum: 63e12e33a8d377e839dade35e8b33a82
+Description: scalable scientific and technical computing in Java
+Homepage: http://acs.lbl.gov/software/colt/
+Description-md5: 4f892e5dd41a9a3f78d039300e09e5a2
+Section: non-free/java
+Priority: optional
+Filename: pool/non-free/c/colt/libcolt-java_1.2.0~nojar-2_all.deb
+
+Package: libcolt-java-doc
+Source: colt
+Version: 1.2.0~nojar-2
+Installed-Size: 12572
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Size: 1195592
+SHA256: f8487b52ae2a0ea51de0859ca60f973ac96966f8d2ec766272dbfc4c1a5973c3
+SHA1: 2c9959b0d7e427549293e778ebb796dc18e5e648
+MD5sum: 9e8d272bb5f3b9589e4d3a899d93c85a
+Description: scalable scientific and technical computing in Java (doc)
+Homepage: http://acs.lbl.gov/software/colt/
+Description-md5: 9da5b207a214feaa654237ab14568831
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/c/colt/libcolt-java-doc_1.2.0~nojar-2_all.deb
+
+Package: libcore++-demo
+Source: core++
+Version: 1.7-12
+Installed-Size: 420
+Maintainer: Joachim Reichel <reichel@debian.org>
+Architecture: all
+Depends: libcore++-dev (>= 1.7-12), libcore++1c2 (>= 1.7-12)
+Size: 403558
+SHA256: ae975025f2d113c20d6b93cbbfd61004f386d08100ea4bcacf772d4c37914ca3
+SHA1: a365e0a95ec8f0ba0769f215b2881e46687fc644
+MD5sum: ffedf4d5e56d9cf7527a24fd43862c95
+Description: C/C++ library for robust computation (demos)
+Homepage: http://www.cs.nyu.edu/exact/core_pages/intro.html
+Description-md5: 4aaaa88541aec57bbe0f2251f453089d
+Section: non-free/devel
+Priority: optional
+Filename: pool/non-free/c/core++/libcore++-demo_1.7-12_all.deb
+
+Package: libcore++-doc
+Source: core++
+Version: 1.7-12
+Installed-Size: 1680
+Maintainer: Joachim Reichel <reichel@debian.org>
+Architecture: all
+Depends: libcore++1c2 (>= 1.7-12)
+Size: 1413904
+SHA256: 94d9e68e53e2a66446f2a529c2c12cd31e40fffde8700e52faf729ff0190f951
+SHA1: d4e4e4a45cd4d32c02e3f86a6c36a203af19522a
+MD5sum: b73ea3b37d67d2d1aa0026cf35cf20f0
+Description: C/C++ library for robust computation (documentation)
+Homepage: http://www.cs.nyu.edu/exact/core_pages/intro.html
+Description-md5: 0a7f287e9689da24cf08134c63abe78a
+Tag: devel::doc, made-of::pdf, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/c/core++/libcore++-doc_1.7-12_all.deb
+
+Package: libcupti-doc
+Source: nvidia-cuda-toolkit
+Version: 4.2.9-1
+Installed-Size: 786
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Architecture: all
+Size: 725670
+SHA256: 3fb1f124107429de8ba158b4961b1740490edb4718a5d27d6607dbbd50d04d95
+SHA1: 8c010316c217dcaac5047a303b18cb94ec73d2e1
+MD5sum: 2aa5c8a2314d33013e594e484d524e4d
+Description: NVIDIA CUDA Profiler Tools Interface documentation
+Homepage: http://developer.nvidia.com/cuda-profiling-tools-interface
+Description-md5: 0c6d9f272f89c82663423610515dd3eb
+Section: non-free/doc
+Priority: extra
+Filename: pool/non-free/n/nvidia-cuda-toolkit/libcupti-doc_4.2.9-1_all.deb
+
+Package: libcwd-doc
+Source: libcwd
+Version: 1.0.4-1
+Installed-Size: 3820
+Maintainer: Carlo Wood <carlo@alinoe.com>
+Architecture: all
+Size: 1083676
+SHA256: d877e2bf46b9cb97e8be4756868e9796049c295f25a089a7202664e75beac411
+SHA1: 0851fb52173a88f2a976a7d0c268636938320d80
+MD5sum: 23435e5c59921fb3c27373d00faca0a9
+Description: Documentation of the libcwd C++ Debugging Support Library
+Description-md5: 30b1177207a621ce2805b10f357cd862
+Tag: devel::doc, role::documentation
+Section: non-free/doc
+Priority: extra
+Filename: pool/non-free/libc/libcwd/libcwd-doc_1.0.4-1_all.deb
+
+Package: libertas-firmware
+Version: 9.70.7.p0.0-2
+Installed-Size: 41
+Maintainer: Andres Salomon <dilinger@debian.org>
+Architecture: all
+Depends: firmware-libertas
+Size: 7464
+SHA256: b035e25a01413d736059e22501dcb9a5fac361e70fadb3efefefdaf3f167fbf0
+SHA1: 6c21dac317225c0a21d55fda592b44d341657d66
+MD5sum: 930dc2464f1b92aded31a0ebd3a3fe1b
+Description: Firmware for Marvell's libertas wireless chip series (dummy package)
+Description-md5: 93cb7211d86903eef952ad87efbd6a1c
+Tag: admin::hardware, hardware::TODO, role::data
+Section: non-free/kernel
+Priority: optional
+Filename: pool/non-free/libe/libertas-firmware/libertas-firmware_9.70.7.p0.0-2_all.deb
+
+Package: libf2j-java
+Source: f2j
+Version: 0.8.1-2
+Installed-Size: 112
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Size: 76156
+SHA256: b3ea246d98f8405dd2a122eaccf32728b73a6d7ba382fccf55a4e400fc4a87aa
+SHA1: da1502d9b07a0ee58a6c9353ca402040942476d1
+MD5sum: 66ab1fc6dda593fb28f49c7c8df28bf3
+Description: Java library port of Fortran numerical libraries
+Homepage: http://sourceforge.net/projects/f2j/
+Description-md5: 545bcec4a65e2d974a0e300c0f193fa5
+Section: non-free/java
+Priority: optional
+Filename: pool/non-free/f/f2j/libf2j-java_0.8.1-2_all.deb
+
+Package: libgeotiff-epsg
+Version: 1.3.0-1
+Installed-Size: 4291
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: libgeotiff2
+Size: 667594
+SHA256: 8a22e6b2c40f24acef1ce93c693d209e67c12736ade6c1581931fbe9709d8453
+SHA1: 356c7360be9ed159ac05eeeb44efaa99ee17305e
+MD5sum: c5e1e4a2c9d51c5739f2a1303ce64ad6
+Description: the GeoTIFF library -- EPSG Geodetic Parameter Dataset
+Homepage: http://www.gdal.org/
+Description-md5: 792028a422e1fa1cef6b7ca20303c168
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/libg/libgeotiff-epsg/libgeotiff-epsg_1.3.0-1_all.deb
+
+Package: libjabsorb-java
+Source: jabsorb
+Version: 1.3-2
+Installed-Size: 172
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Architecture: all
+Depends: libservlet2.5-java, libslf4j-java, libcommons-httpclient-java
+Size: 127546
+SHA256: fb255380841c95424271a169ecebf648f5ddb68586ae1207f8726ef7bc297c99
+SHA1: cd79fa7607e0fd94768331ea66d253bcc94bd8c7
+MD5sum: 5c86ac7f3531c7129f9e42ca87836feb
+Description: Java to Javascript object request broker
+Homepage: http://jabsorb.org
+Description-md5: 29dc75219714714e5909da9b16d9547f
+Section: non-free/java
+Priority: optional
+Filename: pool/non-free/j/jabsorb/libjabsorb-java_1.3-2_all.deb
+
+Package: libjai-core-java-doc
+Source: jai-core
+Version: 1.1.4-3
+Installed-Size: 14412
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Size: 1310688
+SHA256: 5a00fef51f8fceb811855798ebf5c110f9e90c85d18eeb68df1056e31091e5db
+SHA1: 48bd3a439fe756d834800bd7426cce8bc98b8c36
+MD5sum: a296f503e16c151ce081c00e1a87b501
+Description: Java Advanced Imaging API reference implementation (documentation)
+Homepage: http://java.net/projects/jai-core/
+Description-md5: bba575a45f53341646e1c6c1b001a405
+Tag: devel::doc, devel::lang:java, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/j/jai-core/libjai-core-java-doc_1.1.4-3_all.deb
+
+Package: libjai-imageio-core-java-doc
+Source: jai-imageio-core
+Version: 1.2-3
+Installed-Size: 2266
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Size: 226270
+SHA256: 2ac96eacd4e8297729e669eb2df549375f61b985195ccb4a14c6217f98339993
+SHA1: 1e2840b1d31a08e34f01a28960fb2e7daae3e25d
+MD5sum: c449a1ae0f0598712e99b090c94e14a0
+Description: Java Advanced Imaging Image I/O Tools API core (documentation)
+Homepage: http://java.net/projects/jai-imageio-core/
+Description-md5: 9b0ff45e881b41ea1c839be6637adcb1
+Tag: devel::doc, devel::lang:java, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/j/jai-imageio-core/libjai-imageio-core-java-doc_1.2-3_all.deb
+
+Package: libmail-sender-perl
+Version: 0.8.16-2
+Installed-Size: 204
+Maintainer: Erik Wenzel <erik@debian.org>
+Architecture: all
+Depends: perl
+Size: 55178
+SHA256: c3b8eeb0c9bbad1d07828144e7739c0a034c7df00c77678955f6232b15ab5435
+SHA1: 32e36f418222dc402f90052c4999dc395f7479c8
+MD5sum: dd97177ad61633ca5d731b36d38176c2
+Description: Perl Module for sending mails with attachments
+Description-md5: 96201f7633bb9080cfd3cc026db4bc43
+Tag: devel::lang:perl, devel::library, implemented-in::perl, mail::smtp,
+ network::client, protocol::smtp, role::devel-lib, works-with::mail
+Section: non-free/perl
+Priority: optional
+Filename: pool/non-free/libm/libmail-sender-perl/libmail-sender-perl_0.8.16-2_all.deb
+
+Package: libstar-parser-perl
+Version: 0.59-3
+Installed-Size: 116
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Architecture: all
+Depends: perl (>= 5.6.0-16)
+Size: 38028
+SHA256: 07e053536600b88fafb3c56e2bc50de2112fa430d2625f5b711a3bc0b9f9ea2e
+SHA1: 081d22b17103c711991073780472c8345a8e6f6b
+MD5sum: 31ce4b0f49491096e2aa8a58104791b2
+Description: STAR compliant data file parser for Perl
+Description-md5: d54e47338677ec829b7e74424901633b
+Tag: devel::lang:perl
+Section: non-free/perl
+Priority: optional
+Filename: pool/non-free/libs/libstar-parser-perl/libstar-parser-perl_0.59-3_all.deb
+
+Package: libttspico-data
+Source: svox
+Version: 1.0+git20110131-2
+Installed-Size: 6342
+Maintainer: Debian Accessibility Team <debian-accessibility@lists.debian.org>
+Architecture: all
+Recommends: libttspico0
+Size: 4672304
+SHA256: 7cb77e1f5f9c36eff492716d25507282912eb857ecaea4cf0bf81ebfdcea9e8e
+SHA1: 32f1c8e1847fca5a9aefcb66c488a1a85b970005
+MD5sum: 81e2ab363052e979ef81294ceef0cbb1
+Description: Small Footprint TTS (lingware)
+Multi-Arch: foreign
+Homepage: http://www.android.com/
+Description-md5: bfcf6e28cfddab51239c192d23e97393
+Section: non-free/sound
+Priority: extra
+Filename: pool/non-free/s/svox/libttspico-data_1.0+git20110131-2_all.deb
+
+Package: libvideo-info-perl
+Version: 0.993-2
+Installed-Size: 880
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Architecture: all
+Depends: perl, libclass-makemethods-perl, libmp3-info-perl
+Size: 659866
+SHA256: fa5e8dc352a30a2918a7ca18b6ad9dc85fedc0836d603115649242df6231be16
+SHA1: 616f1b6d0fd9cda4592ece716b1b79abcf742d04
+MD5sum: 4637f141c851f7be041f4939e8ca4fdb
+Description: Perl module to examine video files
+Homepage: http://search.cpan.org/dist/Video-Info/
+Description-md5: 644e90d63ab098c2420d59e2008c51ea
+Tag: devel::lang:perl, devel::library, implemented-in::c,
+ implemented-in::perl, use::analysing, works-with::file,
+ works-with::video
+Section: non-free/perl
+Priority: optional
+Filename: pool/non-free/libv/libvideo-info-perl/libvideo-info-perl_0.993-2_all.deb
+
+Package: libworldwind-java
+Source: worldwind
+Version: 0.5.0-10
+Installed-Size: 2576
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Architecture: all
+Depends: sun-java5-jre | sun-java6-jre | openjdk-6-jre, libjogl-java
+Suggests: worldwind-doc
+Size: 2448640
+SHA256: 448725941cb1763c440f271a866f60fcbc56b28e1ce7fb933c95d28e71a4c2e1
+SHA1: 14a10d0a92249451abf1332f496313b036c30a3b
+MD5sum: 10c59353db94ef0ee5f7cfb96071c832
+Description: 3D Virtual Globe
+Homepage: http://worldwind.arc.nasa.gov/java/
+Description-md5: 7fa37fcac49aa3e1731bcc303db2abee
+Section: non-free/java
+Priority: optional
+Filename: pool/non-free/w/worldwind/libworldwind-java_0.5.0-10_all.deb
+
+Package: lmbench-doc
+Source: lmbench
+Version: 3.0-a9-1
+Installed-Size: 700
+Maintainer: Al Stone <ahs3@debian.org>
+Architecture: all
+Size: 274412
+SHA256: ef9c9752c8e1f8b4e587a3d0f065c8419cb24f29c327d0bc9b4242c7b4600f5a
+SHA1: fc6630426a4b2768907f5c6dc6616c6553c41c85
+MD5sum: c403ddcac1ae456563f616bbdf52bd87
+Description: Documentation for the lmbench benchmark suite
+Description-md5: 426e96fcf9086b665a494194a145246d
+Tag: made-of::man, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/l/lmbench/lmbench-doc_3.0-a9-1_all.deb
+
+Package: lugaru-data
+Version: 0~20110520.1+hge4354-1
+Installed-Size: 36296
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: all
+Enhances: lugaru
+Size: 34558522
+SHA256: 7ab5242e6864556355b0ba204cf2e3f5e4d778f33cf5dc65c0dc11df85fa7726
+SHA1: 62d1cd484a9d641518dcd9b008ba241f58f7e9d6
+MD5sum: 30115b2899a630dd5c8d1387e16a5bf9
+Description: data for the third-person action game lugaru
+Homepage: http://code.google.com/p/lugaru/
+Description-md5: 5ad9ea6bb605109fd090da1a30ab5a67
+Tag: game::arcade, made-of::audio, role::app-data, use::gameplaying
+Section: non-free/games
+Priority: optional
+Filename: pool/non-free/l/lugaru-data/lugaru-data_0~20110520.1+hge4354-1_all.deb
+
+Package: make-doc
+Source: make-doc-non-dfsg
+Version: 3.81-5.1
+Installed-Size: 2060
+Maintainer: Manoj Srivastava <srivasta@debian.org>
+Architecture: all
+Replaces: make (<< 3.80+3.81.rc2-1)
+Depends: dpkg (>= 1.15.4) | install-info
+Suggests: make
+Enhances: make
+Size: 972746
+SHA256: b959b87a11e420af7f50fb32a41eb05aaea686e5b352daaf1063ae345cb0166a
+SHA1: 1402f4329a73ff4bb39d6c106446141d127eb1f0
+MD5sum: a513c1b05c01d7c5c12681767a3451b0
+Description: Documentation for the GNU version of the "make" utility.
+Description-md5: 6ec17c3075d72b902597318d8f1e82c4
+Tag: devel::doc, devel::lang:c, made-of::html, made-of::postscript,
+ role::documentation, suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/m/make-doc-non-dfsg/make-doc_3.81-5.1_all.deb
+
+Package: manpages-posix
+Version: 2.16-1
+Installed-Size: 1162
+Maintainer: Francesco Paolo Lovergine <frankie@debian.org>
+Architecture: all
+Recommends: manpages
+Suggests: man-browser
+Enhances: manpages
+Size: 863670
+SHA256: 9ba42031a5506344a25e16be7a62fba723a5f49d05b523f007d6f54baaf0cf26
+SHA1: cd1a489a23d191d2185e52e3f6763967030f43c6
+MD5sum: 40450754ff2aedc8cebc574c41f67430
+Description: Manual pages about using POSIX system
+Description-md5: bebba789d7556a5d3bb41a68c74536d8
+Tag: made-of::man, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/m/manpages-posix/manpages-posix_2.16-1_all.deb
+
+Package: manpages-posix-dev
+Source: manpages-posix
+Version: 2.16-1
+Installed-Size: 5098
+Maintainer: Francesco Paolo Lovergine <frankie@debian.org>
+Architecture: all
+Depends: manpages-posix
+Recommends: manpages-dev
+Suggests: man-browser
+Enhances: manpages-dev
+Size: 1447350
+SHA256: dce5ad682a73b2bc044824e10bf46b4145e8204fdcd5d5b1e43ffc756c3c3269
+SHA1: ff0f2339a8c703fdb9103777944a0d2cabf64ae3
+MD5sum: 3ca03bd39768cf274237f3f3988533e6
+Description: Manual pages about using a POSIX system for development
+Description-md5: 0df35d08fd332d72043312433a0bd2b2
+Tag: devel::doc, devel::lang:c, devel::lang:posix-shell, made-of::man,
+ role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/m/manpages-posix/manpages-posix-dev_2.16-1_all.deb
+
+Package: mbrola-af1
+Version: 0.0.20040426-2
+Installed-Size: 7944
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-af
+Depends: mbrola
+Size: 6686780
+SHA256: cb1c9b323720cdfd6dfc8d113a83b874b1022382f4cf194b67ab1beb977d8365
+SHA1: 33f04d57cb5c671330c41edf0097ebf72d1a6c07
+MD5sum: 48e00625477a6ff5a3d93db9e7e6f4dd
+Description: Afrikaans male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 45c04f2896fe6010eee87e59c402611f
+Tag: accessibility::speech, culture::afrikaans, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-af1/mbrola-af1_0.0.20040426-2_all.deb
+
+Package: mbrola-br1
+Version: 2.021-1
+Installed-Size: 5416
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-pt, mbrola-voice-pt-br
+Depends: mbrola
+Size: 5200044
+SHA256: dfc6a8a6cd4a2da8550e75e65fce78cdad084c72f3b6ba5d08c169f0042be17c
+SHA1: de7054410c33b8f31d75fe5176c5af5cf14242be
+MD5sum: c325f16727a211fd2c4a13f9f86d46d3
+Description: Brazilian Portuguese male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: b26a18b65acf95c11ed143d760a8a5de
+Tag: accessibility::speech, culture::brazilian, culture::portuguese,
+ role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-br1/mbrola-br1_2.021-1_all.deb
+
+Package: mbrola-br3
+Version: 2.021-2
+Installed-Size: 10164
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-pt, mbrola-voice-pt-br
+Depends: mbrola
+Size: 8985720
+SHA256: 22ef09d2dfa2c23e3b08f7e8380d5e5651a9b0bb6f4971dbadaab65b54e45b67
+SHA1: d2de2519c2617aa2ea00cb6c25cbb2c616417f53
+MD5sum: c2a85d23d7fcbdcb31a9aa23023e54e3
+Description: Brazilian Portuguese male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: b26a18b65acf95c11ed143d760a8a5de
+Tag: accessibility::speech, culture::brazilian, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-br3/mbrola-br3_2.021-2_all.deb
+
+Package: mbrola-cr1
+Version: 0.0.19981028-2
+Installed-Size: 3516
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-hr
+Depends: mbrola
+Size: 2985194
+SHA256: 9a07510d27b8dc421dd5be2c81753e34c549aad2674a51b66dddcdd50d0db9bf
+SHA1: f6e1ef2340b85c765a1e8787f95a340bfd650ae8
+MD5sum: ea4a05565bc3d5ab557ac29c0510efd3
+Description: Croatian male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: b755a2e96548919c7f3c3e13aa4142b5
+Tag: accessibility::speech, culture::croatian, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-cr1/mbrola-cr1_0.0.19981028-2_all.deb
+
+Package: mbrola-cz2
+Version: 0.2-2
+Installed-Size: 9660
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-cs
+Depends: mbrola
+Size: 8847582
+SHA256: 00b527531b6048f2d8a8558b49454dd91cbcdb2dd140d986181a059f432053ab
+SHA1: e8b13c380e0d59d77a46508b7e29bd4376bf81d5
+MD5sum: f76878a312ecd8773a016c98b2a0d4ec
+Description: Czech male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: e6994379f70599765b4ff74b098db346
+Tag: accessibility::speech, culture::czech, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-cz2/mbrola-cz2_0.2-2_all.deb
+
+Package: mbrola-de4
+Version: 0.0.20020812-1
+Installed-Size: 21844
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-de
+Depends: mbrola
+Size: 19520804
+SHA256: 74a543360aff69cb217b2d8f7f3f09ced83034b3f5a304007cefd4c290172ea8
+SHA1: 93d667105b36e4f8e0c05b0441e2a66bfe402d57
+MD5sum: ad10149fd6a0a48ec6357bc385ba0ed4
+Description: German male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 07164727bc69bc13aae1272a5ba0313e
+Tag: accessibility::speech, culture::german, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-de4/mbrola-de4_0.0.20020812-1_all.deb
+
+Package: mbrola-de5
+Version: 1.0-1
+Installed-Size: 13996
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-de
+Depends: mbrola
+Size: 13136180
+SHA256: 0bfdbe489496af69218ae3c9873e3312eb500adfdf421b23ae3339d56b7bb017
+SHA1: cc92840595f73e43c5b3747b62c934c3b14a9b40
+MD5sum: b25718f9ccf2b044ba06f14d8a391f43
+Description: German female voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 801390ff97d6389517ac334fe6fc5a53
+Tag: accessibility::speech, culture::german, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-de5/mbrola-de5_1.0-1_all.deb
+
+Package: mbrola-de6
+Version: 0.0.20021125-2
+Installed-Size: 55484
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-de
+Depends: mbrola
+Size: 48472246
+SHA256: 3960f20af7bfe12b7b0fd374e52e584bf1135434c25a4743f664f8872cf505a4
+SHA1: e5011f799d46b34a19cf7679ad360d456adac81f
+MD5sum: d3770d660e5799f8b99ca5b9488dfcb4
+Description: German male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 1e78699771261beaa8ccaff7c69c5999
+Tag: accessibility::speech, culture::german, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-de6/mbrola-de6_0.0.20021125-2_all.deb
+
+Package: mbrola-de7
+Version: 0.0.20030404-2
+Installed-Size: 55432
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-de
+Depends: mbrola
+Size: 47635802
+SHA256: 6e286c8da274946f511cd887f0d60789cabc7eecefe966df9d19e6661e013a75
+SHA1: 7d3a9d8e1a3c4603bba7dd6023bfcc73ec783e6d
+MD5sum: 649a98786a4727f82187402ca9d7cf3a
+Description: German female voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 801390ff97d6389517ac334fe6fc5a53
+Tag: accessibility::speech, culture::german, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-de7/mbrola-de7_0.0.20030404-2_all.deb
+
+Package: mbrola-ee1
+Version: 0.0.20020407-1
+Installed-Size: 11891
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-et, mbrola-voice-et-ee
+Depends: mbrola
+Size: 8939572
+SHA256: d58c63742b2ad883fca142d568c5deb50c6241cc525db75b90d7a1570af91dac
+SHA1: 92896ef017dfb85b03c26d4420533131aa6e4128
+MD5sum: 7b5daf48d9115a8996754d1654379d45
+Description: Estonian male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: b3d6e53c1837dd636fdf963a2f546735
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-ee1/mbrola-ee1_0.0.20020407-1_all.deb
+
+Package: mbrola-en1
+Version: 19980910-2
+Installed-Size: 6656
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-en, mbrola-voice-en-uk
+Depends: mbrola
+Size: 5833282
+SHA256: d8d4d722b96a45ededb8d5d07cb7c76cb279001e5c1bc7cf1c6cecd7a9775301
+SHA1: d810f39833ba8c9876779d993afba8f6a81f6029
+MD5sum: 6b46cee525036af9074b2b000f19ab2d
+Description: British English male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 58c38183cd5c4dc361473ff1f2cd9fa2
+Tag: accessibility::speech, culture::british, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-en1/mbrola-en1_19980910-2_all.deb
+
+Package: mbrola-es1
+Version: 0.0.19980610-2
+Installed-Size: 2916
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-es
+Depends: mbrola
+Size: 2109892
+SHA256: 3f4aee4cbfff08eaea7581f787ab82fd8ff78591baa8206e40277ffee3b757a5
+SHA1: cd2272e4c09ef6dcef188df09ef807d71ce0cad4
+MD5sum: 6d93aaebf352653bb5632c327edbc88f
+Description: Spanish male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 07cf405b5fb975b987d7cbce7c4e4736
+Tag: accessibility::speech, culture::spanish, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-es1/mbrola-es1_0.0.19980610-2_all.deb
+
+Package: mbrola-es2
+Version: 2.069-1
+Installed-Size: 5648
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-es
+Depends: mbrola
+Size: 5101564
+SHA256: 6e0fedf6739b32395f7b120a5b018d2176796e5d4ba1a0e0703f02078749e15a
+SHA1: 7000bd2eb2209dc443d70779b0ba4cb03d4ecb23
+MD5sum: b3a5caf2798cfb3b8c64d67640d086f8
+Description: Spanish male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 7a18739caaba1a06994ac7cc36e1538d
+Tag: accessibility::speech, culture::spanish, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-es2/mbrola-es2_2.069-1_all.deb
+
+Package: mbrola-fr1
+Version: 2.050-1
+Installed-Size: 5076
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-fr
+Depends: mbrola
+Size: 4693184
+SHA256: f96ecb5b1c97df5f6afa9d2f3ad555abe9b9415ac9eee2d256cd87e92fb99dfd
+SHA1: 0c937e0214c5654186dff36f1b58c0c46d04a371
+MD5sum: e27fcccd5bdd3b106862a34963158bf9
+Description: French male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: b37eb4aba52be6b911e48d956ec3f4eb
+Tag: accessibility::speech, culture::french, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-fr1/mbrola-fr1_2.050-1_all.deb
+
+Package: mbrola-fr4
+Version: 0.0.19990521-2
+Installed-Size: 5928
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-fr
+Depends: mbrola
+Size: 5621008
+SHA256: 61e1ca41a561e47fc9d39d3958f94e6a5818c0b3f4355a57a89b9bae47af82cf
+SHA1: 3bbf8517d8c7491cfe1f5c4d759d9f386419000c
+MD5sum: 59cebe5a944811a51143d7946ea205a7
+Description: French female voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 31cce834a748193d3400d7a43b5ae082
+Tag: accessibility::speech, culture::french, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-fr4/mbrola-fr4_0.0.19990521-2_all.deb
+
+Package: mbrola-gr1
+Version: 19990610-1
+Installed-Size: 3204
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-el
+Depends: mbrola
+Size: 2620272
+SHA256: 621d14b3bd85210c7eeb99538f89b331d9276cecf224a04f6c1408d9db536ac6
+SHA1: ef3b51b191839e3e4730c29305931aed8cb66e7b
+MD5sum: cf883335ec4a23957fffb1dcf6a6f606
+Description: Greek male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: e70bf630f8b28711efeaa42209ba1574
+Tag: accessibility::speech, culture::greek, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-gr1/mbrola-gr1_19990610-1_all.deb
+
+Package: mbrola-gr2
+Version: 0.0.20010521-2
+Installed-Size: 6540
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-el
+Depends: mbrola
+Size: 5855712
+SHA256: ceb2013f987657bc5ff995cda8d9867d3317d688b682ba64a7b2ffef81b6c579
+SHA1: 6de23775cedd685b06c2071aefd8ee4c96366d16
+MD5sum: 8664c3aebe1e985ba786da50996c64f8
+Description: Greek male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: e70bf630f8b28711efeaa42209ba1574
+Tag: accessibility::speech, culture::greek, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-gr2/mbrola-gr2_0.0.20010521-2_all.deb
+
+Package: mbrola-hu1
+Version: 1.002-2
+Installed-Size: 8800
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-hu
+Depends: mbrola
+Size: 7469486
+SHA256: 98e69f65d519d3300fb9f23f977a2799648482b1fbc1aea90bfd0bcc109637c9
+SHA1: 8ba24918ce690830d810247b932306c940ea056a
+MD5sum: fbe7550c19c90bdf4ef7e4a5495bb212
+Description: Hungarian male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 35110cb8e60a53be301d5873215deee5
+Tag: accessibility::speech, culture::hungarian, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-hu1/mbrola-hu1_1.002-2_all.deb
+
+Package: mbrola-id1
+Version: 1-2
+Installed-Size: 5492
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-id
+Depends: mbrola
+Size: 4446532
+SHA256: 975c41ef8952b06de4766b6b1de46e7ae87915b17a1d90d1d0d8fda5563cb3d8
+SHA1: b443a7d72084891013463965e28f13e1db96a8be
+MD5sum: 575fe51071afe49196fdb6d6355e51c3
+Description: Indonesian male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: e3e6089af0d2686e42d50345f6c1a0af
+Tag: accessibility::speech, culture::TODO, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-id1/mbrola-id1_1-2_all.deb
+
+Package: mbrola-it3
+Version: 0.1-2
+Installed-Size: 6700
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-it
+Depends: mbrola
+Size: 5350458
+SHA256: 839e2b4a3c33671c478ae8c7e1cb7daddaee352b6c3372b00f25d8bb7be854d3
+SHA1: 417a558a2a4c622de2e790b3dd45e1ac72d44f0a
+MD5sum: 05ad73a229364ba791d88662273bd6af
+Description: Italian male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 8bcdff42357114709c8947080764aa67
+Tag: accessibility::speech, culture::italian, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-it3/mbrola-it3_0.1-2_all.deb
+
+Package: mbrola-it4
+Version: 0.1-2
+Installed-Size: 6092
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-it
+Depends: mbrola
+Size: 5044278
+SHA256: c4ac09bda90026c2b6de1340d3b4084059b0b5347d291cd21ad29d347f096267
+SHA1: 8f839e01aa505f2264eb41468b4f16a20f6724c1
+MD5sum: cb03d0bd6c12d0857846caa43b033f7a
+Description: Italian female voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: b6d4bc9b08c185cf14098f63aff7de0b
+Tag: accessibility::speech, culture::italian, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-it4/mbrola-it4_0.1-2_all.deb
+
+Package: mbrola-la1
+Version: 0.0.20050615-2
+Installed-Size: 8508
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-la
+Depends: mbrola
+Size: 7629476
+SHA256: fe9053296d21209791b1d4a75ba50c9b3fd59b3d499b207cfc4dc72565f11fff
+SHA1: d44b8fc62af7779870c1b71992ad63cfec2afb95
+MD5sum: d40e18105f15a240fec53c9ba25a6d0b
+Description: Latin male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 5f084b8558f61ee6c618db76625952ac
+Tag: accessibility::speech, culture::TODO, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-la1/mbrola-la1_0.0.20050615-2_all.deb
+
+Package: mbrola-mx2
+Version: 0.1-1
+Installed-Size: 4188
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-es, mbrola-voice-es-mx
+Depends: mbrola
+Size: 3486070
+SHA256: 54c68f3998f2a999674c943aca74b08d3de203944767312bdc6bf26178fac7b4
+SHA1: 91cf4e9713a1b12af7aa277bfcbf09fd1b0d42db
+MD5sum: 4719bae6120648c7837da554e91291f5
+Description: Mexican Spanish male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 5ce86a8ac16202fe32f86fc498ef81d0
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-mx2/mbrola-mx2_0.1-1_all.deb
+
+Package: mbrola-nl2
+Version: 0.5-2
+Installed-Size: 14972
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-nl
+Depends: mbrola
+Size: 13259228
+SHA256: 9461fcf39585237100a3ba4515acef3762374e188d969ae9bd09df5fe501e35a
+SHA1: b58b7a877224cb90c771b8c38137e96723e67dd8
+MD5sum: 2852c8a6343850ab427314d71c028f3f
+Description: Dutch male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 34360fda73cbdf6939e4333f34d1b6a3
+Tag: accessibility::speech, culture::dutch, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-nl2/mbrola-nl2_0.5-2_all.deb
+
+Package: mbrola-pl1
+Version: 0.1-2
+Installed-Size: 4728
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-pl
+Depends: mbrola
+Size: 4051312
+SHA256: ea1035172ed3e55361530ddc333dd7437752558cd785126deb8e7bf1d2238124
+SHA1: 795d956e43abae9c01e5e358a8296432b9d04dee
+MD5sum: d28bb82b34a79681ce6223459f641add
+Description: Polish female voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 800a36ae67e74cef402416686a5bbacb
+Tag: accessibility::speech, culture::polish, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-pl1/mbrola-pl1_0.1-2_all.deb
+
+Package: mbrola-pt1
+Version: 1.0-2
+Installed-Size: 8304
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-pt, mbrola-voice-pt-pt
+Depends: mbrola
+Size: 7829042
+SHA256: c2fc9056a8066eebdddf9fbe31a8f55ee779326afcce0e98a850176aa80b7e1b
+SHA1: 68a83ddd7d11e52543d000995b84f456e7d61f96
+MD5sum: 45c3440e81dfd14ee2f448d447e9a7ef
+Description: European Portuguese female voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 3b749adcb9cf977b5d3a30c08e23ac17
+Tag: accessibility::speech, culture::portuguese, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-pt1/mbrola-pt1_1.0-2_all.deb
+
+Package: mbrola-ro1
+Version: 1.00-2
+Installed-Size: 3848
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-ro
+Depends: mbrola
+Size: 3222138
+SHA256: 2a33d311749ab39a1b2a7bc89ed29f891bf155407a8bc753f3f2363ea3c9496c
+SHA1: 1129035b4d9b67f9bef7b2cf0661dc46b9d631bb
+MD5sum: 0022e0684cdea00d86bde8abc9267391
+Description: Romanian male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 124ce3cd7a12c8af23a5236549e6b23a
+Tag: accessibility::speech, culture::romanian, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-ro1/mbrola-ro1_1.00-2_all.deb
+
+Package: mbrola-sw1
+Version: 1.00-2
+Installed-Size: 11356
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-sv
+Depends: mbrola
+Size: 9383742
+SHA256: c8469e3e31c32e5e5a92cde28e7e853cf32ad79138178680e956a643090a164c
+SHA1: 4575394454439f5d0b6475e607110b5e2d80f6a4
+MD5sum: e5d5a9c078859d975d78ef1f5be0ca1c
+Description: Swedish male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: f70877a2eb2fe44fab91f86a0409f8ab
+Tag: accessibility::speech, culture::swedish, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-sw1/mbrola-sw1_1.00-2_all.deb
+
+Package: mbrola-sw2
+Version: 1.0-2
+Installed-Size: 6496
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-sv
+Depends: mbrola
+Size: 5629596
+SHA256: 60176a00c575b3e5de17559091dd2716a9870cd12de43ee14fa31ea0296565b3
+SHA1: 51c9385195df5c2c07ac7002c01ee2b8a0a782f6
+MD5sum: 388b175888df674c5257b9e5fd0762fc
+Description: Swedish female voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 099764935e3b8af0377da2d8549c63f4
+Tag: accessibility::speech, culture::swedish, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-sw2/mbrola-sw2_1.0-2_all.deb
+
+Package: mbrola-us1
+Version: 0.3-2
+Installed-Size: 7164
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-en, mbrola-voice-en-us
+Depends: mbrola
+Size: 6564452
+SHA256: 60dd560dc844a380fc6b30dc187c1ce96fce87bad3df79c6795b3e91e6151b56
+SHA1: 0ca8255f6c27d2ab674aeb288a62d5813e0a6ca7
+MD5sum: 1d6f7f4485b7c82095d72c65aa68d581
+Description: American English female voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 0c2453a5093091da912d8ba28dd38a5b
+Tag: accessibility::speech, culture::TODO, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-us1/mbrola-us1_0.3-2_all.deb
+
+Package: mbrola-us2
+Version: 0.1-2
+Installed-Size: 7000
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-en, mbrola-voice-en-us
+Depends: mbrola
+Size: 6389054
+SHA256: 66793225a497c47fa4a596baa498b9ec74cd515982ee87c9bba3666ca4a34523
+SHA1: 58764ebf48b6176322c61f9a90b969bec11cfebd
+MD5sum: ed05f85b91d65384c21d2a82ac185c5f
+Description: American English male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: 3e3d47046d4b95ec1b81c4fe28d72723
+Tag: accessibility::speech, culture::TODO, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-us2/mbrola-us2_0.1-2_all.deb
+
+Package: mbrola-us3
+Version: 0.1-1
+Installed-Size: 7320
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-en, mbrola-voice-en-us
+Depends: mbrola
+Size: 6192582
+SHA256: ae412de21163bc7aebcd9efb2e7d5edceaab410aa6a6076b8370e763caa3564f
+SHA1: 8a0540347497256a1e304cc8c56f1448f911466c
+MD5sum: 0df61d66014f7b7da1bc8d0e37a1eda3
+Description: American English male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: d2e9d6051294e7b58ec26187330d0832
+Tag: accessibility::speech, culture::TODO, role::app-data
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-us3/mbrola-us3_0.1-1_all.deb
+
+Package: mbrola-vz1
+Version: 2-1
+Installed-Size: 3007
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Architecture: all
+Provides: mbrola-voice, mbrola-voice-es, mbrola-voice-es-ve
+Depends: mbrola
+Size: 2373966
+SHA256: 62fe0e7b8e9d147086fff0d4666511960bb93bdc25c465081904b2b68571a83d
+SHA1: 87ed11bdef1e463b89d365746ef5728ab06191f6
+MD5sum: 1b07d6a652668c52e6a9bfcb8f69553b
+Description: Venezuelan Spanish male voice for Mbrola
+Homepage: http://tcts.fpms.ac.be/synthesis/
+Description-md5: bcd6e6841ae70b30525c7071e71a196a
+Section: non-free/sound
+Priority: optional
+Filename: pool/non-free/m/mbrola-vz1/mbrola-vz1_2-1_all.deb
+
+Package: mess-data
+Source: mess
+Version: 0.146-2
+Installed-Size: 66279
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: all
+Size: 31883580
+SHA256: 001f631a6a6cd689d6076b8451a5f07571e8dc949d42b4672c413f1ee9f34d9e
+SHA1: cf4e2e361ab71a97d6226c6383d0e2141b8655ce
+MD5sum: 6d9d6b98367d4a72438b59ca9f79c7e5
+Description: Data files for the Multi Emulator Super System (MESS)
+Homepage: http://mess.org/
+Description-md5: 43ff9f188ece9deceaeb8948774256e2
+Tag: role::app-data
+Section: non-free/games
+Priority: optional
+Filename: pool/non-free/m/mess/mess-data_0.146-2_all.deb
+
+Package: mgltools-cadd
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 77382
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), mgltools-vision, mgltools-webservices
+Size: 21581564
+SHA256: 6ca1c3e25a57eb39d10857b25efe8097783c7cd3f1e176050b90dd5a3ba595e5
+SHA1: 1e0037e140ab7d5b60d9998fb75e927398f03435
+MD5sum: 69f96112123baaa8db5259bba9ff086f
+Description: Computer Aided Drug Discovery (CADD) Pipeline
+Homepage: http://mgltools.scripps.edu/
+Description-md5: 2f10f571aa9fcccbe62ec78f98a502f4
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-cadd/mgltools-cadd_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: mgltools-dejavu
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 3243
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), mgltools-opengltk, mgltools-pyglf, mgltools-geomutils
+Suggests: mgltools-qslimlib
+Enhances: autodocktools
+Size: 617048
+SHA256: 6fda5a1c197e07b9db3e747fbeefc7b3d75bf1d5d87ca63a7f97f42fe882b782
+SHA1: 082a1fa73aa034f7e139ee4431b3f91dd99abcab
+MD5sum: 283854c2f7162826f045e229467c1750
+Description: visualization of 3D geometry using the OpenGL with Python
+Homepage: http://mgltools.scripps.edu/
+Description-md5: ff5690189b41f59fb37fbae5ac05ef57
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-dejavu/mgltools-dejavu_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: mgltools-mglutil
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 7053
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), mgltools-sff, python-pmw, python-zsi (>= 2.0), idle | idle-python2.6
+Recommends: qhull-bin
+Suggests: tcsh
+Size: 1767474
+SHA256: a86733fa3817b9a7c6cc21f8731c9037dfcccef4bc05f2bdf50d3db87d3b8d4d
+SHA1: dde0c70c3fd250cbe3b26d0398f02c5de6c08409
+MD5sum: e6a9c43712c747619e786f65403aacbb
+Description: Molecular Graphics Laboratory utility collection
+Homepage: http://mgltools.scripps.edu/
+Description-md5: 932329562c23a2560517f3003ff17fa7
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-mglutil/mgltools-mglutil_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: mgltools-molkit
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 14579
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), mgltools-pybabel, mgltools-dejavu, mgltools-bhtree, mgltools-sff, python-numpy
+Recommends: mgltools-cmolkit
+Suggests: pdb2pqr
+Size: 3021778
+SHA256: d2721881cd421bf8fd71d9edbc162df5fb9f208f3cf1fa06ea66d9bd960fc48f
+SHA1: d191ccdffdde502e9c81da3e04598a0697ccaca7
+MD5sum: 16e7b9b50b70af6d1d2b0fa6edd81f39
+Description: Python classes to read and manipulate molecules
+Homepage: http://mgltools.scripps.edu/
+Description-md5: fd672598586eacf82e9b75ed12efc738
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-molkit/mgltools-molkit_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: mgltools-networkeditor
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 1011
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), idle | idle-python2.6
+Size: 201502
+SHA256: 2b86e56a64202a37309902a1bef755b6c76fed74c391b0558b4c64b767fab9da
+SHA1: 2369e89f47ec03dafdae0661f11995b81f777d72
+MD5sum: d7fb1d669a80f590d690cee774e8b5d7
+Description: Python GUI library for the editing of networks
+Homepage: http://mgltools.scripps.edu/
+Description-md5: 58fd1261c1c60af0f1fa9480419389fd
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-networkeditor/mgltools-networkeditor_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: mgltools-pmv
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 28843
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), mgltools-scenario2, mgltools-mglutil, mgltools-support, mgltools-opengltk, mgltools-molkit, mgltools-viewerframework, mgltools-dejavu, python-zsi, mgltools-geomutils, idle-python2.7 | idle-python2.6 | idle-python2.5, python-imaging-tk
+Recommends: apbs, autodocktools
+Suggests: mgltools-qslimlib, mgltools-pmv-test
+Enhances: autodocktools
+Size: 15195800
+SHA256: 7afa9b14ac0a6de7136e30c335c3ee9b51492e55ef1f6d6f80c5305cd3b101de
+SHA1: 02a470db9270ca95e78581290bf5e19d2224d75c
+MD5sum: 90851779b020c335384ddd70e2e16754
+Description: Python-based Molecular Viewer
+Homepage: http://mgltools.scripps.edu/
+Description-md5: 77e51a34a874ad11d4a15511ee2c6758
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-pmv/mgltools-pmv_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: mgltools-pmv-test
+Source: mgltools-pmv
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 10909
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), mgltools-pmv
+Size: 3738072
+SHA256: bcbac85a433bfad15dc290fc336a02717c39f46fc5b3461efcd3326f8bdc151a
+SHA1: b354efd0d661c7650c5845621850a248065463ed
+MD5sum: 4308adc97d33b1c491fa99ee08509d13
+Description: Python-based Molecular Viewer (functionality tests)
+Homepage: http://mgltools.scripps.edu/
+Description-md5: 0cea8e2c2f920078750b5b1d74064e04
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-pmv/mgltools-pmv-test_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: mgltools-pyautodock
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 44738
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), python-numpy, mgltools-molkit
+Suggests: autodock
+Size: 11670582
+SHA256: 9225d41735fa0dcd110d37a362a2223ee0391181160f513faf47cf4b2c16ca85
+SHA1: 174abd9b0125097991e816e0a8c91427085e70b8
+MD5sum: 3bea475c612108e55caacffc22f12dbb
+Description: Python implementation of autodock
+Homepage: http://autodock.scripps.edu/
+Description-md5: 1a56b42344f806fb1ff1268ca9d2df50
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-pyautodock/mgltools-pyautodock_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: mgltools-pybabel
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 268
+Maintainer: Debian-Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8)
+Size: 41918
+SHA256: 9fe84ea3272413af77720beb4b8e16f7eaf163202a1b780401a6f87b80ee0c07
+SHA1: 1bc8dc8d935956860bef81bc26c38368254dfb8c
+MD5sum: 81f3d4e1b8f7919599b51fb058553793
+Description: molecular structure file access and interpretation
+Homepage: http://mgltools.scripps.edu/
+Description-md5: 7f5ddb89ebd86aca669691dc7d4ceed2
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-pybabel/mgltools-pybabel_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: mgltools-scenario2
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 646
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), python-simpy, python-tk, python-pmw
+Size: 297158
+SHA256: 7a8e4bff85391e72d286efa850bd9b0ec1ae2c853bf390151ba72a55405fa485
+SHA1: d02b807ca2f9c8210def5a232aab8f06a65e2646
+MD5sum: e521e5716c214df1220d3c79fabfe43b
+Description: Python-based viewer of molecular structures
+Homepage: http://mgltools.scripps.edu/
+Description-md5: 7c0e57ef395b46e550c21af39e978be8
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-scenario2/mgltools-scenario2_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: mgltools-support
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 123
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8)
+Suggests: autodock
+Size: 16676
+SHA256: 88c93f3107b78c924b96d893d1ec3128fd3d929d6dc1708553ad93b2ae9e45eb
+SHA1: abcf99079bb16fdf7b2ef23346f3284531a083a8
+MD5sum: e8e5e1fa3d17fa4db4ed22f96eb38cb1
+Description: Update mechanism of MGLTools
+Homepage: http://mgltools.scripps.edu/
+Description-md5: 65579c985fd7d9fa7b171556bd84d88a
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-support/mgltools-support_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: mgltools-symserv
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 287
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), python-numpy
+Size: 29038
+SHA256: 78d9d7f62a81a580354a9131558f4b7ed2efcc03b3d170a5fa6059bfe557bda4
+SHA1: 6c6248eb26033c6069fbe65bbbd08cb43ed30a46
+MD5sum: 7c2181e2ee2b2e19bf0fc2311ec453bf
+Description: Symetry server
+Homepage: http://mgltools.scripps.edu/
+Description-md5: bc4ee8ac50977cd2667fc440c950571a
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-symserv/mgltools-symserv_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: mgltools-viewerframework
+Version: 1.5.6~rc3~cvs.20120206-2
+Installed-Size: 1104
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), mgltools-bhtree, idle
+Size: 352956
+SHA256: cd0f226a25eb92a0c5d52ad3482402ef72e186d970a5ae87fab197cd12812a94
+SHA1: 933294954d7bdd32a401cfe0d85377d322891a7a
+MD5sum: b0c83768a23c8c83fa4ef530ab8ac9d1
+Description: ViewerFramework supports building visualization applications
+Homepage: http://mgltools.scripps.edu/
+Description-md5: 4153b4fdcf11b7c92230461eb0fd9f65
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-viewerframework/mgltools-viewerframework_1.5.6~rc3~cvs.20120206-2_all.deb
+
+Package: mgltools-vision
+Version: 1.5.6~rc3~cvs.20120601-1
+Installed-Size: 11174
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python-numpy, python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), mgltools-networkeditor, mgltools-mglutil, idle | idle-python2.6, mgltools-support
+Enhances: autodocktools
+Size: 5152848
+SHA256: cda539701fe1ac0f488a100283bbbf3896d27175b887329f54c1ec1c0f3c4f33
+SHA1: 45eaa5c2fd9d574025bafff9f01e7b495a8d2eb6
+MD5sum: 97eef975aa0476bb57f5d74d1cb1c23d
+Description: Python-based Visual Programming Environment
+Homepage: http://mgltools.scripps.edu/
+Description-md5: 65865d2aaddabe3b992e4a198c0aeb6b
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-vision/mgltools-vision_1.5.6~rc3~cvs.20120601-1_all.deb
+
+Package: mgltools-visionlibraries
+Version: 1.5.6~rc3~cvs.20120601-1
+Installed-Size: 156
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python-numpy, python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), mgltools-vision
+Enhances: autodocktools
+Size: 12114
+SHA256: 1672c70ec968404b5193aef4e23bb9ab8aeee634fee3f4ba58b9e0d2bddb9ffc
+SHA1: 3d53a879049f47a98f65dd7a421809ec04bdc683
+MD5sum: 7c5e70e7aa833eed7e77384cfcfbe405
+Description: Extensions for Python-based Visual Programming Environment
+Homepage: http://mgltools.scripps.edu/
+Description-md5: 99ff47fe9af661bf0aa1179f6f8ffe43
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-visionlibraries/mgltools-visionlibraries_1.5.6~rc3~cvs.20120601-1_all.deb
+
+Package: mgltools-volume
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 26795
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), python-numpy
+Suggests: mgltools-qslimlib
+Enhances: autodocktools
+Size: 9817634
+SHA256: 37258ce1974bc3a0fe1dd162f4b0d13b7ac148efdff9338993f04fe871c32b7f
+SHA1: 86168e1a004653a83a6e1a38de7c1b994fe5e01b
+MD5sum: 1e523f22fb537de249d506cb7241d7b7
+Description: Volume rendering Python package
+Homepage: http://mgltools.scripps.edu/
+Description-md5: bc8d5e83cb6d172d7517b91b9584975c
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-volume/mgltools-volume_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: mgltools-webservices
+Version: 1.5.6~rc3~cvs.20120206-1
+Installed-Size: 240
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8)
+Size: 33278
+SHA256: 6ffc06c780d0ee0bf92b6b42407f1d50248add22888ca9b060bd9a773e6b3acc
+SHA1: aa0e47fbe6233986571f9df705e52ea6442f7350
+MD5sum: a256a976bdd14972018e00a31ba706f9
+Description: webservices for components of autodocktools
+Homepage: http://mgltools.scripps.edu/
+Description-md5: 6d84f5511bb186a31cfa79118b50b8b1
+Python-Version: 2.6, 2.7
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/m/mgltools-webservices/mgltools-webservices_1.5.6~rc3~cvs.20120206-1_all.deb
+
+Package: midisport-firmware
+Version: 1.2-4
+Installed-Size: 160
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Architecture: all
+Depends: fxload, udev
+Size: 28022
+SHA256: 7cbf9c60ee83ecb151ad82c6e52ab99611ad34845584f3da4c3e2137fb380afa
+SHA1: f73674d65d647400eb79cb007138f7f98c9a6ed4
+MD5sum: ba50cd6a2647ce29a8f95b46cf186898
+Description: Firmware loader for M-Audio's MidiSport devices
+Homepage: http://usb-midi-fw.sourceforge.net/
+Description-md5: c96294c63ab5dc12d0321ed6b1d338e0
+Tag: hardware::usb, role::data
+Section: non-free/sound
+Priority: extra
+Filename: pool/non-free/m/midisport-firmware/midisport-firmware_1.2-4_all.deb
+
+Package: mpi-specs
+Version: 20040719-2
+Installed-Size: 5492
+Maintainer: Francesco Paolo Lovergine <frankie@debian.org>
+Architecture: all
+Recommends: w3m | www-browser, xpdf-reader | pdf-viewer
+Size: 776180
+SHA256: ef050f2ec04ba68a7e53d9bb7fbfea4f954041961ec4ed1efcd5badcb1b5f9b5
+SHA1: 9399726a877d5c47f58e29915f3a492125772c5f
+MD5sum: 4f724593641fae729021d8460279565b
+Description: [EBOOK-DEV] MPI 1.1 and 2.0 Specifications of MPI Forum
+Description-md5: 449e2906b3b0f93a4092beea175e3214
+Tag: role::data, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/m/mpi-specs/mpi-specs_20040719-2_all.deb
+
+Package: ngspice-doc
+Source: ngspice
+Version: 24-1
+Installed-Size: 4370
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Architecture: all
+Size: 2415866
+SHA256: be54348a89a61d01c0605b2c5b4f804048cf6b8cc9b89619da75b1b5aa391da3
+SHA1: 1416b74bb7121b4dfff3260f0ba63cbc7a0f4447
+MD5sum: 8fcdf1056534b56d873c5c3c4266edbe
+Description: Documentation for the NGspice circuit simulator
+Homepage: http://ngspice.sourceforge.net
+Description-md5: af7034cc72937c4bedb34d22202de90b
+Tag: field::electronics, made-of::html, made-of::postscript,
+ role::documentation
+Section: non-free/doc
+Priority: extra
+Filename: pool/non-free/n/ngspice/ngspice-doc_24-1_all.deb
+
+Package: nikto
+Version: 1:2.1.4-2
+Installed-Size: 2032
+Maintainer: Vincent Bernat <bernat@debian.org>
+Architecture: all
+Depends: perl, libwhisker2-perl (>= 2.5), libnet-ssleay-perl
+Suggests: nmap
+Size: 328808
+SHA256: a6cce2c0471d7acf9df93f483aba80177eb72506a17a2ac79f487e2a6bcfa9dd
+SHA1: 3c18d03b2b268b68436df8422c2699cf66283089
+MD5sum: 466506c8be5a2ff12ea72af8e02cb9f7
+Description: web server security scanner
+Homepage: http://cirt.net/nikto2
+Description-md5: bfcacf3e002a7b25ffda9835561a1b95
+Tag: implemented-in::perl, interface::commandline, network::scanner,
+ protocol::http, protocol::ssl, role::program, scope::utility,
+ use::scanning, web::cgi
+Section: non-free/net
+Priority: extra
+Filename: pool/non-free/n/nikto/nikto_2.1.4-2_all.deb
+
+Package: noshell
+Source: titantools
+Version: 4.0.11+notdfsg1-5
+Installed-Size: 36
+Maintainer: Javier Fernandez-Sanguino Pen~a <jfs@debian.org>
+Architecture: all
+Depends: titantools
+Size: 6090
+SHA256: 446bb86f785a26ae055dce0c3e7573a1200335b1899e786d2eca1b4022c16734
+SHA1: 58ea5f41305de778a902f33b8634d072cfa25572
+MD5sum: fac657facfc8fb687aef632e44e57873
+Description: transitional dummy package
+Description-md5: 378424a10ce6515e77edc5d6621ba516
+Tag: admin::user-management, interface::commandline, role::program,
+ scope::utility
+Section: non-free/oldlibs
+Priority: optional
+Filename: pool/non-free/t/titantools/noshell_4.0.11+notdfsg1-5_all.deb
+
+Package: notion-dev
+Source: notion
+Version: 3+2012042300-1
+Installed-Size: 444
+Maintainer: Arnout Engelen <arnouten@bzzt.net>
+Architecture: all
+Depends: libx11-dev, libsm-dev, lua5.1, gcc (>> 3)
+Size: 98260
+SHA256: a67cbf9b830f3d64e39e85a73e96bbc2a8b49daa1de1455d3f741de3d70ae043
+SHA1: eabfda05b101c80e391088843a4ba65eb17f2ec1
+MD5sum: a5245f169857d5168d976d1646fc34f5
+Description: Notion development files
+Homepage: http://notion.sourceforge.net/
+Description-md5: cc63e31ab5c2f3d12f04e0160cfd72ff
+Section: non-free/devel
+Priority: extra
+Filename: pool/non-free/n/notion/notion-dev_3+2012042300-1_all.deb
+
+Package: nvidia-cg-doc
+Source: nvidia-cg-toolkit
+Version: 3.1.0013-1
+Installed-Size: 41638
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Architecture: all
+Replaces: nvidia-cg-toolkit (<< 3.1.0013-1)
+Breaks: nvidia-cg-toolkit (<< 3.1.0013-1)
+Size: 12760168
+SHA256: 701121b0f9338861b9f55f05b954270d45e535aa31302805a17e6a3c46264987
+SHA1: 39ec74b517a3875131356da38f4b79dac067c506
+MD5sum: a9b9a2650bcd5315fa46720be3c918ef
+Description: Cg Toolkit - GPU Shader Authoring Language (documentation)
+Homepage: http://developer.nvidia.com/cg-toolkit
+Description-md5: f832b162277bae44fa706176251ceb5b
+Section: non-free/doc
+Priority: extra
+Filename: pool/non-free/n/nvidia-cg-toolkit/nvidia-cg-doc_3.1.0013-1_all.deb
+
+Package: nvidia-cuda-doc
+Source: nvidia-cuda-toolkit
+Version: 4.2.9-1
+Installed-Size: 40663
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Architecture: all
+Size: 28768280
+SHA256: 98b440368fa4e7ddfb9f282e7ff7a2ef6e309979b17ea97ec9a1bb7905ea3619
+SHA1: 08869b5de017fad11f89c38d0852816397e4a968
+MD5sum: ab7ab7bcccc4665631efd98f19428a84
+Description: NVIDIA CUDA and OpenCL documentation
+Homepage: http://www.nvidia.com/CUDA
+Description-md5: 1ade4ee74357654b5ef0998d191b1349
+Tag: devel::doc, role::documentation
+Section: non-free/doc
+Priority: extra
+Filename: pool/non-free/n/nvidia-cuda-toolkit/nvidia-cuda-doc_4.2.9-1_all.deb
+
+Package: ocaml-book-en
+Source: ocaml-book
+Version: 1.0-5
+Installed-Size: 7061
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Architecture: all
+Recommends: www-browser | pdf-viewer
+Size: 3547354
+SHA256: 837b847653f0e313e24e1fecdbf5b53f3570800feff9fd3383c1d3549d46a754
+SHA1: 21ce3401b077f870e2fbb06f617bd892c8e2a634
+MD5sum: 48d9bbe2e2c8c75c64b4ae9a85748e1c
+Description: English book: "Developing applications with Objective Caml"
+Description-md5: 5b9bf0c8684a0947e1442391b56ca356
+Tag: devel::doc, devel::lang:ocaml, implemented-in::ocaml, role::data,
+ role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/o/ocaml-book/ocaml-book-en_1.0-5_all.deb
+
+Package: ocaml-book-fr
+Source: ocaml-book
+Version: 1.0-5
+Installed-Size: 4202
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Architecture: all
+Recommends: www-browser
+Size: 1108654
+SHA256: 03f19868191107a98fbcfb7b0515a9bf20c050fdacbf07fc68e642a0b49812b4
+SHA1: aa1a5212fcd6c6fae9af47849a9a2d9611aa521c
+MD5sum: 49a770bf4cf33f0447dcc062bd3b9c27
+Description: French book: "Developpement d'applications avec Objective Caml"
+Description-md5: 7287793ac83c93cbaa8b0bf8e986976d
+Tag: culture::french, devel::doc, devel::lang:ocaml, implemented-in::ocaml,
+ role::data, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/o/ocaml-book/ocaml-book-fr_1.0-5_all.deb
+
+Package: ocaml-doc
+Version: 3.12-2
+Installed-Size: 6672
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Architecture: all
+Depends: dpkg (>= 1.15.4) | install-info
+Suggests: ocaml
+Size: 2562042
+SHA256: 9fbba40db49eb5d4a26be650fac147cc845c588897cc3aa1fe3ed951512f1f6c
+SHA1: a2f8fdb710ff3e7222eda190c0fb170b564a7876
+MD5sum: a70359c24ce6728abd4d4bc18edb7fef
+Description: Documentation for Objective Caml
+Homepage: http://caml.inria.fr
+Description-md5: de6a7102999eba471bbf5651b7358462
+Tag: devel::doc, devel::lang:ocaml, implemented-in::ocaml,
+ role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/o/ocaml-doc/ocaml-doc_3.12-2_all.deb
+
+Package: ooohg
+Version: 09.12a-8
+Installed-Size: 85336
+Maintainer: Georges Khaznadar <georgesk@ofset.org>
+Architecture: all
+Recommends: libreoffice (>= 3.3) | openoffice.org (>= 3.3)
+Size: 80160238
+SHA256: c03fa23eca1f3e100438d645ca622ce8e55b431f6687a9d1d1a4681d0c1ccb23
+SHA1: a77d536725f10a1b58e72cec533cde354e9ee7c9
+MD5sum: 07fa568dfb1e3adef3d9458df250d0a6
+Description: Set of 1600 free of charge maps for libreoffice/openoffice.org
+Homepage: http://ooo.hg.free.fr/ooohg/ooohg.html
+Description-md5: 200be9bf0e65feee88682315fb09d273
+Tag: field::geography, implemented-in::ml, role::data, role::examples,
+ role::plugin, suite::openoffice
+Section: non-free/misc
+Priority: extra
+Filename: pool/non-free/o/ooohg/ooohg_09.12a-8_all.deb
+
+Package: openttd-opensfx
+Version: 0.2.3-3
+Installed-Size: 12915
+Maintainer: Matthijs Kooijman <matthijs@stdin.nl>
+Architecture: all
+Size: 11339018
+SHA256: 90f9f48f681dd2b35282398139c0dfa184fdc9e8e96ab10f2cbab17a6ebd2a39
+SHA1: af3ed500de6c6bcd18d18b09235b7c215d754a0f
+MD5sum: 66b88378921fd9b951b47aa60bb2499e
+Description: sound set for use with the OpenTTD game
+Homepage: http://dev.openttdcoop.org/projects/opensfx
+Description-md5: 107eb65077f6c64d7c21a0c757480def
+Tag: game::simulation, made-of::audio, role::app-data, use::gameplaying
+Section: non-free/games
+Priority: extra
+Filename: pool/non-free/o/openttd-opensfx/openttd-opensfx_0.2.3-3_all.deb
+
+Package: os8
+Version: 2.1-4
+Installed-Size: 4440
+Maintainer: Vince Mulhollon <vlm@debian.org>
+Architecture: all
+Recommends: palbart, simh
+Size: 776954
+SHA256: 1684fed93ea1e05b06f89fe55b428a1686b320d09d5b464872d3ac8b02d5d303
+SHA1: 0f1c1052c16332515022bb380e2e7b617a2425a6
+MD5sum: cec9fdb655a3deb6b6da074b00c2b768
+Description: DEC OS8 images for a PDP-8 emulator
+Description-md5: b945c2d39059d19dc0dc1b1ac75405aa
+Tag: hardware::emulation, role::data
+Section: non-free/otherosfs
+Priority: optional
+Filename: pool/non-free/o/os8/os8_2.1-4_all.deb
+
+Package: othman
+Version: 0.2.7-1
+Installed-Size: 225
+Maintainer: Debian Islamic Maintainers <debian-islamic-maintainers@lists.alioth.debian.org>
+Architecture: all
+Depends: python-othman, python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), python-gtk2
+Recommends: islamic-menus
+Size: 60432
+SHA256: 63f9f1412d05416069bbc93987d44079cb9051a8686acb21aec087ba5d5071e1
+SHA1: d5c6cf9877d383d3bda3e4c9f4e96370ae879314
+MD5sum: 1fb13ca04b0a13f5619229cee8083540
+Description: electronic Quran browser
+Homepage: http://othman.ojuba.org
+Description-md5: b8238305290697b4d61d0fe7d875e1be
+Tag: field::religion, implemented-in::python, interface::x11, role::program,
+ uitoolkit::gtk
+Section: non-free/misc
+Priority: extra
+Filename: pool/non-free/o/othman/othman_0.2.7-1_all.deb
+
+Package: out-of-order
+Version: 1.0-2
+Installed-Size: 20649
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: sludge-engine
+Size: 10533230
+SHA256: d6fdf7dce4688860449d2c75d10538f0c828ba534c9220baa6a886af93e0eda5
+SHA1: 0d9fc69d3e6c3de9eff38a5ee7cdace9b478be20
+MD5sum: 24c54fcd6d36ce713c56912a76bae1bb
+Description: comedy science fiction adventure game
+Homepage: http://outoforder.adventuredevelopers.com
+Description-md5: e65f4efdc5dcf46fdbdc1855d891cb92
+Tag: game::adventure, implemented-in::TODO, interface::x11, role::program,
+ use::gameplaying, x11::application
+Section: non-free/games
+Priority: extra
+Filename: pool/non-free/o/out-of-order/out-of-order_1.0-2_all.deb
+
+Package: paml-doc
+Source: paml
+Version: 4.5-1
+Installed-Size: 1501
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Size: 1380048
+SHA256: 9f9d86bce2cb7232d7ac8197e70e6b921a6bd2ab9c40b40523edfeb749d3f7e8
+SHA1: 22c491a99906bb174ba6e5fba9d6c226be9373f7
+MD5sum: f62d75fc661dbba9ebaf34b6a3cde623
+Description: Documentation for PAML
+Homepage: http://abacus.gene.ucl.ac.uk/software/paml.html
+Description-md5: 53be757c8db37fcf3ca4ddab436f67bb
+Tag: role::documentation
+Section: non-free/doc
+Priority: extra
+Filename: pool/non-free/p/paml/paml-doc_4.5-1_all.deb
+
+Package: parmetis-doc
+Source: parmetis
+Version: 3.1.1-4
+Installed-Size: 5044
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Architecture: all
+Size: 3746078
+SHA256: 8a5889da21fe6a8998606cd585636086e096df417aa1b252e9c759723f3b029b
+SHA1: 2216d4d5a96c8b2f5a70884649f1cb4624dc4f57
+MD5sum: c8dc0bc00c0d1f8bc8ae4e59aac14e3c
+Description: Parallel Graph Partitioning and Sparse Matrix Ordering Lib - Docs
+Homepage: http://glaros.dtc.umn.edu/gkhome/metis/parmetis/overview
+Description-md5: 55cc39b179c0b5b2dedead6fc6a8c34f
+Tag: role::documentation
+Section: non-free/doc
+Priority: extra
+Filename: pool/non-free/p/parmetis/parmetis-doc_3.1.1-4_all.deb
+
+Package: phy-spread
+Version: 1.0.3-1
+Installed-Size: 1858
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Depends: libcolorpicker-java, libcolt-java, libjebl2-java, libkmlframework-java, libprocessing-core-java, openjdk-6-jre | java-jre
+Size: 1676228
+SHA256: 48edf3367bc77569e3eb538d7ab914ee09ec845bc924fb99329b8fefbaf01cbe
+SHA1: 563af09b85e64f8f014da1bcc71004c9d43b63bd
+MD5sum: 7944b3b3165ab99d41b6eb32505027dd
+Description: analyze and visualize phylogeographic reconstructions
+Homepage: http://www.kuleuven.be/aidslab/phylogeography/SPREAD.html
+Description-md5: 3adb36b53159c17b4ca86e0ba4d0f573
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/p/phy-spread/phy-spread_1.0.3-1_all.deb
+
+Package: phylip-doc
+Source: phylip
+Version: 1:3.69-1
+Installed-Size: 1180
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Architecture: all
+Suggests: phylip
+Size: 327074
+SHA256: b3408aab21929b3f39ef39fd17c32dc2e35751ee761eeb87cd9782778d59607a
+SHA1: 2c4eab91bad0540400e8d6086d86fffe6104642e
+MD5sum: 4e19e513184be04ce5f71f1035dfd5b2
+Description: package of programs for inferring phylogenies
+Homepage: http://evolution.genetics.washington.edu/phylip.html
+Description-md5: 97a28c6430e03d94eeeacd477a66861c
+Tag: field::biology, field::biology:bioinformatics, made-of::html,
+ role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/p/phylip/phylip-doc_3.69-1_all.deb
+
+Package: picon-domains
+Version: 2012.05.09-1
+Installed-Size: 13098
+Maintainer: Hakan Ardo <hakan@debian.org>
+Architecture: all
+Provides: picons
+Size: 3629944
+SHA256: 861e59d48b59926777ed444f865df3e2ae8c8ffb9d9b009ff4cb7580aa418122
+SHA1: 7f3edda04c5d9f2951d905dc495b52bbf8903dbe
+MD5sum: 4bfeb90d18504d0822aa2096a15a60cb
+Description: Picon (Personal Images) database of Internet domain logos
+Description-md5: 609b5dd38c95fad5b4022153c912f67c
+Section: non-free/graphics
+Priority: extra
+Filename: pool/non-free/p/picon-domains/picon-domains_2012.05.09-1_all.deb
+
+Package: picon-misc
+Version: 2010.01.02-1
+Installed-Size: 576
+Maintainer: Hakan Ardo <hakan@debian.org>
+Architecture: all
+Provides: picons
+Size: 47850
+SHA256: 0be1798445a125751be5985d8e2c86d0e5c8cf9fbe62d83817116c6a39877c68
+SHA1: eb5e378f6413642609fee2e16a78820e7f438002
+MD5sum: 9b35564ac074a7efb2cb7070307893d9
+Description: Picon (Personal Images) database of common accounts and misc.
+Description-md5: 2ba5cd6f50b1efc56e5c7c1b01370e6a
+Section: non-free/graphics
+Priority: extra
+Filename: pool/non-free/p/picon-misc/picon-misc_2010.01.02-1_all.deb
+
+Package: picon-news
+Version: 2010.01.02-1
+Installed-Size: 9348
+Maintainer: Hakan Ardo <hakan@debian.org>
+Architecture: all
+Provides: picons
+Size: 479340
+SHA256: 974d09d840b94f1cef4d8cb63d42c12c55765cffa15695a34b9241877bd74616
+SHA1: 9b6dba0985085304ad9dfa28474cf038a7e05831
+MD5sum: 934219e8d9cc91e92a134b291cf105fd
+Description: Picon (Personal Images) db of Usenet newsgroups and hierarchies
+Description-md5: 18a59915eee9e4a08fc25155eb061e47
+Section: non-free/graphics
+Priority: extra
+Filename: pool/non-free/p/picon-news/picon-news_2010.01.02-1_all.deb
+
+Package: picon-unknown
+Version: 2010.01.02-1
+Installed-Size: 160
+Maintainer: Hakan Ardo <hakan@debian.org>
+Architecture: all
+Provides: picons
+Size: 19366
+SHA256: 4a00aee545c780ea6dc6d80865f3a6803be980ac9e926aec6881f1fa3a61ae2a
+SHA1: fe7d6a70d511fa608fed3f899334f2a6b6d68717
+MD5sum: f97b4f5307d7a09ec99a10066e1ca28b
+Description: Picon (Personal Images) database for very high-level domains
+Description-md5: a202171b148f1f6a5825923ed981c965
+Section: non-free/graphics
+Priority: extra
+Filename: pool/non-free/p/picon-unknown/picon-unknown_2010.01.02-1_all.deb
+
+Package: picon-usenix
+Version: 1995.04.13-8
+Installed-Size: 108136
+Maintainer: Hakan Ardo <hakan@debian.org>
+Architecture: all
+Provides: picons
+Size: 14082438
+SHA256: 8453633516a3b1786b117265c41fd7bd578ca12e26f8cbdf8837ffe47a7a057e
+SHA1: 99da7d28f15b22c5ce2cf7652cc317cdb08697b7
+MD5sum: 8775cc9d28c74fbfee26cc2679bbf53f
+Description: Picon (Personal Images) db of Usenix conference attendees
+Description-md5: 4035758b09e54c4e66ccd200b6bfc6ec
+Section: non-free/graphics
+Priority: extra
+Filename: pool/non-free/p/picon-usenix/picon-usenix_1995.04.13-8_all.deb
+
+Package: picon-users
+Version: 2012.05.14-1
+Installed-Size: 12827
+Maintainer: Hakan Ardo <hakan@debian.org>
+Architecture: all
+Provides: picons
+Size: 4800610
+SHA256: 25fdeb44e5cb8c4458f791a539ad95533420e30bd4c64dcbd00b66f32fc6fd27
+SHA1: 5188d4091c01594e9c9d210ebd7d33a47a01063c
+MD5sum: d6619270e18f188943ab86ae606a17be
+Description: Picon (Personal Images) database of individual Internet accounts
+Description-md5: 1dc97f7b24c32344c50e3648aad21885
+Section: non-free/graphics
+Priority: extra
+Filename: pool/non-free/p/picon-users/picon-users_2012.05.14-1_all.deb
+
+Package: picon-weather
+Version: 2010.01.02-1
+Installed-Size: 1720
+Maintainer: Hakan Ardo <hakan@debian.org>
+Architecture: all
+Provides: picons
+Size: 83734
+SHA256: 020b783869398eda8250f7ad4f73c2edbc540b6bdc18c9e38089483791a4dd4b
+SHA1: 117ca517ca2b5846ba9fcc085d22a03dad782bb5
+MD5sum: b12c9c8de97da19ccb7d7c5588d76ea0
+Description: Picon (Personal Images) database for displaying weather forecasts.
+Description-md5: 07f8788134f1eed413d8d428fe6ed067
+Section: non-free/graphics
+Priority: extra
+Filename: pool/non-free/p/picon-weather/picon-weather_2010.01.02-1_all.deb
+
+Package: ptex-jtex
+Version: 1.7+1-13
+Installed-Size: 2196
+Maintainer: Atsuhito KOHDA <kohda@debian.org>
+Architecture: all
+Depends: texlive-binaries (>= 2011.20120410-1), texlive-lang-cjk (>= 2011.20120410-1)
+Size: 544322
+SHA256: fb598ad6a07c3c0a3f8b68ac73bd119eac640c3352e94d7d7556acf71c32c305
+SHA1: 9aa4987c58e842ba5dde8dde5a6ce45578778ae5
+MD5sum: fac67c97d2281929502dc132fc61ad00
+Description: ASCII jTeX with pTeX
+Description-md5: f1ef220f67d53c6a3feb62bc99a0895f
+Tag: use::editing, works-with-format::tex, works-with::text
+Section: non-free/tex
+Priority: optional
+Filename: pool/non-free/p/ptex-jtex/ptex-jtex_1.7+1-13_all.deb
+
+Package: python-hijra
+Source: hijra
+Version: 0.2.1-1
+Installed-Size: 107
+Maintainer: Debian Islamic Maintainers <debian-islamic-maintainers@lists.alioth.debian.org>
+Architecture: all
+Replaces: hijra-python
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8)
+Conflicts: hijra-python
+Size: 22550
+SHA256: a5719411c7eabd6065af4ec9a023662dacf2479b18e52c83bf610beedf8cc088
+SHA1: bd74ce3618c4e5abb38bc1882a364a3aa061b4be
+MD5sum: 2209c0f7c7420c89907288ccebc97874
+Description: Hijri Islamic Calendar converting functions for python
+Homepage: http://hijra.ojuba.org
+Description-md5: 074249b7b972252627b3cfe3f0f24d8f
+Tag: devel::lang:python, devel::library, field::religion,
+ implemented-in::python, role::devel-lib, role::shared-lib,
+ use::timekeeping
+Section: non-free/python
+Priority: extra
+Filename: pool/non-free/h/hijra/python-hijra_0.2.1-1_all.deb
+
+Package: python-okasha
+Source: okasha
+Version: 0.2.4-1
+Installed-Size: 184
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.6 | python2.7, python (>= 2.6.6-7~), python (<< 2.8)
+Suggests: python-paste, python-lxml, python-kid
+Size: 33884
+SHA256: f807f9d27ec0aea84ed5e4e9910f6508689fe07b27b47e971d2a3ac791ac915d
+SHA1: bd8000dab5f4d8073d9cb45de141ab1b275faaf8
+MD5sum: 096d4a9ddb3d37beaf247bfe52eb2169
+Description: trivial WSGI web framework for Python
+Homepage: http://okasha.ojuba.org
+Description-md5: ed6edbf3deb3983057d29b8c36a36a70
+Tag: devel::lang:python, devel::library, implemented-in::python,
+ role::devel-lib, role::shared-lib
+Section: non-free/python
+Priority: optional
+Filename: pool/non-free/o/okasha/python-okasha_0.2.4-1_all.deb
+
+Package: python-okasha-examples
+Source: okasha
+Version: 0.2.4-1
+Installed-Size: 348
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Architecture: all
+Depends: python-okasha, libjs-jquery, python-paste
+Size: 166342
+SHA256: cbac00df32fe00d08000c8e5fff4aef518c890a297997ada00b7d8b084a76be6
+SHA1: 6150cd691729830105f8d47e527d8cab25a7e5fd
+MD5sum: cc5141270234920e16c9ea0f499d20c9
+Description: trivial WSGI web framework for Python (examples)
+Homepage: http://okasha.ojuba.org
+Description-md5: 5b25d92da2de19f5812b5a45b992d1e8
+Tag: implemented-in::python, role::examples
+Section: non-free/python
+Priority: optional
+Filename: pool/non-free/o/okasha/python-okasha-examples_0.2.4-1_all.deb
+
+Package: python-othman
+Source: othman
+Version: 0.2.7-1
+Installed-Size: 4960
+Maintainer: Debian Islamic Maintainers <debian-islamic-maintainers@lists.alioth.debian.org>
+Architecture: all
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8)
+Size: 1399606
+SHA256: 190ef189e0641c07e4494d5ebe0bbf6c733a9bffbaf7daa89c75c87776c192ed
+SHA1: cc07682e75067fb5aa282a0fa0d0b94ccfcb0b63
+MD5sum: b4ccbefa6a6849ed50333f38a75df777
+Description: library providing access to Quranic text with a fast search index
+Homepage: http://othman.ojuba.org
+Description-md5: 1dbcf92cf3e1415d46e858c72c860c65
+Tag: devel::lang:python, devel::library, implemented-in::python,
+ role::devel-lib, role::shared-lib
+Section: non-free/python
+Priority: extra
+Filename: pool/non-free/o/othman/python-othman_0.2.7-1_all.deb
+
+Package: python-selenium
+Version: 2.2.0-1
+Installed-Size: 2828
+Maintainer: Sascha Girrulat <sascha@girrulat.de>
+Architecture: all
+Depends: python2.6 | python2.7, python (>= 2.6.6-7~), python (<< 2.8), python-rdflib
+Size: 1447630
+SHA256: 1741215a5a24bba3c5a173d09368ef3baa46e9b123fa1b77d8080c84d5552ea6
+SHA1: 29be783207a7e1f82113d2d7ab5861aa7e8e0bce
+MD5sum: 7be7ec0cc4aed9558fbe170033b892ae
+Description: python bindings for Selenium
+Homepage: http://code.google.com/p/selenium/
+Description-md5: 69da12ca19b9a1e7467570304e1054b3
+Section: non-free/python
+Priority: optional
+Filename: pool/non-free/p/python-selenium/python-selenium_2.2.0-1_all.deb
+
+Package: qmail-src
+Source: qmail
+Version: 1.03-49.3
+Installed-Size: 640
+Maintainer: Jon Marler <jmarler@debian.org>
+Architecture: all
+Depends: dpkg-dev (>= 1.4.0.20), patch (>= 2.5-0bo1), build-essential, fakeroot | sudo, groff-base, adduser, libc6-dev
+Recommends: ucspi-tcp-src, procmail
+Conflicts: qmail-run, qmail-uids-gids
+Size: 606348
+SHA256: 0fb83851a48d9ec8875675e43ddcae3fdbec992c0f7287c761cdf9f02e420fbf
+SHA1: 43b51a98d3546fcd96a417f57de154f47eb7ed99
+MD5sum: 89087a45a514b57759a68197e475f536
+Description: Source only package for building qmail binary package
+Description-md5: e06f7200bf231b9ec8de356a1958e018
+Tag: network::client, protocol::smtp, role::program, works-with::mail
+Section: non-free/mail
+Priority: extra
+Filename: pool/non-free/q/qmail/qmail-src_1.03-49.3_all.deb
+
+Package: redeclipse-data
+Version: 1.2-1
+Installed-Size: 506742
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: all
+Pre-Depends: dpkg (>= 1.15.6~)
+Enhances: redeclipse-server
+Size: 455838764
+SHA256: 270a14404349d3205af4f516be17bbf48bc512401d2e2260b636de5992be7857
+SHA1: 8926e5d78ab289720b38ce1e49862e7bfed591cb
+MD5sum: 75c249dd51e1c3808892549b7b25db0b
+Description: data for the Red Eclipse FPS game
+Homepage: http://www.redeclipse.net
+Description-md5: caa768fd43b5f3008c12364205a75427
+Section: non-free/games
+Priority: optional
+Filename: pool/non-free/r/redeclipse-data/redeclipse-data_1.2-1_all.deb
+
+Package: rubybook
+Version: 0.2.1-1
+Installed-Size: 2256
+Maintainer: Aurélien GÉRÔME <ag@roxor.cx>
+Architecture: all
+Suggests: ruby
+Size: 411078
+SHA256: b8abc27a3d95c882209240b679ba063d2da90c43f1909711fd790334b41681dc
+SHA1: 9331f9844ea5522fcd6cc297e68c2ec6c1d4feae
+MD5sum: 0f21cc1f035aba600d7747b73a1538c2
+Description: the "Programming Ruby" book
+Description-md5: 899c269dfce606ada4d62fdbb661a1a4
+Tag: devel::doc, devel::lang:ruby, made-of::html, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/r/rubybook/rubybook_0.2.1-1_all.deb
+
+Package: sauerbraten-data
+Version: 0.0.20100728+repack-1
+Installed-Size: 526748
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: all
+Recommends: sauerbraten
+Conflicts: sauerbraten (<< 0.0.20100728+repack)
+Size: 459845652
+SHA256: 5c55fd9675f79c7e334a2dfefe87ba27ad4c7427cbc48251253992b55fe8deec
+SHA1: 17e538b1162126fb8d1f418f6cc3e55dff2969c0
+MD5sum: e4765ffb08692927728d003d7faddee7
+Description: Game content for the Sauerbraten game
+Homepage: http://sauerbraten.org/
+Description-md5: f0365f054dd2595232c7cabe15234149
+Tag: game::fps, role::app-data, use::gameplaying
+Section: non-free/games
+Priority: extra
+Filename: pool/non-free/s/sauerbraten-data/sauerbraten-data_0.0.20100728+repack-1_all.deb
+
+Package: scribus-doc
+Version: 1.4.0+r17300-1
+Installed-Size: 34008
+Maintainer: Oleksandr Moskalenko <malex@debian.org>
+Architecture: all
+Replaces: scribus-cvs-doc, scribus-svn-doc (<= 1.3.5~svn20080708-1)
+Recommends: scribus
+Conflicts: scribus-cvs-doc, scribus-svn-doc (<= 1.3.5~svn20080708-1)
+Size: 32373666
+SHA256: 1f63799535f11e5eeb0cca3cb6552bf955ab82cecbf91f1a37942b42ea4b2863
+SHA1: f55476b8c11336ec6724a3850f9917ed7777505f
+MD5sum: bb39495fdbcddf8a01a0f559aa25938f
+Description: non-free documentation for Scribus
+Homepage: http://docs.scribus.net/
+Description-md5: fa445290a28661778947f11935a34f74
+Tag: made-of::html, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/s/scribus-doc/scribus-doc_1.4.0+r17300-1_all.deb
+
+Package: scribus-ng-doc
+Version: 1.4.0+r17300-1
+Installed-Size: 32
+Maintainer: Oleksandr Moskalenko <malex@debian.org>
+Architecture: all
+Depends: scribus-doc (>= 1.4.0+r17300)
+Recommends: scribus-ng
+Size: 4276
+SHA256: 7c4ee9d8e9973d6e89fa6d1c760669b78f48497710aa595cd9e110ad389d6019
+SHA1: 3061ad4d2e242a3d26b7938d4c5a230db8d02c92
+MD5sum: 95cae1274a2d19c1362f36c5c1b9f3f0
+Description: non-free documentation for Developmental Scribus branch
+Homepage: http://docs.scribus.net/
+Description-md5: cb5a2a74c080110ea0ba9dee0297c376
+Tag: made-of::html, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/s/scribus-ng-doc/scribus-ng-doc_1.4.0+r17300-1_all.deb
+
+Package: selfhtml
+Version: 8.1.2-1
+Installed-Size: 26068
+Maintainer: Uwe Hermann <uwe@debian.org>
+Architecture: all
+Size: 7366188
+SHA256: 9b19d2ce9b01e718f59febb101dea6d43580a6105ff1ec53feeb626ef72dddad
+SHA1: 4dc8240e5821ba2ba1ba999fe396d27eb8d7a759
+MD5sum: 6d5cceae3828c3dd5cdcb1e5dfb5338b
+Description: German HTML reference and tutorial
+Homepage: http://selfhtml.org
+Description-md5: 43bcb79584226897801d009c21bcf8a6
+Tag: culture::german, devel::examples, devel::web, made-of::html,
+ role::documentation, use::text-formatting
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/s/selfhtml/selfhtml_8.1.2-1_all.deb
+
+Package: sgb-doc
+Source: sgb
+Version: 1:20090810-1
+Installed-Size: 404
+Maintainer: Julian Gilbey <jdg@debian.org>
+Architecture: all
+Replaces: sgb-src (<= 1:2000.09.14-4)
+Recommends: sgb, texlive-base | texlive-base-bin
+Conflicts: sgb (<< 1:20090810-1)
+Size: 295994
+SHA256: 98234fac695b4859c707a0bd8d589631c93532c36639c324c83ae7ac6cb8017d
+SHA1: 3a9f45bbc7296adb055e9fe72b5ba8711da3a8f4
+MD5sum: 9249f605b8e8d1e31558630916714e58
+Description: Documentation for the Stanford GraphBase
+Description-md5: eaae774ff38328532e7d72ab56f63004
+Tag: field::mathematics, role::documentation
+Section: non-free/doc
+Priority: extra
+Filename: pool/non-free/s/sgb/sgb-doc_20090810-1_all.deb
+
+Package: shapetools-tutorial
+Version: 1.3-3.1
+Installed-Size: 172
+Maintainer: Matthias Klose <doko@debian.org>
+Architecture: all
+Depends: atfs
+Suggests: shapetools
+Size: 131472
+SHA256: e841cb8962c5fc07c04059eeb44e7dac94d605e5f5012f2a9abffae76f181d1c
+SHA1: 137fe64cf0a46e07b5be1b5a54e60af399124222
+MD5sum: 3bab636911b0e6ae3bd502523ac2fe2e
+Description: A Tutorial for ShapeTools
+Description-md5: 0fdd4e7ed793b95cb373d267d7939ab9
+Tag: devel::doc, made-of::postscript, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/s/shapetools-tutorial/shapetools-tutorial_1.3-3.1_all.deb
+
+Package: sisu-markup-samples
+Version: 3.0.1-1
+Installed-Size: 15407
+Maintainer: SiSU Project <sisu@lists.sisudoc.org>
+Architecture: all
+Depends: sisu (>= 3.0.1)
+Size: 8977066
+SHA256: 9618d6d1ace2f0836be9992d080069136e3f04fe09f436db90c78e4f4f1d3b33
+SHA1: 8b455872c186a81cb13d86cfa30b8f08d84614e9
+MD5sum: d9ffc9a3eaf1319490d61038ee5db981
+Description: document markup examples for sisu, publish and search framework
+Homepage: http://www.jus.uio.no/sisu/
+Description-md5: b2ee66a81b88ccb11bcd0a88a5a5a24f
+Tag: devel::examples, role::app-data
+Section: non-free/text
+Priority: extra
+Filename: pool/non-free/s/sisu-markup-samples/sisu-markup-samples_3.0.1-1_all.deb
+
+Package: sl-modem-source
+Source: sl-modem
+Version: 2.9.11~20110321-8
+Installed-Size: 41
+Maintainer: أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@sabily.org>
+Architecture: all
+Depends: sl-modem-dkms
+Size: 17588
+SHA256: c9a63306c2046662792ecd67987dd69f3bce9c32e3df97a743f2b6d74a06c0cc
+SHA1: da4a57fb910c0d56501f853c28ed6ea9d055020a
+MD5sum: dfa88a240db0790e755ccc59078334e7
+Description: SmartLink software modem driver (dummy transitional package)
+Homepage: http://linmodems.technion.ac.il/packages/smartlink/
+Description-md5: b0cd8d6ee3224ec2010134791d9e9907
+Tag: admin::kernel, hardware::modem, hardware::usb, implemented-in::c,
+ role::source
+Section: non-free/oldlibs
+Priority: extra
+Filename: pool/non-free/s/sl-modem/sl-modem-source_2.9.11~20110321-8_all.deb
+
+Package: snmp-mibs-downloader
+Version: 1.1
+Installed-Size: 5744
+Maintainer: Jochen Friedrich <jochen@scram.de>
+Architecture: all
+Depends: wget, smistrip, patch
+Suggests: unzip
+Size: 5117976
+SHA256: 955961222e4f3707107af00705ee845a9328789008bf8eb5d2d2fc2aa8237aaa
+SHA1: c410b8a3fec73b07876bfe40733081b1a2f883b6
+MD5sum: 8475b196b8467e0d58c9ece8ffcdb02b
+Description: Install and manage Management Information Base (MIB) files
+Homepage: https://alioth.debian.org/projects/pkg-net-snmp
+Description-md5: a21b7d21f79b837876477c50c0fe313f
+Tag: protocol::snmp, role::program, use::downloading
+Section: non-free/net
+Priority: optional
+Filename: pool/non-free/s/snmp-mibs-downloader/snmp-mibs-downloader_1.1_all.deb
+
+Package: spectrum-roms
+Version: 20081224-3
+Installed-Size: 1060
+Maintainer: Colin Watson <cjwatson@debian.org>
+Architecture: all
+Size: 314594
+SHA256: 562eaea73f6bc52fa50b6e77132cea7acd62a8cf62ae6a9cf2817418554cf849
+SHA1: 4a9eafc07bf8057460a55820b053c7a27dc67310
+MD5sum: 7ea6ee8dda9ce81debb08ce960379683
+Description: ZX Spectrum ROMs
+Homepage: http://www.chiark.greenend.org.uk/~cjwatson/code/spectrum-roms/
+Description-md5: d9451df8d361fd4d316fde5b38b04f95
+Tag: hardware::emulation, role::data
+Section: non-free/otherosfs
+Priority: optional
+Filename: pool/non-free/s/spectrum-roms/spectrum-roms_20081224-3_all.deb
+
+Package: spellcast-doc
+Version: 1.5
+Installed-Size: 328
+Maintainer: Javier Fernandez-Sanguino Pen~a <jfs@computer.org>
+Architecture: all
+Suggests: spellcast, www-browser
+Size: 51318
+SHA256: 14997668e6c495774a034a12ec0727363a998d0bfa54e23bc96d8aa5b4b4bac6
+SHA1: 6f0c0c907618dcc767f1438762ddcf801de2c287
+MD5sum: d5ea740286ffdd77686ab86f287bca2c
+Description: Documentation for the multi-player X game of spellcasting.
+Description-md5: bf9f2170555ff8a2ef4a06e6823db636
+Tag: game::strategy, made-of::html, role::documentation, use::gameplaying
+Section: non-free/doc
+Priority: extra
+Filename: pool/non-free/s/spellcast-doc/spellcast-doc_1.5_all.deb
+
+Package: stardict-english-czech
+Version: 20120601-1
+Installed-Size: 6032
+Maintainer: Michal Čihař <nijel@debian.org>
+Architecture: all
+Replaces: stardict-czech-english
+Provides: stardict-czech-english
+Recommends: stardict (>= 2.4.6) | sdcv (>= 0.4.2-2) | stardict-gtk (>= 2.4.6) | goldendict | qstardict | babiloo | dictionarystar
+Conflicts: stardict-czech-english
+Size: 4287986
+SHA256: f630dcbdcff4b5a3dd49eed08472277f8a8fd5ab84291bf6c2247901492d0c76
+SHA1: d8b9a70f9f0940591598b6e965ec95fc5c15675d
+MD5sum: 7f9633e6aca38e15df149a70f5470c1c
+Description: Stardict package for English-Czech dictionary
+Homepage: http://cihar.com/software/slovnik/
+Description-md5: 722afb5160c90119b8352e8b204b62fa
+Tag: culture::czech, made-of::dictionary, role::app-data, use::converting
+Section: non-free/text
+Priority: optional
+Filename: pool/non-free/s/stardict-english-czech/stardict-english-czech_20120601-1_all.deb
+
+Package: stardict-german-czech
+Version: 20120201-1
+Installed-Size: 81
+Maintainer: Michal Čihař <nijel@debian.org>
+Architecture: all
+Replaces: stardict-czech-german
+Provides: stardict-czech-german
+Recommends: stardict (>= 2.4.6) | sdcv (>= 0.4.2-2) | stardict-gtk (>= 2.4.6) | goldendict | qstardict | babiloo | dictionarystar
+Conflicts: stardict-czech-german
+Size: 38068
+SHA256: 5198a8594b14a3bf3172a23d725ac72d07e8f420d3287cda64684469d5307b02
+SHA1: 40762f6374d72a5cd6aa14b8899f898c5f3e5bd9
+MD5sum: 54282be3474d772dad42c308b95806d1
+Description: Stardict package for German-Czech dictionary
+Homepage: http://cihar.com/software/slovnik/
+Description-md5: f1ab60feaec04afa63404eb31eb5136f
+Tag: culture::czech, culture::german, made-of::dictionary, role::app-data
+Section: non-free/text
+Priority: optional
+Filename: pool/non-free/s/stardict-german-czech/stardict-german-czech_20120201-1_all.deb
+
+Package: t1-xfree86-nonfree
+Source: xfonts-scalable-nonfree
+Version: 4.2.1-3.1
+Installed-Size: 1950
+Maintainer: Jonas Smedegaard <dr@jones.dk>
+Architecture: all
+Replaces: xfonts-scalable-nonfree, xfonts-xfree86-nonfree
+Depends: fontconfig, xfonts-utils
+Suggests: xfs | xserver
+Conflicts: xfonts-scalable-nonfree, xfonts-xfree86-nonfree
+Size: 971920
+SHA256: 27e20d69badebd135fe08aa5775d208497760e49797919ed52078363345989c6
+SHA1: b483ef09a4e1b64976a324e66ad95607782ee9f4
+MD5sum: 7ddfd95c8fd52b6d8345a7b515fdffa3
+Description: non-free Postscript Type 1 fonts from XFree86
+Description-md5: 4f2b352f8ee76693689626a9dfc9480e
+Tag: made-of::font, role::app-data, works-with::font
+Section: non-free/fonts
+Priority: optional
+Filename: pool/non-free/x/xfonts-scalable-nonfree/t1-xfree86-nonfree_4.2.1-3.1_all.deb
+
+Package: tads3-common
+Source: frobtads
+Version: 1:0.13-2
+Installed-Size: 224
+Maintainer: Daniel Schepler <schepler@debian.org>
+Architecture: all
+Recommends: frobtads | tads3-dev
+Size: 29804
+SHA256: 1e2e4c2394982371adf67dbf789b2d04c194e480328e9ad0ada1a536ef985cad
+SHA1: 567f7b319a12958db9ccf89eb795d4a8a3bc32ee
+MD5sum: 49c5c50581b1b5a27cc7368b3d4976b8
+Description: TADS version 3 runtime support files
+Description-md5: 01d9dceb19dc9c7ee2c0fcfba9d85fc6
+Tads3-Version: 3.0.18.1
+Tag: role::app-data
+Section: non-free/games
+Priority: optional
+Filename: pool/non-free/f/frobtads/tads3-common_0.13-2_all.deb
+
+Package: tads3-doc
+Source: tads
+Version: 3.0.8-1
+Installed-Size: 2068
+Maintainer: Daniel Schepler <schepler@debian.org>
+Architecture: all
+Suggests: tads3-dev, doc-base
+Size: 393154
+SHA256: 6714f7ae91f45ccf42039c212dd49caff5bd87902d1e44c8b4c1095dccbd0d52
+SHA1: 22d6bc495996b8a8e5af0bcd640b1e0e4437c255
+MD5sum: 674e5d69955ff6409b5a61da229d735c
+Description: TADS version 3 documentation
+Description-md5: c53696271c2752d1f79bd113f9a274cc
+Tag: devel::doc, made-of::html, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/t/tads/tads3-doc_3.0.8-1_all.deb
+
+Package: tangerine-icon-theme
+Version: 0.26.debian-3
+Installed-Size: 3464
+Maintainer: Alan Baghumian <alan@technotux.org>
+Architecture: all
+Depends: gnome-icon-theme
+Size: 594152
+SHA256: cb01ac5750c5677200b84c3fa0d7e4da4d57383e9c89c3ad88496a6a54ec5562
+SHA1: 5273c64132d2241b98f2722c91ee58d6720d250a
+MD5sum: 3ebbf4584420a84b959e82df6c6a4f6d
+Description: Tangerine Icon theme
+Description-md5: 250f978798b7939dc52701f2efb6e3aa
+Tag: made-of::icons, role::app-data, x11::theme
+Section: non-free/x11
+Priority: optional
+Filename: pool/non-free/t/tangerine-icon-theme/tangerine-icon-theme_0.26.debian-3_all.deb
+
+Package: tar-doc
+Version: 1.26-2
+Installed-Size: 232
+Maintainer: Bdale Garbee <bdale@gag.com>
+Architecture: all
+Depends: dpkg (>= 1.15.4) | install-info
+Size: 180842
+SHA256: de2f118208cdac7b19dea05abfa749d0d52ca3d094b91e3571ecea0551d707ee
+SHA1: 57dd6541507f32ca5ffa3b7bc95521bc1fca7bb7
+MD5sum: 185b1ecf98a8efa4f2b4ed1955df10fd
+Description: documentation for the tar package
+Description-md5: 6b9e60dc6dddd349e316e7e4fb90e3df
+Tag: made-of::info, role::documentation, suite::gnu
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/t/tar-doc/tar-doc_1.26-2_all.deb
+
+Package: texinfo-doc-nonfree
+Version: 4.13a-1
+Installed-Size: 3020
+Maintainer: Debian TeX maintainers <debian-tex-maint@lists.debian.org>
+Architecture: all
+Replaces: info (<= 4.8-8), texinfo (<= 4.8-8)
+Recommends: info
+Conflicts: info (<= 4.8-8), texinfo (<= 4.8-8)
+Size: 642334
+SHA256: 01eae056690c0927fa4502252ac8a8e56b0f0d26ec36ded3cb2b696e880ed86f
+SHA1: 7d8513ea5697f318f9000b2f4cb501be2cb972d9
+MD5sum: 68424f24ba272cf6fcec3352ecd8e56a
+Description: texinfo and info documentation that is non-free
+Description-md5: 0702852174ad437db8e2786ae34b6933
+Tag: made-of::html, made-of::info, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/t/texinfo-doc-nonfree/texinfo-doc-nonfree_4.13a-1_all.deb
+
+Package: thawab
+Version: 3.0.13-1
+Installed-Size: 993
+Maintainer: Debian Islamic Maintainers <debian-islamic-maintainers@lists.alioth.debian.org>
+Architecture: all
+Depends: python (>= 2.6.6-7~), python-whoosh (>= 1.7.2), python-okasha (>= 0.2.3), python-othman, python-gtk2, python-webkit, mdbtools, python-paste
+Recommends: islamic-menus
+Size: 275296
+SHA256: 1476c31fe2c62baea06cb7ff11f374b82ce58e72893e0255f06be47cded15a34
+SHA1: 86376237ff95caaf559580a35e7dff9855a36eeb
+MD5sum: c0f0d6edd4a13d831cc53f67127bb18b
+Description: Arabic/Islamic encyclopedia system
+Homepage: http://thawab.ojuba.org
+Description-md5: 67884eb3f1c0238b9f91cd9a0969f5a7
+Section: non-free/misc
+Priority: extra
+Filename: pool/non-free/t/thawab/thawab_3.0.13-1_all.deb
+
+Package: ttf-ipafont-jisx0208
+Source: fonts-ipafont-nonfree-jisx0208
+Version: 00103-19
+Installed-Size: 19
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: fonts-ipafont-nonfree-jisx0208
+Pre-Depends: dpkg (>= 1.15.6~)
+Size: 8176
+SHA256: 2a2c9c546895ad79b0474d4a9ff4f56e501e4a8e28e1d67b4717919c5bf87da9
+SHA1: c5e38e58d74ecc1346cf5cc5dc4c432a60259946
+MD5sum: 568e89c23da34739fe032e0dbfd9a6e4
+Description: transitional dummy package
+Homepage: http://www.ipa.go.jp/
+Description-md5: d022b4cd65360a59d321e029d730c59e
+Tag: culture::japanese, made-of::font, role::data, x11::font
+Section: non-free/oldlibs
+Priority: extra
+Filename: pool/non-free/f/fonts-ipafont-nonfree-jisx0208/ttf-ipafont-jisx0208_00103-19_all.deb
+
+Package: ttf-ipafont-uigothic
+Source: fonts-ipafont-nonfree
+Version: 00203-21
+Installed-Size: 20
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: fonts-ipafont-nonfree-uigothic
+Pre-Depends: dpkg (>= 1.15.6~)
+Size: 9030
+SHA256: 7040fa2f70e14fa3d5412dee290c22f9f25362f4e1487aaf9cce0c89caece255
+SHA1: ccdf67c742e226783ab89cd5d1c6ffa998a47719
+MD5sum: a2c2c8cb51853a42ca8f1d4932884e8c
+Description: transitional dummy package
+Homepage: http://www.ipa.go.jp/
+Description-md5: d022b4cd65360a59d321e029d730c59e
+Tag: culture::japanese, made-of::font, role::data, role::dummy, x11::font
+Section: oldlibs
+Priority: extra
+Filename: pool/non-free/f/fonts-ipafont-nonfree/ttf-ipafont-uigothic_00203-21_all.deb
+
+Package: ttf-kochi-gothic-naga10
+Source: ttf-kochi-naga10
+Version: 20030809-14
+Installed-Size: 8036
+Maintainer: GOTO Masanori <gotom@debian.org>
+Architecture: all
+Provides: ttf-kochi-gothic
+Pre-Depends: dpkg (>= 1.15.6~)
+Suggests: ttf-kochi-mincho-naga10
+Conflicts: ttf-kochi-gothic
+Size: 3221366
+SHA256: 5af16a554769da2fb9e304ea9d962dde35976774293b304192aa80b5a1b52651
+SHA1: 074f983283ab04be1c6e11d7011f7331f868df71
+MD5sum: df80028825b002ff77da4ccb02cfd7ef
+Description: Kochi Subst Gothic Japanese TrueType font with naga10 (non-free)
+Homepage: http://sourceforge.jp/projects/efont/
+Description-md5: b5d86e44ff2029a69e960e523bb45998
+Tag: culture::japanese, made-of::font, role::app-data, role::data,
+ works-with::font
+Section: non-free/fonts
+Priority: extra
+Filename: pool/non-free/t/ttf-kochi-naga10/ttf-kochi-gothic-naga10_20030809-14_all.deb
+
+Package: ttf-kochi-mincho-naga10
+Source: ttf-kochi-naga10
+Version: 20030809-14
+Installed-Size: 9203
+Maintainer: GOTO Masanori <gotom@debian.org>
+Architecture: all
+Provides: ttf-kochi-mincho
+Pre-Depends: dpkg (>= 1.15.6~)
+Suggests: ttf-kochi-gothic-naga10
+Conflicts: ttf-kochi-mincho
+Size: 3817326
+SHA256: 67763e55e00bd6146c2d1892db2a8ef3d67334c33e6cc7b129bd375ad53b7765
+SHA1: ca93feca66369676107489eb5489b4c17b68234f
+MD5sum: 4c427f29df3d0eeab5685731e6085b5e
+Description: Kochi Subst Mincho Japanese TrueType font with naga10 (non-free)
+Homepage: http://sourceforge.jp/projects/efont/
+Description-md5: ec153fb5bd8a54a1cd51be58fec6917c
+Tag: culture::japanese, made-of::font, role::app-data, role::data,
+ works-with::font
+Section: non-free/fonts
+Priority: extra
+Filename: pool/non-free/t/ttf-kochi-naga10/ttf-kochi-mincho-naga10_20030809-14_all.deb
+
+Package: ttf-larabie-deco
+Source: fonts-larabie
+Version: 1:20011216-4
+Installed-Size: 29
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: fonts-larabie-deco
+Size: 4572
+SHA256: 19638862e40a9bb5523f942ff53b4ad0ae848bd00d58518bea138c5dc644c384
+SHA1: 83133918b7958b89a6db956eddd24584ba195ead
+MD5sum: 9ee842c2273bf52ceb7eeb5055f9b34b
+Description: transitional dummy package
+Description-md5: d022b4cd65360a59d321e029d730c59e
+Tag: made-of::font, role::app-data, role::data, works-with::font
+Section: non-free/oldlibs
+Priority: optional
+Filename: pool/non-free/f/fonts-larabie/ttf-larabie-deco_20011216-4_all.deb
+
+Package: ttf-larabie-straight
+Source: fonts-larabie
+Version: 1:20011216-4
+Installed-Size: 29
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: fonts-larabie-straight
+Size: 4578
+SHA256: 1e87990053f6b8707a57a9c620ae9ab97136e05ee4e603025493eb9a38f0205c
+SHA1: 7215f19cca6a45fed7daf25bcf75ad39f124b3e6
+MD5sum: b77d4a779935f2844e6c23ec52ed6194
+Description: transitional dummy package
+Description-md5: d022b4cd65360a59d321e029d730c59e
+Tag: made-of::font, role::app-data, role::data, works-with::font
+Section: non-free/oldlibs
+Priority: optional
+Filename: pool/non-free/f/fonts-larabie/ttf-larabie-straight_20011216-4_all.deb
+
+Package: ttf-larabie-uncommon
+Source: fonts-larabie
+Version: 1:20011216-4
+Installed-Size: 29
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: fonts-larabie-uncommon
+Size: 4578
+SHA256: a27fc82c5159169d81bdca6892465448ec8b474114788117be8342c7fd138590
+SHA1: 5d48aa0f3b5ab1810b8c9415d33e94f454037dfa
+MD5sum: b81e98112c7743c6b5224c469fd54093
+Description: transitional dummy package
+Description-md5: d022b4cd65360a59d321e029d730c59e
+Tag: made-of::font, role::app-data, role::data, works-with::font
+Section: non-free/oldlibs
+Priority: optional
+Filename: pool/non-free/f/fonts-larabie/ttf-larabie-uncommon_20011216-4_all.deb
+
+Package: ttf-mikachan
+Source: fonts-mikachan
+Version: 9.1-8
+Installed-Size: 38
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: fonts-mikachan
+Pre-Depends: dpkg (>= 1.15.6~)
+Size: 14280
+SHA256: c09cc66f1de8fdbea5373159a416ad68ac3624033b2d12b4c7790592ce76a0a5
+SHA1: 59d6895127b78aea777e9fa8a58fa4741bc9e998
+MD5sum: d35410234f89f97d432068f36560da6f
+Description: transitional dummy package
+Homepage: http://mikachan-font.com/
+Description-md5: d022b4cd65360a59d321e029d730c59e
+Tag: culture::japanese, made-of::font, role::data, role::dummy, x11::font
+Section: non-free/oldlibs
+Priority: extra
+Filename: pool/non-free/f/fonts-mikachan/ttf-mikachan_9.1-8_all.deb
+
+Package: ttf-xfree86-nonfree
+Source: xfonts-scalable-nonfree
+Version: 4.2.1-3.1
+Installed-Size: 929
+Maintainer: Jonas Smedegaard <dr@jones.dk>
+Architecture: all
+Depends: fontconfig
+Suggests: x-ttcidfont-conf, xserver-xfree86 | xfs-xtt (>> 1:1.3.0.1-3) | xfs (>= 4.0.2-1)
+Conflicts: xfonts-scalable-nonfree, xfonts-xfree86-nonfree
+Size: 434544
+SHA256: 695d0ffda650657a2f50b4945c61045b08b35e8c7586bed890f513e0adba0ddc
+SHA1: 22ea89ea580d16c4852bd8c5b6f820244e2675d5
+MD5sum: 79f032bdbba03b19e6665674fa72fdac
+Description: non-free TrueType fonts from XFree86
+Description-md5: e2fef8baf637b7f27dbe3abc060c6b84
+Tag: made-of::font, role::app-data, role::data, works-with::font
+Section: non-free/fonts
+Priority: optional
+Filename: pool/non-free/x/xfonts-scalable-nonfree/ttf-xfree86-nonfree_4.2.1-3.1_all.deb
+
+Package: ttf-xfree86-nonfree-syriac
+Source: xfonts-scalable-nonfree
+Version: 4.2.1-3.1
+Installed-Size: 5683
+Maintainer: Jonas Smedegaard <dr@jones.dk>
+Architecture: all
+Depends: fontconfig
+Suggests: xserver-xfree86 | xfs-xtt (>> 1:1.3.0.1-3) | xfs (>= 4.0.2-1)
+Size: 1866340
+SHA256: 292b82cb939502e6350feaf473f9565201021bed1040d3a72980fc3153889d91
+SHA1: 8bbc9698dd23fc927b214dc4c20a8aa034aa4670
+MD5sum: 72e21a94ae1213815a30299d51ba24a7
+Description: non-free syriac OpenType fonts from XFree86
+Description-md5: 6b1694718d10ef453b9dd92363d00f11
+Tag: made-of::font, role::app-data, role::data
+Section: non-free/fonts
+Priority: optional
+Filename: pool/non-free/x/xfonts-scalable-nonfree/ttf-xfree86-nonfree-syriac_4.2.1-3.1_all.deb
+
+Package: ttytter
+Version: 2.0.1-1
+Installed-Size: 372
+Maintainer: Thijs Kinkhorst <thijs@debian.org>
+Architecture: all
+Depends: perl, curl | lynx
+Recommends: libterm-readline-gnu-perl, libtimedate-perl
+Size: 124470
+SHA256: 4fa6f78af1092f13aeeed18a03a5fb3c16034bf72ffa8cdcf5662c0ec11bf30f
+SHA1: f81831823acabf245f58ba47607236bd833f7d3a
+MD5sum: 84e0af0e311e2bf2a6ea660629d3407c
+Description: console Twitter client
+Homepage: http://www.floodgap.com/software/ttytter/
+Description-md5: 9a146e473033d9d280ab16d4f003c589
+Tag: implemented-in::perl, interface::commandline, interface::text-mode,
+ network::client, role::program, scope::application, web::microblog
+Section: non-free/net
+Priority: optional
+Filename: pool/non-free/t/ttytter/ttytter_2.0.1-1_all.deb
+
+Package: ucspi-tcp-src
+Version: 0.88-15
+Installed-Size: 188
+Maintainer: Jon Marler <jmarler@debian.org>
+Architecture: all
+Depends: dpkg-dev (>= 1.4.0.20), patch (>= 2.5-0bo1), fakeroot | sudo, gcc, make, libc6-dev
+Size: 121430
+SHA256: 54a5c71affe4dd332b0e5b98fe42d71bdd596621892ad6ebffe15f34d503c93c
+SHA1: 85f69e738963597cc5b0353bd99cf0493ef01bf8
+MD5sum: dfc5d4a22a8880aec934f380656be717
+Description: Source only package for building ucspi-tcp binary package
+Description-md5: b3e277a67cddf5defc2b641776001a55
+Tag: network::client, network::server, protocol::tcp, role::source
+Section: non-free/net
+Priority: optional
+Filename: pool/non-free/u/ucspi-tcp-src/ucspi-tcp-src_0.88-15_all.deb
+
+Package: uqm-content
+Version: 0.6.0+deb1-6
+Installed-Size: 49656
+Maintainer: Dmitry E. Oboukhov <unera@debian.org>
+Architecture: all
+Depends: uqm (>= 0.6.0)
+Conflicts: uqm (<< 0.4), uqm-music (<< 0.3), uqm-voice (<< 0.3)
+Size: 6600710
+SHA256: 0b1a34f8fbaf40d5f0b09ea8a94ed1c5bd5fb9387d14cfe606fe523d3a9f02ba
+SHA1: c989b513c129b3dd0591db809a9d47e115cc58ed
+MD5sum: 4c077b1cccf902138baf2c414dfe5762
+Description: The Ur-Quan Masters - Game data files
+Homepage: http://sc2.sourceforge.net/
+Description-md5: d7f7f708308d54e508318be3eb7c3bcf
+Tag: game::strategy, role::app-data, use::gameplaying
+Section: non-free/games
+Priority: optional
+Filename: pool/non-free/u/uqm-content/uqm-content_0.6.0+deb1-6_all.deb
+
+Package: uqm-music
+Source: uqm-content
+Version: 0.6.0+deb1-6
+Installed-Size: 18692
+Maintainer: Dmitry E. Oboukhov <unera@debian.org>
+Architecture: all
+Depends: uqm (>= 0.6.0)
+Size: 18930628
+SHA256: 2e4766555ae5f121168d22b38cff474742d8d01cca0d7d9f3cb56bd6e7cc927e
+SHA1: e8d05eb0f82667f6a9023ffdcf34bda4751d2cba
+MD5sum: 5733986fe8cb7528e97ea1047fb0e4a6
+Description: The Ur-Quan Masters - Game music files
+Homepage: http://sc2.sourceforge.net/
+Description-md5: e30a0c3c7725aff364033433f48e819a
+Tag: made-of::audio, role::app-data
+Section: non-free/games
+Priority: optional
+Filename: pool/non-free/u/uqm-content/uqm-music_0.6.0+deb1-6_all.deb
+
+Package: uqm-voice
+Source: uqm-content
+Version: 0.6.0+deb1-6
+Installed-Size: 119660
+Maintainer: Dmitry E. Oboukhov <unera@debian.org>
+Architecture: all
+Depends: uqm (>= 0.6.0)
+Size: 111382370
+SHA256: 6aa90aa57c84b316df22cb7dc375772f1e8b8ea6288466b9430adcf8b397433e
+SHA1: 92f708a9aecc853b2074e48d3731f5892770f4ba
+MD5sum: 357e1bf739f426aeed374bd5d5185a75
+Description: The Ur-Quan Masters - Voice files
+Homepage: http://sc2.sourceforge.net/
+Description-md5: 97d3042297f40db281c3216b6096a25e
+Tag: role::app-data
+Section: non-free/games
+Priority: optional
+Filename: pool/non-free/u/uqm-content/uqm-voice_0.6.0+deb1-6_all.deb
+
+Package: virtualbox-guest-additions
+Source: virtualbox-guest-additions-iso
+Version: 4.1.18-1
+Installed-Size: 12
+Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: virtualbox-guest-additions-iso
+Size: 7256
+SHA256: c052aacf2eaee6df29163ce6d43686ca9a8e3df8dbbaa4299fcbc38be298fa93
+SHA1: 0db6c2c893e294563247604014ba940304ab3943
+MD5sum: 13774436c9db76455aa553cae034f7a3
+Description: transitional package for virtualbox-guest-additions-iso
+Homepage: http://www.virtualbox.org/
+Description-md5: 5beaa29575092d4b0482b8859cb2ab91
+Tag: admin::virtualization, role::app-data
+Section: non-free/oldlibs
+Priority: extra
+Filename: pool/non-free/v/virtualbox-guest-additions-iso/virtualbox-guest-additions_4.1.18-1_all.deb
+
+Package: virtualbox-guest-additions-iso
+Version: 4.1.18-1
+Installed-Size: 50954
+Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Replaces: virtualbox-guest-additions (<< 4.0.6-1~)
+Recommends: virtualbox (>= 4.1.18)
+Conflicts: virtualbox-2.0, virtualbox-2.1, virtualbox-2.2, virtualbox-3.0, virtualbox-3.1, virtualbox-3.2, virtualbox-4.0, virtualbox-4.1
+Breaks: virtualbox-guest-additions (<< 4.0.6-1~)
+Size: 42022200
+SHA256: 590929e2c87db6128cfa744b3abcb76801c8812a222b9ea33e39a8642f094da8
+SHA1: 8a5bc145f68e25efe2a8c0dba04fa56c99fb28d1
+MD5sum: c98f4140079eb4a1bd01ddf85d6e150d
+Description: guest additions iso image for VirtualBox
+Homepage: http://www.virtualbox.org/
+Description-md5: 11a9eaac064138ec238f7c2ee4c018df
+Tag: role::app-data
+Section: non-free/misc
+Priority: extra
+Filename: pool/non-free/v/virtualbox-guest-additions-iso/virtualbox-guest-additions-iso_4.1.18-1_all.deb
+
+Package: vmtk
+Version: 1.0.1-1
+Installed-Size: 77
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Architecture: all
+Depends: python, python-tk, python-vmtk (>= 1.0.1-1)
+Size: 12296
+SHA256: c62982e02382226ea0ae01cfab28acaf3b4ce7b818bca908b1e1f300d9db6958
+SHA1: ed434c1435fe653984171f7c85d200847f528c57
+MD5sum: 9c7e32b47d5b05905688b804ba59f485
+Description: the Vascular Modeling Toolkit
+Homepage: http://www.vmtk.org
+Description-md5: 668c5f835f4051ad6db3ceb6bd7030bd
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/v/vmtk/vmtk_1.0.1-1_all.deb
+
+Package: w3-recs
+Version: 20110107-1
+Installed-Size: 191864
+Maintainer: Colin Darie <colindarie@gmail.com>
+Architecture: all
+Recommends: www-browser
+Size: 35069348
+SHA256: 2afdc9775655a1eebe5cbed308c1f0a3a8b70931a364eccd879fd5ab95651601
+SHA1: 8c5e63ad95da1b739706f7712fc38acbfd98e327
+MD5sum: ce3c8f1bca3537315553769ff4796de6
+Description: Recommendations of the World Wide Web Consortium (W3C)
+Homepage: http://www.w3.org
+Description-md5: adacb41179aa7d5d7fc5a3866da9a8f7
+Tag: devel::web, interface::web, made-of::html, made-of::xml,
+ role::documentation, use::learning
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/w/w3-recs/w3-recs_20110107-1_all.deb
+
+Package: worldwind
+Version: 0.5.0-10
+Installed-Size: 70
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Architecture: all
+Depends: libworldwind-java, java-wrappers
+Size: 16318
+SHA256: 8f664ec1819786834b381812bfc9dfea6dc232ef5621306ed49e1cc8826b3202
+SHA1: 21989483f91f89a54081f650ff421a62eba309ee
+MD5sum: 67e5b73dfb2101857fd0fe7d82f2170c
+Description: 3D Virtual Globe
+Homepage: http://worldwind.arc.nasa.gov/java/
+Description-md5: aad1fee44c91305b7bdd01ef41bd3f76
+Tag: field::geography, interface::x11, role::program, use::viewing,
+ x11::application
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/w/worldwind/worldwind_0.5.0-10_all.deb
+
+Package: worldwind-doc
+Source: worldwind
+Version: 0.5.0-10
+Installed-Size: 22306
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Architecture: all
+Size: 1461918
+SHA256: 5a352461c104039ed247773cbc9135665fd0ca11864c9b8df655809cfcd5e68b
+SHA1: 5541ccc6023f552db6f21e66e8b05027c5f97e1f
+MD5sum: b80c1ee34ea7ffda415cb500ce01a4a9
+Description: 3D Virtual Globe
+Homepage: http://worldwind.arc.nasa.gov/java/
+Description-md5: c6ef20ef15364f37f78f2d42905f4373
+Tag: field::geography, made-of::html, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/w/worldwind/worldwind-doc_0.5.0-10_all.deb
+
+Package: xfonts-naga10
+Version: 1.1-13.1
+Installed-Size: 1831
+Maintainer: GOTO Masanori <gotom@debian.org>
+Architecture: all
+Replaces: knj10font
+Depends: xfonts-utils
+Suggests: xfs | xserver
+Conflicts: knj10font, xbase-clients (<< 4.0)
+Size: 1353724
+SHA256: f59531ee97db17c77317eb498a067a243559b9a24d9abb99b915d7a570ff9bcb
+SHA1: 76a1da76b86c83661d9d80fa3c7778a84016da62
+MD5sum: 54d3f1bffab08c7e0e0accb9ef44b214
+Description: 10x10 dot Japanese and ISO-8859-1 naga10 fonts
+Description-md5: f553d0d1c2d331faa6d13c8e8b9c0928
+Tag: made-of::font, role::app-data, works-with::font, x11::font
+Section: non-free/fonts
+Priority: optional
+Filename: pool/non-free/x/xfonts-naga10/xfonts-naga10_1.1-13.1_all.deb
+
+Package: xfonts-x3270-misc
+Source: ibm-3270
+Version: 3.3.10ga4-2
+Installed-Size: 212
+Maintainer: Bastian Blank <waldi@debian.org>
+Architecture: all
+Depends: xfonts-utils
+Size: 116516
+SHA256: fc5a68b08b86c2640613ba0648dfad5f1e5f60e062b47aa8900679781dce72c2
+SHA1: 9da6fae1cf73dd65f89f5312d3fe2a8f87df95bc
+MD5sum: add2c0f98c3ca0c558dc1fa67131bf22
+Description: Font files for the x3270(1) IBM 3270 emulator
+Description-md5: 8df398c835305ef0ab3d37446988aa04
+Tag: x11::font
+Section: non-free/fonts
+Priority: optional
+Filename: pool/non-free/i/ibm-3270/xfonts-x3270-misc_3.3.10ga4-2_all.deb
+
+Package: xmame-sdl
+Source: mame
+Version: 0.146-2
+Installed-Size: 88
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: mame
+Size: 42778
+SHA256: 8e2ec01bca7dd22926f84ee996fca1f9812005a78a9c524a2df2e5b55463bb5f
+SHA1: 7ab8be48ab357f0c2182721bdfcfbc42337b57fe
+MD5sum: d67be287a3860223646155031bd19d12
+Description: Transitional package for xmame-sdl
+Homepage: http://mamedev.org/
+Description-md5: c5f4f487efea5181ecb700b2c1f1ae52
+Tag: hardware::emulation, implemented-in::c, interface::x11, role::program,
+ scope::utility, uitoolkit::sdl, use::gameplaying, x11::application
+Section: non-free/metapackages
+Priority: extra
+Filename: pool/non-free/m/mame/xmame-sdl_0.146-2_all.deb
+
+Package: xmame-tools
+Source: mess
+Version: 0.146-2
+Installed-Size: 74
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: mame-tools
+Size: 37834
+SHA256: 0bfe36167a5fe5d4c8de870861fcf3d15ad9a4968d3906329e0bb31baf4779e5
+SHA1: f2198a92b04c050725b92b23d34a19993a372494
+MD5sum: e1198fa9d989d0023d5822ed108b3f15
+Description: Transitional package for mame-tools
+Homepage: http://mess.org/
+Description-md5: 2fe952a29337edd4d832173f8d1c5d14
+Tag: role::program, uitoolkit::sdl
+Section: non-free/games
+Priority: optional
+Filename: pool/non-free/m/mess/xmame-tools_0.146-2_all.deb
+
+Package: xmame-x
+Source: mame
+Version: 0.146-2
+Installed-Size: 88
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: mame
+Size: 42774
+SHA256: d2e22e43d91bfc135099d8c3bf061ef727e8a109c0ffce182015ec6466e27f36
+SHA1: 0d29268ce36977572fd5afb2f33fb80188634166
+MD5sum: 08b888e142d0402da94caeb2ca447e58
+Description: Transitional package for xmame-x
+Homepage: http://mamedev.org/
+Description-md5: 5c9b042cb151611c5734dc03949138ad
+Tag: hardware::emulation, implemented-in::c, interface::x11, role::program,
+ scope::utility, uitoolkit::xlib, use::gameplaying, x11::application
+Section: non-free/metapackages
+Priority: extra
+Filename: pool/non-free/m/mame/xmame-x_0.146-2_all.deb
+
+Package: xmess-sdl
+Source: mess
+Version: 0.146-2
+Installed-Size: 74
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: mess
+Size: 37838
+SHA256: e1017342b2182484c78bf0e70bc23f9e426a419eb2ba06d023e84af0c8d03167
+SHA1: 133bcc623aa1c85176aa7fa7c4f9cf6bc62d1472
+MD5sum: 1ff137a68821330cad5625b3d955729f
+Description: Transitional package for xmess-sdl
+Homepage: http://mess.org/
+Description-md5: 8938c8cb14960db68f1715888883c26f
+Tag: hardware::emulation, implemented-in::c, interface::x11, role::program,
+ scope::utility, uitoolkit::sdl, use::gameplaying, x11::application
+Section: non-free/games
+Priority: optional
+Filename: pool/non-free/m/mess/xmess-sdl_0.146-2_all.deb
+
+Package: xmess-x
+Source: mess
+Version: 0.146-2
+Installed-Size: 74
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: all
+Depends: mess
+Size: 37830
+SHA256: 986c90674f81bf83d97872182de349f9efe3c0e79cd05c6171f1de95172b8362
+SHA1: f2ee7ccba0d63c38a5751dd702a128a12a777cb4
+MD5sum: a06cfd5ad426b3233c920eb2efea9d44
+Description: Transitional package for xmess-x
+Homepage: http://mess.org/
+Description-md5: 3eef1eba70f430b664764fc32f0d8763
+Tag: hardware::emulation, implemented-in::c, interface::x11, role::program,
+ scope::utility, uitoolkit::sdl, use::gameplaying
+Section: non-free/games
+Priority: optional
+Filename: pool/non-free/m/mess/xmess-x_0.146-2_all.deb
+
+Package: xml2rfc
+Version: 1.36-3
+Installed-Size: 778
+Maintainer: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Architecture: all
+Depends: tcl8.5 | tclsh, sgml-base (>= 1.26+nmu2)
+Suggests: wish
+Size: 254512
+SHA256: 9d84f363981757c61918aee525e3f8d228a811437d5cfe6a9ca940a7f2f8db57
+SHA1: 2af2fac435b7c47b32b23b027d79478d949ab133
+MD5sum: 70762e49026b97c71cd7aa5d7894d5f2
+Description: XML-based formatting tool for RFCs
+Homepage: http://xml.resource.org/
+Description-md5: 4686bf6f62893f3ed7d4429bc50aa594
+Tag: implemented-in::tcl, interface::shell, interface::x11, role::program,
+ scope::utility, uitoolkit::tk, use::text-formatting,
+ works-with-format::html, works-with-format::xml, works-with::text,
+ x11::application
+Section: non-free/text
+Priority: optional
+Filename: pool/non-free/x/xml2rfc/xml2rfc_1.36-3_all.deb
+
+Package: xtide-data-nonfree
+Version: 20100529-1
+Installed-Size: 556
+Maintainer: Peter S Galbraith <psg@debian.org>
+Architecture: all
+Recommends: xtide-data
+Conflicts: xtide (<< 2.6-1)
+Size: 291704
+SHA256: e1ebbc4e763996c508ad0dafb5b816774bdb7faf0f44de63c4f0223adcce6305
+SHA1: 4f535ce064983bab62bc784b9de5b81c5ec56bcc
+MD5sum: dc095b44cbf5d70731064303b1571c26
+Description: Harmonics data for xtide (Canada, Netherlands, Germany and UK)
+Homepage: http://www.flaterco.com/xtide/
+Description-md5: 5198053f69c8e13dcd7b07b35926227a
+Tag: role::app-data
+Section: non-free/science
+Priority: extra
+Filename: pool/non-free/x/xtide-data-nonfree/xtide-data-nonfree_20100529-1_all.deb
+
+Package: yale
+Version: 5.0.95-2
+Installed-Size: 2232
+Maintainer: Francisco Manuel Garcia Claramonte <francisco@debian.org>
+Architecture: all
+Suggests: stardata-common, yale-viewer
+Size: 748678
+SHA256: 8e0286467359c09c5bd3fd399e004633bb7752c06267e9fb579d21a05a64cac1
+SHA1: 9e24f0f1cf7a12d7bfb966668a38e0d24dd52d72
+MD5sum: 0ff4ae78422b455c3c4388ce7ebdaf55
+Description: stellar data set from the Yale Bright Star Catalog
+Homepage: http://starplot.org/datafiles.html
+Description-md5: 46e088008ce08a1e9426e8d000ccbd9b
+Tag: field::astronomy, role::data
+Section: non-free/science
+Priority: optional
+Filename: pool/non-free/y/yale/yale_5.0.95-2_all.deb
+
+Package: zangband-data
+Source: zangband
+Version: 1:2.7.5pre1-4
+Installed-Size: 4872
+Maintainer: Drew Parsons <dparsons@debian.org>
+Architecture: all
+Size: 1090468
+SHA256: 7c880fa334ef929229be8fcd7ceda2b173b0e4f09c0a60129ba44cb88490d98d
+SHA1: 9108c30daeeb24716ff21e03167d239bceed1cd5
+MD5sum: 7421da71eb972f32d05efdde865b9b63
+Description: A single-player, text-based, roguelike game (datafiles)
+Description-md5: c4eda47e60a37530b7356526be2a4294
+Tag: role::app-data
+Section: non-free/games
+Priority: optional
+Filename: pool/non-free/z/zangband/zangband-data_2.7.5pre1-4_all.deb
+
+Package: zd1211-firmware
+Version: 2.21.0.0-1
+Installed-Size: 112
+Maintainer: Christian Kastner <debian@kvr.at>
+Architecture: all
+Size: 16458
+SHA256: 50aeaa94b36277dab9afc90806fdc440ae6d90bff79ad45ed2da9f21c4a42ef7
+SHA1: 27b5290027c128da7d5535dcc9ebf15239111d8a
+MD5sum: 485f2b3fee62f28bcd3199b061e66f56
+Description: Firmware images for the zd1211rw wireless driver
+Homepage: http://zd1211.wiki.sourceforge.net/
+Description-md5: 323b7fd616517f4babce49e30714d2c8
+Tag: hardware::usb, role::data, use::driver
+Section: non-free/kernel
+Priority: extra
+Filename: pool/non-free/z/zd1211-firmware/zd1211-firmware_2.21.0.0-1_all.deb
+
+Package: zekr
+Version: 1.0.0+repack-7
+Installed-Size: 5659
+Maintainer: Debian Islamic Maintainers <debian-islamic-maintainers@lists.alioth.debian.org>
+Architecture: all
+Replaces: zekr-quran-recitation-online-abdulbasit (<< 0.7.0~beta2-1), zekr-quran-recitation-online-afasi (<< 0.7.0~beta2-1), zekr-quran-recitation-online-ajmy (<< 0.7.0~beta2-1), zekr-quran-recitation-online-ayyub (<< 0.7.0~beta2-1), zekr-quran-recitation-online-ghamdi (<< 0.7.0~beta2-1), zekr-quran-recitation-online-husary (<< 0.7.0~beta2-1), zekr-quran-recitation-online-huzaifi (<< 0.7.0~beta2-1), zekr-quran-recitation-online-minshawi (<< 0.7.0~beta2-1), zekr-quran-recitation-online-shatri (<< 0.7.0~beta2-1), zekr-quran-recitation-online-shuraim (<< 0.7.0~beta2-1)
+Provides: zekr-quran-recitation-online-abdulbasit, zekr-quran-recitation-online-afasi, zekr-quran-recitation-online-ajmy, zekr-quran-recitation-online-ayyub, zekr-quran-recitation-online-ghamdi, zekr-quran-recitation-online-husary, zekr-quran-recitation-online-huzaifi, zekr-quran-recitation-online-minshawi, zekr-quran-recitation-online-shatri, zekr-quran-recitation-online-shuraim
+Depends: default-jre | java5-runtime | java6-runtime, libbasicplayer-java, libcommons-codec-java, libcommons-collections3-java, libcommons-configuration-java, libcommons-io-java, libcommons-lang-java, libcommons-logging-java, liblog4j1.2-java, liblucene2-java, libswt-gtk-3-java, libtritonus-java, velocity, libswt-cairo-gtk-3-jni, libswt-gnome-gtk-3-jni, libswt-webkit-gtk-3-jni | libswt-mozilla-gtk-3-jni, zenity, libjs-jquery, ttf-sil-scheherazade | ttf-kacst (>= 1.6.2+mry-1) | ttf-farsiweb
+Recommends: ttf-freefont | ttf-dejavu, libmp3spi-java, libvorbisspi-java, libjorbis-java, libjspeex-java, libjlayer-java, islamic-menus
+Suggests: zekr-quran-translation, zekr-quran-recitation, ttf-me-quran
+Breaks: zekr-quran-recitation-online-abdulbasit (<< 0.7.0~beta2-1), zekr-quran-recitation-online-afasi (<< 0.7.0~beta2-1), zekr-quran-recitation-online-ajmy (<< 0.7.0~beta2-1), zekr-quran-recitation-online-ayyub (<< 0.7.0~beta2-1), zekr-quran-recitation-online-ghamdi (<< 0.7.0~beta2-1), zekr-quran-recitation-online-husary (<< 0.7.0~beta2-1), zekr-quran-recitation-online-huzaifi (<< 0.7.0~beta2-1), zekr-quran-recitation-online-minshawi (<< 0.7.0~beta2-1), zekr-quran-recitation-online-shatri (<< 0.7.0~beta2-1), zekr-quran-recitation-online-shuraim (<< 0.7.0~beta2-1), zekr-quran-translation-extras (<< 0.12)
+Size: 2306272
+SHA256: 1ca62b6eb9beae7021d42311600bac22d9cf8ccd671e387621c1707bca96ce03
+SHA1: 4c51e75979e1b404ff7e5d62f2bd1c32d474e118
+MD5sum: b009b97891586f7048d7dc286ac7ddc8
+Description: Quranic Study Tool
+Homepage: http://www.zekr.org
+Description-md5: ccedde14e251921b4b9fe87a5c97365a
+Tag: field::religion, implemented-in::java, interface::x11, role::program,
+ uitoolkit::gtk, use::learning, x11::application
+Section: non-free/x11
+Priority: optional
+Filename: pool/non-free/z/zekr/zekr_1.0.0+repack-7_all.deb
+
+Package: zeroc-ice-manual
+Version: 3.4.2-1
+Installed-Size: 4948
+Maintainer: Francisco Moya <paco@debian.org>
+Architecture: all
+Size: 4238884
+SHA256: bcf50433b0025edbad3522fee26c55ac5e9cd189f1d5ef92103371e61e155b2b
+SHA1: d259f5eea5ef6e2646b7592c0acb8861773c0b3f
+MD5sum: c7e2e5e2f5ead66ccac4e5f75aa400c5
+Description: Ice documentation in pdf
+Description-md5: e8d1b384965040f931108a6bcf3b0065
+Tag: devel::doc, made-of::pdf, role::documentation
+Section: non-free/doc
+Priority: optional
+Filename: pool/non-free/z/zeroc-ice-manual/zeroc-ice-manual_3.4.2-1_all.deb
+

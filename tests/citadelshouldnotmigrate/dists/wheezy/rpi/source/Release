@@ -1,0 +1,7 @@
+Archive: testing
+Version: 7.0
+Component: rpi
+Origin: Raspbian
+Label: Raspbian
+Architecture: source
+Description: Debian armhf testing distribution for Raspberry Pi

@@ -1,0 +1,59 @@
+--- dpkg-db.pp	2012-05-26 15:41:38.000000000 -0700
++++ dpkgdb.pas	2012-05-26 15:40:17.000000000 -0700
+@@ -1,5 +1,5 @@
+ 
+-unit dpkg-db;
++unit dpkgdb;
+ interface
+ 
+ uses
+@@ -7,6 +7,7 @@
+ 
+ {
+   Automatically converted by H2Pas 1.0.0 from dpkg-db.h
++  modified by plugwash to make it actually compile
+   The following command line parameters were used:
+     -d
+     -C
+@@ -25,6 +26,7 @@
+     Pversionrevision  = ^versionrevision;
+ {$IFDEF FPC}
+ {$PACKRECORDS C}
++{$mode objfpc}
+ {$ENDIF}
+ 
+ 
+@@ -50,22 +52,17 @@
+   }
+ {$ifndef LIBDPKG_DPKG_DB_H}
+ {$define LIBDPKG_DPKG_DB_H}
+-{$include <sys/types.h>}
+-{$include <stdbool.h>}
+-{$include <stdio.h>}
+-{$include <dpkg/macros.h>}
+-{$include <dpkg/varbuf.h>}
+-(* error 
+-struct versionrevision {
+-in declaration at line 36 *)
+-(* Const before type ignored *)
+-      var
+-         version : ^cchar;cvar;public;
+-(* Const before type ignored *)
+-         revision : ^cchar;cvar;public;
+-(* error 
+-};  
+-in declaration at line 39 *)
++{ $include <sys/types.h>}
++{ $include <stdbool.h>}
++{ $include <stdio.h>}
++{ $include <dpkg/macros.h>}
++{ $include <dpkg/varbuf.h>}
++type 
++  versionrevision = record
++    version : ^cchar;
++    revision : ^cchar;
++  end;
++
+     type
+        deptype = (dep_suggests,dep_recommends,dep_depends,
+          dep_predepends,dep_breaks,dep_conflicts,
