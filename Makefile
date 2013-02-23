@@ -1,7 +1,7 @@
 all: migrator oodfinder componentcleaner systemscanner sourcefinder repochecker
 
 migrator: migrator.dpr *.pas
-	fpc -Sd -gv migrator.dpr -Fl/usr/lib/gcc/i486-linux-gnu/4.4.5/
+	fpc -Sd -gl migrator.dpr -Fl/usr/lib/gcc/i486-linux-gnu/4.4.5/
 
 oodfinder: oodfinder.dpr *.pas
 	fpc -Sd -gl oodfinder.dpr -Fl/usr/lib/gcc/i486-linux-gnu/4.4.5/

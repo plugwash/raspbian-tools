@@ -2,7 +2,7 @@ program migrator;
 uses
   readtxt2,sysutils, contnrs, dpkgdb, classes, util;
 const
-  reporoot = '/mnt/testrepo/';
+  reporoot = '/home/repo/repo/raspbian/';
   codename = 'wheezy';
   codenamestaging = 'wheezy-staging';
   architecture = 'armhf';
@@ -72,6 +72,7 @@ begin
       newbinarypackage.source := self;
       newbinarypackage.version := binarypackage.version;
       newbinarypackage.sourceversion := binarypackage.sourceversion;
+      newbinarypackage.depends := binarypackage.depends;
       binaries.add(binarypackagename,newbinarypackage);
     end;
   end;
@@ -106,6 +107,7 @@ begin
   currentversion := '';
   currentsourcepackage := '';
   currentsourceversion := '';
+  currentdepends := '';
 end;
 
 procedure tdistribution.processsource;
@@ -469,6 +471,9 @@ begin
       resultingbinarypackage.source := resultingsourcepackage;
       resultingbinarypackage.version := stagingbinarypackage.version;
       resultingbinarypackage.sourceversion := stagingbinarypackage.sourceversion;
+      //writeln(binarypackagename);
+      //writeln(ptruint(stagingbinarypackage.depends));
+      resultingbinarypackage.depends := stagingbinarypackage.depends;
       if resultingsourcepackage.binaries = nil then resultingsourcepackage.binaries := tfphashlist.create;
       //writeln('d');
       k := resultingsourcepackage.binaries.findindexof(binarypackagename);
@@ -492,16 +497,20 @@ begin
       //writeln('scanning dependencies for binary package '+binarypackagename);
 
       //we don't care if new binaries migrate before their dependencies are satisfiable.
-      //if mainbinarypackage = nil then begin
+      if mainbinarypackage = nil then begin
         //writeln('not checking dependencies because it''s a new binary');
-        //continue;
-      //end;
+        continue;
+      end;
+      //writeln(ptruint(resultingbinarypackage));
+      //writeln(ptruint(resultingbinarypackage.depends));
 
       for j := 0 to resultingbinarypackage.depends.count -1 do begin
         //writeln(resultingbinarypackage.depends.nameofindex(j));
         dependedonpackage := resultingbinarypackage.depends.nameofindex(j);
 
         //find out whether the dependency is present in main
+        //writeln(ptruint(mainbinarypackage));
+        //writeln(ptruint(mainbinarypackage.depends));
         presentinmain := mainbinarypackage.depends.findindexof(dependedonpackage) >= 0;
         //if presentinmain then begin
         //  writeln('dependency:',dependedonpackage,' IS present in main');
@@ -522,7 +531,7 @@ begin
           //writeln('the dependency is not satisfiable in any distribution it''s probablly a virtual package, ignore it');
         end else if presentinmain and  satisfiableinmain then begin
           //writeln('the dependency was made unsatisfiable in resulting by an update to another package, remove that update from the candidate list');
-          mainsourcepackage := tbinarypackage(mainbinarypackage.depends.findindexof(dependedonpackage)).source;
+          mainsourcepackage := tbinarypackage(mainbinaries.find(dependedonpackage)).source;
           sourcepackagename := mainsourcepackage.name;
           migrationindex := proposedsourcemigrations.findindexof(sourcepackagename);
           writeln('migrationindex=',migrationindex);
