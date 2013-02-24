@@ -1,4 +1,4 @@
-all: migrator oodfinder componentcleaner systemscanner sourcefinder repochecker
+all: migrator oodfinder componentcleaner systemscanner sourcefinder repochecker processdebdiff
 
 migrator: migrator.dpr *.pas
 	fpc -Sd -gl migrator.dpr -Fl/usr/lib/gcc/i486-linux-gnu/4.4.5/
@@ -18,5 +18,9 @@ sourcefinder: sourcefinder.dpr *.pas
 repochecker: repochecker.dpr *.pas
 	fpc -Sd -gl repochecker.dpr -Fl/usr/lib/gcc/i486-linux-gnu/4.4.5/
 
+processdebdiff: processdebdiff.dpr *.pas
+	fpc -Sd -gl processdebdiff.dpr -Fl/usr/lib/gcc/i486-linux-gnu/4.4.5/
+
+
 clean:
-	rm componentcleaner repochecker migrator sourcefinder systemscanner *.o *.ppu
+	rm oodfinder componentcleaner repochecker migrator sourcefinder systemscanner processdebdiff *.o *.ppu
