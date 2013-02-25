@@ -1,12 +1,12 @@
 program sourcearchivechecker;
 uses
-  readtxt2,sysutils, contnrs, classes, process, util;
+  readtxt2,sysutils, contnrs, classes, process, util, regexpr;
 
 var
   line : string;
   currentpackage, currentversion, currentsourcepackage, currentsourceversion, currentstatus, currentbuiltusing :string;
   sourcesandversions : tfphashlist;
-  
+  s1,s2,s3,s4 : tsearchrec;
   findresult : longint;
   param : string;
   process : tprocess;
@@ -16,7 +16,34 @@ var
   exitstatus : integer;
   t:treadtxt;
   sl : tstringlist;
+  baseversion : string;
+  regexobj : tregexpr;
+  strippattern : string;
+  i : integer;
+  baseversionnoepoch : string;
 begin
+  
+  sl := tstringlist.create;
+  sl.Delimiter := '$';
+  sl.DelimitedText := paramstr(1);
+  
+  strippattern := '(';
+  for i := 0 to sl.count -1 do begin
+    if strippattern <> '(' then begin
+      strippattern := strippattern + '|';
+    end;
+    strippattern := strippattern + QuoteRegExprMetaChars(sl[i]);
+  end;
+  strippattern := strippattern + ')[0-9]*';
+
+  writeln(strippattern);
+                  
+
+  regexobj := tregexpr.create;
+  regexobj.expression := strippattern;
+
+  writeln(regexobj.replace('foo+rpi1','',false));
+
   writeln('phase3: checking source packages are complete');
   findresult := findfirst('*',faDirectory,s1);
   while findresult = 0 do begin
@@ -30,13 +57,20 @@ begin
               findresult := findfirst(''+s1.name+'/'+s2.name+'/'+s3.name+'/*.dsc',faanyfile,s4);
               while findresult = 0 do begin
                 //writeln(''+s1.name+'/'+s2.name+'/'+s3.name+'/'+s4.name);
+                sourcepackage := '';
+                version := '';
                 t := treadtxt.createf(''+s1.name+'/'+s2.name+'/'+s3.name+'/'+s4.name);
                 line :=t.readline;
                 while trim(line) <> 'Files:' do begin
+                  
+                  if copy(line,1,8) = 'Source: ' then sourcepackage := copy(line,9,maxlongint);
+                  if copy(line,1,9) = 'Version: ' then version := copy(line,10,maxlongint);
+                  
                   if t.eof then begin
                     writeln('broken dsc found, no files section');
                     halt(99);
                   end;
+                  
                   Line := t.readline;
                 end;
                 while not t.eof do begin
@@ -56,7 +90,22 @@ begin
                 end;
                 t.free;
                 //halt;
+                //p := pos('+rpi',version);
+                //if p > 0 then writeln(sourcepackage+' '+version);
+                baseversion := regexobj.replace(version,'',false);
+                if baseversion <> version then begin
+                  p := pos(':',baseversion);
+                  if p > 0 then begin
+                    baseversionnoepoch := copy(baseversion,p+1,maxlongint);
+                  end else begin
+                    baseversionnoepoch := baseversion;
+                  end;
+                  if not fileexists(''+s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+baseversionnoepoch+'.dsc') then begin
+                    writeln(sourcepackage+' '+baseversion+' '+version);
+                  end;
+                end;
                 findresult := findnext(s4);
+                 
               end;
               findclose(s4);
             end;
