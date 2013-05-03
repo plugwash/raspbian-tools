@@ -1,37 +1,9 @@
 program oodfinder;
 uses
-  readtxt2,sysutils, contnrs, dpkgdb, classes, util;
+  readtxt2,sysutils, contnrs, versions, classes, util;
 const
   sourcesfile = '/home/repo/repo/raspbian/dists/wheezy-staging/main/source/Sources';
   packagesfile = '/home/repo/repo/raspbian/dists/wheezy-staging/main/binary-armhf/Packages';
-
-//return -1 if versiona is less than versionb
-//reutrn 0 if versiona is equal to versionb
-//reutrn 1 if versiona is greater than versionb
-function compareversion(versiona,versionb: string) : longint;
-var
-  rversiona:versionrevision;
-  rversionb:versionrevision;
-  error : dpkg_error;
-begin
-  //writeln(versiona,' ',versionb);
-  uniquestring(versiona);
-  uniquestring(versionb);
-  if parseversion(@rversiona,pchar(versiona),@error) <> 0 then begin
-    writeln('error parsing version '+versiona);
-    halt;
-  end;
-  //writeln('rversiona.version ',rversiona.version);
-  //writeln('rversiona.revision ',rversiona.revision);
-  if parseversion(@rversionb,pchar(versionb),@error) <> 0 then begin
-    writeln('error parsing version '+versionb);
-    halt;
-  end;
-  //writeln('rversionb.version ',rversionb.version);
-  //writeln('rversionb.revision ',rversionb.revision);
-  
-  result := versioncompare(@rversiona,@rversionb);
-end;
 
 var
   t : treadtxt;
