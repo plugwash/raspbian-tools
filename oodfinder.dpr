@@ -93,7 +93,9 @@ begin
       writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' nsf');
       nsfcount := nsfcount +1;
     end else begin
+      //writeln('starting version comparison');
       versioncomparison := compareversion(currentsourceversion,sourceversionfromsources);
+      //writeln('version comparison complete');
       if versioncomparison < 0 then begin
         writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' ood');
         oodcount := oodcount +1;
@@ -146,6 +148,7 @@ begin
 
   rdeps := tfpobjecthashtable.create();
   for pass := 1 to 2 do begin
+    //writeln('starting pass ',pass);
     t := treadtxt.createf(packagesfile);
     reset;
     repeat
@@ -172,9 +175,10 @@ begin
         currentdepends := trim(copy(line,9,maxlongint));
       end;
       if line = '' then begin
-        //end of block
+        //writeln('end of block');
         if currentpackage <> '' then processpackage(pass);
         reset;
+        //writeln('end of block processing complete');
       end;
     until t.eof;
     if currentpackage <> '' then processpackage(pass);

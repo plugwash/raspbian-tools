@@ -52,7 +52,7 @@ begin
   lengtha := length(versionparta);
   lengthb := length(versionpartb);
   while (countera<=lengtha) or (counterb <=lengthb) do begin
-    //process nondigit part
+    //writeln('process nondigit part');
     while true do begin
       if countera <= lengtha then chara := versionparta[countera] else chara := #1;
       if counterb <= lengthb then charb := versionparta[counterb] else charb := #1;
@@ -74,30 +74,30 @@ begin
       counterb := counterb + 1;
     end;
     
-    //if we have reached the end of both version numbers then break out here.
+    //writeln('if we have reached the end of both version numbers then break out here.');
     if (countera >lengtha) and (counterb >lengthb) then break;
     
-    //process digit part
-    while true do begin;
-      numbera := 0;
-      while (countera <= lengtha) and (versionparta[countera] in ['0'..'9']) do begin
-        numbera := numbera * 10;
-        numbera := numbera + ord(versionparta[countera]) - ord('0');
-        countera := countera +1;
-      end;
-      numberb := 0;
-      while (counterb <= lengthb) and (versionpartb[counterb] in ['0'..'9']) do begin
-        numberb := numberb * 10;
-        numberb := numberb + ord(versionpartb[counterb]) - ord('0');
-        counterb := counterb +1;
-      end;
-      if numbera < numberb then begin
-        result := -1;
-        break;
-      end else if numbera > numberb then begin
-        result := 1;
-        break;
-      end;
+    //writeln('process digit part');
+    numbera := 0;
+    while (countera <= lengtha) and (versionparta[countera] in ['0'..'9']) do begin
+      //writeln('countera = ',countera,' versionparta[countera]= ',versionparta[countera]);
+      numbera := numbera * 10;
+      numbera := numbera + ord(versionparta[countera]) - ord('0');
+      countera := countera +1;
+    end;
+    numberb := 0;
+    while (counterb <= lengthb) and (versionpartb[counterb] in ['0'..'9']) do begin
+      numberb := numberb * 10;
+      numberb := numberb + ord(versionpartb[counterb]) - ord('0');
+      counterb := counterb +1;
+    end;
+    //writeln('digit parts read as ',numbera,' ',numberb);
+    if numbera < numberb then begin
+      result := -1;
+      exit;
+    end else if numbera > numberb then begin
+      result := 1;
+      exit;
     end;
   end;
   result := 0;
@@ -120,8 +120,14 @@ begin
   result := 0;
   if (epocha < epochb) then result := -1;
   if (epocha > epochb) then result := 1;
-  if result = 0 then result := compareversionpart(upstreamversiona,upstreamversionb);
-  if result = 0 then result := compareversionpart(debianrevisiona,debianrevisionb);
+  if result = 0 then begin
+    //writeln('comparing upstream versions '+upstreamversiona+' '+upstreamversionb);
+    result := compareversionpart(upstreamversiona,upstreamversionb);
+  end;
+  if result = 0 then begin
+    //writeln('comparing debian revisions '+debianrevisiona+' '+debianrevisionb);
+    result := compareversionpart(debianrevisiona,debianrevisionb);
+  end;
   
   
   { old code based on libdpkg eliminated to avoid unstable interface

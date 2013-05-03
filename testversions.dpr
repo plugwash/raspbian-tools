@@ -22,4 +22,6 @@ begin
  if (epoch=0) and (upstreamversion='12345') and (debianrevision='1+rpi1') then result := 'good' else result := 'bad';
  writeln(inttostr(epoch)+' '+upstreamversion+' '+debianrevision+' '+result);
  
+ writeln(compareversion('12fuck','1234fuck'));
+ 
 end.
