@@ -3,6 +3,7 @@ unit versions;
 interface
 
 function compareversion(versiona,versionb: string) : longint;
+procedure splitversion(version : string; var epoch: integer; var upstreamversion,debianrevision: string);
 
 implementation
 
@@ -30,7 +31,7 @@ begin
   if debiandelim = length(version)+1 then begin
     debianrevision := '0';
   end else begin
-    debianrevision := copy(version,debiandelim,maxlongint);
+    debianrevision := copy(version,debiandelim+1,maxlongint);
   end;
   upstreamversion := copy(version,epochdelim+1,debiandelim-epochdelim-1);
 end;

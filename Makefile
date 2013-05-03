@@ -1,6 +1,6 @@
 DEB_HOST_GNU_TYPE ?=$(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 
-all: migrator oodfinder componentcleaner systemscanner sourcefinder repochecker processdebdiff
+all: migrator oodfinder componentcleaner systemscanner sourcefinder repochecker processdebdiff testversions
 
 migrator: migrator.dpr *.pas
 	fpc -Sd -gl migrator.dpr
@@ -22,6 +22,9 @@ repochecker: repochecker.dpr *.pas
 
 processdebdiff: processdebdiff.dpr *.pas
 	fpc -Sd -gl processdebdiff.dpr
+
+testversions: testversions.dpr *.pas
+	fpc -Sd -gl testversions.dpr
 
 
 clean:
