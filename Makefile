@@ -1,6 +1,6 @@
 DEB_HOST_GNU_TYPE ?=$(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 
-all: migrator oodfinder componentcleaner systemscanner sourcefinder repochecker processdebdiff testversions
+all: migrator oodfinder componentcleaner systemscanner sourcefinder repochecker processdebdiff testversions cruftprocessor binarytosource binnmuscheduler
 
 migrator: migrator.dpr *.pas
 	fpc -Sd -gl migrator.dpr
@@ -25,6 +25,15 @@ processdebdiff: processdebdiff.dpr *.pas
 
 testversions: testversions.dpr *.pas
 	fpc -Sd -gl testversions.dpr
+
+cruftprocessor: cruftprocessor.dpr *.pas
+	fpc -Sd -gl cruftprocessor.dpr
+
+binarytosource: binarytosource.dpr *.pas
+	fpc -Sd -gl binarytosource.dpr
+
+binnmuscheduler: binnmuscheduler.dpr *.pas
+	fpc -Sd -gl binnmuscheduler.dpr
 
 
 clean:

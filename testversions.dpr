@@ -24,4 +24,6 @@ begin
  
  writeln(compareversion('12fuck','1234fuck'));
  
+ writeln(compareversion('0.10.3-2','0.10.3+svn61-1'));
+ 
 end.

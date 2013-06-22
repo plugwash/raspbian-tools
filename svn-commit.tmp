@@ -1,4 +1,4 @@
-Initial import of oodfinder code from plugwash's laptop
+change migrator settings for jessie
 --This line, and those below, will be ignored--
 
-A    .
+M    migrator.dpr

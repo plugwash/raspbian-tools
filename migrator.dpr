@@ -2,9 +2,9 @@ program migrator;
 uses
   readtxt2,sysutils, contnrs, versions, classes, util;
 const
-  reporoot = '/home/repo/repo/raspbian/';
-  codename = 'wheezy';
-  codenamestaging = 'wheezy-staging';
+  reporoot = '/home/repo/private/private/';
+  codename = 'jessie';
+  codenamestaging = 'jessie-staging';
   architecture = 'armhf';
   
 
@@ -595,6 +595,6 @@ begin
   end;
   
   //write export
-  writeln(t,'reprepro -V --basedir . --morguedir +b/morgue export wheezy');
+  writeln(t,'reprepro -V --basedir . --morguedir +b/morgue export '+codename);
   closefile(t);
 end.

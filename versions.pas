@@ -55,13 +55,15 @@ begin
     //writeln('process nondigit part');
     while true do begin
       if countera <= lengtha then chara := versionparta[countera] else chara := #1;
-      if counterb <= lengthb then charb := versionparta[counterb] else charb := #1;
+      if counterb <= lengthb then charb := versionpartb[counterb] else charb := #1;
+      //writeln('before crunching chara = ',ord(chara),' charb = ',ord(charb));
       if chara = '~' then chara := #0;
       if charb = '~' then charb := #0;
       if chara in ['0'..'9'] then chara := #1;
       if charb in ['0'..'9'] then charb := #1;
       if chara in ['.','+','-',':'] then chara := chr(ord(chara)+128);
       if charb in ['.','+','-',':'] then charb := chr(ord(charb)+128);
+      //writeln('after crunching chara = ',ord(chara),' charb = ',ord(charb));
       if chara < charb then begin
         result := -1;
         exit;

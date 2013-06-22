@@ -2,9 +2,9 @@ program componentcleaner;
 uses
   readtxt2,sysutils, contnrs, versions, classes;
 const
-  reporoot = '/home/repo/repo/raspbian/';
-  codename = 'wheezy';
-  codenamestaging = 'wheezy-staging';
+  reporoot = '/home/repo/private/private/';
+  codename = 'jessie';
+  codenamestaging = 'jessie-staging';
   architecture = 'armhf';
   
 
