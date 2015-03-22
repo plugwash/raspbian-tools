@@ -3,11 +3,11 @@ uses
   readtxt2,sysutils, contnrs, versions, classes, util;
 const
   reporoot = '/home/repo/private/private/';
-  codename = 'jessie';
   codenamestaging = 'jessie-staging';
   architecture = 'armhf';
   
-
+var
+  codename: string;
   
 
 type
@@ -302,6 +302,7 @@ var
   b : boolean;
   removalsforthissource : boolean;
 begin
+  codename := paramstr(1);
   writeln('reading packages and sources files for main distribution');
   maindistribution := tdistribution.create;
   maindistribution.readsources(reporoot+'dists/'+codename+'/main/source/Sources');
