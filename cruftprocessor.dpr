@@ -3,11 +3,11 @@ uses
   readtxt2,sysutils, contnrs, versions, classes, util;
 const
   reporoot = '/home/repo/private/private/'; //must have a trailing /
-  suite = 'jessie-staging';
   componentcount = 5;
   components : array[1..componentcount] of string  = ('main','contrib','non-free','rpi','firmware');
   
 var
+  suite : string;
   t : treadtxt;
   line : string;
   currentpackage, currentversion, currentsourcepackage, currentsourceversion , currentdepends,currentarch :string;
@@ -144,7 +144,7 @@ begin
             end;
             writeln;
           end else begin
-            writeln(removals,'reprepro --arch=armhf --export=never remove jessie-staging '+currentpackage);
+            writeln(removals,'reprepro --arch=armhf --export=never remove '+suite+' '+currentpackage);
           end;
         end else begin
           writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' ood');
@@ -187,6 +187,7 @@ var
   sourcesfile,packagesfile,dipackagesfile : string;
   i : integer;
 begin
+  suite := paramstr(1);
   //writeln(compareversion('1','2'));
   //writeln(compareversion('1-1','1-2'));
   //writeln(compareversion('2','1'));
@@ -291,6 +292,6 @@ begin
   closefile(packagescurrentarch);
   closefile(packagescurrentindep);
   closefile(packagesoodbutnotcruft);
-  writeln(removals,'reprepro -v export jessie-staging');
+  writeln(removals,'reprepro -v export '+suite);
   closefile(removals);
 end.
