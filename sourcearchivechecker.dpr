@@ -15,7 +15,7 @@ var
   found : boolean;
   exitstatus : integer;
   t:treadtxt;
-  sl : tstringlist;
+  slversionstrings, sl : tstringlist;
   baseversion : string;
   regexobj : tregexpr;
   strippattern : string;
@@ -24,11 +24,16 @@ var
   debdiffsdir : string;
   versionnoepoch : string;
   debdiffbase : string;
+  debdiffbasesp : string;
+  debdiffbasefn : string;
+  appdir : string;
+  outputstring : string;
+  dummy : string;
 begin
   
-  sl := tstringlist.create;
-  sl.Delimiter := '$';
-  sl.DelimitedText := paramstr(1);
+  slversionstrings := tstringlist.create;
+  slversionstrings.Delimiter := '$';
+  slversionstrings.DelimitedText := paramstr(1);
   
   if paramcount >= 2 then begin
     debdiffsdir := paramstr(2);
@@ -36,11 +41,11 @@ begin
   end;
   writeln('debdiffsdir = '+debdiffsdir);
   strippattern := '(';
-  for i := 0 to sl.count -1 do begin
+  for i := 0 to slversionstrings.count -1 do begin
     if strippattern <> '(' then begin
       strippattern := strippattern + '|';
     end;
-    strippattern := strippattern + QuoteRegExprMetaChars(sl[i]);
+    strippattern := strippattern + QuoteRegExprMetaChars(slversionstrings[i]);
   end;
   strippattern := strippattern + ')[0-9]*';
 
@@ -51,7 +56,8 @@ begin
   regexobj.expression := strippattern;
 
   writeln(regexobj.replace('foo+rpi1','',false));
-
+  appdir := extractfiledir(paramstr(0));
+  sl := tstringlist.create;
   writeln('phase3: checking source packages are complete');
   findresult := findfirst('*',faDirectory,s1);
   while findresult = 0 do begin
@@ -75,7 +81,7 @@ begin
                   if copy(line,1,9) = 'Version: ' then version := copy(line,10,maxlongint);
                   
                   if t.eof then begin
-                    writeln('broken dsc found, no files section');
+                    writeln('broken dsc found, no files section in '+s1.name+'/'+s2.name+'/'+s3.name+'/'+s4.name);
                     halt(99);
                   end;
                   
@@ -116,34 +122,57 @@ begin
                   end;
                     
                   debdiffbase := '';
-                  if fileexists(s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+baseversionnoepoch+'.dsc') then begin
-                    debdiffbase := baseversionnoepoch;
-                  end else if fileexists(s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa1.dsc') then begin
-                    //for mate themes
-                    debdiffbase := copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa1';
-                  end else if fileexists(s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa2.dsc') then begin
-                    //for mate themes
-                    debdiffbase := copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa2';
-                  end else if fileexists(s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa3.dsc') then begin
-                    //for mate themes
-                    debdiffbase := copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa3';
-                  end else if fileexists(s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa1+nmu1.dsc') then begin
-                    //for mate themes
-                    debdiffbase := copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa1+nmu1';
-                  end else if fileexists(s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa2+nmu1.dsc') then begin
-                    //for mate themes
-                    debdiffbase := copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa2+nmu1';
-                  end else if fileexists(s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.lucid.ppa1+nmu1.dsc') then begin
-                    //for mate themes
-                    debdiffbase := copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.lucid.ppa1+nmu1';
-                  end else if (debdiffsdir = '') or not fileexists(debdiffsdir+s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+versionnoepoch+'.debdiff') then begin
-                    writeln('source package for base version not found '+sourcepackage+' '+baseversion+' '+version);
+                  debdiffbasesp := sourcepackage;
+                  debdiffbasefn := '';
+                  if (debdiffsdir = '') or not fileexists(debdiffsdir+s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+versionnoepoch+'.debdiff') then begin
+                    if fileexists(s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+baseversionnoepoch+'.dsc') then begin
+                      debdiffbase := baseversionnoepoch;
+                    end else if fileexists(s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa1.dsc') then begin
+                      //for mate themes
+                      debdiffbase := copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa1';
+                    end else if fileexists(s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa2.dsc') then begin
+                      //for mate themes
+                      debdiffbase := copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa2';
+                    end else if fileexists(s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa3.dsc') then begin
+                      //for mate themes
+                      debdiffbase := copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa3';
+                    end else if fileexists(s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa1+nmu1.dsc') then begin
+                      //for mate themes
+                      debdiffbase := copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa1+nmu1';
+                    end else if fileexists(s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa2+nmu1.dsc') then begin
+                      //for mate themes
+                      debdiffbase := copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.natty.ppa2+nmu1';
+                    end else if fileexists(s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.lucid.ppa1+nmu1.dsc') then begin
+                      //for mate themes
+                      debdiffbase := copy(baseversionnoepoch,1,length(baseversionnoepoch)-5)+'.lucid.ppa1+nmu1';
+                    end else begin
+                      //attempt to check the source package itself for a package name and version.
+                      //writeln(appdir+'/'+'find_derived_from.py');
+                      //writeln(slversionstrings[0]);
+                      runcommand(appdir+'/'+'find_derived_from.py',[s1.name+'/'+s2.name+'/'+s3.name+'/'+s4.name,slversionstrings[0]],outputstring);
+                      //writeln(outputstring);
+                      sl.text := outputstring;
+                      for i := 0 to sl.count -1 do begin;
+                        if stringstartis(sl[i],'name: ') then debdiffbasesp := copy(sl[i],7,maxlongint);
+                        if stringstartis(sl[i],'version: ') then debdiffbase := copy(sl[i],10,maxlongint);
+                      end;
+                      //for now we only check in the same component
+                      makesourcepackagepath(debdiffbasesp,debdiffbase,dummy,debdiffbasefn);
+                      debdiffbasefn := s1.name+'/'+debdiffbasefn;
+                      if not fileexists(debdiffbasefn) then begin
+                        debdiffbase := '';
+                        debdiffbasefn := '';
+                      end;
+                      
+                      if debdiffbase = '' then writeln('source package for base version not found '+sourcepackage+' '+baseversion+' '+version);
+                    end;
                   end;
                   if debdiffbase <> '' then begin
                     if (debdiffsdir <> '') and not fileexists(debdiffsdir+s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+versionnoepoch+'.debdiff') then begin
                       writeln('generating debdiff '+sourcepackage+' '+baseversion+' '+version);
                       forcedirectories(debdiffsdir+s1.name+'/'+s2.name+'/'+s3.name);
-                      fpsystem('debdiff '+s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+debdiffbase+'.dsc'+' '+s1.name+'/'+s2.name+'/'+s3.name+'/'+s4.name+' > '+debdiffsdir+s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+versionnoepoch+'.debdiff');
+                      if debdiffbasefn = '' then debdiffbasefn := s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+debdiffbase+'.dsc';
+                      fpsystem('debdiff '+debdiffbasefn+' '+s1.name+'/'+s2.name+'/'+s3.name+'/'+s4.name+' > '+debdiffsdir+s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+versionnoepoch+'.debdiff');
                     end;
                   end else
                 end;

@@ -307,10 +307,14 @@ begin
   maindistribution.readsources(reporoot+'dists/'+codename+'/main/source/Sources');
   maindistribution.readsources(reporoot+'dists/'+codename+'/contrib/source/Sources');
   maindistribution.readsources(reporoot+'dists/'+codename+'/non-free/source/Sources');
+  maindistribution.readsources(reporoot+'dists/'+codename+'/rpi/source/Sources');
+  maindistribution.readsources(reporoot+'dists/'+codename+'/firmware/source/Sources');
   
   maindistribution.readpackages(reporoot+'dists/'+codename+'/main/binary-'+architecture+'/Packages');
   maindistribution.readpackages(reporoot+'dists/'+codename+'/contrib/binary-'+architecture+'/Packages');
   maindistribution.readpackages(reporoot+'dists/'+codename+'/non-free/binary-'+architecture+'/Packages');
+  maindistribution.readpackages(reporoot+'dists/'+codename+'/rpi/binary-'+architecture+'/Packages');
+  maindistribution.readpackages(reporoot+'dists/'+codename+'/firmware/binary-'+architecture+'/Packages');
   maindistribution.readpackages(reporoot+'dists/'+codename+'/main/debian-installer/binary-'+architecture+'/Packages');
 
   
@@ -325,10 +329,14 @@ begin
   stagingdistribution.readsources(reporoot+'dists/'+codenamestaging+'/main/source/Sources');
   stagingdistribution.readsources(reporoot+'dists/'+codenamestaging+'/contrib/source/Sources');
   stagingdistribution.readsources(reporoot+'dists/'+codenamestaging+'/non-free/source/Sources');
+  stagingdistribution.readsources(reporoot+'dists/'+codenamestaging+'/rpi/source/Sources');
+  stagingdistribution.readsources(reporoot+'dists/'+codenamestaging+'/firmware/source/Sources');
   
   stagingdistribution.readpackages(reporoot+'dists/'+codenamestaging+'/main/binary-'+architecture+'/Packages');
   stagingdistribution.readpackages(reporoot+'dists/'+codenamestaging+'/contrib/binary-'+architecture+'/Packages');
   stagingdistribution.readpackages(reporoot+'dists/'+codenamestaging+'/non-free/binary-'+architecture+'/Packages');
+  stagingdistribution.readpackages(reporoot+'dists/'+codenamestaging+'/rpi/binary-'+architecture+'/Packages');
+  stagingdistribution.readpackages(reporoot+'dists/'+codenamestaging+'/firmware/binary-'+architecture+'/Packages');
   stagingdistribution.readpackages(reporoot+'dists/'+codenamestaging+'/main/debian-installer/binary-'+architecture+'/Packages');
 
   stagingbinaries := tfphashlist.create;
@@ -509,7 +517,7 @@ begin
           migrationindex := proposedsourcemigrations.findindexof(sourcepackagename);
           writeln('migrationindex=',migrationindex);
           if migrationindex >= 0 then begin //if this is -1 it most likely means the migration has already been removed from the list
-            writeln('removing source package ',sourcepackagename,' from migration list because migrating it would break dependencies of ',binarypackagename);
+            writeln('removing source package ',sourcepackagename,' from migration list because migrating it would break dependency of ',binarypackagename,' on ',dependedonpackage);
             proposedsourcemigrations.delete(migrationindex);
             removalsthisiteration := removalsthisiteration + 1;
           end;

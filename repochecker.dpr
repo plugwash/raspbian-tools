@@ -34,6 +34,8 @@ begin
   if currentsourcepackage = '' then currentsourcepackage := currentpackage;
   if currentsourceversion = '' then currentsourceversion := currentversion;
   sourceandversion := currentsourcepackage + ' ' +currentsourceversion;
+  //writeln(currentpackage);
+  //writeln(sourceandversion);
   //writeln(erroutput,sourceandversion);
   if sourcesandversions.findindexof(sourceandversion) < 0 then sourcesandversions.add(sourceandversion,pointer($deadbeef));
   if currentbuiltusing <> '' then begin
@@ -42,6 +44,7 @@ begin
     for i := 0 to builtusingstringlist.count-1 do begin
       sourceandversion := stringreplace(builtusingstringlist[i],' (= ',' ',[]);
       setlength(sourceandversion,length(sourceandversion)-1);
+      //writeln(sourceandversion);
       //writeln('!'+sourceandversion);
       if sourcesandversions.findindexof(sourceandversion) < 0 then sourcesandversions.add(sourceandversion,pointer($deadbeef));
     end;
@@ -103,7 +106,7 @@ var
 begin 
   //writeln(filename);
   t := treadtxt.createf(filename);
-  processtext(t,true);
+  processtext(t,false);
   t.free;
 end;
 
