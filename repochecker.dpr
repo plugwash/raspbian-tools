@@ -37,7 +37,7 @@ begin
   //writeln(currentpackage);
   //writeln(sourceandversion);
   //writeln(erroutput,sourceandversion);
-  if sourcesandversions.findindexof(sourceandversion) < 0 then sourcesandversions.add(sourceandversion,pointer($deadbeef));
+  if sourcesandversions.findindexof(sourceandversion) < 0 then sourcesandversions.add(sourceandversion,strnew(pchar(currentpackage)));
   if currentbuiltusing <> '' then begin
     builtusingstringlist := tstringlist.create;
     extractstrings([','],[' '],pchar(currentbuiltusing),builtusingstringlist);
@@ -46,7 +46,7 @@ begin
       setlength(sourceandversion,length(sourceandversion)-1);
       //writeln(sourceandversion);
       //writeln('!'+sourceandversion);
-      if sourcesandversions.findindexof(sourceandversion) < 0 then sourcesandversions.add(sourceandversion,pointer($deadbeef));
+      if sourcesandversions.findindexof(sourceandversion) < 0 then sourcesandversions.add(sourceandversion,strnew(pchar(currentpackage)));
     end;
     builtusingstringlist.free;
   end;
@@ -176,7 +176,7 @@ begin
     end;
     findclose(s1);
     if not found then begin
-      writeln('failed to find ',filepath);
+      writeln('failed to find ',filepath,' needed by package '+pchar(sourcesandversions.items[i]));
       exitstatus := 1;
     end;
   end;
