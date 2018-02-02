@@ -334,7 +334,7 @@ begin
       writeln(outputfile,'wanna-build -A armhf -d '+codenamestaging+' -m "rebuild due to debcheck failure" --binNMU '+inttostr(binnmunumber)+' '+sourcepackagename+'_'+stagingsourcepackage.version);
 
     end else begin
-      writeln(outputfile,'echo can''t find information needed to generate binnmu for '+sourcepackagename);
+      writeln(outputfile,'echo can\''t find information needed to generate binnmu for '+sourcepackagename);
     end;
   until eof(input);
   closefile(outputfile);

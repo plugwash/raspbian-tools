@@ -3,15 +3,13 @@ uses
   readtxt2,sysutils, contnrs, versions, classes;
 const
   reporoot = '/home/repo/private/private/';
-  codename = 'jessie';
-  codenamestaging = 'jessie-staging';
   architecture = 'armhf';
   
 
 var
     t : treadtxt;
     currentpackage, currentversion, currentsourcepackage, currentsourceversion , currentdepends :string;
-
+    codename,codenamestaging : string;
 procedure reset;
 begin
   currentpackage := '';
@@ -157,6 +155,9 @@ end;
 var
   i : integer;
 begin
+  codename := paramstr(1);
+  codenamestaging := codename+'-staging';
+
   assignfile(tout,'removals.sh');
   rewrite(tout);
   
