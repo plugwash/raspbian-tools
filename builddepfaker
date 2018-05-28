@@ -1,0 +1,66 @@
+#!/usr/bin/python3
+import deb822
+import sys
+
+#f = open("/home/repo/private/private/conf/fakebuilddeps")
+f = open(sys.argv[1])
+
+fakelines = f.readlines()
+f.close()
+
+fakedepdict = {}
+
+for fakeline in fakelines:
+	if ':' in fakeline:
+		(package, fakedeps) = fakeline.split(':',1)
+		fakedeps = fakedeps.split(',')
+		positive = set()
+		negative = set()
+		if (package in fakedepdict):
+			(negative,positive) = fakedepdict[package]
+		for fakedep in fakedeps:
+			fakedep = fakedep.strip()
+			if (fakedep[0] == '!'):
+				negative.add(fakedep[1:])
+			else:
+				positive.add(fakedep)
+		fakedepdict[package] = (negative,positive)
+
+#print(repr(fakedepdict))
+
+#exit()
+
+#f = open("/home/repo/private/private/dists/buster-staging/main/source/Sources")
+f = open(sys.argv[2])
+
+#fakelist = ()
+
+for entry in deb822.Sources.iter_paragraphs(f):
+	package = entry['Package'];
+	if (package in fakedepdict):
+		(negative,positive) = fakedepdict[package]
+		builddeps = []
+		if 'Build-Depends' in entry:
+			builddeps = entry['Build-Depends'].split(',')
+		processedbuilddeps = []
+		for depstr in builddeps:
+			depname = depstr.lstrip().split(' ')[0]
+			#print(depname)
+			if not (depname in negative):
+				processedbuilddeps.append(depstr)
+			positive.discard(depname)
+		for depstr in positive:
+			processedbuilddeps.append(' '+depstr+' (!= 0.fake.0)')
+		entry['Build-Depends'] = ','.join(processedbuilddeps)
+		if 'Build-Depends-Indep' in entry:
+			builddeps = entry['Build-Depends-Indep'].split(',')
+			processedbuilddeps = []
+			for depstr in builddeps:
+				depname = depstr.lstrip().split(' ')[0]
+				#print(depname)
+				if not (depname in negative):
+					processedbuilddeps.append(depstr)
+			entry['Build-Depends-Indep'] = ','.join(processedbuilddeps)
+	print(entry)
+
+f.close()
