@@ -10,8 +10,8 @@ var
   suite : string;
   t : treadtxt;
   line : string;
-  currentpackage, currentversion, currentsourcepackage, currentsourceversion , currentdepends,currentarch :string;
-  sourcestosourceversions : tfpstringhashtable;
+  currentpackage, currentversion, currentbinaryline, currentsourcepackage, currentsourceversion , currentdepends,currentarch :string;
+  sourcestosourceversions, sourcestobinarylists, oodfound : tfpstringhashtable;
   sourcestoarchbinarysourceversions : tfpstringhashtable;
   rdeps : tfpobjecthashtable;
   currentpackagestanza : tstringlist;
@@ -21,6 +21,7 @@ procedure reset;
 begin
   currentpackage := '';
   currentversion := '';
+  currentbinaryline := '';
   currentsourcepackage := '';
   currentsourceversion := '';
   currentarch := '';
@@ -36,9 +37,14 @@ begin
     writeln('package without version!');
     halt;
   end;
+  if currentbinaryline = '' then begin
+    writeln('source package without binary list');
+    halt;
+  end;
   existingversion := sourcestosourceversions[currentpackage];
   if existingversion = '' then begin
     sourcestosourceversions[currentpackage] := currentversion;
+    sourcestobinarylists[currentpackage] := currentbinaryline;
   end else begin
     writeln('multiple instances of the same source package cannot be handled yet');
     halt;
@@ -84,6 +90,7 @@ var
   oldsourceversion : string;
   latestarchbinarysourceversion : string;
   binarylist: tfphashlist;
+  cruftduetobinarylist: boolean;
 begin
   if currentversion = '' then begin
     writeln('package without version!');
@@ -122,8 +129,10 @@ begin
   end else begin
     sourceversionfromsources := sourcestosourceversions[currentsourcepackage];
     if sourceversionfromsources = '' then begin
-      writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' nsf');
-      nsfcount := nsfcount +1;
+      if pass = 3 then begin
+        writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' nsf');
+        nsfcount := nsfcount +1;
+      end
     end else begin
       //writeln('starting version comparison');
       versioncomparison := compareversion(currentsourceversion,sourceversionfromsources);
@@ -131,47 +140,63 @@ begin
       if versioncomparison < 0 then begin
         latestarchbinarysourceversion := sourcestoarchbinarysourceversions[currentsourcepackage];
         versioncomparison := compareversion(currentsourceversion,latestarchbinarysourceversion);
-        if (currentarch = 'all') or (versioncomparison < 0) then begin
-          writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' cruft');
-          cruftcount := cruftcount +1;
-          rdeplist := tfphashlist(rdeps[currentpackage]);
-          if rdeplist <> nil then for i := 0 to rdeplist.count -1 do begin
-            //writeln('  binnmu '+rdeplist.nameofindex(i)+'_'+sourcestosourceversions[rdeplist.nameofindex(i)]+' 1 ''rebuild to eliminate dependency on '+currentpackage+'''');
-            write('  '+rdeplist.nameofindex(i)+':');
-            binarylist := tfphashlist(rdeplist.items[i]);
-            for j := 0 to binarylist.count -1 do begin
-              write(' '+binarylist.nameofindex(j));
+        cruftduetobinarylist := pos(currentpackage,sourcestobinarylists[currentsourcepackage]) = 0;
+        if cruftduetobinarylist and (pass = 3) then begin
+          //the point of cruftprocessor is to find packages that should be removed, so we want to include packages
+          //that have dropped their last arch-specific binary but not packages that have not-yet built.
+          if oodfound[currentsourcepackage] = 'Y' then cruftduetobinarylist := false;
+        end;
+        if (currentarch = 'all') or (versioncomparison < 0) or (cruftduetobinarylist) then begin
+          if pass = 3 then begin
+            writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' cruft');
+            cruftcount := cruftcount +1;
+            rdeplist := tfphashlist(rdeps[currentpackage]);
+            if rdeplist <> nil then for i := 0 to rdeplist.count -1 do begin
+              //writeln('  binnmu '+rdeplist.nameofindex(i)+'_'+sourcestosourceversions[rdeplist.nameofindex(i)]+' 1 ''rebuild to eliminate dependency on '+currentpackage+'''');
+              write('  '+rdeplist.nameofindex(i)+':');
+              binarylist := tfphashlist(rdeplist.items[i]);
+              for j := 0 to binarylist.count -1 do begin
+                write(' '+binarylist.nameofindex(j));
+              end;
+              writeln;
+            end else begin
+              writeln(removals,'reprepro --arch=armhf --export=never remove '+suite+' '+currentpackage);
             end;
-            writeln;
-          end else begin
-            writeln(removals,'reprepro --arch=armhf --export=never remove '+suite+' '+currentpackage);
           end;
         end else begin
-          writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' ood');
-          oodcount := oodcount +1;
-          for i := 0 to currentpackagestanza.count - 1 do begin
-            writeln(packagesoodbutnotcruft,currentpackagestanza[i]);
+          if pass = 3 then begin
+            writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' ood');
+            oodcount := oodcount +1;
+            for i := 0 to currentpackagestanza.count - 1 do begin
+              writeln(packagesoodbutnotcruft,currentpackagestanza[i]);
+            end;
+            writeln(packagesoodbutnotcruft);
+          end else begin
+            oodfound[currentsourcepackage] := 'Y'
           end;
-          writeln(packagesoodbutnotcruft);
         end;
         
       end else if versioncomparison > 0 then begin
-        writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' future');
-        futurecount := futurecount +1;
+        if pass = 3 then begin
+          writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' future');
+          futurecount := futurecount +1;
+        end
       end else if versioncomparison = 0 then begin
-        //writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' current');
-        if currentarch = 'all' then begin
-          for i := 0 to currentpackagestanza.count - 1 do begin
-            writeln(packagescurrentindep,currentpackagestanza[i]);
+        if pass = 3 then begin
+          //writeln(currentpackage+' '+currentversion+' '+currentsourcepackage+' '+currentsourceversion+' current');
+          if currentarch = 'all' then begin
+            for i := 0 to currentpackagestanza.count - 1 do begin
+              writeln(packagescurrentindep,currentpackagestanza[i]);
+            end;
+            writeln(packagescurrentindep)
+          end else begin
+            for i := 0 to currentpackagestanza.count - 1 do begin
+              writeln(packagescurrentarch,currentpackagestanza[i]);
+            end;
+            writeln(packagescurrentarch)
           end;
-          writeln(packagescurrentindep)
-        end else begin
-          for i := 0 to currentpackagestanza.count - 1 do begin
-            writeln(packagescurrentarch,currentpackagestanza[i]);
-          end;
-          writeln(packagescurrentarch)
+          currentcount := currentcount +1;
         end;
-        currentcount := currentcount +1;
       end;
     end;
   end;
@@ -204,6 +229,8 @@ begin
   
   
   sourcestosourceversions := tfpstringhashtable.create;
+  sourcestobinarylists := tfpstringhashtable.create;
+  oodfound := tfpstringhashtable.create;
   sourcestoarchbinarysourceversions := tfpstringhashtable.create;
   
   for i := 1 to componentcount do begin
@@ -217,6 +244,9 @@ begin
       end;
       if copy(line,1,8) = 'Version:' then begin
         currentversion := trim(copy(line,9,255));
+      end;
+      if copy(line,1,7) = 'Binary:' then begin
+        currentbinaryline := trim(copy(line,8,maxlongint));
       end;
       if line = '' then begin
         //end of block
@@ -243,7 +273,7 @@ begin
   fs.free;
     
   
-  for pass := 1 to 2 do begin
+  for pass := 1 to 3 do begin
     //writeln('starting pass ',pass);
     ms.seek(0,soFromBeginning);
     t := treadtxt.create(ms,false);
