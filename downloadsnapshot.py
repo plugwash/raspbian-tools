@@ -1,7 +1,8 @@
+#!/usr/bin/python3
+
 # Copyright 2018 Peter Green
 # Released under the MIT/Expat license, see doc/COPYING
 
-#!/usr/bin/python3
 import os
 import sys
 import hashlib
@@ -13,6 +14,8 @@ import stat
 from collections import deque
 from collections import OrderedDict
 import re
+
+sys.exit(1)
 
 def addfilefromdebarchive(filestoverify,filequeue,filename,sha256,size):
 	size = int(size)
