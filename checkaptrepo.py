@@ -1,3 +1,6 @@
+# Copyright 2018 Peter Green
+# Released under the MIT/Expat license, see doc/COPYING
+
 #!/usr/bin/python3
 import os
 import sys
