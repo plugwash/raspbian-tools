@@ -9,6 +9,13 @@ import hashlib
 import gzip
 from sortedcontainers import SortedDict
 
+def openg(filepath):
+	if os.path.exists(filepath):
+		f = open(filepath,'rb')
+	else:
+		f = gzip.open(filepath+b'.gz','rb')
+	return f
+
 def addfiletoverify(filestoverify,filename,sha1,size):
 	size = int(size)
 	sha1andsize = (sha1,size)
@@ -36,7 +43,7 @@ for dist in dists:
 			addfiletoverify(filestoverify,filename,linesplit[0],linesplit[1]);
 			if filename.endswith(b'Packages'):
 				print('found packages file: '+filename.decode('ascii'))
-				pf = open(filename,'rb')
+				pf = openg(filename)
 				filename = None
 				size = None
 				sha1 = None
@@ -58,7 +65,7 @@ for dist in dists:
 				pf.close()
 			elif filename.endswith(b'Sources'):
 				print('found sources file: '+filename.decode('ascii'))
-				pf = open(filename,'rb')
+				pf = openg(filename)
 				filesfound = [];
 				directory = None
 				insha1p = False;
