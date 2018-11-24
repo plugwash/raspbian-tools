@@ -149,8 +149,9 @@ def openg(filepath):
 while filequeue:
 	filepath = filequeue.popleft()
 	print('processing '+filepath.decode('ascii'))
-	if filepath+b'.gz' not in knownfiles:
-		sha256,size,status = knownfiles[filepath]
+	sha256,size,status = knownfiles[filepath]
+	if (filepath+b'.gz' not in knownfiles) or (status == 'R'):
+		
 		getfile(filepath,sha256,size)
 	pathsplit = filepath.split(b'/')
 	#print(pathsplit[-1])
