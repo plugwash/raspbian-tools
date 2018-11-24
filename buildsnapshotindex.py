@@ -21,6 +21,13 @@ def addfilefromdebarchive(filestoverify,filename,sha256,size):
 	else:
 		filestoverify[filename] = sha256andsize
 
+def openg(filepath):
+	if os.path.exists(filepath):
+		f = open(filepath,'rb')
+	else:
+		f = gzip.open(filepath+b'.gz','rb')
+	return f
+
 distlocs = []
 
 for toplevel in os.listdir('.'):
@@ -47,7 +54,7 @@ for distdir, toplevel in distlocs:
 				addfilefromdebarchive(knownfiles,filename,linesplit[0],linesplit[1]);
 				if filename.endswith(b'Packages'):
 					print('found packages file: '+filename.decode('ascii'))
-					pf = open(filename,'rb')
+					pf = openg(filename)
 					filename = None
 					size = None
 					sha256 = None
@@ -69,7 +76,7 @@ for distdir, toplevel in distlocs:
 					pf.close()
 				elif filename.endswith(b'Sources'):
 					print('found sources file: '+filename.decode('ascii'))
-					pf = open(filename,'rb')
+					pf = openg(filename)
 					filesfound = [];
 					directory = None
 					insha256p = False;
