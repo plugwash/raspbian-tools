@@ -139,7 +139,7 @@ for (dirpath,dirnames,filenames) in os.walk('.',True,throwerror,False):
 		filepath = os.path.join(dirpath,filename)[2:].encode('ascii') # [2:] is to strip the ./ prefix
 		#print(filepath)
 		if os.path.islink(filepath):
-			symlinks.append(filepath)
+			symlinks.add(filepath)
 	for filename in filenames:
 		filepath = os.path.join(dirpath,filename)[2:].encode('ascii') # [2:] is to strip the ./ prefix
 		if not os.path.islink(filepath) and filepath != b'snapshotindex.txt':
