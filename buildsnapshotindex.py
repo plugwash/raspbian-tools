@@ -32,12 +32,13 @@ def ensuresafepath(path):
 		elif component[0] == '.':
 			print("filenames starting with a dot are not allowed")
 			sys.exit(1)
-	if not shaallowed.fullmatch(sha256):
-		print('invalid character in sha256 hash')
-		sys.exit(1)
+
 
 def addfilefromdebarchive(filestoverify,filename,sha256,size):
-	ensuresafepath(filename)	
+	ensuresafepath(filename)
+	if not shaallowed.fullmatch(sha256):
+		print('invalid character in sha256 hash')
+		sys.exit(1)	
 	size = int(size)
 	sha256andsize = [sha256,size,'M']
 	if filename in filestoverify:
@@ -219,6 +220,8 @@ if missingcount > 0:
 		for filepath, (sha256hashed,filesize,status) in knownfiles.items():
 			if status == 'M':
 				print('recovering missing file '+filepath.decode('ascii'))
+				hashdir = b'../hashpool/'+sha256[:2]+b'/'+sha256[:4]
+				hashfn = hashdir + b'/' + sha256				
 				os.link(hashfn,filepath)
 	else:
 		print('missing files, aborting')
