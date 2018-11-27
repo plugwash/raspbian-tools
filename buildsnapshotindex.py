@@ -9,9 +9,35 @@ import hashlib
 import gzip
 from sortedcontainers import SortedDict
 from sortedcontainers import SortedList
+import argparse
+import re
 
+parser = argparse.ArgumentParser(description="build a snapshot index file")
+parser.add_argument("--recover", help="add missing files to snapshot from hashpool if possible", action="store_true")
+args = parser.parse_args()
+
+#regex used for filename sanity checks
+pfnallowed = re.compile(b'[a-z0-9A-Z\-_:\+~\.]+',re.ASCII)
+shaallowed = re.compile(b'[a-z0-9]+',re.ASCII)
+
+def ensuresafepath(path):
+	pathsplit = path.split(b'/')
+	if path[0] == '/':
+		print("path must be relative")
+		sys.exit(1)
+	for component in pathsplit:
+		if not pfnallowed.fullmatch(component):
+			print("file name contains unexpected characters")
+			sys.exit(1)
+		elif component[0] == '.':
+			print("filenames starting with a dot are not allowed")
+			sys.exit(1)
+	if not shaallowed.fullmatch(sha256):
+		print('invalid character in sha256 hash')
+		sys.exit(1)
 
 def addfilefromdebarchive(filestoverify,filename,sha256,size):
+	ensuresafepath(filename)	
 	size = int(size)
 	sha256andsize = [sha256,size,'M']
 	if filename in filestoverify:
@@ -189,8 +215,14 @@ print('uncompressed count: '+str(uncompressedcount))
 print('missing count: '+str(missingcount))
 
 if missingcount > 0:
-	print('missing files, aborting')
-	sys.exit(1)
+	if args.recover:
+		for filepath, (sha256hashed,filesize,status) in knownfiles.items():
+			if status == 'M':
+				print('recovering missing file '+filepath.decode('ascii'))
+				os.link(hashfn,filepath)
+	else:
+		print('missing files, aborting')
+		sys.exit(1)
 
 for filepath, (sha256,filesize,status) in knownfiles.items():
 	if status == 'U':

@@ -49,12 +49,13 @@ def ensuresafepath(path):
 		elif component[0] == '.':
 			print("filenames starting with a dot are not allowed")
 			sys.exit(1)
-	if not shaallowed.fullmatch(sha256):
-		print('invalid character in sha256 hash')
 	
 
 def getfile(path,sha256,size):
 	ensuresafepath(path)
+	if not shaallowed.fullmatch(sha256):
+		print('invalid character in sha256 hash')
+		sys.exit(1)
 	hashfn = b'../hashpool/' + sha256[:2] +b'/'+ sha256[:4] +b'/'+ sha256
 	if os.path.isfile(hashfn):
 		if os.path.getsize(hashfn) != size:
