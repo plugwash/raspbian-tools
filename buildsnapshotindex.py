@@ -220,8 +220,9 @@ if missingcount > 0:
 		for filepath, (sha256hashed,filesize,status) in knownfiles.items():
 			if status == 'M':
 				print('recovering missing file '+filepath.decode('ascii'))
-				hashdir = b'../hashpool/'+sha256[:2]+b'/'+sha256[:4]
-				hashfn = hashdir + b'/' + sha256				
+				os.makedirs(os.path.dirname(filepath),exist_ok=True)
+				hashdir = b'../hashpool/'+sha256hashed[:2]+b'/'+sha256hashed[:4]
+				hashfn = hashdir + b'/' + sha256hashed
 				os.link(hashfn,filepath)
 	else:
 		print('missing files, aborting')
