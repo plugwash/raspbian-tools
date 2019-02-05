@@ -15,7 +15,16 @@ from collections import deque
 from collections import OrderedDict
 from datetime import datetime
 from email.utils import parsedate_to_datetime
+import argparse
 import re
+
+parser = argparse.ArgumentParser(description="download one or more raspbian snapshots")
+parser.add_argument("baseurl", help="base url for snapshot source")
+parser.add_argument("timestamps", help="timestamp or range of timestamps to download, if a single timestamp is used then the current director is assumed to be the snapshot target directory, otherwise the current directory is assumed to be the directory above the snapshot target directory")
+
+parser.add_argument("--secondpool", help="specify location of secondary hash pool")
+args = parser.parse_args()
+
 
 def addfilefromdebarchive(filestoverify,filequeue,filename,sha256,size):
 	size = int(size)
@@ -32,8 +41,6 @@ def addfilefromdebarchive(filestoverify,filequeue,filename,sha256,size):
 		else:
 			filequeue.append(filename)
 
-baseurl = sys.argv[1].encode('ascii')
-snapshotts = sys.argv[2].encode('ascii')
 
 #regex used for filename sanity checks
 pfnallowed = re.compile(b'[a-z0-9A-Z\-_:\+~\.]+',re.ASCII)
@@ -64,15 +71,28 @@ def getfile(path,sha256,size):
 			print('size mismatch on existing file in hash pool')
 			sys.exit(1)
 	else:
-		print('downloading '+path.decode('ascii')+' with hash '+sha256.decode('ascii'))
-		fileurl = baseurl + b'/' + snapshotts + b'/' + path
-		#fileurl = baseurl + hashfn[2:]
-		with urllib.request.urlopen(fileurl.decode('ascii')) as response:
-			data = response.read()
-			dt = parsedate_to_datetime(response.getheader('Last-Modified'))
-			if dt.tzinfo is None:
-				dt = dt.replace(tzinfo=timezone.utc)
-
+		secondhashfn = None
+		if args.secondpool is not None:
+			secondhashfn = os.path.join(args.secondpool.encode('ascii'),sha256[:2] +b'/'+ sha256[:4] +b'/'+ sha256)
+			#print(secondhashfn)
+			if not os.path.isfile(secondhashfn):
+				secondhashfn = None
+		if secondhashfn is None:
+			print('downloading '+path.decode('ascii')+' with hash '+sha256.decode('ascii'))
+			fileurl = baseurl + b'/' + snapshotts + b'/' + path
+			#fileurl = baseurl + hashfn[2:]
+			with urllib.request.urlopen(fileurl.decode('ascii')) as response:
+				data = response.read()
+				dt = parsedate_to_datetime(response.getheader('Last-Modified'))
+				if dt.tzinfo is None:
+					dt = dt.replace(tzinfo=timezone.utc)
+			ts = dt.timestamp()
+		else:
+			print('copying '+path.decode('ascii')+' with hash '+sha256.decode('ascii')+' from secondary pool')
+			f = open(secondhashfn,'rb')
+			data = f.read()
+			f.close()
+			ts = os.path.getmtime(secondhashfn)
 		sha256hash = hashlib.sha256(data)
 		sha256hashed = sha256hash.hexdigest().encode('ascii')
 		if (sha256 != sha256hashed):
@@ -89,7 +109,7 @@ def getfile(path,sha256,size):
 		f = open(hashfn,'wb')
 		f.write(data)
 		f.close()
-		ts = dt.timestamp()
+		
 		os.utime(hashfn,(ts,ts))
 	os.makedirs(os.path.dirname(path),exist_ok=True)
 	if os.path.isfile(path): # file already exists
@@ -110,139 +130,175 @@ def getfile(path,sha256,size):
 	else:
 		os.link(hashfn,path)
 
-fileurl = baseurl + b'/' + snapshotts +b'/snapshotindex.txt'
+baseurl = args.baseurl.encode('ascii')
 
-with urllib.request.urlopen(fileurl.decode('ascii')) as response:
-	filedata = response.read()
-	#print(response.getheaders())
-	dt = parsedate_to_datetime(response.getheader('Last-Modified'))
-	if dt.tzinfo is None:
-		dt = dt.replace(tzinfo=timezone.utc)
-	#print(repr(dt))
-
-f = open(b'snapshotindex.txt','wb')
-f.write(filedata)
-f.close()
-ts = dt.timestamp()
-os.utime(b'snapshotindex.txt',(ts,ts))
-
-knownfiles = OrderedDict()
-filequeue = deque()
-
-f = open(b'snapshotindex.txt','rb')
-for line in f:
-	line = line.strip()
-	filepath, sizeandsha = line.split(b' ')
-	if sizeandsha[:2] == b'->':
-		symlinktarget = sizeandsha[2:]
-		ensuresafepath(filepath)
-		ensuresafepath(symlinktarget)
-		os.makedirs(os.path.dirname(filepath),exist_ok=True)
-		if os.path.islink(filepath):
-			if os.readlink(filepath) != symlinktarget:
-				print('symlink already exists with wrong target')
-				sys.exit(1)
-		else:
-			os.symlink(symlinktarget,filepath)
+if '-' in args.timestamps:
+	with urllib.request.urlopen(baseurl.decode('ascii')) as response:
+		dirdata = response.read()
+	dirregex = re.compile(b'"[0-9]{12}/"',re.ASCII)
+	dirmatches = dirregex.findall(dirdata)
+	#print(repr(dirmatches))
+	dirnames = [dirmatch[1:13] for dirmatch in dirmatches]	
+	(start, end) = args.timestamps.split('-')
+	if start != '':
+		start = int(start)
 	else:
-		size,sha256 = sizeandsha.split(b':')
-		size = int(size)
-		knownfiles[filepath] = [sha256,size,'R']
-		if filepath.endswith(b'.gz'):
-			# process gz files with high priority so they can be used as substitutes for their uncompressed counterparts
-			filequeue.appendleft(filepath)
-		else:
-			filequeue.append(filepath)
-
-f.close()
-
-def openg(filepath):
-	if os.path.exists(filepath):
-		f = open(filepath,'rb')
+		start = 0	
+	if end != '':
+		end = int(end)
 	else:
-		f = gzip.open(filepath+b'.gz','rb')
-	return f
+		end = 999999999999
+	snapshottss = []
+	for dir in dirnames:
+		if (int(dir) >= start) and (int(dir) <= end):
+			snapshottss.append(dir)
 
-while filequeue:
-	filepath = filequeue.popleft()
-	print('processing '+filepath.decode('ascii'))
-	sha256,size,status = knownfiles[filepath]
-	if (filepath+b'.gz' not in knownfiles) or (status == 'R'):
-		
-		getfile(filepath,sha256,size)
-	pathsplit = filepath.split(b'/')
-	#print(pathsplit[-1])
-	#if (pathsplit[-1] == b'Packages'):
-	#	print(repr(pathsplit))
-	if (pathsplit[-1] == b'Release') and (pathsplit[-3] == b'dists'):
-		distdir = b'/'.join(pathsplit[:-1])
-		f = open(filepath,'rb')
-		insha256 = False;
-		for line in f:
-			#print(repr(line[0]))
-			if (line == b'SHA256:\n'):
-				insha256 = True
-			elif ((line[0] == 32) and insha256):
-				linesplit = line.split()
-				filename = distdir+b'/'+linesplit[2]
-				#if filename in knownfiles:
-				#	if files
-				print(filename)
-				addfilefromdebarchive(knownfiles,filequeue,filename,linesplit[0],linesplit[1]);
+	changedirs = True
+else:
+	snapshottss = [args.timestamps.encode('ascii')]
+	changedirs = False
+
+initialdir = os.getcwdb()
+
+for snapshotts in snapshottss:
+	snapshotdir = os.path.join(initialdir,snapshotts)
+	os.makedirs(snapshotdir,exist_ok=True)
+	os.chdir(snapshotdir)
+
+	fileurl = baseurl + b'/' + snapshotts +b'/snapshotindex.txt'
+
+	with urllib.request.urlopen(fileurl.decode('ascii')) as response:
+		filedata = response.read()
+		#print(response.getheaders())
+		dt = parsedate_to_datetime(response.getheader('Last-Modified'))
+		if dt.tzinfo is None:
+			dt = dt.replace(tzinfo=timezone.utc)
+		#print(repr(dt))
+
+	f = open(b'snapshotindex.txt.tmp','wb')
+	f.write(filedata)
+	f.close()
+	ts = dt.timestamp()
+	os.utime(b'snapshotindex.txt.tmp',(ts,ts))
+
+	knownfiles = OrderedDict()
+	filequeue = deque()
+
+	f = open(b'snapshotindex.txt.tmp','rb')
+	for line in f:
+		line = line.strip()
+		filepath, sizeandsha = line.split(b' ')
+		if sizeandsha[:2] == b'->':
+			symlinktarget = sizeandsha[2:]
+			ensuresafepath(filepath)
+			ensuresafepath(symlinktarget)
+			os.makedirs(os.path.dirname(filepath),exist_ok=True)
+			if os.path.islink(filepath):
+				if os.readlink(filepath) != symlinktarget:
+					print('symlink already exists with wrong target')
+					sys.exit(1)
 			else:
-				insha256 = False
-		f.close()
-	elif (pathsplit[-1] == b'Packages') and ((pathsplit[-5] == b'dists') or ((pathsplit[-3] == b'debian-installer') and (pathsplit[-6] == b'dists'))):
-					if pathsplit[-5] == b'dists':
-						toplevel = b'/'.join(pathsplit[:-5])
-					else:
-						toplevel = b'/'.join(pathsplit[:-6])
-					print('found packages file: '+filepath.decode('ascii'))
-					pf = openg(filepath)
-					filename = None
-					size = None
-					sha256 = None
-							
-					for line in pf:
-						linesplit = line.split()
-						if (len(linesplit) == 0):
-							if (filename != None):
-								addfilefromdebarchive(knownfiles,filequeue,filename,sha256,size);
-							filename = None
-							size = None
-							sha256 = None
-						elif (linesplit[0] == b'Filename:'):
-							filename = toplevel+b'/'+linesplit[1]
-						elif (linesplit[0] == b'Size:'):
-							size = linesplit[1]
-						elif (linesplit[0] == b'SHA256:'):
-							sha256 = linesplit[1]
-					pf.close()
-	elif (pathsplit[-1] == b'Sources') and (pathsplit[-5] == b'dists'):
-					print('found sources file: '+filepath.decode('ascii'))
-					toplevel = b'/'.join(pathsplit[:-5])
-					pf = openg(filepath)
-					filesfound = [];
-					directory = None
-					insha256p = False;
-					for line in pf:
-						linesplit = line.split()
-						if (len(linesplit) == 0):
-							for ls in filesfound:
-								#print(repr(ls))
-								addfilefromdebarchive(knownfiles,filequeue,toplevel+b'/'+directory+b'/'+ls[2],ls[0],ls[1]);
-							filesfound = [];
-							directory = None
-							insha256p = False
-						elif ((line[0] == 32) and insha256p):
-							filesfound.append(linesplit)
-						elif (linesplit[0] == b'Directory:'):
-							insha256p = False
-							directory = linesplit[1]
-						elif (linesplit[0] == b'Checksums-Sha256:'):
-							insha256p = True
+				os.symlink(symlinktarget,filepath)
+		else:
+			size,sha256 = sizeandsha.split(b':')
+			size = int(size)
+			knownfiles[filepath] = [sha256,size,'R']
+			if filepath.endswith(b'.gz'):
+				# process gz files with high priority so they can be used as substitutes for their uncompressed counterparts
+				filequeue.appendleft(filepath)
+			else:
+				filequeue.append(filepath)
+
+	f.close()
+
+	def openg(filepath):
+		if os.path.exists(filepath):
+			f = open(filepath,'rb')
+		else:
+			f = gzip.open(filepath+b'.gz','rb')
+		return f
+
+	while filequeue:
+		filepath = filequeue.popleft()
+		print('processing '+filepath.decode('ascii'))
+		sha256,size,status = knownfiles[filepath]
+		if (filepath+b'.gz' not in knownfiles) or (status == 'R'):
+		
+			getfile(filepath,sha256,size)
+		pathsplit = filepath.split(b'/')
+		#print(pathsplit[-1])
+		#if (pathsplit[-1] == b'Packages'):
+		#	print(repr(pathsplit))
+		if (pathsplit[-1] == b'Release') and (pathsplit[-3] == b'dists'):
+			distdir = b'/'.join(pathsplit[:-1])
+			f = open(filepath,'rb')
+			insha256 = False;
+			for line in f:
+				#print(repr(line[0]))
+				if (line == b'SHA256:\n'):
+					insha256 = True
+				elif ((line[0] == 32) and insha256):
+					linesplit = line.split()
+					filename = distdir+b'/'+linesplit[2]
+					#if filename in knownfiles:
+					#	if files
+					print(filename)
+					addfilefromdebarchive(knownfiles,filequeue,filename,linesplit[0],linesplit[1]);
+				else:
+					insha256 = False
+			f.close()
+		elif (pathsplit[-1] == b'Packages') and ((pathsplit[-5] == b'dists') or ((pathsplit[-3] == b'debian-installer') and (pathsplit[-6] == b'dists'))):
+						if pathsplit[-5] == b'dists':
+							toplevel = b'/'.join(pathsplit[:-5])
 						else:
-							insha256p = False
-					pf.close()
+							toplevel = b'/'.join(pathsplit[:-6])
+						print('found packages file: '+filepath.decode('ascii'))
+						pf = openg(filepath)
+						filename = None
+						size = None
+						sha256 = None
+							
+						for line in pf:
+							linesplit = line.split()
+							if (len(linesplit) == 0):
+								if (filename != None):
+									addfilefromdebarchive(knownfiles,filequeue,filename,sha256,size);
+								filename = None
+								size = None
+								sha256 = None
+							elif (linesplit[0] == b'Filename:'):
+								filename = toplevel+b'/'+linesplit[1]
+							elif (linesplit[0] == b'Size:'):
+								size = linesplit[1]
+							elif (linesplit[0] == b'SHA256:'):
+								sha256 = linesplit[1]
+						pf.close()
+		elif (pathsplit[-1] == b'Sources') and (pathsplit[-5] == b'dists'):
+						print('found sources file: '+filepath.decode('ascii'))
+						toplevel = b'/'.join(pathsplit[:-5])
+						pf = openg(filepath)
+						filesfound = [];
+						directory = None
+						insha256p = False;
+						for line in pf:
+							linesplit = line.split()
+							if (len(linesplit) == 0):
+								for ls in filesfound:
+									#print(repr(ls))
+									addfilefromdebarchive(knownfiles,filequeue,toplevel+b'/'+directory+b'/'+ls[2],ls[0],ls[1]);
+								filesfound = [];
+								directory = None
+								insha256p = False
+							elif ((line[0] == 32) and insha256p):
+								filesfound.append(linesplit)
+							elif (linesplit[0] == b'Directory:'):
+								insha256p = False
+								directory = linesplit[1]
+							elif (linesplit[0] == b'Checksums-Sha256:'):
+								insha256p = True
+							else:
+								insha256p = False
+						pf.close()
+	os.rename('snapshotindex.txt.tmp','snapshotindex.txt')
 			
 
