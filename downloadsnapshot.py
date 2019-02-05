@@ -13,6 +13,8 @@ import stat
 #from sortedcontainers import SortedList
 from collections import deque
 from collections import OrderedDict
+from datetime import datetime
+from email.utils import parsedate_to_datetime
 import re
 
 def addfilefromdebarchive(filestoverify,filequeue,filename,sha256,size):
@@ -63,9 +65,14 @@ def getfile(path,sha256,size):
 			sys.exit(1)
 	else:
 		print('downloading '+path.decode('ascii')+' with hash '+sha256.decode('ascii'))
-		fileurl = baseurl + hashfn[2:]
+		fileurl = baseurl + b'/' + snapshotts + b'/' + path
+		#fileurl = baseurl + hashfn[2:]
 		with urllib.request.urlopen(fileurl.decode('ascii')) as response:
 			data = response.read()
+			dt = parsedate_to_datetime(response.getheader('Last-Modified'))
+			if dt.tzinfo is None:
+				dt = dt.replace(tzinfo=timezone.utc)
+
 		sha256hash = hashlib.sha256(data)
 		sha256hashed = sha256hash.hexdigest().encode('ascii')
 		if (sha256 != sha256hashed):
@@ -82,6 +89,8 @@ def getfile(path,sha256,size):
 		f = open(hashfn,'wb')
 		f.write(data)
 		f.close()
+		ts = dt.timestamp()
+		os.utime(hashfn,(ts,ts))
 	os.makedirs(os.path.dirname(path),exist_ok=True)
 	if os.path.isfile(path): # file already exists
 		sh = os.stat(hashfn)
@@ -105,10 +114,17 @@ fileurl = baseurl + b'/' + snapshotts +b'/snapshotindex.txt'
 
 with urllib.request.urlopen(fileurl.decode('ascii')) as response:
 	filedata = response.read()
+	#print(response.getheaders())
+	dt = parsedate_to_datetime(response.getheader('Last-Modified'))
+	if dt.tzinfo is None:
+		dt = dt.replace(tzinfo=timezone.utc)
+	#print(repr(dt))
 
 f = open(b'snapshotindex.txt','wb')
 f.write(filedata)
 f.close()
+ts = dt.timestamp()
+os.utime(b'snapshotindex.txt',(ts,ts))
 
 knownfiles = OrderedDict()
 filequeue = deque()
