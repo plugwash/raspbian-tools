@@ -161,9 +161,12 @@ else:
 initialdir = os.getcwdb()
 
 for snapshotts in snapshottss:
-	snapshotdir = os.path.join(initialdir,snapshotts)
-	os.makedirs(snapshotdir,exist_ok=True)
-	os.chdir(snapshotdir)
+	if changedirs:
+		snapshotdir = os.path.join(initialdir,snapshotts)
+		os.makedirs(snapshotdir,exist_ok=True)
+		os.chdir(snapshotdir)
+		if os.path.isfile('snapshotindex.txt'):
+			continue #we already have this snapshot.
 
 	fileurl = baseurl + b'/' + snapshotts +b'/snapshotindex.txt'
 
