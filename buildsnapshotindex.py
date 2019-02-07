@@ -237,9 +237,14 @@ for filepath, (sha256,filesize,status) in knownfiles.items():
 		continue #we already have this in the hash pool
 	print('adding '+filepath.decode('ascii')+' with hash '+sha256.decode('ascii')+' to hash pool')
 	f = open(filepath,'rb')
-	data = f.read();
+	sha256hash = hashlib.sha256()
+	while True:
+		data = f.read(65536);
+		if not data:
+			break
+		sha256hash.update(data)
 	f.close()
-	sha256hash = hashlib.sha256(data)
+	
 	sha256hashed = sha256hash.hexdigest().encode('ascii')
 	if (sha256 != sha256hashed):
 		print('hash mismatch');
