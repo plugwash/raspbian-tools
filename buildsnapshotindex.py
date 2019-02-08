@@ -18,6 +18,7 @@ parser.add_argument("--recover", help="add missing files to snapshot from hashpo
 parser.add_argument("--internal", help="internal mode, various file path mangling for use in private repo on main server", action="store_true")
 parser.add_argument("--nohashpool", help="do not add files to hash pool", action="store_true")
 parser.add_argument("--noscanpool", help="do not perform file search in pool directories, just include files from Debian metadata",action="store_true")
+parser.add_argument("--addextrasources", help="add extra sources needed by outdated binaries and/or built-using fields", action="store_true")
 args = parser.parse_args()
 
 #regex used for filename sanity checks
@@ -50,7 +51,7 @@ def addfilefromdebarchive(filestoverify,filename,sha256,size):
 		status = 'A'
 	sha256andsize = [sha256,size,status]
 	if filename in filestoverify:
-		if (sha256andsize != filestoverify[filename]):
+		if (sha256andsize[0:1] != filestoverify[filename][0:1]):
 			print('error: same file with different hash/size old:'+repr(filestoverify[filename])+' new:'+repr(sha256andsize))
 			sys.exit(1)
 	else:
@@ -93,6 +94,8 @@ if args.internal:
 else:
 	dirlist = os.listdir('.')
 
+def isfilem(filepath):
+	return os.path.isfile(manglefilepath(filepath))
 
 def isdirm(filepath):
 	return os.path.isdir(manglefilepath(filepath))
@@ -118,6 +121,8 @@ for toplevel in dirlist:
 
 knownfiles = SortedDict() #sorted for reproducibility and to hopefully get better locality on file accesses.
 
+neededsources = set()
+
 for distdir, toplevel in distlocs:
 		f = openm(distdir+'/Release','rb')
 		insha256 = False;
@@ -128,6 +133,7 @@ for distdir, toplevel in distlocs:
 			elif ((line[0] == 32) and insha256):
 				linesplit = line.split()
 				filename = distdir.encode('ascii')+b'/'+linesplit[2]
+				component = (linesplit[2].split(b'/'))[0]
 				#if filename in knownfiles:
 				#	if files
 				addfilefromdebarchive(knownfiles,filename,linesplit[0],linesplit[1]);
@@ -137,21 +143,66 @@ for distdir, toplevel in distlocs:
 					filename = None
 					size = None
 					sha256 = None
+					packagefield = None
+					sourcefield = None
+					versionfield = None
+					builtusingfield = None
 							
 					for line in pf:
 						linesplit = line.split()
 						if (len(linesplit) == 0):
 							if (filename != None):
 								addfilefromdebarchive(knownfiles,filename,sha256,size);
+							if args.addextrasources and (packagefield is not None):
+								#print(packagefield)
+								#print(sourcefield)
+								if sourcefield is None:
+									sourcepackage = packagefield
+									sourceversion = versionfield
+								elif len(sourcefield) == 1:
+									sourcepackage = sourcefield[0]
+									sourceversion = versionfield
+								elif (sourcefield[1][0] == ord(b'(')) and (sourcefield[1][-1] == ord(b')')):
+									sourcepackage = sourcefield[0]
+									sourceversion = sourcefield[1][1:-1]
+								else:
+									#print(len(sourcefield))
+									#print(sourcefield[1][0])
+									#print(sourcefield[1][-1])
+									print('error: cannot decode source package and version')
+									sys.exit(1)
+								neededsources.add((toplevel,component,sourcepackage,sourceversion))
+							if args.addextrasources and (builtusingfield is not None):
+								builtusingfield = b' '.join(builtusingfield).split(b',')
+								for builtusingitem in builtusingfield:
+									builtusingitem = builtusingitem.strip()
+									(sourcepackage,sourceversion) = builtusingitem.split(b' ',1)
+									if (sourceversion[0:2] != b'(=') or (sourceversion[-1] != ord(b')')):
+										print("can't parse built-using")
+										sys.exit(1)
+									sourceversion = sourceversion[2:-1].strip()
+									neededsources.add((toplevel,component,sourcepackage,sourceversion))
 							filename = None
 							size = None
 							sha256 = None
+							packagefield = None
+							sourcefield = None
+							versionfield = None
+							builtusingfield = None
 						elif (linesplit[0] == b'Filename:'):
 							filename = toplevel+b'/'+linesplit[1]
 						elif (linesplit[0] == b'Size:'):
 							size = linesplit[1]
 						elif (linesplit[0] == b'SHA256:'):
 							sha256 = linesplit[1]
+						elif (linesplit[0] == b'Package:'):
+							packagefield = linesplit[1]
+						elif (linesplit[0] == b'Source:'):
+							sourcefield = linesplit[1:]
+						elif (linesplit[0] == b'Version:'):
+							versionfield = linesplit[1]
+						elif (linesplit[0] == b'Built-Using:'):
+							builtusingfield = linesplit[1:]
 					pf.close()
 				elif filename.endswith(b'Sources'):
 					print('found sources file: '+filename.decode('ascii'))
@@ -185,6 +236,72 @@ for distdir, toplevel in distlocs:
 
 def throwerror(error):
 	raise error
+
+
+if args.addextrasources:
+	missingsources = False
+	for (toplevel,component,source,version) in neededsources:
+		versionsplit = version.split(b':',1)
+		versionnoepoch = versionsplit[-1]
+		if source[0:3] == b'lib':
+			pooldir = source[0:4]
+		else:
+			pooldir = source[0:1]
+		filepath = toplevel+b'/pool/'+component+b'/'+pooldir+b'/'+source+b'/'+source+b'_'+versionnoepoch+b'.dsc'
+		components = [component]
+		
+		if component == b'non-free':
+			components.append(b'contrib')
+		if component != b'main':
+			components.append(b'main')
+		found = False
+		for testcomponent in components:
+			filepath = toplevel+b'/pool/'+testcomponent+b'/'+pooldir+b'/'+source+b'/'+source+b'_'+versionnoepoch+b'.dsc'
+			if filepath in knownfiles:
+				found = True
+				break
+			if not pfnallowed.fullmatch(source+b'_'+versionnoepoch+b'.dsc'):
+				print("file name contains unexpected characters")
+				sys.exit(1)
+			if isfilem(filepath):
+				f = openm(filepath,'rb')
+				data = f.read()
+				f.close()
+				sha256hash = hashlib.sha256(data)
+				sha256hashed = sha256hash.hexdigest().encode('ascii')
+				filesize = len(data)
+				knownfiles[filepath] = [sha256hashed,filesize,'R']
+				f.close()
+				f = openm(filepath,'rb')
+				insha256p = False
+				filesfound = []
+				for line in f:
+					linesplit = line.split()
+					if len(linesplit) == 0:
+						pass
+					elif ((line[0] == 32) and insha256p):
+						filesfound.append(linesplit)
+					elif (linesplit[0] == b'Checksums-Sha256:'):
+						insha256p = True
+					else:
+						insha256p = False
+					pf.close()
+				for ls in filesfound:
+					#print(repr(ls))
+					componentfilepath = toplevel+b'/pool/'+testcomponent+b'/'+pooldir+b'/'+source+b'/'+ls[2]
+					previouslyknown = componentfilepath in knownfiles
+					addfilefromdebarchive(knownfiles,componentfilepath,ls[0],ls[1]);
+					if not previouslyknown:
+						knownfiles[componentfilepath][2] = 'R'
+				f.close()
+				found = True
+		if not found:
+			filepath = toplevel+b'/pool/'+component+b'/'+pooldir+b'/'+source+b'/'+source+b'_'+versionnoepoch+b'.dsc'
+			missingsources = True
+			print((toplevel,component,source,version,filepath))
+	if missingsources:
+		print('aborting due to missing sources')
+		sys.exit(1)
 
 #print(knownfiles.items()[0])
 #sys.exit(1)
