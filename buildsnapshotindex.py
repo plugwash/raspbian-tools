@@ -11,9 +11,12 @@ from sortedcontainers import SortedDict
 from sortedcontainers import SortedList
 import argparse
 import re
+from itertools import chain
 
 parser = argparse.ArgumentParser(description="build a snapshot index file")
 parser.add_argument("--recover", help="add missing files to snapshot from hashpool if possible", action="store_true")
+parser.add_argument("--internal", help="internal mode, various file path mangling for use in private repo on main server", action="store_true")
+parser.add_argument("--nohashpool", help="do not add files to hash pool", action="store_true")
 args = parser.parse_args()
 
 #regex used for filename sanity checks
@@ -48,7 +51,28 @@ def addfilefromdebarchive(filestoverify,filename,sha256,size):
 	else:
 		filestoverify[filename] = sha256andsize
 
+def manglefilepath(filepath):
+	if args.internal:
+		#file paths may be either strings or bytes,
+		#convert to bytes for consistency during
+		#mangle process, convert back at end.
+		if isinstance(filepath,str):
+			filepath = filepath.encode('ascii')
+			asstr = True
+		else:
+			asstr = False
+		filepath = filepath.split(b'/')
+		if filepath[0] == b'raspbian':
+			filepath[0] = b'private'
+		else:
+			filepath = [b'..',b'repo'] + filepath
+		filepath = b'/'.join(filepath)
+		if asstr:
+			filepath = filepath.decode('ascii')
+	return filepath
+
 def openg(filepath):
+	filepath = manglefilepath(filepath)
 	if os.path.exists(filepath):
 		f = open(filepath,'rb')
 	else:
@@ -57,17 +81,40 @@ def openg(filepath):
 
 distlocs = []
 
-for toplevel in os.listdir('.'):
-	if os.path.isdir(toplevel+'/dists/'):
-		dists = os.listdir(toplevel+'/dists/')
+if args.internal:
+	dirlist = os.listdir('../repo')
+	if 'raspbian' not in dirlist:
+		dirlist.append('raspbian')
+else:
+	dirlist = os.listdir('.')
+
+
+def isdirm(filepath):
+	return os.path.isdir(manglefilepath(filepath))
+
+def islinkm(filepath):
+	return os.path.islink(manglefilepath(filepath))
+
+def listdirm(filepath):
+	return os.listdir(manglefilepath(filepath))
+
+def openm(filepath,mode):
+	return open(manglefilepath(filepath),mode)
+
+def readlinkm(filepath):
+	return os.readlink(manglefilepath(filepath))
+
+for toplevel in dirlist:
+	if isdirm(toplevel+'/dists/'):
+		dists = listdirm(toplevel+'/dists/')
 		for dist in dists:
-			if not os.path.islink(toplevel+'/dists/'+dist):
+			if not islinkm(toplevel+'/dists/'+dist):
 				distlocs.append((toplevel+'/dists/'+dist,toplevel.encode('ascii')))
 
 knownfiles = SortedDict() #sorted for reproducibility and to hopefully get better locality on file accesses.
 
 for distdir, toplevel in distlocs:
-		f = open(distdir+'/Release','rb')
+		f = openm(distdir+'/Release','rb')
 		insha256 = False;
 		for line in f:
 			#print(repr(line[0]))
@@ -130,6 +177,7 @@ for distdir, toplevel in distlocs:
 				insha256 = False
 		f.close()
 
+
 def throwerror(error):
 	raise error
 
@@ -142,7 +190,7 @@ for filepath, meta in knownfiles.items():
 	(sha256,filesize,status) = meta
 	if (filepath + b'.gz') in knownfiles:
 		print('found file '+filepath.decode('ascii')+'  with .gz counterpart')
-		f = gzip.open(filepath+b'.gz','rb')
+		f = gzip.open(manglefilepath(filepath)+b'.gz','rb')
 		data = f.read();
 		f.close()
 		sha256hash = hashlib.sha256(data)
@@ -155,21 +203,46 @@ for filepath, meta in knownfiles.items():
 			sys.exit(1)
 		knownfiles[filepath][2] = 'U'
 
+if args.internal:
+	towalk = chain(os.walk('../repo',True,throwerror,False),os.walk('private/dists',True,throwerror,False),os.walk('private/pool',True,throwerror,False))
+else:
+	towalk = os.walk('.',True,throwerror,False)
 
-for (dirpath,dirnames,filenames) in os.walk('.',True,throwerror,False):
+for (dirpath,dirnames,filenames) in towalk:
 	#if dirpath == './raspbian/dists':
 	#	print(dirpath)
 	#	print(dirnames)
 	#	print(filenames)
 	#print(dirpath)
+	physicaldirpath = dirpath
+	if args.internal:
+		if dirpath == '../repo':
+			i = 0
+			while i < len(dirnames):
+				if dirnames[i] == 'raspbian':
+					del dirnames[i]
+				else:
+					i += 1
+		dirpath = dirpath.split('/')
+		if dirpath[0] == '..' and dirpath[1] == 'repo':
+			dirpath = ['.'] + dirpath[2:]
+		elif dirpath[0] == 'private':
+			dirpath = ['.','raspbian'] + dirpath[1:]
+		else:
+			print("can't demangle dir path")
+			sys.exit(1)
+		dirpath = '/'.join(dirpath)
+		print('scanning logical path '+dirpath+' physical path '+physicaldirpath)
+	else:
+		print('scanning '+dirpath)
 	for filename in (filenames+dirnames): #os.walk seems to regard symlinks to directories as directories.
 		filepath = os.path.join(dirpath,filename)[2:].encode('ascii') # [2:] is to strip the ./ prefix
 		#print(filepath)
-		if os.path.islink(filepath):
+		if islinkm(filepath):
 			symlinks.add(filepath)
 	for filename in filenames:
 		filepath = os.path.join(dirpath,filename)[2:].encode('ascii') # [2:] is to strip the ./ prefix
-		if not os.path.islink(filepath) and filepath != b'snapshotindex.txt':
+		if not islinkm(filepath) and filepath != b'snapshotindex.txt':
 			if filepath in knownfiles:
 				if knownfiles[filepath][2] == 'M':
 					knownfiles[filepath][2] = 'N'
@@ -180,7 +253,7 @@ for (dirpath,dirnames,filenames) in os.walk('.',True,throwerror,False):
 					sys.exit(1)
 			else:
 				#print(filepath)
-				f = open(filepath,'rb')
+				f = openm(filepath,'rb')
 				data = f.read();
 				f.close()
 				sha256hash = hashlib.sha256(data)
@@ -228,29 +301,30 @@ if missingcount > 0:
 		print('missing files, aborting')
 		sys.exit(1)
 
-for filepath, (sha256,filesize,status) in knownfiles.items():
-	if status == 'U':
-		continue #we don't bother storing uncompressed versions of compressed files.
-	hashdir = b'../hashpool/'+sha256[:2]+b'/'+sha256[:4]
-	hashfn = hashdir + b'/' + sha256
-	if os.path.isfile(hashfn):
-		continue #we already have this in the hash pool
-	print('adding '+filepath.decode('ascii')+' with hash '+sha256.decode('ascii')+' to hash pool')
-	f = open(filepath,'rb')
-	sha256hash = hashlib.sha256()
-	while True:
-		data = f.read(65536);
-		if not data:
-			break
-		sha256hash.update(data)
-	f.close()
+if not args.nohashpool:
+	for filepath, (sha256,filesize,status) in knownfiles.items():
+		if status == 'U':
+			continue #we don't bother storing uncompressed versions of compressed files.
+		hashdir = b'../hashpool/'+sha256[:2]+b'/'+sha256[:4]
+		hashfn = hashdir + b'/' + sha256
+		if os.path.isfile(hashfn):
+			continue #we already have this in the hash pool
+		print('adding '+filepath.decode('ascii')+' with hash '+sha256.decode('ascii')+' to hash pool')
+		f = openm(filepath,'rb')
+		sha256hash = hashlib.sha256()
+		while True:
+			data = f.read(65536);
+			if not data:
+				break
+			sha256hash.update(data)
+		f.close()
 	
-	sha256hashed = sha256hash.hexdigest().encode('ascii')
-	if (sha256 != sha256hashed):
-		print('hash mismatch');
-		sys.exit(1)
-	os.makedirs(hashdir,exist_ok=True)
-	os.link(filepath,hashfn)
+		sha256hashed = sha256hash.hexdigest().encode('ascii')
+		if (sha256 != sha256hashed):
+			print('hash mismatch');
+			sys.exit(1)
+		os.makedirs(hashdir,exist_ok=True)
+		os.link(manglefilepath(filepath),hashfn)
 
 f = open('snapshotindex.txt','wb')
 for filepath, (sha256,filesize,status) in knownfiles.items():
@@ -262,7 +336,7 @@ for filepath, (sha256,filesize,status) in knownfiles.items():
 		f.write(filepath+b' '+str(filesize).encode('ascii')+b':'+sha256+b'\n')
 
 for filepath in symlinks:
-		f.write(filepath+b' ->'+os.readlink(filepath)+b'\n')
+		f.write(filepath+b' ->'+readlinkm(filepath)+b'\n')
 
 f.close()
 
