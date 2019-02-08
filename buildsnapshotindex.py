@@ -17,6 +17,7 @@ parser = argparse.ArgumentParser(description="build a snapshot index file")
 parser.add_argument("--recover", help="add missing files to snapshot from hashpool if possible", action="store_true")
 parser.add_argument("--internal", help="internal mode, various file path mangling for use in private repo on main server", action="store_true")
 parser.add_argument("--nohashpool", help="do not add files to hash pool", action="store_true")
+parser.add_argument("--noscanpool", help="do not perform file search in pool directories, just include files from Debian metadata",action="store_true")
 args = parser.parse_args()
 
 #regex used for filename sanity checks
@@ -43,7 +44,11 @@ def addfilefromdebarchive(filestoverify,filename,sha256,size):
 		print('invalid character in sha256 hash')
 		sys.exit(1)	
 	size = int(size)
-	sha256andsize = [sha256,size,'M']
+	status = 'M'
+	filenamesplit = filename.split(b'/')
+	if args.noscanpool and (filenamesplit[1] == b'pool'):
+		status = 'A'
+	sha256andsize = [sha256,size,status]
 	if filename in filestoverify:
 		if (sha256andsize != filestoverify[filename]):
 			print('error: same file with different hash/size old:'+repr(filestoverify[filename])+' new:'+repr(sha256andsize))
@@ -204,7 +209,10 @@ for filepath, meta in knownfiles.items():
 		knownfiles[filepath][2] = 'U'
 
 if args.internal:
-	towalk = chain(os.walk('../repo',True,throwerror,False),os.walk('private/dists',True,throwerror,False),os.walk('private/pool',True,throwerror,False))
+	if args.noscanpool:
+		towalk = chain(os.walk('../repo',True,throwerror,False),os.walk('private/dists',True,throwerror,False))
+	else:
+		towalk = chain(os.walk('../repo',True,throwerror,False),os.walk('private/dists',True,throwerror,False),os.walk('private/pool',True,throwerror,False))
 else:
 	towalk = os.walk('.',True,throwerror,False)
 
@@ -235,6 +243,16 @@ for (dirpath,dirnames,filenames) in towalk:
 		print('scanning logical path '+dirpath+' physical path '+physicaldirpath)
 	else:
 		print('scanning '+dirpath)
+	if args.noscanpool:
+		dirpathsplit = dirpath.split('/')
+		if len(dirpathsplit) == 2:
+			i = 0
+			while i < len(dirnames):
+				if dirnames[i] == 'pool':
+					del dirnames[i]
+				else:
+					i += 1
+					
 	for filename in (filenames+dirnames): #os.walk seems to regard symlinks to directories as directories.
 		filepath = os.path.join(dirpath,filename)[2:].encode('ascii') # [2:] is to strip the ./ prefix
 		#print(filepath)
@@ -268,6 +286,7 @@ normalcount = 0
 rootcount = 0
 missingcount = 0
 uncompressedcount = 0
+assumedcount = 0
 
 for filepath, (sha256hashed,filesize,status) in knownfiles.items():
 	if status == 'N':
@@ -279,6 +298,8 @@ for filepath, (sha256hashed,filesize,status) in knownfiles.items():
 		print('missing file: '+filepath.decode('ascii'))
 	elif status == 'U':
 		uncompressedcount +=1
+	elif status == 'A':
+		assumedcount +=1
 	else:
 		print('unknown status')
 		sys.exit(1)
@@ -286,6 +307,8 @@ for filepath, (sha256hashed,filesize,status) in knownfiles.items():
 print('normal count:'+str(normalcount))
 print('root count: '+str(rootcount))
 print('uncompressed count: '+str(uncompressedcount))
+if args.noscanpool:
+	print('assumed count: '+str(assumedcount))
 print('missing count: '+str(missingcount))
 
 if missingcount > 0:
