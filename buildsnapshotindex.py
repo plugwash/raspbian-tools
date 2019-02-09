@@ -12,6 +12,7 @@ from sortedcontainers import SortedList
 import argparse
 import re
 from itertools import chain
+from collections import defaultdict
 
 parser = argparse.ArgumentParser(description="build a snapshot index file")
 parser.add_argument("--recover", help="add missing files to snapshot from hashpool if possible", action="store_true")
@@ -32,7 +33,7 @@ def ensuresafepath(path):
 		sys.exit(1)
 	for component in pathsplit:
 		if not pfnallowed.fullmatch(component):
-			print("file name contains unexpected characters")
+			print("file name "+repr(filename)+" contains unexpected characters")
 			sys.exit(1)
 		elif component[0] == '.':
 			print("filenames starting with a dot are not allowed")
@@ -121,7 +122,7 @@ for toplevel in dirlist:
 
 knownfiles = SortedDict() #sorted for reproducibility and to hopefully get better locality on file accesses.
 
-neededsources = set()
+neededsources = defaultdict(list)
 
 for distdir, toplevel in distlocs:
 		f = openm(distdir+'/Release','rb')
@@ -171,7 +172,8 @@ for distdir, toplevel in distlocs:
 									#print(sourcefield[1][-1])
 									print('error: cannot decode source package and version')
 									sys.exit(1)
-								neededsources.add((toplevel,component,sourcepackage,sourceversion))
+								sourcedetails = (toplevel,component,sourcepackage,sourceversion)
+								neededsources[sourcedetails].append((packagefield,versionfield))
 							if args.addextrasources and (builtusingfield is not None):
 								builtusingfield = b' '.join(builtusingfield).split(b',')
 								for builtusingitem in builtusingfield:
@@ -181,7 +183,8 @@ for distdir, toplevel in distlocs:
 										print("can't parse built-using")
 										sys.exit(1)
 									sourceversion = sourceversion[2:-1].strip()
-									neededsources.add((toplevel,component,sourcepackage,sourceversion))
+									sourcedetails = (toplevel,component,sourcepackage,sourceversion)
+									neededsources[sourcedetails].append((packagefield,versionfield))
 							filename = None
 							size = None
 							sha256 = None
@@ -240,7 +243,7 @@ def throwerror(error):
 
 if args.addextrasources:
 	missingsources = False
-	for (toplevel,component,source,version) in neededsources:
+	for ((toplevel,component,source,version),binaries) in neededsources.items():
 		versionsplit = version.split(b':',1)
 		versionnoepoch = versionsplit[-1]
 		if source[0:3] == b'lib':
@@ -261,7 +264,7 @@ if args.addextrasources:
 				found = True
 				break
 			if not pfnallowed.fullmatch(source+b'_'+versionnoepoch+b'.dsc'):
-				print("file name contains unexpected characters")
+				print("file name contains "+repr(source+b'_'+versionnoepoch+b'.dsc')+" unexpected characters")
 				sys.exit(1)
 			if isfilem(filepath):
 				f = openm(filepath,'rb')
@@ -299,6 +302,8 @@ if args.addextrasources:
 			filepath = toplevel+b'/pool/'+component+b'/'+pooldir+b'/'+source+b'/'+source+b'_'+versionnoepoch+b'.dsc'
 			missingsources = True
 			print((toplevel,component,source,version,filepath))
+			for binary in binaries:
+				print(binary)
 	if missingsources:
 		print('aborting due to missing sources')
 		sys.exit(1)
@@ -389,14 +394,17 @@ for (dirpath,dirnames,filenames) in towalk:
 			else:
 				#print(filepath)
 				f = openm(filepath,'rb')
-				data = f.read();
+				filesize = 0
+				sha256hash = hashlib.sha256()
+				while True:
+					data = f.read(65536);
+					if not data:
+						break
+					filesize += len(data)
+					sha256hash.update(data)
 				f.close()
-				sha256hash = hashlib.sha256(data)
+	
 				sha256hashed = sha256hash.hexdigest().encode('ascii')
-				filesize = len(data)
-				if filesize is None:
-					print('wtf filesize is none')
-					sys.exit(1)
 				knownfiles[filepath] = [sha256hashed,filesize,'R']
 
 normalcount = 0
