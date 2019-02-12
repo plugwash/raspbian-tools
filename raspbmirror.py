@@ -129,7 +129,7 @@ def getfile(path,sha256,size):
 			return # no download needed but rename is
 	elif path in oldknownfiles: 
 		#shortcut exit if file is unchanged, we skip this if a .new file was detected because
-		#that means some sort of update was going on to the file.
+		#that means some sort of update was going on to the file and may need to be finished/cleaned up.
 		oldsha256,oldsize,oldstatus = oldknownfiles[path]
 		if (oldsha256 == sha256) and (oldsize == size):
 			return # no update needed
@@ -182,9 +182,9 @@ symlinkupdates = list()
 fileupdates = set()
 
 def opengu(filepath):
-	print('in opengu')
-	print('filepath = '+repr(filepath))
-	print('fileupdates = '+repr(fileupdates))
+	#print('in opengu')
+	#print('filepath = '+repr(filepath))
+	#print('fileupdates = '+repr(fileupdates))
 	f = None
 	if (filepath in fileupdates):
 		print((b'opening '+filepath+b'.new for '+filepath).decode('ascii'))
