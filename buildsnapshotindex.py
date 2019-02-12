@@ -242,6 +242,47 @@ def throwerror(error):
 	raise error
 
 
+def adddsc(prefix, filepath):
+	f = openm(prefix + filepath, 'rb')
+	data = f.read()
+	f.close()
+	sha256hash = hashlib.sha256(data)
+	sha256hashed = sha256hash.hexdigest().encode('ascii')
+	filesize = len(data)
+	knownfiles[filepath] = [sha256hashed, filesize, 'R']
+	f.close()
+	f = openm(prefix + filepath, 'rb')
+	insha256p = False
+	filesfound = []
+	for line in f:
+		linesplit = line.split()
+		if len(linesplit) == 0:
+			pass
+		elif ((line[0] == 32) and insha256p):
+			filesfound.append(linesplit)
+		elif (linesplit[0] == b'Checksums-Sha256:'):
+			insha256p = True
+		else:
+			insha256p = False
+		pf.close()
+	for ls in filesfound:
+		# print(repr(ls))
+		componentfilepath = toplevel + b'/pool/' + testcomponent + b'/' + pooldir + b'/' + source + b'/' + ls[2]
+		previouslyknown = componentfilepath in knownfiles
+		addfilefromdebarchive(knownfiles, componentfilepath, ls[0], ls[1]);
+		if not previouslyknown:
+			knownfiles[componentfilepath][2] = 'R'
+		if (prefix != b'') and not isfilem(componentfilepath):
+			if prefix + componentfilepath != manglefilepath(componentfilepath):
+				print('recovering ' + componentfilepath.decode('ascii') + ' from ' + prefix.decode('ascii'))
+				os.link(prefix + componentfilepath, manglefilepath(componentfilepath))
+	if (prefix != b'') and not isfilem(filepath):
+		if prefix + filepath != manglefilepath(filepath):
+			print('recovering ' + filepath.decode('ascii') + ' from ' + repr(prefix))
+			os.link(prefix + filepath, manglefilepath(filepath))
+	f.close()
+
+
 if args.addextrasources:
 	missingsources = False
 	for ((toplevel,component,source,version),binaries) in neededsources.items():
@@ -272,44 +313,7 @@ if args.addextrasources:
 				print("file name contains "+repr(source+b'_'+versionnoepoch+b'.dsc')+" unexpected characters")
 				sys.exit(1)
 			if isfilem(prefix+filepath):
-				f = openm(prefix+filepath,'rb')
-				data = f.read()
-				f.close()
-				sha256hash = hashlib.sha256(data)
-				sha256hashed = sha256hash.hexdigest().encode('ascii')
-				filesize = len(data)
-				knownfiles[filepath] = [sha256hashed,filesize,'R']
-				f.close()
-				f = openm(prefix+filepath,'rb')
-				insha256p = False
-				filesfound = []
-				for line in f:
-					linesplit = line.split()
-					if len(linesplit) == 0:
-						pass
-					elif ((line[0] == 32) and insha256p):
-						filesfound.append(linesplit)
-					elif (linesplit[0] == b'Checksums-Sha256:'):
-						insha256p = True
-					else:
-						insha256p = False
-					pf.close()
-				for ls in filesfound:
-					#print(repr(ls))
-					componentfilepath = toplevel+b'/pool/'+testcomponent+b'/'+pooldir+b'/'+source+b'/'+ls[2]
-					previouslyknown = componentfilepath in knownfiles
-					addfilefromdebarchive(knownfiles,componentfilepath,ls[0],ls[1]);
-					if not previouslyknown:
-						knownfiles[componentfilepath][2] = 'R'
-					if (prefix != b'') and not isfilem(componentfilepath):
-						if prefix + componentfilepath != manglefilepath(componentfilepath):
-							print('recovering '+componentfilepath.decode('ascii')+' from '+prefix.decode('ascii'))
-							os.link(prefix+componentfilepath,manglefilepath(componentfilepath))
-				if (prefix != b'') and not isfilem(filepath):
-					if prefix + filepath != manglefilepath(filepath):
-						print('recovering '+filepath.decode('ascii')+' from '+repr(prefix))
-						os.link(prefix+filepath,manglefilepath(filepath))
-				f.close()
+				adddsc(prefix,filepath)
 				found = True
 		if not found:
 			filepath = toplevel+b'/pool/'+component+b'/'+pooldir+b'/'+source+b'/'+source+b'_'+versionnoepoch+b'.dsc'
