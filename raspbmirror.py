@@ -156,8 +156,19 @@ def getfile(path,sha256,size):
 	else:
 		outputpath = path
 	fileurl = baseurl + b'/' + path
-	print('downloading '+fileurl.decode('ascii')+' with hash '+sha256.decode('ascii')+' to '+outputpath.decode('ascii'))
-	(data,ts) = geturl(fileurl)
+	if path+b'.gz' in knownfiles:
+		if path+b'.gz' in fileupdates:
+			gzfile = path+b'.gz.new'
+		else:
+			gzfile = path+b'.gz'
+		print('uncompressing '+gzfile.decode('ascii')+' with hash '+sha256.decode('ascii')+' to '+outputpath.decode('ascii'))
+		f = gzip.open(gzfile)
+		data = f.read()
+		f.close()
+		ts = os.path.getmtime(gzfile)
+	else:
+		print('downloading '+fileurl.decode('ascii')+' with hash '+sha256.decode('ascii')+' to '+outputpath.decode('ascii'))
+		(data,ts) = geturl(fileurl)
 	sha256hash = hashlib.sha256(data)
 	sha256hashed = sha256hash.hexdigest().encode('ascii')
 	if (sha256 != sha256hashed):
