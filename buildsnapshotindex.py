@@ -13,6 +13,7 @@ import argparse
 import re
 from itertools import chain,product
 from collections import defaultdict
+import subprocess
 
 parser = argparse.ArgumentParser(description="build a snapshot index file")
 parser.add_argument("--recover", help="add missing files to snapshot from hashpool if possible", action="store_true")
@@ -21,6 +22,7 @@ parser.add_argument("--internalrecover", help="when in internal mode recover mis
 parser.add_argument("--nohashpool", help="do not add files to hash pool", action="store_true")
 parser.add_argument("--noscanpool", help="do not perform file search in pool directories, just include files from Debian metadata",action="store_true")
 parser.add_argument("--addextrasources", help="add extra sources needed by outdated binaries and/or built-using fields", action="store_true")
+parser.add_argument("--sssextrasources", help="download missing extra sources for main component using snapshotsecure")
 args = parser.parse_args()
 
 #regex used for filename sanity checks
@@ -314,6 +316,15 @@ if args.addextrasources:
 				sys.exit(1)
 			if isfilem(prefix+filepath):
 				adddsc(prefix,filepath)
+				found = True
+		if (not found) and (args.sssextrasources is not None):
+			filepath = toplevel+b'/pool/'+testcomponent+b'/'+pooldir+b'/'+source+b'/'+source+b'_'+versionnoepoch+b'.dsc'
+			filepathm = manglefilepath(filepath)
+			command = [args.sssextrasources,source,version]
+			print(command, flush=True)
+			if (subprocess.call(command,cwd=os.path.dirname(filepathm)) != 0): exit(1)
+			if isfilem(filepath):
+				adddsc(b'',filepath)
 				found = True
 		if not found:
 			filepath = toplevel+b'/pool/'+component+b'/'+pooldir+b'/'+source+b'/'+source+b'_'+versionnoepoch+b'.dsc'
