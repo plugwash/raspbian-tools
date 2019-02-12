@@ -124,7 +124,7 @@ def getfile(path,sha256,size):
 		sha256hash = hashlib.sha256(data)
 		sha256hashed = sha256hash.hexdigest().encode('ascii')
 		if (sha256 == sha256hashed) and (size == len(data)):
-			print('existing file '+path+' matched by hash and size')
+			print('existing file '+path.decode('ascii')+' matched by hash and size')
 			fileupdates.add(path)
 			return # no download needed but rename is
 	elif path in oldknownfiles: 
