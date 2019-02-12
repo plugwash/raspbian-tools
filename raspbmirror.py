@@ -200,6 +200,8 @@ def opengu(filepath):
 		f = gzip.open(filepath+b'.gz','rb')
 	return f
 
+oldsymlinks = set()
+newsymlinks = set()
 
 for stage in ("scanexisting","downloadnew"):
 	if stage == "downloadnew":
@@ -229,12 +231,16 @@ for stage in ("scanexisting","downloadnew"):
 			ensuresafepath(filepath)
 			ensuresafepath(symlinktarget)
 			os.makedirs(os.path.dirname(filepath),exist_ok=True)
-			if os.path.islink(filepath):
-				if os.readlink(filepath) != symlinktarget:
-					symlinkupdates.append((filepath,symlinktarget))
+			if stage == "scanexisting":
+				oldsymlinks.add(filepath)
 			else:
-				print('creating symlink '+filepath.decode('ascii')+' -> '+symlinktarget.decode('ascii'))
-				os.symlink(symlinktarget,filepath)
+				if os.path.islink(filepath):
+					if os.readlink(filepath) != symlinktarget:
+						symlinkupdates.append((filepath,symlinktarget))
+				else:
+					print('creating symlink '+filepath.decode('ascii')+' -> '+symlinktarget.decode('ascii'))
+					os.symlink(symlinktarget,filepath)
+				newsymlinks.add(filepath)
 		else:
 			size,sha256 = sizeandsha.split(b':')
 			size = int(size)
@@ -361,7 +367,13 @@ for (filepath,symlinktarget) in symlinkupdates:
 	os.symlink(symlinktarget,filepath)
 
 
-removedfiles = set(oldknownfiles.keys()) - set(knownfiles.keys())
+removedfiles = (set(oldknownfiles.keys()) | oldsymlinks) - (set(knownfiles.keys()) | newsymlinks)
+
+def isemptydir(dirpath):
+	#scandir would be significantly more efficient, but needs python 3.6 or above
+	#which is not reasonable to expect at this time.
+	#return os.path.isdir(dirpath) and ((next(os.scandir(dirpath), None)) is None)
+	return os.path.isdir(dirpath) and (len(os.listdir(dirpath)) == 0)
 
 for filepath in removedfiles:
 	#file may not actually exist, either due to earlier updates gone-wrong
@@ -370,6 +382,12 @@ for filepath in removedfiles:
 	if os.path.exists(filepath): 
 		print('removing '+filepath.decode('ascii'))
 		os.remove(filepath)
+		#clean up empty directories.
+		dirpath = os.path.dirname(filepath)
+		while (len(dirpath) != 0) and isemptydir(dirpath):
+			print('removing empty dir '+dirpath.decode('ascii'))
+			os.rmdir(dirpath)
+			dirpath = os.path.dirname(dirpath)
 
 os.rename('snapshotindex.txt.tmp','snapshotindex.txt')
 
