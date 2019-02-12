@@ -11,12 +11,13 @@ from sortedcontainers import SortedDict
 from sortedcontainers import SortedList
 import argparse
 import re
-from itertools import chain
+from itertools import chain,product
 from collections import defaultdict
 
 parser = argparse.ArgumentParser(description="build a snapshot index file")
 parser.add_argument("--recover", help="add missing files to snapshot from hashpool if possible", action="store_true")
 parser.add_argument("--internal", help="internal mode, various file path mangling for use in private repo on main server", action="store_true")
+parser.add_argument("--internalrecover", help="when in internal mode recover missing extra sources from public repo to private repo", action="store_true")
 parser.add_argument("--nohashpool", help="do not add files to hash pool", action="store_true")
 parser.add_argument("--noscanpool", help="do not perform file search in pool directories, just include files from Debian metadata",action="store_true")
 parser.add_argument("--addextrasources", help="add extra sources needed by outdated binaries and/or built-using fields", action="store_true")
@@ -258,7 +259,11 @@ if args.addextrasources:
 		if component != b'main':
 			components.append(b'main')
 		found = False
-		for testcomponent in components:
+		prefixes = [b'']
+		if args.internalrecover:
+			prefixes.append(b'../repo/')
+		for (prefix,testcomponent) in product(prefixes,components):
+			#print('checking '+filepath.decode('ascii'))
 			filepath = toplevel+b'/pool/'+testcomponent+b'/'+pooldir+b'/'+source+b'/'+source+b'_'+versionnoepoch+b'.dsc'
 			if filepath in knownfiles:
 				found = True
@@ -266,8 +271,8 @@ if args.addextrasources:
 			if not pfnallowed.fullmatch(source+b'_'+versionnoepoch+b'.dsc'):
 				print("file name contains "+repr(source+b'_'+versionnoepoch+b'.dsc')+" unexpected characters")
 				sys.exit(1)
-			if isfilem(filepath):
-				f = openm(filepath,'rb')
+			if isfilem(prefix+filepath):
+				f = openm(prefix+filepath,'rb')
 				data = f.read()
 				f.close()
 				sha256hash = hashlib.sha256(data)
@@ -275,7 +280,7 @@ if args.addextrasources:
 				filesize = len(data)
 				knownfiles[filepath] = [sha256hashed,filesize,'R']
 				f.close()
-				f = openm(filepath,'rb')
+				f = openm(prefix+filepath,'rb')
 				insha256p = False
 				filesfound = []
 				for line in f:
@@ -296,6 +301,14 @@ if args.addextrasources:
 					addfilefromdebarchive(knownfiles,componentfilepath,ls[0],ls[1]);
 					if not previouslyknown:
 						knownfiles[componentfilepath][2] = 'R'
+					if (prefix != b'') and not isfilem(componentfilepath):
+						if prefix + componentfilepath != manglefilepath(componentfilepath):
+							print('recovering '+componentfilepath.decode('ascii')+' from '+prefix.decode('ascii'))
+							os.link(prefix+componentfilepath,manglefilepath(componentfilepath))
+				if (prefix != b'') and not isfilem(filepath):
+					if prefix + filepath != manglefilepath(filepath):
+						print('recovering '+filepath.decode('ascii')+' from '+repr(prefix))
+						os.link(prefix+filepath,manglefilepath(filepath))
 				f.close()
 				found = True
 		if not found:
@@ -304,6 +317,7 @@ if args.addextrasources:
 			print((toplevel,component,source,version,filepath))
 			for binary in binaries:
 				print(binary)
+			
 	if missingsources:
 		print('aborting due to missing sources')
 		sys.exit(1)
