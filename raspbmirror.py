@@ -156,8 +156,8 @@ def getfile(path,sha256,size):
 	else:
 		outputpath = path
 	pathsplit = path.split(b'/')
-	if (args.internal is not None) and (pathsplit[0] == 'raspbian'):
-		fileurl = args.internal +b'/private/' + b'/'.join(pathsplit[1:])
+	if (args.internal is not None) and (pathsplit[0] == b'raspbian'):
+		fileurl = args.internal.encode('ascii') +b'/private/' + b'/'.join(pathsplit[1:])
 	else:
 		fileurl = baseurl + b'/' + path
 	data = None
@@ -217,7 +217,11 @@ def getfile(path,sha256,size):
 	
 
 baseurl = args.baseurl.encode('ascii')
-fileurl = baseurl +b'/snapshotindex.txt'
+if args.internal is not None:
+	fileurl = args.internal.encode('ascii') + b'/snapshotindex.txt'
+else:
+	fileurl = baseurl +b'/snapshotindex.txt'
+
 
 symlinkupdates = list()
 fileupdates = set()
