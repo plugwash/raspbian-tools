@@ -70,7 +70,7 @@ def geturl(fileurl):
 			dt = parsedate_to_datetime(response.getheader('Last-Modified'))
 			if dt.tzinfo is None:
 				dt = dt.replace(tzinfo=timezone.utc)
-				ts = dt.timestamp()
+			ts = dt.timestamp()
 	return (data,ts)
 
 def getfile(path,sha256,size):
