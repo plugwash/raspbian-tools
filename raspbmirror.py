@@ -320,7 +320,7 @@ for stage in ("scanexisting","downloadnew"):
 
 	while filequeue:
 		filepath = filequeue.popleft()
-		print('processing '+filepath.decode('ascii'))
+		#print('processing '+filepath.decode('ascii'))
 		sha256,size,status = knownfiles[filepath]
 		if (stage == "downloadnew") and ((filepath+b'.gz' not in knownfiles) or (status == 'R') or os.path.exists(filepath)):
 			getfile(filepath,sha256,size)
