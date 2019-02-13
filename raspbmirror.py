@@ -155,7 +155,11 @@ def getfile(path,sha256,size):
 		outputpath = path+b'.new'
 	else:
 		outputpath = path
-	fileurl = baseurl + b'/' + path
+	pathsplit = path.split(b'/')
+	if (args.internal is not None) and (pathsplit[0] == 'raspbian'):
+		fileurl = args.internal +b'/private/' + b'/'.join(pathsplit[1:])
+	else:
+		fileurl = baseurl + b'/' + path
 	if path+b'.gz' in knownfiles:
 		if path+b'.gz' in fileupdates:
 			gzfile = path+b'.gz.new'
