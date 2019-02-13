@@ -115,7 +115,8 @@ def getfile(path,sha256,size):
 	#	f.close()
 	#	
 	#	os.utime(hashfn,(ts,ts))
-	os.makedirs(os.path.dirname(path),exist_ok=True)
+	if len(os.path.dirname(path)) > 0:
+		os.makedirs(os.path.dirname(path),exist_ok=True)
 	if os.path.isfile(path+b'.new'): # file with .new extension already exists
 				#.new file already exists, lets check the hash
 		f = open(path+b'.new','rb')
@@ -276,7 +277,8 @@ for stage in ("scanexisting","downloadnew"):
 			symlinktarget = sizeandsha[2:]
 			ensuresafepath(filepath)
 			ensuresafepath(symlinktarget)
-			os.makedirs(os.path.dirname(filepath),exist_ok=True)
+			if len(os.path.dirname(filepath)) > 0:
+				os.makedirs(os.path.dirname(filepath),exist_ok=True)
 			if stage == "scanexisting":
 				oldsymlinks.add(filepath)
 			else:
