@@ -161,30 +161,31 @@ def getfile(path,sha256,size):
 	else:
 		fileurl = baseurl + b'/' + path
 	data = None
-	for sourcepool in args.sourcepool:
-		if pathsplit[1] == b'pool':
-			spp = os.path.join(sourcepool,b'/'.join(pathsplit[2:]))
-			if os.path.isfile(spp)  and (size == os.path.getsize(spp)):
-				print('trying file from sourcepool '+spp.decode('ascii'))
-				ts = os.path.getmtime(spp)
-				f = open(spp,'rb')
-				data = f.read()
-				f.close()
-				sha256hash = hashlib.sha256(data)
-				sha256hashed = sha256hash.hexdigest().encode('ascii')
-				if (sha256 != sha256hashed):
-					#print(repr(filesize))
-					#print(repr(sha256))
-					#print(repr(sha256hashed))
-					print('hash mismatch while trying file from sourcepool, ignoring file');
-					data = None
-					continue
-				try:
-					os.link(spp,outputpath)
-					print('successfully hardlinked file to source pool')
-					return
-				except:
-					print('file in souce pool was good but hard linking failed, copying file instead')
+	if args.sourcepool is not None:
+		for sourcepool in args.sourcepool:
+			if pathsplit[1] == b'pool':
+				spp = os.path.join(sourcepool,b'/'.join(pathsplit[2:]))
+				if os.path.isfile(spp)  and (size == os.path.getsize(spp)):
+					print('trying file from sourcepool '+spp.decode('ascii'))
+					ts = os.path.getmtime(spp)
+					f = open(spp,'rb')
+					data = f.read()
+					f.close()
+					sha256hash = hashlib.sha256(data)
+					sha256hashed = sha256hash.hexdigest().encode('ascii')
+					if (sha256 != sha256hashed):
+						#print(repr(filesize))
+						#print(repr(sha256))
+						#print(repr(sha256hashed))
+						print('hash mismatch while trying file from sourcepool, ignoring file');
+						data = None
+						continue
+					try:
+						os.link(spp,outputpath)
+						print('successfully hardlinked file to source pool')
+						return
+					except:
+						print('file in souce pool was good but hard linking failed, copying file instead')
 	if data is None:
 		if path+b'.gz' in knownfiles:
 			if path+b'.gz' in fileupdates:
