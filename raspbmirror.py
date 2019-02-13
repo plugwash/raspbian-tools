@@ -32,8 +32,24 @@ def addfilefromdebarchive(filestoverify,filequeue,filename,sha256,size):
 	sha256andsize = [sha256,size,'M']
 	if filename in filestoverify:
 		if (sha256andsize != filestoverify[filename]):
-			print('error: same file with different hash/size old:'+repr(filestoverify[filename])+' new:'+repr(sha256andsize))
-			sys.exit(1)
+			if stage == 'scanexisting':
+				print('warning: same file with different hash/size during scanexisting phase old:'+repr(filestoverify[filename])+' new:'+repr(sha256andsize))
+				#find existing sha1/size of file on disk if it exists
+				if os.path.isfile(filename):
+					f = open(filename,'rb')
+					data = f.read()
+					f.close()
+					sha256hash = hashlib.sha256(data)
+					sha256hashed = sha256hash.hexdigest().encode('ascii')
+					size = len(data)
+				else:
+					#otherwise we have no idea
+					sha256 = None
+					size = None
+				filestoverify[filename] = [sha256,size,'M']
+			else:
+				print('error: same file with different hash/size during downloadnew phase old:'+repr(filestoverify[filename])+' new:'+repr(sha256andsize))
+				sys.exit(1)
 	else:
 		filestoverify[filename] = sha256andsize
 		if filename.endswith(b'.gz'):
