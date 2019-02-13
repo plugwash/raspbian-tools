@@ -22,7 +22,7 @@ parser = argparse.ArgumentParser(description="mirror raspbian repo.")
 parser.add_argument("baseurl", help="base url for source repo")
 parser.add_argument("--internal", help="base URL for private repo (internal use only)")
 #parser.add_argument("timestamps", help="timestamp or range of timestamps to download, if a single timestamp is used then the current director is assumed to be the snapshot target directory, otherwise the current directory is assumed to be the directory above the snapshot target directory")
-parser.add_argument("--sourcepool", help="specify a source pool to look for packages in before downloading them (useful if maintaining multiple mirrors)",action='append', nargs='*')
+parser.add_argument("--sourcepool", help="specify a source pool to look for packages in before downloading them (useful if maintaining multiple mirrors)",action='append')
 
 args = parser.parse_args()
 
@@ -180,6 +180,9 @@ def getfile(path,sha256,size):
 	data = None
 	if args.sourcepool is not None:
 		for sourcepool in args.sourcepool:
+			#print(repr(args.sourcepool))
+			#print(repr(sourcepool))
+			sourcepool = sourcepool.encode('ascii')
 			if pathsplit[1] == b'pool':
 				spp = os.path.join(sourcepool,b'/'.join(pathsplit[2:]))
 				if os.path.isfile(spp)  and (size == os.path.getsize(spp)):
