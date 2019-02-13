@@ -22,8 +22,8 @@ parser = argparse.ArgumentParser(description="mirror raspbian repo.")
 parser.add_argument("baseurl", help="base url for source repo")
 parser.add_argument("--internal", help="base URL for private repo (internal use only)")
 #parser.add_argument("timestamps", help="timestamp or range of timestamps to download, if a single timestamp is used then the current director is assumed to be the snapshot target directory, otherwise the current directory is assumed to be the directory above the snapshot target directory")
+parser.add_argument("--sourcepool", help="specify a source pool to look for packages in before downloading them (useful if maintaining multiple mirrors)",action='append', nargs='*')
 
-#parser.add_argument("--secondpool", help="specify location of secondary hash pool")
 args = parser.parse_args()
 
 
@@ -160,27 +160,53 @@ def getfile(path,sha256,size):
 		fileurl = args.internal +b'/private/' + b'/'.join(pathsplit[1:])
 	else:
 		fileurl = baseurl + b'/' + path
-	if path+b'.gz' in knownfiles:
-		if path+b'.gz' in fileupdates:
-			gzfile = path+b'.gz.new'
+	data = None
+	for sourcepool in args.sourcepool:
+		if pathsplit[1] == b'pool':
+			spp = os.path.join(sourcepool,b'/'.join(pathsplit[2:]))
+			if os.path.isfile(spp)  and (size == os.path.getsize(spp)):
+				print('trying file from sourcepool '+spp.decode('ascii'))
+				ts = os.path.getmtime(spp)
+				f = open(spp,'rb')
+				data = f.read()
+				f.close()
+				sha256hash = hashlib.sha256(data)
+				sha256hashed = sha256hash.hexdigest().encode('ascii')
+				if (sha256 != sha256hashed):
+					#print(repr(filesize))
+					#print(repr(sha256))
+					#print(repr(sha256hashed))
+					print('hash mismatch while trying file from sourcepool, ignoring file');
+					data = None
+					continue
+				try:
+					os.link(spp,outputpath)
+					print('successfully hardlinked file to source pool')
+					return
+				except:
+					print('file in souce pool was good but hard linking failed, copying file instead')
+	if data is None:
+		if path+b'.gz' in knownfiles:
+			if path+b'.gz' in fileupdates:
+				gzfile = path+b'.gz.new'
+			else:
+				gzfile = path+b'.gz'
+			print('uncompressing '+gzfile.decode('ascii')+' with hash '+sha256.decode('ascii')+' to '+outputpath.decode('ascii'))
+			f = gzip.open(gzfile)
+			data = f.read()
+			f.close()
+			ts = os.path.getmtime(gzfile)
 		else:
-			gzfile = path+b'.gz'
-		print('uncompressing '+gzfile.decode('ascii')+' with hash '+sha256.decode('ascii')+' to '+outputpath.decode('ascii'))
-		f = gzip.open(gzfile)
-		data = f.read()
-		f.close()
-		ts = os.path.getmtime(gzfile)
-	else:
-		print('downloading '+fileurl.decode('ascii')+' with hash '+sha256.decode('ascii')+' to '+outputpath.decode('ascii'))
-		(data,ts) = geturl(fileurl)
-	sha256hash = hashlib.sha256(data)
-	sha256hashed = sha256hash.hexdigest().encode('ascii')
-	if (sha256 != sha256hashed):
-		#print(repr(filesize))
-		#print(repr(sha256))
-		#print(repr(sha256hashed))
-		print('hash mismatch while downloading file '+path.decode('ascii')+' '+sha256.decode('ascii')+' '+sha256hashed.decode('ascii'));
-		sys.exit(1)
+			print('downloading '+fileurl.decode('ascii')+' with hash '+sha256.decode('ascii')+' to '+outputpath.decode('ascii'))
+			(data,ts) = geturl(fileurl)
+		sha256hash = hashlib.sha256(data)
+		sha256hashed = sha256hash.hexdigest().encode('ascii')
+		if (sha256 != sha256hashed):
+			#print(repr(filesize))
+			#print(repr(sha256))
+			#print(repr(sha256hashed))
+			print('hash mismatch while downloading file '+path.decode('ascii')+' '+sha256.decode('ascii')+' '+sha256hashed.decode('ascii'));
+			sys.exit(1)
 	if len(data) != size:
 		print('size mismatch while downloading file')
 		sys.exit(1)
