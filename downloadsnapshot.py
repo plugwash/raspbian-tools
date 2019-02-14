@@ -20,7 +20,7 @@ import re
 
 parser = argparse.ArgumentParser(description="download one or more raspbian snapshots")
 parser.add_argument("baseurl", help="base url for snapshot source")
-parser.add_argument("timestamps", help="timestamp or range of timestamps to download, if a single timestamp is used then the current director is assumed to be the snapshot target directory, otherwise the current directory is assumed to be the directory above the snapshot target directory")
+parser.add_argument("timestamps", help="timestamp or range of timestamps to download, if a single timestamp is used then the current director is assumed to be the snapshot target directory, otherwise the current directory is assumed to be the directory above the snapshot target directory, if this parameter is not specified then baseurl is assumed to point to an individual snapshot rather than a snapshot collection",nargs='?')
 
 parser.add_argument("--secondpool", help="specify location of secondary hash pool")
 args = parser.parse_args()
@@ -79,7 +79,7 @@ def getfile(path,sha256,size):
 				secondhashfn = None
 		if secondhashfn is None:
 			print('downloading '+path.decode('ascii')+' with hash '+sha256.decode('ascii'))
-			fileurl = baseurl + b'/' + snapshotts + b'/' + path
+			fileurl = snapshotbaseurl + b'/' + path
 			#fileurl = baseurl + hashfn[2:]
 			with urllib.request.urlopen(fileurl.decode('ascii')) as response:
 				data = response.read()
@@ -132,7 +132,10 @@ def getfile(path,sha256,size):
 
 baseurl = args.baseurl.encode('ascii')
 
-if '-' in args.timestamps:
+if args.timestamps is None:
+	snapshottss = [None]
+	changedirs = False
+elif '-' in args.timestamps:
 	with urllib.request.urlopen(baseurl.decode('ascii')) as response:
 		dirdata = response.read()
 	dirregex = re.compile(b'"[0-9]{12}/"',re.ASCII)
@@ -167,8 +170,11 @@ for snapshotts in snapshottss:
 		os.chdir(snapshotdir)
 		if os.path.isfile('snapshotindex.txt'):
 			continue #we already have this snapshot.
-
-	fileurl = baseurl + b'/' + snapshotts +b'/snapshotindex.txt'
+	if snapshotts is None:
+		snapshotbaseurl = baseurl
+	else:
+		snapshotbaseurl = baseurl + b'/' + snapshotts
+	fileurl = snapshotbaseurl +b'/snapshotindex.txt'
 
 	with urllib.request.urlopen(fileurl.decode('ascii')) as response:
 		filedata = response.read()
