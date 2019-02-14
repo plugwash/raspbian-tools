@@ -23,6 +23,8 @@ parser.add_argument("baseurl", help="base url for snapshot source")
 parser.add_argument("timestamps", help="timestamp or range of timestamps to download, if a single timestamp is used then the current director is assumed to be the snapshot target directory, otherwise the current directory is assumed to be the directory above the snapshot target directory, if this parameter is not specified then baseurl is assumed to point to an individual snapshot rather than a snapshot collection",nargs='?')
 
 parser.add_argument("--secondpool", help="specify location of secondary hash pool")
+parser.add_argument("--tlwhitelist", help="specify comma-seperated whitelist of top-level directories")
+
 args = parser.parse_args()
 
 
@@ -184,27 +186,31 @@ for snapshotts in snapshottss:
 		snapshotbaseurl = baseurl + b'/' + snapshotts
 	fileurl = snapshotbaseurl +b'/snapshotindex.txt'
 
-	with urllib.request.urlopen(fileurl.decode('ascii')) as response:
-		filedata = response.read()
-		#print(response.getheaders())
-		dt = parsedate_to_datetime(response.getheader('Last-Modified'))
-		if dt.tzinfo is None:
-			dt = dt.replace(tzinfo=timezone.utc)
-		#print(repr(dt))
+	(filedata,ts) = geturl(fileurl)
 
 	f = open(b'snapshotindex.txt.tmp','wb')
 	f.write(filedata)
 	f.close()
-	ts = dt.timestamp()
 	os.utime(b'snapshotindex.txt.tmp',(ts,ts))
 
 	knownfiles = OrderedDict()
 	filequeue = deque()
 
+	if args.tlwhitelist is not None:
+		ffilter = open('snapshotindex.txt.filter','wb')
+		tlwhitelist = set(args.tlwhitelist.encode('ascii').split(b','))
+
 	f = open(b'snapshotindex.txt.tmp','rb')
 	for line in f:
 		line = line.strip()
 		filepath, sizeandsha = line.split(b' ')
+		if args.tlwhitelist is not None:
+			filepathsplit = filepath.split(b'/')
+			if filepathsplit[0] not in tlwhitelist:
+				#print(repr(tlwhitelist))
+				#print(repr(filepathsplit[0]))
+				continue
+			ffilter.write(line+b'\n')
 		if sizeandsha[:2] == b'->':
 			symlinktarget = sizeandsha[2:]
 			ensuresafepath(filepath)
@@ -316,6 +322,12 @@ for snapshotts in snapshottss:
 							else:
 								insha256p = False
 						pf.close()
-	os.rename('snapshotindex.txt.tmp','snapshotindex.txt')
+	f.close()
+	if args.tlwhitelist is not None:
+		ffilter.close()
+		os.remove('snapshotindex.txt.tmp')
+		os.rename('snapshotindex.txt.filter','snapshotindex.txt')
+	else:
+		os.rename('snapshotindex.txt.tmp','snapshotindex.txt')
 			
 
