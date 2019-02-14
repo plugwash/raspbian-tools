@@ -351,7 +351,7 @@ for stage in ("scanexisting","downloadnew"):
 					filename = distdir+b'/'+linesplit[2]
 					#if filename in knownfiles:
 					#	if files
-					print(filename)
+					#print(filename)
 					addfilefromdebarchive(knownfiles,filequeue,filename,linesplit[0],linesplit[1]);
 				else:
 					insha256 = False
