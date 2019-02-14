@@ -60,6 +60,19 @@ def ensuresafepath(path):
 			sys.exit(1)
 	
 
+def geturl(fileurl):
+	with urllib.request.urlopen(fileurl.decode('ascii')) as response:
+		data = response.read()
+		#print(fileurl[:7])
+		if fileurl[:7] == b'file://':
+			ts = os.path.getmtime(fileurl[7:])
+		else:
+			dt = parsedate_to_datetime(response.getheader('Last-Modified'))
+			if dt.tzinfo is None:
+				dt = dt.replace(tzinfo=timezone.utc)
+			ts = dt.timestamp()
+	return (data,ts)
+
 def getfile(path,sha256,size):
 	ensuresafepath(path)
 	if not shaallowed.fullmatch(sha256):
@@ -81,12 +94,7 @@ def getfile(path,sha256,size):
 			print('downloading '+path.decode('ascii')+' with hash '+sha256.decode('ascii'))
 			fileurl = snapshotbaseurl + b'/' + path
 			#fileurl = baseurl + hashfn[2:]
-			with urllib.request.urlopen(fileurl.decode('ascii')) as response:
-				data = response.read()
-				dt = parsedate_to_datetime(response.getheader('Last-Modified'))
-				if dt.tzinfo is None:
-					dt = dt.replace(tzinfo=timezone.utc)
-			ts = dt.timestamp()
+			(data,ts) = geturl(fileurl)
 		else:
 			print('copying '+path.decode('ascii')+' with hash '+sha256.decode('ascii')+' from secondary pool')
 			f = open(secondhashfn,'rb')
