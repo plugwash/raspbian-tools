@@ -23,6 +23,7 @@ parser.add_argument("baseurl", help="base url for source repo")
 parser.add_argument("--internal", help="base URL for private repo (internal use only)")
 #parser.add_argument("timestamps", help="timestamp or range of timestamps to download, if a single timestamp is used then the current director is assumed to be the snapshot target directory, otherwise the current directory is assumed to be the directory above the snapshot target directory")
 parser.add_argument("--sourcepool", help="specify a source pool to look for packages in before downloading them (useful if maintaining multiple mirrors)",action='append')
+parser.add_argument("--tmpdir", help="specify a temporary directory to avoid storing temporary files in the output tree, must be on the same filesystem as the output tree")
 
 args = parser.parse_args()
 
@@ -89,6 +90,12 @@ def geturl(fileurl):
 			ts = dt.timestamp()
 	return (data,ts)
 
+def makenewpath(path):
+	if args.tmpdir is None:
+		return path+b'.new'
+	else:
+		return os.path.join(args.tmpdir.encode('ascii'),(path+b'.new').replace(b'/',b'~'))
+
 def getfile(path,sha256,size):
 	ensuresafepath(path)
 	if not shaallowed.fullmatch(sha256):
@@ -133,9 +140,8 @@ def getfile(path,sha256,size):
 	#	os.utime(hashfn,(ts,ts))
 	if len(os.path.dirname(path)) > 0:
 		os.makedirs(os.path.dirname(path),exist_ok=True)
-	if os.path.isfile(path+b'.new'): # file with .new extension already exists
-				#.new file already exists, lets check the hash
-		f = open(path+b'.new','rb')
+	if os.path.isfile(makenewpath(path)): # "new" file already exists, lets check the hash
+		f = open(makenewpath(path),'rb')
 		data = f.read()
 		f.close()
 		sha256hash = hashlib.sha256(data)
@@ -145,7 +151,7 @@ def getfile(path,sha256,size):
 			fileupdates.add(path)
 			return # no download needed but rename is
 	elif path in oldknownfiles: 
-		#shortcut exit if file is unchanged, we skip this if a .new file was detected because
+		#shortcut exit if file is unchanged, we skip this if a "new" file was detected because
 		#that means some sort of update was going on to the file and may need to be finished/cleaned up.
 		oldsha256,oldsize,oldstatus = oldknownfiles[path]
 		if (oldsha256 == sha256) and (oldsize == size):
@@ -160,16 +166,16 @@ def getfile(path,sha256,size):
 			if (sha256 == sha256hashed) and (size == len(data)):
 				print('existing file '+path.decode('ascii')+' matched by hash and size')
 				return # no update needed
-				if os.path.isfile(path+b'.new'): 
-					#if file is up to date but a .new file exists and is bad
+				if os.path.isfile(makenewpath(path)): 
+					#if file is up to date but a "new" file exists and is bad
 					#(we wouldn't have got this far if it was good)
-					#schedule the .new file for removal by adding it to "oldknownfiles"
-					oldknownfiles[path+b'.new'] = 'stalenewfile'
+					#schedule the "new" file for removal by adding it to "oldknownfiles"
+					oldknownfiles[makenewpath(path)] = 'stalenewfile'
 	if os.path.isfile(path): # file already exists
 		fileupdates.add(path)
-		if os.path.isfile(path+b'.new'):
-			os.remove(path+b'.new')
-		outputpath = path+b'.new'
+		if os.path.isfile(makenewpath(path)):
+			os.remove(makenewpath(path))
+		outputpath = makenewpath(path)
 	else:
 		outputpath = path
 	pathsplit = path.split(b'/')
@@ -209,7 +215,7 @@ def getfile(path,sha256,size):
 	if data is None:
 		if path+b'.gz' in knownfiles:
 			if path+b'.gz' in fileupdates:
-				gzfile = path+b'.gz.new'
+				gzfile = makenewpath(path+b'.gz')
 			else:
 				gzfile = path+b'.gz'
 			print('uncompressing '+gzfile.decode('ascii')+' with hash '+sha256.decode('ascii')+' to '+outputpath.decode('ascii'))
@@ -253,11 +259,11 @@ def opengu(filepath):
 	#print('fileupdates = '+repr(fileupdates))
 	f = None
 	if (filepath in fileupdates):
-		print((b'opening '+filepath+b'.new for '+filepath).decode('ascii'))
-		f = open(filepath+b'.new','rb')
+		print((b'opening '+makenewpath(filepath)+b' for '+filepath).decode('ascii'))
+		f = open(makenewpath(filepath),'rb')
 	elif (filepath+b'.gz' in fileupdates):
-		print((b'opening '+filepath+b'.gz.new for '+filepath).decode('ascii'))
-		f = gzip.open(filepath+b'.gz.new','rb')
+		print((b'opening '+makenewpath(filepath+b'.gz')+b' for '+filepath).decode('ascii'))
+		f = gzip.open(makenewpath(filepath+b'.gz'),'rb')
 	elif os.path.exists(filepath):
 		print((b'opening '+filepath+b' for '+filepath).decode('ascii'))
 		f = open(filepath,'rb')
@@ -425,8 +431,8 @@ for stage in ("scanexisting","downloadnew"):
 						pf.close()
 
 for filepath in fileupdates:
-	print((b'renaming '+filepath+b'.new to '+filepath).decode('ascii'))
-	os.replace(filepath+b'.new',filepath)
+	print((b'renaming '+makenewpath(filepath)+b' to '+filepath).decode('ascii'))
+	os.replace(makenewpath(filepath),filepath)
 
 for (filepath,symlinktarget) in symlinkupdates:
 	print('updating symlink '+filepath.decode('ascii')+' -> '+symlinktarget.decode('ascii'))
