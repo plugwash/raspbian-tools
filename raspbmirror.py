@@ -165,12 +165,12 @@ def getfile(path,sha256,size):
 			sha256hashed = sha256hash.hexdigest().encode('ascii')
 			if (sha256 == sha256hashed) and (size == len(data)):
 				print('existing file '+path.decode('ascii')+' matched by hash and size')
-				return # no update needed
-				if os.path.isfile(makenewpath(path)): 
+				if os.path.isfile(makenewpath(path)):
 					#if file is up to date but a "new" file exists and is bad
 					#(we wouldn't have got this far if it was good)
 					#schedule the "new" file for removal by adding it to "oldknownfiles"
 					oldknownfiles[makenewpath(path)] = 'stalenewfile'
+				return  # no update needed
 	if os.path.isfile(path): # file already exists
 		fileupdates.add(path)
 		if os.path.isfile(makenewpath(path)):
