@@ -19,7 +19,8 @@ import argparse
 import re
 
 parser = argparse.ArgumentParser(description="mirror raspbian repo.")
-parser.add_argument("baseurl", help="base url for source repo")
+parser.add_argument("baseurl", help="base url for source repo",nargs='?')
+parser.add_argument("mdurl", help="base url for mirrordirector",nargs='?')
 parser.add_argument("--internal", help="base URL for private repo (internal use only)")
 #parser.add_argument("timestamps", help="timestamp or range of timestamps to download, if a single timestamp is used then the current director is assumed to be the snapshot target directory, otherwise the current directory is assumed to be the directory above the snapshot target directory")
 parser.add_argument("--sourcepool", help="specify a source pool to look for packages in before downloading them (useful if maintaining multiple mirrors)",action='append')
@@ -223,27 +224,71 @@ def getfile(path,sha256,size):
 			data = f.read()
 			f.close()
 			ts = os.path.getmtime(gzfile)
+			if not checkdatahash(data, sha256, 'hash mismatch while uncompressing file ', path, ''):
+				sys.exit(1)
+			if len(data) != size:
+				print('size mismatch while uncompressing file')
+				sys.exit(1)
+
+	#use slicing so we don't error if pathsplit only has one item
+	if (data is None) and (mdurl is not None) and (pathsplit[1:2] == [b'pool']):
+		try:
+			fileurl = mdurl + b'/' + path
+			#fileurl = mdurl + b'/' + b'/'.join(pathsplit[1:])
+			print('downloading ' + fileurl.decode('ascii') + ' with hash ' + sha256.decode('ascii') + ' to ' + outputpath.decode('ascii'))
+			(data, ts) = geturl(fileurl)
+			if not checkdatahash(data, sha256, 'hash mismatch while downloading file from mirrordirector ', path, ' trying main server instead'):
+				data = None
+			elif len(data) != size:
+				print('size mismatch while downloading file from mirrordirector, trying main server instead')
+				data = None
+		except Exception as e:
+			print('exception '+str(e)+ ' while downloading file from mirrordirector, trying main server instead')
+			data = None
+	if data is None:
+		if (args.internal is not None) and (pathsplit[0] == b'raspbian'):
+			fileurl = args.internal.encode('ascii') +b'/private/' + b'/'.join(pathsplit[1:])
 		else:
-			print('downloading '+fileurl.decode('ascii')+' with hash '+sha256.decode('ascii')+' to '+outputpath.decode('ascii'))
-			(data,ts) = geturl(fileurl)
-		sha256hash = hashlib.sha256(data)
-		sha256hashed = sha256hash.hexdigest().encode('ascii')
-		if (sha256 != sha256hashed):
-			#print(repr(filesize))
-			#print(repr(sha256))
-			#print(repr(sha256hashed))
-			print('hash mismatch while downloading file '+path.decode('ascii')+' '+sha256.decode('ascii')+' '+sha256hashed.decode('ascii'));
+			fileurl = baseurl + b'/' + path
+		print('downloading '+fileurl.decode('ascii')+' with hash '+sha256.decode('ascii')+' to '+outputpath.decode('ascii'))
+		(data,ts) = geturl(fileurl)
+		if not checkdatahash(data, sha256, 'hash mismatch while downloading file ', path, ''):
 			sys.exit(1)
-	if len(data) != size:
-		print('size mismatch while downloading file')
-		sys.exit(1)
+		if len(data) != size:
+			print('size mismatch while downloading file')
+			sys.exit(1)
+
 	f = open(outputpath,'wb')
 	f.write(data)
 	f.close()
 	os.utime(outputpath,(ts,ts))
-	
 
-baseurl = args.baseurl.encode('ascii')
+
+def checkdatahash(data, sha256, errorprefix, path, errorsuffix):
+	sha256hash = hashlib.sha256(data)
+	sha256hashed = sha256hash.hexdigest().encode('ascii')
+	if (sha256 != sha256hashed):
+		# print(repr(filesize))
+		# print(repr(sha256))
+		# print(repr(sha256hashed))
+		print(errorprefix + path.decode('ascii') + ' ' + sha256.decode('ascii') + ' ' + sha256hashed.decode(
+			'ascii')+errorsuffix);
+		return False
+	return True
+
+
+if args.mdurl is None:
+	mdurl = None
+else:
+	mdurl = args.mdurl.encode('ascii')
+
+if args.baseurl is None:
+	baseurl = b'https://archive.raspbian.org'
+	mdurl = b'http://mirrordirector.raspbian.org'
+else:
+	baseurl = args.baseurl.encode('ascii')
+
+
 if args.internal is not None:
 	fileurl = args.internal.encode('ascii') + b'/snapshotindex.txt'
 else:
