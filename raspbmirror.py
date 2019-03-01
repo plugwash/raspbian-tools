@@ -325,10 +325,10 @@ for stage in ("scanexisting","downloadnew"):
 		oldknownfiles = knownfiles
 		(filedata,ts) = geturl(fileurl) 
 
-		f = open(b'snapshotindex.txt.tmp','wb')
+		f = open(makenewpath(b'snapshotindex.txt'),'wb')
 		f.write(filedata)
 		f.close()
-		os.utime(b'snapshotindex.txt.tmp',(ts,ts))
+		os.utime(makenewpath(b'snapshotindex.txt'),(ts,ts))
 
 	knownfiles = OrderedDict()
 	filequeue = deque()
@@ -339,7 +339,7 @@ for stage in ("scanexisting","downloadnew"):
 		else:
 			continue
 	else:
-		f = open(b'snapshotindex.txt.tmp','rb')
+		f = open(makenewpath(b'snapshotindex.txt'),'rb')
 	for line in f:
 		line = line.strip()
 		filepath, sizeandsha = line.split(b' ')
@@ -507,5 +507,5 @@ for filepath in removedfiles:
 			os.rmdir(dirpath)
 			dirpath = os.path.dirname(dirpath)
 
-os.rename('snapshotindex.txt.tmp','snapshotindex.txt')
+os.rename(makenewpath(b'snapshotindex.txt'),b'snapshotindex.txt')
 
