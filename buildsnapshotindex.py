@@ -411,7 +411,7 @@ for (dirpath,dirnames,filenames) in towalk:
 			symlinks.add(filepath)
 	for filename in filenames:
 		filepath = os.path.join(dirpath,filename)[2:].encode('ascii') # [2:] is to strip the ./ prefix
-		if not islinkm(filepath) and filepath != b'snapshotindex.txt':
+		if not islinkm(filepath) and not filepath.startswith(b'snapshotindex.txt'):
 			if filepath in knownfiles:
 				if knownfiles[filepath][2] == 'M':
 					knownfiles[filepath][2] = 'N'
