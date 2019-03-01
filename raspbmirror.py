@@ -33,7 +33,7 @@ def addfilefromdebarchive(filestoverify,filequeue,filename,sha256,size):
 	size = int(size)
 	sha256andsize = [sha256,size,'M']
 	if filename in filestoverify:
-		if (sha256andsize != filestoverify[filename]):
+		if (sha256andsize[0:2] != filestoverify[filename][0:2]):
 			if stage == 'scanexisting':
 				print('warning: same file with different hash/size during scanexisting phase old:'+repr(filestoverify[filename])+' new:'+repr(sha256andsize))
 				#find existing sha1/size of file on disk if it exists
