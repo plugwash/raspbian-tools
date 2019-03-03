@@ -17,6 +17,7 @@ from datetime import datetime
 from email.utils import parsedate_to_datetime
 import argparse
 import re
+from heapq import heappush, heappop
 
 parser = argparse.ArgumentParser(description="mirror raspbian repo.")
 parser.add_argument("baseurl", help="base url for source repo",nargs='?')
@@ -25,6 +26,12 @@ parser.add_argument("--internal", help="base URL for private repo (internal use 
 #parser.add_argument("timestamps", help="timestamp or range of timestamps to download, if a single timestamp is used then the current director is assumed to be the snapshot target directory, otherwise the current directory is assumed to be the directory above the snapshot target directory")
 parser.add_argument("--sourcepool", help="specify a source pool to look for packages in before downloading them (useful if maintaining multiple mirrors)",action='append')
 parser.add_argument("--tmpdir", help="specify a temporary directory to avoid storing temporary files in the output tree, must be on the same filesystem as the output tree")
+
+#debug option to set the index file used for the "downloadnew" phase but not the "finalize" phase, used to test error recovery.
+parser.add_argument("--debugfif", help=argparse.SUPPRESS)
+#debug option to set the source url used to download "dists" files during the "downloadnew" phase, used to test error recovery.
+parser.add_argument("--debugfdistsurl", help=argparse.SUPPRESS)
+
 
 args = parser.parse_args()
 
@@ -54,11 +61,17 @@ def addfilefromdebarchive(filestoverify,filequeue,filename,sha256,size):
 				sys.exit(1)
 	else:
 		filestoverify[filename] = sha256andsize
+		addtofilequeue(filequeue,filename)
+
+def addtofilequeue(filequeue,filename):
+	filenamesplit = filename.split(b'/')
+	if b'dists' in filenamesplit:
 		if filename.endswith(b'.gz'):
 			# process gz files with high priority so they can be used as substitutes for their uncompressed counterparts
-			filequeue.appendleft(filename)
+			heappush(filequeue,(10,filename))
 		else:
-			filequeue.append(filename)
+			heappush(filequeue,(20,filename))
+	heappush(filequeue,(30,filename))
 
 
 #regex used for filename sanity checks
@@ -155,7 +168,7 @@ def getfile(path,sha256,size):
 		#shortcut exit if file is unchanged, we skip this if a "new" file was detected because
 		#that means some sort of update was going on to the file and may need to be finished/cleaned up.
 		oldsha256,oldsize,oldstatus = oldknownfiles[path]
-		if (oldsha256 == sha256) and (oldsize == size):
+		if (oldsha256 == sha256) and (oldsize == size) and (oldstatus != 'F'):
 			return # no update needed
 	if os.path.isfile(path): # file already exists
 		if (size == os.path.getsize(path)): #no point reading the data and calculating a hash if the size does not match
@@ -169,8 +182,8 @@ def getfile(path,sha256,size):
 				if os.path.isfile(makenewpath(path)):
 					#if file is up to date but a "new" file exists and is bad
 					#(we wouldn't have got this far if it was good)
-					#schedule the "new" file for removal by adding it to "oldknownfiles"
-					oldknownfiles[makenewpath(path)] = 'stalenewfile'
+					#schedule the "new" file for removal by adding it to "basefiles"
+					basefiles.add(makenewpath(path))
 				return  # no update needed
 	if os.path.isfile(path): # file already exists
 		fileupdates.add(path)
@@ -210,9 +223,12 @@ def getfile(path,sha256,size):
 					try:
 						os.link(spp,outputpath)
 						print('successfully hardlinked file to source pool')
-						return
+					
 					except:
 						print('file in souce pool was good but hard linking failed, copying file instead')
+					fdownloads.write(outputpath+b'\n')
+					fdownloads.flush()
+					return
 	if data is None:
 		if path+b'.gz' in knownfiles:
 			if path+b'.gz' in fileupdates:
@@ -246,22 +262,40 @@ def getfile(path,sha256,size):
 			print('exception '+str(e)+ ' while downloading file from mirrordirector, trying main server instead')
 			data = None
 	if data is None:
-		if (args.internal is not None) and (pathsplit[0] == b'raspbian'):
-			fileurl = args.internal.encode('ascii') +b'/private/' + b'/'.join(pathsplit[1:])
-		else:
-			fileurl = baseurl + b'/' + path
-		print('downloading '+fileurl.decode('ascii')+' with hash '+sha256.decode('ascii')+' to '+outputpath.decode('ascii'))
-		(data,ts) = geturl(fileurl)
-		if not checkdatahash(data, sha256, 'hash mismatch while downloading file ', path, ''):
-			sys.exit(1)
-		if len(data) != size:
-			print('size mismatch while downloading file')
-			sys.exit(1)
+		try:
+			if (args.internal is not None) and (pathsplit[0] == b'raspbian'):
+				fileurl = args.internal.encode('ascii') +b'/private/' + b'/'.join(pathsplit[1:])
+			elif (args.debugfdistsurl is not None) and (stage == 'downloadnew') and (b'dists' in pathsplit):
+				fileurl = args.debugfdistsurl.encode('ascii') + b'/' + path
+			else:
+				fileurl = baseurl + b'/' + path
+			print('downloading '+fileurl.decode('ascii')+' with hash '+sha256.decode('ascii')+' to '+outputpath.decode('ascii'))
+			(data,ts) = geturl(fileurl)
+			if not checkdatahash(data, sha256, 'hash mismatch while downloading file ', path, ''):
+				data = None
+			if len(data) != size:
+				print('size mismatch while downloading file')
+				data = None
+		except Exception as e:
+			print('exception '+str(e)+ ' while downloading file')
+			data = None
 
-	f = open(outputpath,'wb')
-	f.write(data)
-	f.close()
-	os.utime(outputpath,(ts,ts))
+	if data is None:
+		if (stage == 'downloadnew') and (b'dists' not in pathsplit):
+			print('continuing dispite download failure of '+path.decode('ascii')+', may revisit later')
+			global dlerrorcount
+			dlerrorcount += 1
+			knownfiles[path][2] = 'F'
+		else:
+			print('failed to get '+path.decode('ascii')+ 'aborting')
+			sys.exit(1)
+	else:
+		f = open(outputpath,'wb')
+		f.write(data)
+		f.close()
+		os.utime(outputpath,(ts,ts))
+		fdownloads.write(outputpath+b'\n')
+		fdownloads.flush()
 
 
 def checkdatahash(data, sha256, errorprefix, path, errorsuffix):
@@ -289,10 +323,6 @@ else:
 	baseurl = args.baseurl.encode('ascii')
 
 
-if args.internal is not None:
-	fileurl = args.internal.encode('ascii') + b'/snapshotindex.txt'
-else:
-	fileurl = baseurl +b'/snapshotindex.txt'
 
 
 symlinkupdates = list()
@@ -320,9 +350,37 @@ def opengu(filepath):
 oldsymlinks = set()
 newsymlinks = set()
 
-for stage in ("scanexisting","downloadnew"):
-	if stage == "downloadnew":
+fdownloads = open(makenewpath(b'raspbmirrordownloads.txt'),"ab")
+
+dlerrorcount = 0;
+
+for stage in ("scanexisting","downloadnew","finalize"):
+	if stage == "finalize":
+		if dlerrorcount == 0:
+			print('skipping stage 3 as there were no download failures in stage 2')
+			#we can finish now.
+			break
+		print('stage 3, download final updates')
+		
 		oldknownfiles = knownfiles
+		oldsymlinks |= newsymlinks
+		newsymlinks = set()
+
+	if stage == "downloadnew":
+		print('stage 2, main download')
+		oldknownfiles = knownfiles
+		basefiles = set(oldknownfiles.keys())
+
+	if stage == "scanexisting":
+		print('stage 1, scan existing')
+	else:
+		if args.internal is not None:
+			fileurl = args.internal.encode('ascii') + b'/snapshotindex.txt'
+		else:
+			fileurl = baseurl +b'/snapshotindex.txt'
+
+		if (stage == "downloadnew") and (args.debugfif is not None):
+			fileurl = args.debugfif.encode('ascii')
 		(filedata,ts) = geturl(fileurl) 
 
 		f = open(makenewpath(b'snapshotindex.txt'),'wb')
@@ -331,7 +389,7 @@ for stage in ("scanexisting","downloadnew"):
 		os.utime(makenewpath(b'snapshotindex.txt'),(ts,ts))
 
 	knownfiles = OrderedDict()
-	filequeue = deque()
+	filequeue = []
 
 	if stage == "scanexisting":
 		if os.path.isfile(b'snapshotindex.txt'):
@@ -363,20 +421,16 @@ for stage in ("scanexisting","downloadnew"):
 			size,sha256 = sizeandsha.split(b':')
 			size = int(size)
 			knownfiles[filepath] = [sha256,size,'R']
-			if filepath.endswith(b'.gz'):
-				# process gz files with high priority so they can be used as substitutes for their uncompressed counterparts
-				filequeue.appendleft(filepath)
-			else:
-				filequeue.append(filepath)
+			addtofilequeue(filequeue,filepath)
 
 	f.close()
 
 
 	while filequeue:
-		filepath = filequeue.popleft()
+		(priority, filepath) = heappop(filequeue)
 		#print('processing '+filepath.decode('ascii'))
 		sha256,size,status = knownfiles[filepath]
-		if (stage == "downloadnew") and ((filepath+b'.gz' not in knownfiles) or (status == 'R') or os.path.exists(filepath)):
+		if (stage != "scanexisting") and ((filepath+b'.gz' not in knownfiles) or (status == 'R') or os.path.exists(filepath)):
 			getfile(filepath,sha256,size)
 		pathsplit = filepath.split(b'/')
 		#print(pathsplit[-1])
@@ -475,6 +529,15 @@ for stage in ("scanexisting","downloadnew"):
 								insha256p = False
 						pf.close()
 
+fdownloads.close()
+fdownloads = open(makenewpath(b'raspbmirrordownloads.txt'),"rb")
+for line in fdownloads:
+	basefiles.add(line.strip())
+
+fdownloads.close()
+
+print('stage 4, moves and deletions')
+
 for filepath in fileupdates:
 	print((b'renaming '+makenewpath(filepath)+b' to '+filepath).decode('ascii'))
 	os.replace(makenewpath(filepath),filepath)
@@ -485,7 +548,7 @@ for (filepath,symlinktarget) in symlinkupdates:
 	os.symlink(symlinktarget,filepath)
 
 
-removedfiles = (set(oldknownfiles.keys()) | oldsymlinks) - (set(knownfiles.keys()) | newsymlinks)
+removedfiles = (basefiles | oldsymlinks) - (set(knownfiles.keys()) | newsymlinks)
 
 def isemptydir(dirpath):
 	#scandir would be significantly more efficient, but needs python 3.6 or above
@@ -498,6 +561,7 @@ for filepath in removedfiles:
 	#or due to the file being a non-realised uncompressed version of
 	#a gzipped file.
 	if os.path.exists(filepath): 
+		ensuresafepath(filepath)
 		print('removing '+filepath.decode('ascii'))
 		os.remove(filepath)
 		#clean up empty directories.
@@ -508,4 +572,5 @@ for filepath in removedfiles:
 			dirpath = os.path.dirname(dirpath)
 
 os.rename(makenewpath(b'snapshotindex.txt'),b'snapshotindex.txt')
+os.remove(makenewpath(b'raspbmirrordownloads.txt'))
 
