@@ -20,10 +20,11 @@ import re
 from heapq import heappush, heappop
 
 parser = argparse.ArgumentParser(description="mirror raspbian repo.")
-parser.add_argument("baseurl", help="base url for source repo",nargs='?')
-parser.add_argument("mdurl", help="base url for mirrordirector",nargs='?')
-parser.add_argument("--internal", help="base URL for private repo (internal use only)")
-#parser.add_argument("timestamps", help="timestamp or range of timestamps to download, if a single timestamp is used then the current director is assumed to be the snapshot target directory, otherwise the current directory is assumed to be the directory above the snapshot target directory")
+parser.add_argument("baseurl", help="base url for source repo (e.g. https://archive.raspbian.org/ )",nargs='?')
+parser.add_argument("mdurl", help="base url for mirrordirector or local source mirror (e.g. https://mirrordirector.raspbian.org/ )",nargs='?')
+parser.add_argument("hpurl", help="base url for last result hash pool (e.g. http://snapshot.raspbian.org/hashpool )",nargs='?')
+
+parser.add_argument("--internal", help=argparse.SUPPRESS) #base URL for private repo (internal use only)
 parser.add_argument("--sourcepool", help="specify a source pool to look for packages in before downloading them (useful if maintaining multiple mirrors)",action='append')
 parser.add_argument("--tmpdir", help="specify a temporary directory to avoid storing temporary files in the output tree, must be on the same filesystem as the output tree")
 
@@ -248,54 +249,60 @@ def getfile(path,sha256,size):
 
 	#use slicing so we don't error if pathsplit only has one item
 	if (data is None) and (mdurl is not None) and (pathsplit[1:2] == [b'pool']):
-		try:
-			fileurl = mdurl + b'/' + path
-			#fileurl = mdurl + b'/' + b'/'.join(pathsplit[1:])
-			print('downloading ' + fileurl.decode('ascii') + ' with hash ' + sha256.decode('ascii') + ' to ' + outputpath.decode('ascii'))
-			(data, ts) = geturl(fileurl)
-			if not checkdatahash(data, sha256, 'hash mismatch while downloading file from mirrordirector ', path, ' trying main server instead'):
-				data = None
-			elif len(data) != size:
-				print('size mismatch while downloading file from mirrordirector, trying main server instead')
-				data = None
-		except Exception as e:
-			print('exception '+str(e)+ ' while downloading file from mirrordirector, trying main server instead')
-			data = None
-	if data is None:
-		try:
-			if (args.internal is not None) and (pathsplit[0] == b'raspbian'):
-				fileurl = args.internal.encode('ascii') +b'/private/' + b'/'.join(pathsplit[1:])
-			elif (args.debugfdistsurl is not None) and (stage == 'downloadnew') and (b'dists' in pathsplit):
-				fileurl = args.debugfdistsurl.encode('ascii') + b'/' + path
-			else:
-				fileurl = baseurl + b'/' + path
-			print('downloading '+fileurl.decode('ascii')+' with hash '+sha256.decode('ascii')+' to '+outputpath.decode('ascii'))
-			(data,ts) = geturl(fileurl)
-			if not checkdatahash(data, sha256, 'hash mismatch while downloading file ', path, ''):
-				data = None
-			if len(data) != size:
-				print('size mismatch while downloading file')
-				data = None
-		except Exception as e:
-			print('exception '+str(e)+ ' while downloading file')
-			data = None
 
+		fileurl = mdurl + b'/' + path
+		#fileurl = mdurl + b'/' + b'/'.join(pathsplit[1:])
+		data, ts = getandcheckfile(fileurl, sha256, size, path, outputpath, ' from mirrordirector',' trying main server instead')
+	if data is None:
+
+		if (args.internal is not None) and (pathsplit[0] == b'raspbian'):
+			fileurl = args.internal.encode('ascii') +b'/private/' + b'/'.join(pathsplit[1:])
+		elif (args.debugfdistsurl is not None) and (stage == 'downloadnew') and (b'dists' in pathsplit):
+			fileurl = args.debugfdistsurl.encode('ascii') + b'/' + path
+		else:
+			fileurl = baseurl + b'/' + path
+		data, ts = getandcheckfile(fileurl, sha256, size, path, outputpath, '','')
 	if data is None:
 		if (stage == 'downloadnew') and (b'dists' not in pathsplit):
 			print('continuing dispite download failure of '+path.decode('ascii')+', may revisit later')
 			global dlerrorcount
 			dlerrorcount += 1
 			knownfiles[path][2] = 'F'
-		else:
-			print('failed to get '+path.decode('ascii')+ 'aborting')
-			sys.exit(1)
-	else:
-		f = open(outputpath,'wb')
-		f.write(data)
-		f.close()
-		os.utime(outputpath,(ts,ts))
-		fdownloads.write(outputpath+b'\n')
-		fdownloads.flush()
+			return
+	if (data is None) and (hpurl is not None):
+		print('failed to get '+path.decode('ascii')+' from normal sources, trying hash pool')
+		ensuresafepath(sha256)
+		fileurl = hpurl + b'/' + sha256[0:2] + b'/' + sha256[0:4] + b'/' + sha256
+		data, ts = getandcheckfile(fileurl, sha256, size, path, outputpath, '', '')
+	if data is None:
+		print('failed to get '+path.decode('ascii')+' aborting')
+		sys.exit(1)
+
+	f = open(outputpath,'wb')
+	f.write(data)
+	f.close()
+	os.utime(outputpath,(ts,ts))
+	fdownloads.write(outputpath+b'\n')
+	fdownloads.flush()
+
+
+def getandcheckfile(fileurl, sha256, size, path, outputpath, errorfromstr, errorsuffix):
+	print(
+		'downloading ' + fileurl.decode('ascii') + ' with hash ' + sha256.decode('ascii') + ' to ' + outputpath.decode(
+			'ascii'))
+	try:
+		(data, ts) = geturl(fileurl)
+		if not checkdatahash(data, sha256, 'hash mismatch while downloading file' + errorfromstr + ' ', path,
+							 errorsuffix):
+			data = None
+		elif len(data) != size:
+			print('size mismatch while downloading file' + errorfromstr + '.' + errorsuffix)
+			data = None
+	except Exception as e:
+		print('exception ' + str(e) + ' while downloading file' + errorfromstr + '.' + errorsuffix)
+		data = None
+		ts = None
+	return data, ts
 
 
 def checkdatahash(data, sha256, errorprefix, path, errorsuffix):
@@ -311,14 +318,20 @@ def checkdatahash(data, sha256, errorprefix, path, errorsuffix):
 	return True
 
 
-if args.mdurl is None:
+if (args.mdurl is None) or (args.mdurl.upper() == 'NONE'):
 	mdurl = None
 else:
 	mdurl = args.mdurl.encode('ascii')
 
+if (args.hpurl is None) or (args.hpurl.upper() == 'NONE'):
+	hpurl = None
+else:
+	hpurl = args.hpurl.encode('ascii')
+
 if args.baseurl is None:
 	baseurl = b'https://archive.raspbian.org'
 	mdurl = b'http://mirrordirector.raspbian.org'
+	hpurl = b'http://snapshot.raspbian.org/hashpool'
 else:
 	baseurl = args.baseurl.encode('ascii')
 
