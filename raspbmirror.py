@@ -18,6 +18,7 @@ from email.utils import parsedate_to_datetime
 import argparse
 import re
 from heapq import heappush, heappop
+import fcntl
 
 parser = argparse.ArgumentParser(description="mirror raspbian repo.")
 parser.add_argument("baseurl", help="base url for source repo (e.g. https://archive.raspbian.org/ )",nargs='?')
@@ -36,6 +37,8 @@ parser.add_argument("--debugfdistsurl", help=argparse.SUPPRESS)
 
 args = parser.parse_args()
 
+lockfd = os.open('.',os.O_RDONLY)
+fcntl.flock(lockfd,fcntl.LOCK_EX | fcntl.LOCK_NB)
 
 def addfilefromdebarchive(filestoverify,filequeue,filename,sha256,size):
 	size = int(size)
