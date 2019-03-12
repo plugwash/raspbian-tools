@@ -245,6 +245,7 @@ def throwerror(error):
 
 
 def adddsc(prefix, filepath):
+	print('in adddsc, prefix='+repr(prefix)+' filepath='+repr(filepath))
 	f = openm(prefix + filepath, 'rb')
 	data = f.read()
 	f.close()
@@ -274,10 +275,19 @@ def adddsc(prefix, filepath):
 		addfilefromdebarchive(knownfiles, componentfilepath, ls[0], ls[1]);
 		if not previouslyknown:
 			knownfiles[componentfilepath][2] = 'R'
-		if (prefix != b'') and not isfilem(componentfilepath):
-			if prefix + componentfilepath != manglefilepath(componentfilepath):
-				print('recovering ' + componentfilepath.decode('ascii') + ' from ' + prefix.decode('ascii'))
-				os.link(prefix + componentfilepath, manglefilepath(componentfilepath))
+		if not isfilem(componentfilepath):
+			if (prefix != b''):
+				prefixlocal = prefix
+			elif args.internalrecover:
+				prefixlocal = b'../repo/'
+			else:
+				prefixlocal = b''
+			if (prefixlocal != b'') and (prefixlocal + componentfilepath != manglefilepath(componentfilepath)):
+				print('recovering ' + componentfilepath.decode('ascii') + ' from ' + prefixlocal.decode('ascii'))
+				os.link(prefixlocal + componentfilepath, manglefilepath(componentfilepath))
+			else:
+				print('missing file while adding dsc for built using')
+				sys.exit(1)
 	if (prefix != b'') and not isfilem(filepath):
 		if prefix + filepath != manglefilepath(filepath):
 			print('recovering ' + filepath.decode('ascii') + ' from ' + repr(prefix))
