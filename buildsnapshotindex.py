@@ -255,24 +255,37 @@ def adddsc(prefix, filepath):
 	knownfiles[filepath] = [sha256hashed, filesize, 'R']
 	f.close()
 	f = openm(prefix + filepath, 'rb')
-	insha256p = False
-	filesfound = []
+	section = None
+	filesfound = {}
+	hashsections = [b'Files:',b'Checksums-Sha1:',b'Checksums-Sha256:']
 	for line in f:
 		linesplit = line.split()
 		if len(linesplit) == 0:
 			pass
-		elif ((line[0] == 32) and insha256p):
-			filesfound.append(linesplit)
-		elif (linesplit[0] == b'Checksums-Sha256:'):
-			insha256p = True
+		elif (line[0] == 32):
+			if (section in hashsections):
+				componentfilename = linesplit[2]
+				filesizestr = linesplit[1]
+				if componentfilename in filesfound:
+					meta = filesfound[componentfilename]
+					if meta[0] != filesizestr:
+						print('inconsistent dsc')
+						sys.exit(1)
+				else:
+					meta = [filesizestr]+([None]*len(hashsections))
+					filesfound[componentfilename] = meta
+				meta[hashsections.index(section)+1] = linesplit[0]
 		else:
-			insha256p = False
-		pf.close()
-	for ls in filesfound:
+			section = linesplit[0]
+	for componentfilename, meta in filesfound.items():
 		# print(repr(ls))
-		componentfilepath = toplevel + b'/pool/' + testcomponent + b'/' + pooldir + b'/' + source + b'/' + ls[2]
+		componentfilepath = toplevel + b'/pool/' + testcomponent + b'/' + pooldir + b'/' + source + b'/' + componentfilename
 		previouslyknown = componentfilepath in knownfiles
-		addfilefromdebarchive(knownfiles, componentfilepath, ls[0], ls[1]);
+		if meta[3] is None:
+			print(repr(meta))
+			print('dsc without sha256 cannot currently be handled')
+			sys.exit(1)
+		addfilefromdebarchive(knownfiles, componentfilepath, meta[3], meta[0]);
 		if not previouslyknown:
 			knownfiles[componentfilepath][2] = 'R'
 		if not isfilem(componentfilepath):
