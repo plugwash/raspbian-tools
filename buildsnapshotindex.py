@@ -245,7 +245,7 @@ def throwerror(error):
 
 
 def adddsc(prefix, filepath):
-	print('in adddsc, prefix='+repr(prefix)+' filepath='+repr(filepath))
+	#print('in adddsc, prefix='+repr(prefix)+' filepath='+repr(filepath))
 	f = openm(prefix + filepath, 'rb')
 	data = f.read()
 	f.close()
@@ -271,12 +271,19 @@ def adddsc(prefix, filepath):
 					if meta[0] != filesizestr:
 						print('inconsistent dsc')
 						sys.exit(1)
+					if filesizestr != str(int(filesizestr)).encode('ascii'):
+						print('bogus size string')
+						sys.exit(1)
 				else:
 					meta = [filesizestr]+([None]*len(hashsections))
 					filesfound[componentfilename] = meta
+				if not shaallowed.fullmatch(linesplit[0]):
+					print('bogus character found in hash')
+					sys.exit(1)
 				meta[hashsections.index(section)+1] = linesplit[0]
 		else:
 			section = linesplit[0]
+	f.close()
 	for componentfilename, meta in filesfound.items():
 		# print(repr(ls))
 		componentfilepath = toplevel + b'/pool/' + testcomponent + b'/' + pooldir + b'/' + source + b'/' + componentfilename
@@ -298,6 +305,20 @@ def adddsc(prefix, filepath):
 			if (prefixlocal != b'') and (prefixlocal + componentfilepath != manglefilepath(componentfilepath)) and (os.path.isfile(prefixlocal + componentfilepath)):
 				print('recovering ' + componentfilepath.decode('ascii') + ' from ' + prefixlocal.decode('ascii'))
 				os.link(prefixlocal + componentfilepath, manglefilepath(componentfilepath))
+			elif args.sssextrasources is not None:
+				print('grabbing missing file '+componentfilepath.decode('ascii')+'  needed by '+filepath.decode('ascii')+' from snapshot.debian.org')
+				import urllib.request # import this at local scope because we rarely need it.
+				fileurl='http://snapshot.debian.org/file/'+meta[2].decode('ascii')
+				with urllib.request.urlopen(fileurl) as response:
+					filedata = response.read()
+				sha256hash = hashlib.sha256(filedata)
+				sha256hashed = sha256hash.hexdigest().encode('ascii')
+				if sha256hashed != meta[3]:
+					print('hash mismatch while grabbing missing file for dsc from snapshot.debian.org')
+					sys.exit(1)
+				f = openm(componentfilepath,'wb')
+				f.write(filedata)
+				f.close()
 			else:
 				print('missing file while adding dsc for built using')
 				sys.exit(1)
@@ -305,7 +326,6 @@ def adddsc(prefix, filepath):
 		if prefix + filepath != manglefilepath(filepath):
 			print('recovering ' + filepath.decode('ascii') + ' from ' + repr(prefix))
 			os.link(prefix + filepath, manglefilepath(filepath))
-	f.close()
 
 
 if args.addextrasources:
