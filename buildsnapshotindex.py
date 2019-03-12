@@ -282,7 +282,7 @@ def adddsc(prefix, filepath):
 				prefixlocal = b'../repo/'
 			else:
 				prefixlocal = b''
-			if (prefixlocal != b'') and (prefixlocal + componentfilepath != manglefilepath(componentfilepath)):
+			if (prefixlocal != b'') and (prefixlocal + componentfilepath != manglefilepath(componentfilepath)) and (os.path.isfile(prefixlocal + componentfilepath)):
 				print('recovering ' + componentfilepath.decode('ascii') + ' from ' + prefixlocal.decode('ascii'))
 				os.link(prefixlocal + componentfilepath, manglefilepath(componentfilepath))
 			else:
