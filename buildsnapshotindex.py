@@ -23,6 +23,7 @@ parser.add_argument("--nohashpool", help="do not add files to hash pool", action
 parser.add_argument("--noscanpool", help="do not perform file search in pool directories, just include files from Debian metadata",action="store_true")
 parser.add_argument("--addextrasources", help="add extra sources needed by outdated binaries and/or built-using fields", action="store_true")
 parser.add_argument("--sssextrasources", help="download missing extra sources for main component using snapshotsecure")
+parser.add_argument("--distswhitelist", help="comman seperated whitelist of distributions to include, should generally be used in conjuction with noscanpool")
 args = parser.parse_args()
 
 #regex used for filename sanity checks
@@ -89,6 +90,11 @@ def openg(filepath):
 		f = gzip.open(filepath+b'.gz','rb')
 	return f
 
+if args.distswhitelist is None:
+	distswhitelist = None
+else:
+	distswhitelist = set(args.distswhitelist.encode('ascii').split(b','))
+
 distlocs = []
 
 if args.internal:
@@ -120,8 +126,15 @@ for toplevel in dirlist:
 	if isdirm(toplevel+'/dists/'):
 		dists = listdirm(toplevel+'/dists/')
 		for dist in dists:
+			#print(dist)
+			#print(distswhitelist)
+			if (distswhitelist is not None) and (dist.encode('ascii') not in distswhitelist):
+				continue
 			if not islinkm(toplevel+'/dists/'+dist):
 				distlocs.append((toplevel+'/dists/'+dist,toplevel.encode('ascii')))
+
+#print(distlocs)
+#sys.exit(1)
 
 knownfiles = SortedDict() #sorted for reproducibility and to hopefully get better locality on file accesses.
 
@@ -446,7 +459,22 @@ for (dirpath,dirnames,filenames) in towalk:
 					del dirnames[i]
 				else:
 					i += 1
-					
+	if distswhitelist is not None:
+		dirpathsplit = dirpath.split('/')
+		if (len(dirpathsplit) == 3) and (dirpathsplit[-1] == 'dists'):
+			i = 0
+			while i < len(dirnames):
+				ignore = True
+				if islinkm(dirpath+'/'+dirnames[i]):
+					if readlinkm(dirpath+'/'+dirnames[i]).encode('ascii') in distswhitelist:
+						ignore = False
+				else:
+					if dirnames[i].encode('ascii') in distswhitelist:
+						ignore = False
+				if ignore:
+					del dirnames[i]
+				else:
+					i += 1
 	for filename in (filenames+dirnames): #os.walk seems to regard symlinks to directories as directories.
 		filepath = os.path.join(dirpath,filename)[2:].encode('ascii') # [2:] is to strip the ./ prefix
 		#print(filepath)
