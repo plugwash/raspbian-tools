@@ -34,6 +34,7 @@ parser.add_argument("--debugfif", help=argparse.SUPPRESS)
 #debug option to set the source url used to download "dists" files during the "downloadnew" phase, used to test error recovery.
 parser.add_argument("--debugfdistsurl", help=argparse.SUPPRESS)
 
+parser.add_argument("--tlwhitelist", help="specify comma-seperated whitelist of top-level directories")
 
 args = parser.parse_args()
 
@@ -400,7 +401,15 @@ for stage in ("scanexisting","downloadnew","finalize"):
 		(filedata,ts) = geturl(fileurl) 
 
 		f = open(makenewpath(b'snapshotindex.txt'),'wb')
-		f.write(filedata)
+		if args.tlwhitelist is None:
+			f.write(filedata)
+		else:
+			lines = filedata.split(b'\n')
+			tlwhitelist = set(args.tlwhitelist.encode('ascii').split(b','))
+			for line in lines:
+				linesplit = line.split(b'/')
+				if linesplit[0] in tlwhitelist:
+					f.write(line+b'\n')
 		f.close()
 		os.utime(makenewpath(b'snapshotindex.txt'),(ts,ts))
 
