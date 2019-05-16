@@ -36,6 +36,8 @@ parser.add_argument("--debugfdistsurl", help=argparse.SUPPRESS)
 
 parser.add_argument("--tlwhitelist", help="specify comma-seperated whitelist of top-level directories")
 
+parser.add_argument("--cleanup",help="scan for and remove files not managed by raspbmirror from mirror tree", action="store_true")
+
 args = parser.parse_args()
 
 lockfd = os.open('.',os.O_RDONLY)
@@ -612,8 +614,23 @@ fdownloads.close()
 fdownloads = open(makenewpath(b'raspbmirrordownloads.txt'),"rb")
 for line in fdownloads:
 	basefiles.add(line.strip())
-
 fdownloads.close()
+
+def throwerror(error):
+	raise error
+
+if args.cleanup:
+	towalk = os.walk('.', True, throwerror, False)
+	for (dirpath, dirnames, filenames) in towalk:
+		for filename in (filenames + dirnames):  # os.walk seems to regard symlinks to directories as directories.
+			filepath = os.path.join(dirpath, filename)[2:].encode('ascii')  # [2:] is to strip the ./ prefix
+			# print(filepath)
+			if os.path.islink(filepath):
+				oldsymlinks.add(filepath)
+		for filename in filenames:
+			filepath = os.path.join(dirpath, filename)[2:].encode('ascii')  # [2:] is to strip the ./ prefix
+			if not os.path.islink(filepath) and not filepath.startswith(b'snapshotindex.txt') and not filepath.startswith(b'raspbmirrordownloads.txt'):
+				basefiles.add(filepath)
 
 print('stage 4, moves and deletions')
 
