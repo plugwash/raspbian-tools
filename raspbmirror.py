@@ -99,15 +99,20 @@ def ensuresafepath(path):
 def geturl(fileurl):
 	with urllib.request.urlopen(fileurl.decode('ascii')) as response:
 		data = response.read()
-		#print(fileurl[:7])
-		if fileurl[:7] == b'file://':
-			ts = os.path.getmtime(fileurl[7:])
-		else:
-			dt = parsedate_to_datetime(response.getheader('Last-Modified'))
-			if dt.tzinfo is None:
-				dt = dt.replace(tzinfo=timezone.utc)
-			ts = dt.timestamp()
+		ts = getts(fileurl, response)
 	return (data,ts)
+
+
+def getts(fileurl, response):
+	if fileurl[:7] == b'file://':
+		ts = os.path.getmtime(fileurl[7:])
+	else:
+		dt = parsedate_to_datetime(response.getheader('Last-Modified'))
+		if dt.tzinfo is None:
+			dt = dt.replace(tzinfo=timezone.utc)
+		ts = dt.timestamp()
+	return ts
+
 
 def makenewpath(path):
 	if args.tmpdir is None:
@@ -160,12 +165,9 @@ def getfile(path,sha256,size):
 	if len(os.path.dirname(path)) > 0:
 		os.makedirs(os.path.dirname(path),exist_ok=True)
 	if os.path.isfile(makenewpath(path)): # "new" file already exists, lets check the hash
-		f = open(makenewpath(path),'rb')
-		data = f.read()
-		f.close()
-		sha256hash = hashlib.sha256(data)
-		sha256hashed = sha256hash.hexdigest().encode('ascii')
-		if (sha256 == sha256hashed) and (size == len(data)):
+		fn = makenewpath(path)
+		sha256hashed, tl = getfilesha256andsize(fn)
+		if (sha256 == sha256hashed) and (size == tl):
 			print('existing file '+path.decode('ascii')+' matched by hash and size')
 			fileupdates.add(path)
 			return # no download needed but rename is
@@ -177,12 +179,8 @@ def getfile(path,sha256,size):
 			return # no update needed
 	if os.path.isfile(path): # file already exists
 		if (size == os.path.getsize(path)): #no point reading the data and calculating a hash if the size does not match
-			f = open(path,'rb')
-			data = f.read()
-			f.close()
-			sha256hash = hashlib.sha256(data)
-			sha256hashed = sha256hash.hexdigest().encode('ascii')
-			if (sha256 == sha256hashed) and (size == len(data)):
+			sha256hashed, tl = getfilesha256andsize(path)
+			if (sha256 == sha256hashed) and (size == tl):
 				print('existing file '+path.decode('ascii')+' matched by hash and size')
 				if os.path.isfile(makenewpath(path)):
 					#if file is up to date but a "new" file exists and is bad
@@ -281,43 +279,99 @@ def getfile(path,sha256,size):
 	if data is None:
 		print('failed to get '+path.decode('ascii')+' aborting')
 		sys.exit(1)
-
-	f = open(outputpath,'wb')
-	f.write(data)
-	f.close()
+	if data is not ...: #... is used to indicate that the file has been downloaded directly to disk and we don't
+		                # need to write it out here.
+		f = open(outputpath,'wb')
+		f.write(data)
+		f.close()
 	os.utime(outputpath,(ts,ts))
 	fdownloads.write(outputpath+b'\n')
 	fdownloads.flush()
 
 
+def getfilesha256andsize(fn):
+	sha256hash = hashlib.sha256()
+	f = open(fn, 'rb')
+	l = bs
+	tl = 0
+	while l == bs:
+		data = f.read(bs)
+		l = len(data)
+		tl += l
+		sha256hash.update(data)
+	f.close()
+	sha256hashed = sha256hash.hexdigest().encode('ascii')
+	return sha256hashed, tl
+
+
+bs = 16 * 1024 * 1024
+
 def getandcheckfile(fileurl, sha256, size, path, outputpath, errorfromstr, errorsuffix):
-	print(
-		'downloading ' + fileurl.decode('ascii') + ' with hash ' + sha256.decode('ascii') + ' to ' + outputpath.decode(
-			'ascii'))
+	f = None
 	try:
-		(data, ts) = geturl(fileurl)
-		if not checkdatahash(data, sha256, 'hash mismatch while downloading file' + errorfromstr + ' ', path,
+
+		sha256hash = hashlib.sha256()
+		if path == outputpath:
+			writepath = makenewpath(path)
+			viamsg = ' via '+writepath.decode('ascii')
+		else:
+			writepath = outputpath
+			viamsg = ''
+		print(
+			'downloading ' + fileurl.decode('ascii') + ' with hash ' + sha256.decode(
+				'ascii') + ' to ' + outputpath.decode(
+				'ascii') + viamsg)
+		f = open(writepath, 'wb')
+		with urllib.request.urlopen(fileurl.decode('ascii')) as response:
+			l = bs
+			tl = 0
+			while l == bs:
+				data = response.read(bs)
+				f.write(data)
+				l = len(data)
+				tl += l
+				sha256hash.update(data)
+			ts = getts(fileurl, response)
+
+			data = ... #used as a flag to indicate that the data is written to disk rather than stored in memory
+		f.close()
+		if not testandreporthash(sha256hash, sha256, 'hash mismatch while downloading file' + errorfromstr + ' ', path,
 							 errorsuffix):
 			data = None
-		elif len(data) != size:
+		elif tl != size:
 			print('size mismatch while downloading file' + errorfromstr + '.' + errorsuffix)
 			data = None
 	except Exception as e:
 		print('exception ' + str(e) + ' while downloading file' + errorfromstr + '.' + errorsuffix)
+		if f is not None:
+			f.close()
 		data = None
 		ts = None
+	if data is not None:
+		#success
+		if writepath != outputpath:
+			os.rename(writepath, outputpath)
+	else:
+		#failure, cleanup writepath if nessacery
+		if os.path.exists(writepath):
+			os.remove(writepath)
+
 	return data, ts
 
 
 def checkdatahash(data, sha256, errorprefix, path, errorsuffix):
 	sha256hash = hashlib.sha256(data)
+	return testandreporthash(sha256hash, sha256, errorprefix, path, errorsuffix)
+
+
+def testandreporthash(sha256hash, sha256, errorprefix, path, errorsuffix):
 	sha256hashed = sha256hash.hexdigest().encode('ascii')
 	if (sha256 != sha256hashed):
 		# print(repr(filesize))
 		# print(repr(sha256))
 		# print(repr(sha256hashed))
 		print(errorprefix + path.decode('ascii') + ' ' + sha256.decode('ascii') + ' ' + sha256hashed.decode(
-			'ascii')+errorsuffix);
+			'ascii') + errorsuffix);
 		return False
 	return True
 
