@@ -83,7 +83,7 @@ def getfile(path,sha256,size):
 	hashfn = b'../hashpool/' + sha256[:2] +b'/'+ sha256[:4] +b'/'+ sha256
 	if os.path.isfile(hashfn):
 		if os.path.getsize(hashfn) != size:
-			print('size mismatch on existing file in hash pool')
+			print('size mismatch on existing file in hash pool '+hashfn.decode('ascii'))
 			sys.exit(1)
 	else:
 		secondhashfn = None
