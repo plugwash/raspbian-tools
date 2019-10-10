@@ -111,7 +111,12 @@ def isdirm(filepath):
 	return os.path.isdir(manglefilepath(filepath))
 
 def islinkm(filepath):
-	return os.path.islink(manglefilepath(filepath))
+	if os.path.islink(manglefilepath(filepath)):
+		#treat absoloute symlinks as files/directories.
+		print(os.readlink(filepath)[0:1])
+		return os.readlink(filepath)[0:1] != b'/'
+	else:
+		return False
 
 def listdirm(filepath):
 	return os.listdir(manglefilepath(filepath))
@@ -417,11 +422,11 @@ for filepath, meta in knownfiles.items():
 
 if args.internal:
 	if args.noscanpool:
-		towalk = chain(os.walk('../repo',True,throwerror,False),os.walk('private/dists',True,throwerror,False))
+		towalk = chain(os.walk('../repo',True,throwerror,True),os.walk('private/dists',True,throwerror,True))
 	else:
-		towalk = chain(os.walk('../repo',True,throwerror,False),os.walk('private/dists',True,throwerror,False),os.walk('private/pool',True,throwerror,False))
+		towalk = chain(os.walk('../repo',True,throwerror,True),os.walk('private/dists',True,throwerror,True),os.walk('private/pool',True,throwerror,True))
 else:
-	towalk = os.walk('.',True,throwerror,False)
+	towalk = os.walk('.',True,throwerror,True)
 
 for (dirpath,dirnames,filenames) in towalk:
 	#if dirpath == './raspbian/dists':
@@ -480,6 +485,7 @@ for (dirpath,dirnames,filenames) in towalk:
 		#print(filepath)
 		if islinkm(filepath):
 			symlinks.add(filepath)
+			dirnames.remove(filename) #prevent recursing into directories pointed to by relative symlinks.
 	for filename in filenames:
 		filepath = os.path.join(dirpath,filename)[2:].encode('ascii') # [2:] is to strip the ./ prefix
 		if not islinkm(filepath) and not filepath.startswith(b'snapshotindex.txt'):
