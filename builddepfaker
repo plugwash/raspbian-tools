@@ -39,15 +39,20 @@ for entry in deb822.Sources.iter_paragraphs(f):
 	package = entry['Package'];
 	if (package in fakedepdict):
 		(negative,positive) = fakedepdict[package]
+		#if package == 'gcc-6':
+		#	sys.stderr.write(repr((negative,positive)))
 		builddeps = []
 		if 'Build-Depends' in entry:
 			builddeps = entry['Build-Depends'].split(',')
 		processedbuilddeps = []
 		for depstr in builddeps:
-			depname = depstr.lstrip().split(' ')[0]
-			#print(depname)
+			depname = depstr.lstrip().split(' ')[0].split(':')[0]
+			#if package == 'gcc-6':
+			#	sys.stderr.write(depname+'\n')
 			if not (depname in negative):
 				processedbuilddeps.append(depstr)
+			#if package == 'gcc-6':
+			#	sys.stderr.write(depname+' output\n')
 			positive.discard(depname)
 		for depstr in positive:
 			processedbuilddeps.append(' '+depstr+' (!= 0.fake.0)')
