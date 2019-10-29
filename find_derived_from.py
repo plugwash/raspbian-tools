@@ -95,7 +95,7 @@ def get_changelog_entries(tmp_dir, dsc_name):
 	return changelog_entries
 
 
-def find_derived_from(dsc_name,markerstring):
+def find_derived_from(dsc_name,markerstrings):
 	dsc_name = os.path.abspath(dsc_name)
 	print('debug: finding base source package of ' + dsc_name +' marker string is '+markerstring)
 	tmp_dir=tempfile.mkdtemp('','find_derived_from')
@@ -111,11 +111,15 @@ def find_derived_from(dsc_name,markerstring):
 		#print('matching changelog entries against versions possibly derived from')
 		for entry in changelog_entries:
 			entry_name, entry_version = entry
-			if entry_version.find(markerstring) == -1: 
+			foundmarker = False
+			for markerstring in markerstrings:
+				if entry_version.find(markerstring) != -1:
+					found = True
+			if not found:
 				return entry;
 			#print(entry);
 	return None
-entry_name, entry_version =  find_derived_from(sys.argv[1],sys.argv[2])
+entry_name, entry_version =  find_derived_from(sys.argv[1],sys.argv[2].split('$')
 
 print('name: '+entry_name)
 print('version: '+entry_version)

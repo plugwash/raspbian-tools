@@ -149,7 +149,7 @@ begin
                       //attempt to check the source package itself for a package name and version.
                       //writeln(appdir+'/'+'find_derived_from.py');
                       //writeln(slversionstrings[0]);
-                      runcommand(appdir+'/'+'find_derived_from.py',[s1.name+'/'+s2.name+'/'+s3.name+'/'+s4.name,slversionstrings[0]],outputstring);
+                      runcommand(appdir+'/'+'find_derived_from.py',[s1.name+'/'+s2.name+'/'+s3.name+'/'+s4.name,paramstr(1)],outputstring);
                       //writeln(outputstring);
                       sl.text := outputstring;
                       for i := 0 to sl.count -1 do begin;
@@ -169,7 +169,7 @@ begin
                   end;
                   if debdiffbase <> '' then begin
                     if (debdiffsdir <> '') and not fileexists(debdiffsdir+s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+versionnoepoch+'.debdiff') then begin
-                      writeln('generating debdiff '+sourcepackage+' '+baseversion+' '+version);
+                      writeln('generating debdiff '+sourcepackage+' '+baseversion+' '+version+' '+debdiffbase+' '+debdiffbasefn);
                       forcedirectories(debdiffsdir+s1.name+'/'+s2.name+'/'+s3.name);
                       if debdiffbasefn = '' then debdiffbasefn := s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+debdiffbase+'.dsc';
                       fpsystem('debdiff '+debdiffbasefn+' '+s1.name+'/'+s2.name+'/'+s3.name+'/'+s4.name+' > '+debdiffsdir+s1.name+'/'+s2.name+'/'+s3.name+'/'+sourcepackage+'_'+versionnoepoch+'.debdiff');
