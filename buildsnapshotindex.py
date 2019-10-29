@@ -113,8 +113,8 @@ def isdirm(filepath):
 def islinkm(filepath):
 	if os.path.islink(manglefilepath(filepath)):
 		#treat absoloute symlinks as files/directories.
-		print(os.readlink(filepath)[0:1])
-		return os.readlink(filepath)[0:1] != b'/'
+		#print(os.readlink(filepath)[0:1])
+		return os.readlink(manglefilepath(filepath))[0:1] != b'/'
 	else:
 		return False
 
