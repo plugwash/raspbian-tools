@@ -537,9 +537,17 @@ begin
           migrationindex := proposedbinarymigrations.findindexof(binarypackagename);
           //writeln('checking binary migrations migrationindex=',migrationindex);
           if migrationindex >= 0 then begin
-            writeln('removing binary package ',sourcepackagename,' from migration list because of dependency on ',dependedonpackage);
-            proposedbinarymigrations.delete(migrationindex);
-            removalsthisiteration := removalsthisiteration + 1;
+            writeln('removing binary packages from ',sourcepackagename,' from migration list because of dependency on ',dependedonpackage,' by ',binarypackagename);
+            for k := 0 to resultingbinarypackage.source.binaries.count-1 do begin
+              binarypackage := resultingbinarypackage.source.binaries[k];
+              binarypackagename := resultingbinarypackage.source.binaries.nameofindex(k);
+              migrationindex := proposedbinarymigrations.findindexof(binarypackagename);
+              if migrationindex >= 0 then begin
+                writeln('removing binary ',binarypackagename);
+                proposedbinarymigrations.delete(migrationindex);
+                removalsthisiteration := removalsthisiteration + 1;
+              end;
+            end;
           end;
         end;
       end;
