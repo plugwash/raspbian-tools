@@ -38,6 +38,8 @@ parser.add_argument("--tlwhitelist", help="specify comma-seperated whitelist of 
 
 parser.add_argument("--cleanup",help="scan for and remove files not managed by raspbmirror from mirror tree", action="store_true")
 
+parser.add_argument("--debugskippool",help="skip downloading pool data, only download metadata (for debugging)",action="store_true")
+
 args = parser.parse_args()
 
 lockfd = os.open('.',os.O_RDONLY)
@@ -162,7 +164,7 @@ def getfile(path,sha256,size):
 	#	f = open(hashfn,'wb')
 	#	f.write(data)
 	#	f.close()
-	#	
+	#	            
 	#	os.utime(hashfn,(ts,ts))
 	if len(os.path.dirname(path)) > 0:
 		os.makedirs(os.path.dirname(path),exist_ok=True)
@@ -198,6 +200,9 @@ def getfile(path,sha256,size):
 	else:
 		outputpath = path
 	pathsplit = path.split(b'/')
+	if (pathsplit[1:2] == [b'pool']) and (args.debugskippool):
+		print('skipping download of '+path.decode('ascii')+' because --debugskippool was specified')
+		return
 	if (args.internal is not None) and (pathsplit[0] == b'raspbian'):
 		fileurl = args.internal.encode('ascii') +b'/private/' + b'/'.join(pathsplit[1:])
 	else:
