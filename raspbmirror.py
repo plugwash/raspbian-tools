@@ -40,6 +40,8 @@ parser.add_argument("--cleanup",help="scan for and remove files not managed by r
 
 parser.add_argument("--debugskippool",help="skip downloading pool data, only download metadata (for debugging)",action="store_true")
 
+parser.add_argument("--distswhitelist", help="specify comman seperated list of distributions")
+
 args = parser.parse_args()
 
 lockfd = os.open('.',os.O_RDONLY)
@@ -462,15 +464,56 @@ for stage in ("scanexisting","downloadnew","finalize"):
 		(filedata,ts) = geturl(fileurl) 
 
 		f = open(makenewpath(b'snapshotindex.txt'),'wb')
-		if args.tlwhitelist is None:
+		if (args.tlwhitelist is None) and (args.distswhitelist is None):
 			f.write(filedata)
 		else:
 			lines = filedata.split(b'\n')
-			tlwhitelist = set(args.tlwhitelist.encode('ascii').split(b','))
+			if lines[-1] == b'':
+				del(lines[-1])
+			if args.tlwhitelist is not None:
+				tlwhitelist = set(args.tlwhitelist.encode('ascii').split(b','))
+				linesnew = []
+				for line in lines:
+					linesplit = line.split(b'/')
+					if linesplit[0] in tlwhitelist:
+						linesnew.append(line)
+				lines = linesnew
+			if args.distswhitelist is not None:
+				distswhitelist = set(args.distswhitelist.encode('ascii').split(b','))
+				founddists = set()
+				foundesdists = set()
+				linesnew = []
+				for line in lines:
+					path, sizeandsha = line.split(b' ')
+					pathsplit = path.split(b'/')
+					#print(pathsplit)
+					#print(len(pathsplit))
+					if (len(pathsplit) > 2) and (pathsplit[1] == b'dists'):
+						if sizeandsha[0:2] == b'->': #symlink
+							target = sizeandsha[2:]
+							if target in distswhitelist:
+								linesnew.append(line)
+						elif pathsplit[2] in distswhitelist:
+							linesnew.append(line)
+							founddists.add((pathsplit[0],pathsplit[2]))
+							if (len(pathsplit) > 3) and (pathsplit[3] == b'extrasources'):
+								foundesdists.add((pathsplit[0],pathsplit[2]))
+					elif (len(pathsplit) > 1) and pathsplit[1] == b'pool':
+						pass
+					else:
+						linesnew.append(line)
+					
+				lines = linesnew
+				if founddists == set():
+					print('none of the whitelisted distributions were found in the index file')
+					sys.exit(1)
+				missingesdists = founddists - foundesdists
+				if missingesdists != set():
+					for toplevel,distribution in missingesdists:
+						print((b'missing extra sources file for '+toplevel+b'/dists/'+distribution).decode('ascii'))
+					sys.exit(1)
 			for line in lines:
-				linesplit = line.split(b'/')
-				if linesplit[0] in tlwhitelist:
-					f.write(line+b'\n')
+				f.write(line+b'\n')
 		f.close()
 		os.utime(makenewpath(b'snapshotindex.txt'),(ts,ts))
 
@@ -511,7 +554,7 @@ for stage in ("scanexisting","downloadnew","finalize"):
 
 	f.close()
 
-
+	extrasources = {}
 	while filequeue:
 		(priority, filepath) = heappop(filequeue)
 		#print('processing '+filepath.decode('ascii'))
@@ -614,6 +657,23 @@ for stage in ("scanexisting","downloadnew","finalize"):
 							else:
 								insha256p = False
 						pf.close()
+		elif (args.distswhitelist is not None) and (pathsplit[-1] == b'extrasources') and (pathsplit[-3] == b'dists'):
+						print('found extrasources file: '+filepath.decode('ascii'))
+						esf = opengu(filepath)
+						if esf is None:
+							if stage == 'scanexisting':
+								print('warning: cannot find '+filepath.decode('ascii')+' while scanning existing state')
+								continue
+							else:
+								print('error: cannot find '+filepath.decode('ascii')+' or a gzipped substitute, aborting')
+								sys.exit(1)
+						for line in esf:
+							line = line.strip()
+							filename , shaandsize = line.split(b' ')
+							size , sha256 = shaandsize.split(b':')
+							addfilefromdebarchive(knownfiles,filequeue,filename,sha256,size)
+							extrasources[filename] = shaandsize
+							#print(line)
 
 fdownloads.close()
 fdownloads = open(makenewpath(b'raspbmirrordownloads.txt'),"rb")
@@ -671,6 +731,11 @@ for filepath in removedfiles:
 			print('removing empty dir '+dirpath.decode('ascii'))
 			os.rmdir(dirpath)
 			dirpath = os.path.dirname(dirpath)
+
+f = open(makenewpath(b'snapshotindex.txt'),'ab')
+for filename, shaandsize in extrasources.items():
+	f.write(filename+b' '+shaandsize+b'\n')
+f.close()
 
 os.rename(makenewpath(b'snapshotindex.txt'),b'snapshotindex.txt')
 os.remove(makenewpath(b'raspbmirrordownloads.txt'))
