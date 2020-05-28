@@ -282,7 +282,7 @@ def adddsc(prefix, filepath):
 		previouslyknown = componentfilepath in knownfiles
 		if meta[3] is None:
 			print(repr(meta))
-			print('dsc without sha256 cannot currently be handled')
+			print('dsc without sha256 cannot currently be handled while processing '+componentfilename.decode('ascii')+' in '+filepath.decode('ascii'))
 			sys.exit(1)
 		addfilefromdebarchive(knownfiles, componentfilepath, meta[3], meta[0]);
 		if not previouslyknown:
