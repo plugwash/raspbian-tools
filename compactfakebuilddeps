@@ -1,0 +1,28 @@
+#!/usr/bin/python3
+import deb822
+import sys
+import collections
+
+#f = open("/home/repo/private/private/conf/fakebuilddeps")
+f = open(sys.argv[1])
+
+fakelines = f.readlines()
+f.close()
+
+fakedepdict = collections.OrderedDict()
+
+for fakeline in fakelines:
+	if ':' in fakeline:
+		(package, fakedeps) = fakeline.split(':',1)
+		fakedeps = fakedeps.split(',')
+		entries = collections.OrderedDict()
+		if (package in fakedepdict):
+			entries = fakedepdict[package]
+		for fakedep in fakedeps:
+			fakedep = fakedep.strip()
+			entries[fakedep] = True
+		fakedepdict[package] = entries
+
+for package, entries  in fakedepdict.items():
+	print(package+': '+', '.join(entries))
+

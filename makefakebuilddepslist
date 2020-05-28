@@ -1,0 +1,51 @@
+#!/usr/bin/python3
+import deb822
+import sys
+
+deppackage = sys.argv[1];
+builddeppackages = sys.argv[2:];
+
+packageswithdep = set();
+
+f = open("/home/repo/private/private/dists/buster-staging/main/binary-armhf/Packages")
+for entry in deb822.Sources.iter_paragraphs(f):
+	package = entry['Package'];
+	#print(repr(entry))
+	if 'Depends' in entry:
+		deps = entry['Depends'].split(',')
+		for depstr in deps:
+			depname = depstr.lstrip().split(' ')[0]
+		if (depname == deppackage):
+			packageswithdep.add(package)
+
+#print(repr(packageswithdep))
+
+#sys.exit()
+
+f = open("/home/repo/private/private/dists/buster-staging/main/source/Sources")
+#f = open(sys.argv[2])
+
+#fakelist = ()
+
+for entry in deb822.Sources.iter_paragraphs(f):
+	package = entry['Package'];
+	foundbinary = False
+	
+	binaries = entry['Binary'].split(',')
+	for binary in binaries:
+		binary = binary.strip()
+		if binary in packageswithdep:
+			foundbinary = True
+	
+	if (foundbinary):
+		foundbuilddep = False
+		if 'Build-Depends' in entry:
+			builddeps = entry['Build-Depends'].split(',')
+			for depstr in builddeps:
+				depname = depstr.lstrip().split(' ')[0]
+				if depname in builddeppackages:
+					foundbuilddep = True
+		if not foundbuilddep:
+			print(package+': '+builddeppackages[0])
+
+f.close()
