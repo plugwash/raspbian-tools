@@ -8,6 +8,7 @@ import sys
 import hashlib
 import gzip
 import urllib.request
+import urllib.parse
 import stat
 #from sortedcontainers import SortedDict
 #from sortedcontainers import SortedList
@@ -45,7 +46,7 @@ def addfilefromdebarchive(filestoverify,filequeue,filename,sha256,size):
 
 
 #regex used for filename sanity checks
-pfnallowed = re.compile(b'[a-z0-9A-Z\-_:\+~\.]+',re.ASCII)
+pfnallowed = re.compile(b'[a-z0-9A-Z\-_:\+~\.%]+',re.ASCII)
 shaallowed = re.compile(b'[a-z0-9]+',re.ASCII)
 
 def ensuresafepath(path):
@@ -94,7 +95,7 @@ def getfile(path,sha256,size):
 				secondhashfn = None
 		if secondhashfn is None:
 			print('downloading '+path.decode('ascii')+' with hash '+sha256.decode('ascii'))
-			fileurl = snapshotbaseurl + b'/' + path
+			fileurl = snapshotbaseurl + b'/' + urllib.parse.quote(path,'/+').encode('ascii')
 			#fileurl = baseurl + hashfn[2:]
 			(data,ts) = geturl(fileurl)
 		else:
