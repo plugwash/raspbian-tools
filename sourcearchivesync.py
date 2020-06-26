@@ -155,7 +155,7 @@ def urldirlist(url, subdirsonly):
 				#print(match)
 				result.append(match)
 			#sys.exit(1)
-			return result
+	return result
 
 for component in urldirlist(baseurl,True):
 	for prefix in urldirlist(baseurl+component+b'/',True):
