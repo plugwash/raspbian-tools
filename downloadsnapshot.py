@@ -68,7 +68,7 @@ def geturl(fileurl):
 		data = response.read()
 		#print(fileurl[:7])
 		if fileurl[:7] == b'file://':
-			ts = os.path.getmtime(fileurl[7:])
+			ts = os.path.getmtime(urllib.parse.unquote_to_bytes(fileurl[7:].decode('ascii')))
 		else:
 			dt = parsedate_to_datetime(response.getheader('Last-Modified'))
 			if dt.tzinfo is None:
