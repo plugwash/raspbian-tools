@@ -215,7 +215,7 @@ def getfile(path,sha256,size):
 			#print(repr(args.sourcepool))
 			#print(repr(sourcepool))
 			sourcepool = sourcepool.encode('ascii')
-			if pathsplit[1] == b'pool':
+			if (len(pathsplit) > 1) and (pathsplit[1] == b'pool'):
 				spp = os.path.join(sourcepool,b'/'.join(pathsplit[2:]))
 				if os.path.isfile(spp)  and (size == os.path.getsize(spp)):
 					print('trying file from sourcepool '+spp.decode('ascii'))
