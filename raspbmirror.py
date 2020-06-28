@@ -238,6 +238,7 @@ def getfile(path,sha256,size):
 					
 					except:
 						print('file in souce pool was good but hard linking failed, copying file instead')
+						break
 					fdownloads.write(outputpath+b'\n')
 					fdownloads.flush()
 					return
