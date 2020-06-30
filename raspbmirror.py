@@ -96,7 +96,7 @@ def ensuresafepath(path):
 		sys.exit(1)
 	for component in pathsplit:
 		if not pfnallowed.fullmatch(component):
-			print("file name "+ascii(filename)+" contains unexpected characters")
+			print("component "+ascii(component)+" in path "+path+" contains unexpected characters")
 			sys.exit(1)
 		elif component[0] == '.':
 			print("filenames starting with a dot are not allowed")
