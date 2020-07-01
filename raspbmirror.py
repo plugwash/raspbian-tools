@@ -718,12 +718,25 @@ def isemptydir(dirpath):
 	#return os.path.isdir(dirpath) and ((next(os.scandir(dirpath), None)) is None)
 	return os.path.isdir(dirpath) and (len(os.listdir(dirpath)) == 0)
 
+if args.tmpdir is None:
+	tmpdir = None
+else:
+	tmpdir = args.tmpdir.encode('ascii')
+	if tmpdir[-1] != b'/':
+		tmpdir += b'/'
+
+
 for filepath in removedfiles:
 	#file may not actually exist, either due to earlier updates gone-wrong
 	#or due to the file being a non-realised uncompressed version of
 	#a gzipped file.
-	if os.path.exists(filepath): 
-		ensuresafepath(filepath)
+	if os.path.exists(filepath):
+		checkpath = filepath
+		#if the path points into the temporary directory we only check the part of it
+		#that is relative to the tempory directory.
+		if tmpdir is not None and filepath.startswith(tmpdir):
+			checkpath = filepath[len(tmpdir):]
+		ensuresafepath(checkpath)
 		print('removing '+filepath.decode('ascii'))
 		os.remove(filepath)
 		#clean up empty directories.
