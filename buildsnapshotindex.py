@@ -171,6 +171,8 @@ for distdir, toplevel in distlocs:
 					builtusingfield = None
 							
 					for line in pf:
+						if line[0:1] == b' ':
+							continue
 						linesplit = line.split()
 						if (len(linesplit) == 0):
 							if (filename != None):
