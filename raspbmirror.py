@@ -42,10 +42,13 @@ parser.add_argument("--debugskippool",help="skip downloading pool data, only dow
 
 parser.add_argument("--distswhitelist", help="specify comman seperated list of distributions")
 
+parser.add_argument("--nolock", help="don't try to lock the target directory", action="store_true")
+
 args = parser.parse_args()
 
-lockfd = os.open('.',os.O_RDONLY)
-fcntl.flock(lockfd,fcntl.LOCK_EX | fcntl.LOCK_NB)
+if not args.nolock:
+	lockfd = os.open('.',os.O_RDONLY)
+	fcntl.flock(lockfd,fcntl.LOCK_EX | fcntl.LOCK_NB)
 
 def addfilefromdebarchive(filestoverify,filequeue,filename,sha256,size):
 	size = int(size)
