@@ -7,7 +7,7 @@ import os
 import sys
 import hashlib
 import gzip
-import urllib.request
+import urllib3
 import stat
 #from sortedcontainers import SortedDict
 #from sortedcontainers import SortedList
@@ -106,10 +106,10 @@ def ensuresafepath(path):
 			sys.exit(1)
 	
 def geturl(fileurl):
-	with urllib.request.urlopen(fileurl.decode('ascii')) as response:
-		data = response.read()
-		ts = getts(fileurl, response)
-	return (data,ts)
+	print(fileurl.decode('ascii'))
+	response = dlmanager.request("GET", fileurl.decode('ascii'))
+	ts = getts(fileurl, response)
+	return (response.data,ts)
 
 
 def getts(fileurl, response):
@@ -335,23 +335,17 @@ def getandcheckfile(fileurl, sha256, size, path, outputpath, errorfromstr, error
 				'ascii') + ' to ' + outputpath.decode(
 				'ascii') + viamsg)
 		f = open(writepath, 'wb')
-		with urllib.request.urlopen(fileurl.decode('ascii')) as response:
-			l = bs
-			tl = 0
-			while l == bs:
-				data = response.read(bs)
-				f.write(data)
-				l = len(data)
-				tl += l
-				sha256hash.update(data)
-			ts = getts(fileurl, response)
+		response = dlmanager.request("GET", fileurl.decode('ascii'))
+		f.write(response.data)
+		sha256hash.update(response.data)
+		ts = getts(fileurl, response)
 
-			data = ... #used as a flag to indicate that the data is written to disk rather than stored in memory
+		data = ... #used as a flag to indicate that the data is written to disk rather than stored in memory
 		f.close()
 		if not testandreporthash(sha256hash, sha256, 'hash mismatch while downloading file' + errorfromstr + ' ', path,
 							 errorsuffix):
 			data = None
-		elif tl != size:
+		elif len(response.data) != size:
 			print('size mismatch while downloading file' + errorfromstr + '.' + errorsuffix)
 			data = None
 	except Exception as e:
@@ -437,6 +431,9 @@ newsymlinks = set()
 fdownloads = open(makenewpath(b'raspbmirrordownloads.txt'),"ab")
 
 dlerrorcount = 0;
+
+# Create an http pool to take advantage of http 1.1
+dlmanager = urllib3.PoolManager(num_pools=10)
 
 for stage in ("scanexisting","downloadnew","finalize"):
 	if stage == "finalize":
