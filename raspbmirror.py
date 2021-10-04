@@ -7,7 +7,6 @@ import os
 import sys
 import hashlib
 import gzip
-import urllib3
 import stat
 #from sortedcontainers import SortedDict
 #from sortedcontainers import SortedList
@@ -19,6 +18,7 @@ import argparse
 import re
 from heapq import heappush, heappop
 import fcntl
+import subprocess
 
 parser = argparse.ArgumentParser(description="mirror raspbian repo.")
 parser.add_argument("baseurl", help="base url for source repo (e.g. https://archive.raspbian.org/ )",nargs='?')
@@ -45,6 +45,16 @@ parser.add_argument("--distswhitelist", help="specify comman seperated list of d
 parser.add_argument("--nolock", help="don't try to lock the target directory", action="store_true")
 
 args = parser.parse_args()
+
+# Get list of installed packages in user's environment 
+reqs = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
+installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
+hasUrllib3 = 'urllib3' in installed_packages
+
+if hasUrllib3:
+	import urllib3
+else:
+	import urllib.request
 
 if not args.nolock:
 	lockfd = os.open('.',os.O_RDONLY)
@@ -104,12 +114,17 @@ def ensuresafepath(path):
 		elif component[0] == '.':
 			print("filenames starting with a dot are not allowed")
 			sys.exit(1)
-	
+
 def geturl(fileurl):
-	print(fileurl.decode('ascii'))
-	response = dlmanager.request("GET", fileurl.decode('ascii'))
-	ts = getts(fileurl, response)
-	return (response.data,ts)
+	if hasUrllib3:
+		response = dlmanager.request("GET", fileurl.decode('ascii'))
+		ts = getts(fileurl, response)
+		return (response.data, ts)
+	else:
+		with urllib.request.urlopen(fileurl.decode('ascii')) as response:
+			data = response.read()
+		ts = getts(fileurl, response)
+		return (data,ts)
 
 
 def getts(fileurl, response):
@@ -322,7 +337,6 @@ bs = 16 * 1024 * 1024
 def getandcheckfile(fileurl, sha256, size, path, outputpath, errorfromstr, errorsuffix):
 	f = None
 	try:
-
 		sha256hash = hashlib.sha256()
 		if path == outputpath:
 			writepath = makenewpath(path)
@@ -335,17 +349,31 @@ def getandcheckfile(fileurl, sha256, size, path, outputpath, errorfromstr, error
 				'ascii') + ' to ' + outputpath.decode(
 				'ascii') + viamsg)
 		f = open(writepath, 'wb')
-		response = dlmanager.request("GET", fileurl.decode('ascii'))
-		f.write(response.data)
-		sha256hash.update(response.data)
-		ts = getts(fileurl, response)
+		
+		if hasUrllib3:
+			response = dlmanager.request("GET", fileurl.decode('ascii'))
+			f.write(response.data)
+			sha256hash.update(response.data)
+			ts = getts(fileurl, response)
+			tl = len(response.data)
+		else:
+			with urllib.request.urlopen(fileurl.decode('ascii')) as response:
+				l = bs
+				tl = 0
+				while l == bs:
+					data = response.read(bs)
+					f.write(data)
+					l = len(data)
+					tl += l
+					sha256hash.update(data)
+				ts = getts(fileurl, response)
 
 		data = ... #used as a flag to indicate that the data is written to disk rather than stored in memory
 		f.close()
 		if not testandreporthash(sha256hash, sha256, 'hash mismatch while downloading file' + errorfromstr + ' ', path,
 							 errorsuffix):
 			data = None
-		elif len(response.data) != size:
+		elif tl != size:
 			print('size mismatch while downloading file' + errorfromstr + '.' + errorsuffix)
 			data = None
 	except Exception as e:
@@ -432,8 +460,9 @@ fdownloads = open(makenewpath(b'raspbmirrordownloads.txt'),"ab")
 
 dlerrorcount = 0;
 
-# Create an http pool to take advantage of http 1.1
-dlmanager = urllib3.PoolManager(num_pools=10)
+if hasUrllib3:
+	# Create an http pool to take advantage of http 1.1
+	dlmanager = urllib3.PoolManager(num_pools=10)
 
 for stage in ("scanexisting","downloadnew","finalize"):
 	if stage == "finalize":
