@@ -46,15 +46,14 @@ parser.add_argument("--nolock", help="don't try to lock the target directory", a
 
 args = parser.parse_args()
 
-# Get list of installed packages in user's environment 
-reqs = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
-installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
-hasUrllib3 = 'urllib3' in installed_packages
-
-if hasUrllib3:
+try:
 	import urllib3
-else:
+	hasUrllib3 = True
+except:
 	import urllib.request
+	hasUrllib3 = False
+
+print("Using urllib3: ", hasUrllib3)
 
 if not args.nolock:
 	lockfd = os.open('.',os.O_RDONLY)
