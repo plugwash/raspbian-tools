@@ -22,8 +22,6 @@ import re
 parser = argparse.ArgumentParser(description="sync source packages into pool-like structure")
 parser.add_argument("baseurl", help="base url for snapshot source")
 
-parser.add_argument("timestamps", help="timestamp or range of timestamps to download, if a single timestamp is used then the current director is assumed to be the snapshot target directory, otherwise the current directory is assumed to be the directory above the snapshot target directory, if this parameter is not specified then baseurl is assumed to point to an individual snapshot rather than a snapshot collection",nargs='?')
-
 parser.add_argument("hashpool", help="specify location of hash pool")
 
 args = parser.parse_args()
