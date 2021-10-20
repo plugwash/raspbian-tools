@@ -23,6 +23,7 @@ parser = argparse.ArgumentParser(description="sync source packages into pool-lik
 parser.add_argument("baseurl", help="base url for snapshot source")
 
 parser.add_argument("hashpool", help="specify location of hash pool")
+parser.add_argument("--dsclist", help="specify file containing list of dscs rather than scanning source")
 
 args = parser.parse_args()
 
@@ -155,12 +156,10 @@ def urldirlist(url, subdirsonly):
 			#sys.exit(1)
 	return result
 
-for component in urldirlist(baseurl,True):
-	for prefix in urldirlist(baseurl+component+b'/',True):
-		for package in urldirlist(baseurl+component+b'/'+prefix+b'/',True):
-			for filename in urldirlist(baseurl+component+b'/'+prefix+b'/'+package+b'/',False):
+
+def handledsc(baseurl,component,prefix,package,filename):
 				if filename[-4:] != b'.dsc':
-					continue
+					return
 				if not pfnallowed.fullmatch(filename):
 					print('disallowed characters in filename')
 					sys.exit(1)
@@ -174,7 +173,7 @@ for component in urldirlist(baseurl,True):
 					sys.exit(1)
 				dscpath = component+b'/'+prefix+b'/'+package+b'/'+filename
 				if os.path.exists(dscpath):
-					continue
+					return
 				dscurl = baseurl + dscpath
 				print("downloading "+dscurl.decode('ascii'))
 				data,ts = geturl(dscurl)
@@ -263,4 +262,15 @@ for component in urldirlist(baseurl,True):
 					os.utime(hashfn,(ts,ts))
 				linkorcheck(dscpath,sha256hashed)
 
-
+if args.dsclist is not None:
+	f = open(args.dsclist,'rb')
+	for line in f:
+		component,prefix,package,filename = line.strip().split(b'/')
+		handledsc(baseurl,component,prefix,package,filename)
+	f.close()
+else:
+	for component in urldirlist(baseurl,True):
+		for prefix in urldirlist(baseurl+component+b'/',True):
+			for package in urldirlist(baseurl+component+b'/'+prefix+b'/',True):
+				for filename in urldirlist(baseurl+component+b'/'+prefix+b'/'+package+b'/',False):
+					handledsc(baseurl,component,prefix,package,filename)
