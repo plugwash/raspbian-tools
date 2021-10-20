@@ -55,15 +55,13 @@ shaallowed = re.compile(b'[a-z0-9]+',re.ASCII)
 def ensuresafepath(path):
 	pathsplit = path.split(b'/')
 	if path[0] == '/':
-		print("path must be relative")
-		sys.exit(1)
+		raise ValueError("path must be relative")
 	for component in pathsplit:
 		if not pfnallowed.fullmatch(component):
-			print("file name contains unexpected characters")
-			sys.exit(1)
+			raise ValueError("file name "+repr(component)+" in path "+repr(path)+"contains unexpected characters")
 		elif component[0] == '.':
-			print("filenames starting with a dot are not allowed")
-			sys.exit(1)
+			raise ValueError("filenames starting with a dot are not allowed")
+
 	
 
 def geturl(fileurl):
@@ -190,6 +188,7 @@ for snapshotts in snapshottss:
 		snapshotbaseurl = baseurl + b'/' + snapshotts
 	fileurl = snapshotbaseurl +b'/snapshotindex.txt'
 
+	print("getting index for "+snapshotts.decode('ascii'))
 	(filedata,ts) = geturl(fileurl)
 
 	f = open(b'snapshotindex.txt.tmp','wb')
