@@ -47,7 +47,9 @@ def addfilefromdebarchive(filestoverify,filequeue,filename,sha256,size):
 
 
 #regex used for filename sanity checks
-pfnallowed = re.compile(b'[a-z0-9A-Z\-_:\+~\.%]+',re.ASCII)
+#note: downloadsnapshot is more liniant here than raspbmirror because it needs to deal with historical
+#snapshots that sometimes contain various crap that is not desired in current repos.
+pfnallowed = re.compile(b'[a-z0-9A-Z\-_:\+~\.%#@]+',re.ASCII)
 shaallowed = re.compile(b'[a-z0-9]+',re.ASCII)
 
 def ensuresafepath(path):
