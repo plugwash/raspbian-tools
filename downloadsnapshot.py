@@ -25,6 +25,7 @@ parser.add_argument("timestamps", help="timestamp or range of timestamps to down
 
 parser.add_argument("--secondpool", help="specify location of secondary hash pool")
 parser.add_argument("--tlwhitelist", help="specify comma-seperated whitelist of top-level directories")
+parser.add_argument("--quiet",help="reduce verbosity",action="store_true")
 
 args = parser.parse_args()
 
@@ -244,7 +245,8 @@ for snapshotts in snapshottss:
 
 	while filequeue:
 		filepath = filequeue.popleft()
-		print('processing '+filepath.decode('ascii'))
+		if not args.quiet:
+			print('processing '+filepath.decode('ascii'))
 		sha256,size,status = knownfiles[filepath]
 		if (filepath+b'.gz' not in knownfiles) or (status == 'R'):
 		
