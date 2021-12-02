@@ -180,14 +180,15 @@ def getfile(path,sha256,size):
 			print('existing file '+path.decode('ascii')+' matched by hash and size')
 			fileupdates.add(path)
 			return # no download needed but rename is
-	elif path in oldknownfiles: 
-		#shortcut exit if file is unchanged, we skip this if a "new" file was detected because
-		#that means some sort of update was going on to the file and may need to be finished/cleaned up.
-		oldsha256,oldsize,oldstatus = oldknownfiles[path]
-		if (oldsha256 == sha256) and (oldsize == size) and (oldstatus != 'F'):
-			return # no update needed
 	if os.path.isfile(path): # file already exists
 		if (size == os.path.getsize(path)): #no point reading the data and calculating a hash if the size does not match
+			if path in oldknownfiles:
+				#shortcut exit if file is unchanged, we skip this if a "new" file was detected because
+				#that means some sort of update was going on to the file and may need to be finished/cleaned up.
+				oldsha256,oldsize,oldstatus = oldknownfiles[path]
+				if (oldsha256 == sha256) and (oldsize == size) and (oldstatus != 'F'):
+					return # no update needed
+
 			sha256hashed, tl = getfilesha256andsize(path)
 			if (sha256 == sha256hashed) and (size == tl):
 				print('existing file '+path.decode('ascii')+' matched by hash and size')
