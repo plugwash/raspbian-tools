@@ -44,11 +44,76 @@ parser.add_argument("--distswhitelist", help="specify comman seperated list of d
 
 parser.add_argument("--nolock", help="don't try to lock the target directory", action="store_true")
 
+parser.add_argument("--ipv4", help="use IPV4 addresses only", action="store_true")
+
 args = parser.parse_args()
 
 if not args.nolock:
 	lockfd = os.open('.',os.O_RDONLY)
 	fcntl.flock(lockfd,fcntl.LOCK_EX | fcntl.LOCK_NB)
+
+##
+## v4-only support
+##
+
+import http.client
+import socket
+
+def create_connection_v4only(address, timeout=socket._GLOBAL_DEFAULT_TIMEOUT, source_address=None):
+	"""Like socket.create_connection, but IPv4 only"""
+
+	host, port = address
+	err = None
+	for res in socket.getaddrinfo(host, port, socket.AF_INET, socket.SOCK_STREAM):
+		af, socktype, proto, canonname, sa = res
+		sock = None
+		try:
+			sock = socket.socket(af, socktype, proto)
+			if timeout is not socket._GLOBAL_DEFAULT_TIMEOUT:
+				sock.settimeout(timeout)
+			if source_address:
+				sock.bind(source_address)
+			sock.connect(sa)
+			# Break explicitly a reference cycle
+			err = None
+			return sock
+
+		except socket.error as _:
+			err = _
+			if sock is not None:
+				sock.close()
+
+	if err is not None:
+		try:
+			raise err
+		finally:
+			# Break explicitly a reference cycle
+			err = None
+	else:
+		raise socket.error("getaddrinfo returns an empty list")
+
+class HTTPv4onlyConnection(http.client.HTTPConnection):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self._create_connection = create_connection_v4only
+
+class HTTPSv4onlyConnection(http.client.HTTPSConnection):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self._create_connection = create_connection_v4only
+
+class HTTPv4onlyHandler(urllib.request.HTTPHandler):
+	def http_open(self, req):
+		return self.do_open(HTTPv4onlyConnection, req)
+
+class HTTPSv4onlyHandler(urllib.request.HTTPSHandler):
+	def https_open(self, req):
+		return self.do_open(HTTPSv4onlyConnection, req,
+				    context=self._context, check_hostname=self._check_hostname)
+
+if args.ipv4:
+	opener = urllib.request.build_opener(HTTPv4onlyHandler, HTTPSv4onlyHandler)
+	urllib.request.install_opener(opener)
 
 def addfilefromdebarchive(filestoverify,filequeue,filename,sha256,size):
 	size = int(size)
