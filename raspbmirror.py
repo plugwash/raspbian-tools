@@ -175,7 +175,8 @@ def getfile(path,sha256,size):
 	#	os.utime(hashfn,(ts,ts))
 	if len(os.path.dirname(path)) > 0:
 		os.makedirs(os.path.dirname(path),exist_ok=True)
-	if os.path.isfile(makenewpath(path)): # "new" file already exists, lets check the hash
+	havenewfile = os.path.isfile(makenewpath(path))
+	if havenewfile: # "new" file already exists, lets check the hash
 		fn = makenewpath(path)
 		sha256hashed, tl = getfilesha256andsize(fn)
 		if (sha256 == sha256hashed) and (size == tl):
@@ -184,7 +185,7 @@ def getfile(path,sha256,size):
 			return # no download needed but rename is
 	if os.path.isfile(path): # file already exists
 		if (size == os.path.getsize(path)): #no point reading the data and calculating a hash if the size does not match
-			if (not args.repair) and (path in oldknownfiles):
+			if (not args.repair) and (path in oldknownfiles) and (not havenewfile):
 				#shortcut exit if file is unchanged, we skip this if a "new" file was detected because
 				#that means some sort of update was going on to the file and may need to be finished/cleaned up.
 				oldsha256,oldsize,oldstatus = oldknownfiles[path]
@@ -194,7 +195,7 @@ def getfile(path,sha256,size):
 			sha256hashed, tl = getfilesha256andsize(path)
 			if (sha256 == sha256hashed) and (size == tl):
 				print('existing file '+path.decode('ascii')+' matched by hash and size')
-				if os.path.isfile(makenewpath(path)):
+				if havenewfile:
 					#if file is up to date but a "new" file exists and is bad
 					#(we wouldn't have got this far if it was good)
 					#schedule the "new" file for removal by adding it to "basefiles"
