@@ -44,6 +44,8 @@ parser.add_argument("--distswhitelist", help="specify comman seperated list of d
 
 parser.add_argument("--nolock", help="don't try to lock the target directory", action="store_true")
 
+parser.add_argument("--repair", help="during mirroring, verify that all on-disk files match the expected sha256", action="store_true")
+
 args = parser.parse_args()
 
 if not args.nolock:
@@ -182,7 +184,7 @@ def getfile(path,sha256,size):
 			return # no download needed but rename is
 	if os.path.isfile(path): # file already exists
 		if (size == os.path.getsize(path)): #no point reading the data and calculating a hash if the size does not match
-			if path in oldknownfiles:
+			if (not args.repair) and (path in oldknownfiles):
 				#shortcut exit if file is unchanged, we skip this if a "new" file was detected because
 				#that means some sort of update was going on to the file and may need to be finished/cleaned up.
 				oldsha256,oldsize,oldstatus = oldknownfiles[path]
