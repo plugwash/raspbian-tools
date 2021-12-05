@@ -1,0 +1,65 @@
+#!/usr/bin/python3
+
+import deb822
+import sys
+from collections import OrderedDict, defaultdict
+import gzip
+
+raspbianpackagesfn = sys.argv[1]
+debpackagesfn = sys.argv[2]
+raspbiansourcesfn = sys.argv[3]
+
+def readpackagesfile(filename):
+	result = OrderedDict()
+	if filename.endswith('.gz'):
+		f = gzip.open(filename)
+	else:
+		f = open(filename,'rb')
+	for package in deb822.Packages.iter_paragraphs(f,shared_storage=False):
+		#print(repr(package))
+		result[package['Package']] = package #['Version']
+	f.close()
+	return result
+
+raspbianpackages = readpackagesfile(raspbianpackagesfn)
+debianpackages = readpackagesfile(debpackagesfn)
+
+interestingsources = defaultdict(set)
+
+for packagename, package in raspbianpackages.items():
+	if 'Source' in package:
+		sourcepackagename = package['Source'].split(' ')[0]
+	else:
+		sourcepackagename = packagename
+	if package['Architecture'] == 'all':
+		if (packagename not in debianpackages) or (package['Version'] != debianpackages[packagename]['Version']):
+			interestingsources[sourcepackagename].add('indep')
+	else:
+		interestingsources[sourcepackagename].add('arch')
+
+
+
+#print(repr(list(interestingsources.items())[0:100]))
+
+f = open(raspbiansourcesfn,'rb')
+for source in deb822.Sources.iter_paragraphs(f,shared_storage=False):
+	sourcepackagename = source['Package']
+	if sourcepackagename in interestingsources:
+		meta = interestingsources[sourcepackagename]
+		if 'arch' not in meta:
+			if 'Build-Depends-Arch' in source:
+				del source['Build-Depends-Arch']
+		if 'indep' not in meta:
+			if 'Build-Depends-Indep' in source:
+				del source['Build-Depends-Indep']
+		meta.add('found')
+		print(source)
+f.close()
+
+for sourcepackagename,meta in interestingsources.items():
+	if 'found' not in meta:
+		source = deb822.Sources()
+		source['Package'] = sourcepackagename
+		source['Version'] = '0.sourcepackagenotfound.0'
+		source['Build-Depends'] = 'sourcepackagenotfound (== 0.sourcepackagenotfound.0)'
+		print(source)
