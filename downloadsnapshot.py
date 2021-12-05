@@ -188,7 +188,8 @@ for snapshotts in snapshottss:
 		snapshotbaseurl = baseurl + b'/' + snapshotts
 	fileurl = snapshotbaseurl +b'/snapshotindex.txt'
 
-	print("getting index for "+snapshotts.decode('ascii'))
+	if snapshotts is not None:
+		print("getting index for "+snapshotts.decode('ascii'))
 	(filedata,ts) = geturl(fileurl)
 
 	f = open(b'snapshotindex.txt.tmp','wb')
