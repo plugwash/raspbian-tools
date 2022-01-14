@@ -44,6 +44,8 @@ parser.add_argument("--distswhitelist", help="specify comman seperated list of d
 
 parser.add_argument("--nolock", help="don't try to lock the target directory", action="store_true")
 
+parser.add_argument("--nosources", help="don't try to mirror source packages", action="store_true")
+
 args = parser.parse_args()
 
 if not args.nolock:
@@ -389,6 +391,11 @@ def testandreporthash(sha256hash, sha256, errorprefix, path, errorsuffix):
 	return True
 
 
+def issourcespath(path):
+	pathsplit = path.split(b'/')
+	return (b'dists' in pathsplit) and (pathsplit[-1] in (b'extrasources', b'Sources', b'Sources.gz', b'Sources.xz'))
+
+
 if (args.mdurl is None) or (args.mdurl.upper() == 'NONE'):
 	mdurl = None
 else:
@@ -468,7 +475,7 @@ for stage in ("scanexisting","downloadnew","finalize"):
 		(filedata,ts) = geturl(fileurl) 
 
 		f = open(makenewpath(b'snapshotindex.txt'),'wb')
-		if (args.tlwhitelist is None) and (args.distswhitelist is None):
+		if (args.tlwhitelist is None) and (args.distswhitelist is None) and (not args.nosources):
 			f.write(filedata)
 		else:
 			lines = filedata.split(b'\n')
@@ -516,6 +523,20 @@ for stage in ("scanexisting","downloadnew","finalize"):
 					for toplevel,distribution in missingesdists:
 						print((b'missing extra sources file for '+toplevel+b'/dists/'+distribution).decode('ascii'))
 					sys.exit(1)
+			if args.nosources:
+				linesnew = []
+				for line in lines:
+					path, sizeandsha = line.split(b' ')
+					pathsplit = path.split(b'/')
+					if issourcespath(path):
+						pass
+					elif (len(pathsplit) > 1) and pathsplit[1] == b'pool':
+						pass
+					else:
+						linesnew.append(line)
+
+				lines = linesnew
+
 			for line in lines:
 				f.write(line+b'\n')
 		f.close()
@@ -590,6 +611,8 @@ for stage in ("scanexisting","downloadnew","finalize"):
 					#if filename in knownfiles:
 					#	if files
 					#print(filename)
+					if args.nosources and issourcespath(filename):
+						continue
 					addfilefromdebarchive(knownfiles,filequeue,filename,linesplit[0],linesplit[1]);
 				else:
 					insha256 = False
