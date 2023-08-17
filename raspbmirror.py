@@ -290,11 +290,7 @@ def getfile(path,sha256,size):
 				if os.path.isfile(spp)  and (size == os.path.getsize(spp)):
 					print('trying file from sourcepool '+spp.decode('ascii'))
 					ts = os.path.getmtime(spp)
-					f = open(spp,'rb')
-					data = f.read()
-					f.close()
-					sha256hash = hashlib.sha256(data)
-					sha256hashed = sha256hash.hexdigest().encode('ascii')
+					[ sha256hashed, size ] = getfilesha256andsize(spp);
 					if (sha256 != sha256hashed):
 						#print(repr(filesize))
 						#print(repr(sha256))
