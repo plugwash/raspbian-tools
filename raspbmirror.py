@@ -47,7 +47,7 @@ parser.add_argument("--repair", help="during mirroring, verify that all on-disk 
 
 parser.add_argument("--urllib", help="force usage of the builtin urllib module, even if urllib3 is present", action="store_true")
 
-parser.add_argument("--urllib3", help="force usage of the urllib3 module, panics if the dependency is missing", action="store_true")
+parser.add_argument("--urllib3", help="force usage of the urllib3 module, panics if the dependency is missing, note that urllib is always used for file:// urls as urllib3 does not seem to support them", action="store_true")
 
 parser.add_argument("--ipv4", help="force usage of IPv4 addresses. Requires urllib3", action="store_true")
 
@@ -63,8 +63,8 @@ if args.urllib and args.urllib3:
 	print("error: flags --urllib and --urllib3 are in conflict")
 	exit(1)
 
+import urllib.request
 if args.urllib:
-	import urllib.request
 	use_urllib3 = False
 elif args.urllib3:
 	import urllib3
@@ -75,7 +75,6 @@ else:
 		import urllib3
 		use_urllib3 = True
 	except:
-		import urllib.request
 		use_urllib3 = False
 
 if args.ipv4 and args.ipv6:
@@ -167,11 +166,13 @@ def ensuresafepath(path):
 			sys.exit(1)
 	
 def geturl(fileurl):
-    if use_urllib3:
+    if use_urllib3 and (b'file://' not in fileurl):
+        #print('downloading using urllib3')
         response = dlmanager.request("GET", fileurl.decode('ascii'))
         ts = getts(fileurl, response)
         return (response.data, ts)
     else:
+        #print('downloading using urllib')
         with urllib.request.urlopen(fileurl.decode('ascii')) as response:
             data = response.read()
         ts = getts(fileurl, response)
@@ -397,7 +398,7 @@ def getandcheckfile(fileurl, sha256, size, path, outputpath, errorfromstr, error
 				'ascii') + ' to ' + outputpath.decode(
 				'ascii') + viamsg)
 		f = open(writepath, 'wb')
-		if use_urllib3:
+		if use_urllib3 and (b'file://' not in fileurl):
 				response = dlmanager.request("GET", fileurl.decode('ascii'), preload_content=False)
 				ts = getts(fileurl, response)
 				tl = 0
