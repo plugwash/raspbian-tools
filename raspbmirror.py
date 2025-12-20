@@ -149,7 +149,7 @@ def addtofilequeue(filequeue,filename):
 
 
 #regex used for filename sanity checks
-pfnallowed = re.compile(b'[a-z0-9A-Z\-_:\+~\.]+',re.ASCII)
+pfnallowed = re.compile(b'[a-zA-Z0-9._:+~-]+', re.ASCII)
 shaallowed = re.compile(b'[a-z0-9]+',re.ASCII)
 
 def ensuresafepath(path):
@@ -182,7 +182,7 @@ def getts(fileurl, response):
 	if fileurl[:7] == b'file://':
 		ts = os.path.getmtime(fileurl[7:])
 	else:
-		dt = parsedate_to_datetime(response.getheader('Last-Modified'))
+		dt = parsedate_to_datetime(response.headers.get('Last-Modified'))
 		if dt.tzinfo is None:
 			dt = dt.replace(tzinfo=timezone.utc)
 		ts = dt.timestamp()
